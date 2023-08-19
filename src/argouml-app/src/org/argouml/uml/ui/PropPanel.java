@@ -51,8 +51,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -98,11 +96,7 @@ import org.tigris.toolbar.ToolBarFactory;
 public abstract class PropPanel extends AbstractArgoJPanel implements
         UMLUserInterfaceContainer, ComponentListener {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(PropPanel.class.getName());
+    
 
     private Object target;
 
@@ -215,7 +209,7 @@ public abstract class PropPanel extends AbstractArgoJPanel implements
     }
 
     public void buildToolbar() {
-        LOG.log(Level.FINE, "Building toolbar");
+        
 
         ToolBarFactory factory = new ToolBarFactory(getActions());
         factory.setRollover(true);
@@ -364,7 +358,7 @@ public abstract class PropPanel extends AbstractArgoJPanel implements
      */
     public void setTarget(Object t) {
 
-        LOG.log(Level.FINE, "setTarget called with {0} as parameter (not target!)", t);
+        
 
         t = (t instanceof Fig) ? ((Fig) t).getOwner() : t;
 

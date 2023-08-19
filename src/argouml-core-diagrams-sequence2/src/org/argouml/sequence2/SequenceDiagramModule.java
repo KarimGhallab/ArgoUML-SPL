@@ -38,9 +38,6 @@
 
 package org.argouml.sequence2;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.argouml.moduleloader.ModuleInterface;
 import org.argouml.notation.Notation;
 import org.argouml.notation.NotationName;
@@ -61,8 +58,7 @@ import org.argouml.uml.ui.PropPanelFactoryManager;
  */
 public class SequenceDiagramModule implements ModuleInterface {
 
-    private static final Logger LOG =
-        Logger.getLogger(SequenceDiagramModule.class.getName());
+    
 
     private SequenceDiagramPropPanelFactory propPanelFactory;
 
@@ -122,7 +118,7 @@ public class SequenceDiagramModule implements ModuleInterface {
         persistanceManager.addTranslation(
                 "org.argouml.uml.diagram.sequence2.ui.FigMessageSpline",
                 "org.argouml.sequence2.diagram.FigMessageSpline");
-        LOG.log(Level.INFO, "SequenceDiagram Module enabled.");
+        
         return true;
     }
 
@@ -135,7 +131,7 @@ public class SequenceDiagramModule implements ModuleInterface {
         DiagramFactory.getInstance().registerDiagramFactory(
                 DiagramType.Sequence, (DiagramFactoryInterface2) null);
 
-        LOG.log(Level.INFO, "SequenceDiagram Module disabled.");
+        
         return true;
     }
 

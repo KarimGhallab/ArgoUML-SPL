@@ -46,8 +46,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.ProjectManager;
 import org.argouml.model.Model;
@@ -63,11 +61,7 @@ import org.tigris.gef.presentation.Fig;
 public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
         VetoableChangeListener {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(StateDiagramGraphModel.class.getName());
+    
 
 
     /**
@@ -131,7 +125,7 @@ public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
         if (Model.getFacade().isAStateVertex(port)) {
             return new ArrayList(Model.getFacade().getIncomings(port));
         }
-        LOG.log(Level.FINE, "TODO: getInEdges of MState");
+        
         return Collections.EMPTY_LIST;
     }
 
@@ -142,7 +136,7 @@ public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
         if (Model.getFacade().isAStateVertex(port)) {
             return new ArrayList(Model.getFacade().getOutgoings(port));
         }
-        LOG.log(Level.FINE, "TODO: getOutEdges of MState");
+        
         return Collections.EMPTY_LIST;
     }
 
@@ -209,25 +203,18 @@ public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
 
         // Both ends must be defined and nodes that are on the graph already.
         if (end0 == null || end1 == null) {
-            LOG.log(Level.SEVERE,
-                    "Edge rejected. Its ends are not attached to anything");
+            
             return false;
         }
 
         if (!containsNode(end0)
                 && !containsEdge(end0)) {
-            LOG.log(Level.SEVERE,
-                    "Edge rejected. Its source end is attached to "
-                    + end0
-                    + " but this is not in the graph model");
+            
             return false;
         }
         if (!containsNode(end1)
                 && !containsEdge(end1)) {
-            LOG.log(Level.SEVERE,
-                    "Edge rejected. Its destination end is attached to "
-                    + end1
-                    + " but this is not in the graph model");
+            
             return false;
         }
 
@@ -238,9 +225,7 @@ public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
      * @see org.tigris.gef.graph.MutableGraphModel#addNode(java.lang.Object)
      */
     public void addNode(Object node) {
-        LOG.log(Level.FINE,
-                "adding statechart/activity diagram node: {0}",
-                node);
+        
 
         if (!canAddNode(node)) {
             return;
@@ -278,7 +263,7 @@ public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
      * @see org.tigris.gef.graph.MutableGraphModel#addEdge(java.lang.Object)
      */
     public void addEdge(Object edge) {
-        LOG.log(Level.FINE, "adding statechart/activity diagram edge!!!!!!");
+        
         if (edge == null) {
             throw new IllegalArgumentException("Cannot add a null edge");
         }
@@ -288,12 +273,10 @@ public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
                     "The source and dest port should be provided on an edge");
         }
 
-        LOG.log(Level.INFO,
-                "Adding an edge of type {0} to class diagram.",
-                edge.getClass().getName());
+        
 
         if (!canAddEdge(edge)) {
-            LOG.log(Level.INFO, "Attempt to add edge rejected");
+            
             return;
         }
 
@@ -328,11 +311,11 @@ public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
      */
     public boolean canConnect(Object fromPort, Object toPort) {
         if (!(Model.getFacade().isAStateVertex(fromPort))) {
-            LOG.log(Level.SEVERE, "internal error not from sv");
+            
             return false;
         }
         if (!(Model.getFacade().isAStateVertex(toPort))) {
-            LOG.log(Level.SEVERE, "internal error not to sv");
+            
             return false;
         }
 
@@ -387,13 +370,11 @@ public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
                 addEdge(connection);
                 return connection;
             } catch (Exception ex) {
-                LOG.log(Level.SEVERE, "buildConnection() failed", ex);
+                
             }
             return null;
         } else {
-            LOG.log(Level.FINE,
-                    "wrong kind of edge in StateDiagram connect3 {0}",
-                    edgeClass);
+            
             return null;
         }
     }
@@ -412,7 +393,7 @@ public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
             Object eo = /* (MElementImport) */pce.getNewValue();
             Object me = Model.getFacade().getModelElement(eo);
             if (oldOwned.contains(eo)) {
-                LOG.log(Level.FINE, "model removed {0}", me);
+                
                 if (Model.getFacade().isAState(me)) {
                     removeNode(me);
                 }
@@ -423,7 +404,7 @@ public class StateDiagramGraphModel extends UMLMutableGraphSupport implements
                     removeEdge(me);
                 }
             } else {
-                LOG.log(Level.FINE, "model added {0}", me);
+                
             }
         }
     }

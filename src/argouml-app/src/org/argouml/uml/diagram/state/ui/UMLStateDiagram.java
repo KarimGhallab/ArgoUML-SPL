@@ -45,8 +45,6 @@ import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -92,8 +90,7 @@ public class UMLStateDiagram extends UMLDiagram implements StateDiagram {
 
     private static final long serialVersionUID = -1541136327444703151L;
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLStateDiagram.class.getName());
+    
 
     /**
      * this diagram needs to be deleted when its statemachine is deleted.
@@ -210,9 +207,7 @@ public class UMLStateDiagram extends UMLDiagram implements StateDiagram {
                     : Model.getFacade().getBehaviors(ns).size();
             String name = nname + " " + (number++);
 
-            LOG.log(Level.INFO,
-                    "UMLStateDiagram constructor: String name = {0}",
-                    name);
+            
 
             try {
                 setName(name);
@@ -836,7 +831,7 @@ public class UMLStateDiagram extends UMLDiagram implements StateDiagram {
         } else if (Model.getFacade().isAPseudostate(droppedObject)) {
             Object kind = Model.getFacade().getKind(droppedObject);
             if (kind == null) {
-                LOG.log(Level.WARNING, "found a null type pseudostate");
+                
                 return null;
             }
             if (kind.equals(Model.getPseudostateKind().getInitial())) {
@@ -862,7 +857,7 @@ public class UMLStateDiagram extends UMLDiagram implements StateDiagram {
                 figNode = new FigDeepHistoryState(droppedObject, bounds,
                         settings);
             } else {
-                LOG.log(Level.WARNING, "found a type not known");
+                
             }
         }
 
@@ -872,11 +867,9 @@ public class UMLStateDiagram extends UMLDiagram implements StateDiagram {
             if (location != null) {
                 figNode.setLocation(location.x, location.y);
             }
-            LOG.log(Level.FINE,
-                    "Dropped object {0} converted to {1}",
-                    new Object[]{droppedObject, figNode});
+            
         } else {
-            LOG.log(Level.FINE, "Dropped object NOT added {0}", figNode);
+            
         }
 
         return figNode;
@@ -910,7 +903,7 @@ public class UMLStateDiagram extends UMLDiagram implements StateDiagram {
         } else if (Model.getFacade().isAPseudostate(modelElement)) {
             Object kind = Model.getFacade().getKind(modelElement);
             if (kind == null) {
-                LOG.log(Level.WARNING, "found a null type pseudostate");
+                
                 return null;
             }
             if (kind.equals(Model.getPseudostateKind().getInitial())) {
@@ -936,16 +929,14 @@ public class UMLStateDiagram extends UMLDiagram implements StateDiagram {
                 figNode = new FigDeepHistoryState(modelElement, bounds,
                         settings);
             } else {
-                LOG.log(Level.WARNING, "found a type not known");
+                
             }
         }
 
         if (figNode != null) {
-            LOG.log(Level.FINE,
-                    "Model element {0} converted to {1}",
-                    new Object[]{modelElement, figNode});
+            
         } else {
-            LOG.log(Level.FINE, "Dropped object NOT added {0}", figNode);
+            
         }
         return figNode;
     }

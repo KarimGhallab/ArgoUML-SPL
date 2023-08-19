@@ -48,8 +48,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.JPanel;
@@ -89,11 +87,7 @@ public class DetailsPane
 	       Orientable,
 	       TargetListener {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(DetailsPane.class.getName());
+    
 
     /**
      * The top level pane, which is a tabbed pane.
@@ -155,7 +149,7 @@ public class DetailsPane
      * @param theOrientation is the orientation.
      */
     public DetailsPane(String compassPoint, Orientation theOrientation) {
-        LOG.log(Level.INFO, "making DetailsPane({0})", compassPoint);
+        
 
         orientation = theOrientation;
 
@@ -476,7 +470,7 @@ public class DetailsPane
      * {@inheritDoc}
      */
     public void stateChanged(ChangeEvent e) {
-        LOG.log(Level.FINE, "DetailsPane state changed");
+        
         Component sel = topLevelTabbedPane.getSelectedComponent();
 
         // update the previously selected tab
@@ -530,8 +524,7 @@ public class DetailsPane
     public void mySingleClick(int tab) {
         //TODO: should fire its own event and ProjectBrowser
         //should register a listener
-        LOG.log(Level.FINE, "single: {0}",
-                topLevelTabbedPane.getComponentAt(tab).toString());
+        
     }
 
     /**
@@ -543,8 +536,7 @@ public class DetailsPane
     public void myDoubleClick(int tab) {
         //TODO: should fire its own event and ProjectBrowser
         //should register a listener
-        LOG.log(Level.FINE, "double: {0}",
-                topLevelTabbedPane.getComponentAt(tab).toString());
+        
 //        JPanel t = (JPanel) tabPanelList.elementAt(tab);
         // Currently this feature is disabled for ArgoUML.
 //        if (t instanceof AbstractArgoJPanel)

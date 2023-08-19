@@ -39,8 +39,6 @@
 package org.argouml.profile;
 
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Loads models using the default ClassLoader or a provided one.
@@ -49,10 +47,7 @@ import java.util.logging.Logger;
  */
 public class ResourceModelLoader extends URLModelLoader {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG = Logger.getLogger(ResourceModelLoader.class.getName());
+    
 
     private Class clazz;
 
@@ -76,7 +71,7 @@ public class ResourceModelLoader extends URLModelLoader {
 
     public Collection loadModel(ProfileReference reference)
         throws ProfileException {
-        LOG.log(Level.INFO, "Loading profile from resource {0}", reference.getPath());
+        
 
         return super.loadModel(clazz.getResource(reference.getPath()),
             reference.getPublicReference());

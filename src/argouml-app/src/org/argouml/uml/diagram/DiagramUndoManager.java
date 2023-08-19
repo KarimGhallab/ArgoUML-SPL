@@ -39,8 +39,6 @@
 package org.argouml.uml.diagram;
 
 import java.beans.PropertyChangeListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectManager;
@@ -58,8 +56,7 @@ import org.tigris.gef.undo.UndoManager;
  */
 public class DiagramUndoManager extends UndoManager {
 
-    private static final Logger LOG =
-        Logger.getLogger(UndoManager.class.getName());
+    
 
     private boolean startChain;
 
@@ -111,7 +108,7 @@ public class DiagramUndoManager extends UndoManager {
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-        LOG.log(Level.INFO, "Adding property listener {0}", listener);
+        
 
         super.addPropertyChangeListener(listener);
     }

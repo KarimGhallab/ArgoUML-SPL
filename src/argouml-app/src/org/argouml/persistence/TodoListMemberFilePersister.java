@@ -47,11 +47,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
 import org.argouml.application.api.Argo;
-import org.argouml.cognitive.Designer;
 import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectMember;
 import org.argouml.ocl.OCLExpander;
-import org.argouml.uml.cognitive.ProjectMemberTodoList;
 import org.tigris.gef.ocl.ExpansionException;
 import org.tigris.gef.ocl.TemplateReader;
 import org.xml.sax.InputSource;
@@ -80,10 +78,10 @@ class TodoListMemberFilePersister extends MemberFilePersister {
         throws OpenException {
 
         try {
-            TodoParser parser = new TodoParser();
-            parser.readTodoList(inputSource);
-            ProjectMemberTodoList pm = new ProjectMemberTodoList("", project);
-            project.addMember(pm);
+            
+            
+            
+            
         } catch (Exception e) {
             if (e instanceof OpenException) {
                 throw (OpenException) e;
@@ -126,7 +124,7 @@ class TodoListMemberFilePersister extends MemberFilePersister {
         }
         
         try {
-            Designer.disableCritiquing();
+            
             // WARNING: The GEF implementation of the OutputStream version of 
             // this method doesn't work - tfm - 20070531
             expander.expand(pw, member);
@@ -135,7 +133,7 @@ class TodoListMemberFilePersister extends MemberFilePersister {
         } finally {
             pw.flush();
 //            pw.close();
-            Designer.enableCritiquing();
+            
         }
 
     }

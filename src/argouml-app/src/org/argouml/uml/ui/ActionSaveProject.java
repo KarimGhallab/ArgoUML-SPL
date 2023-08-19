@@ -39,8 +39,6 @@
 package org.argouml.uml.ui;
 
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -59,11 +57,7 @@ import org.argouml.ui.ProjectBrowser;
 public class ActionSaveProject extends AbstractAction {
 
     private static final long serialVersionUID = -5579548202585774293L;
-	/**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ActionSaveProject.class.getName());
+	
 
     /**
      * The constructor.
@@ -90,7 +84,7 @@ public class ActionSaveProject extends AbstractAction {
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
     public void actionPerformed(ActionEvent e) {
-        LOG.log(Level.INFO, "Performing save action");
+        
         ProjectBrowser.getInstance().trySave(
                 ProjectManager.getManager().getCurrentProject() != null
                         && ProjectManager.getManager().getCurrentProject()
@@ -110,16 +104,7 @@ public class ActionSaveProject extends AbstractAction {
         if (isEnabled == this.enabled) {
             return;
         }
-        if (LOG.isLoggable(Level.FINE)) {
-            if (!enabled && isEnabled) {
-                Throwable throwable = new Throwable();
-                throwable.fillInStackTrace();
-                LOG.log(Level.FINE, "Save action enabled by  ", throwable);
-            } else {
-                LOG.log(Level.FINE, "Save state changed from " + enabled + " to "
-                        + isEnabled);
-            }
-        }
+        
         internalSetEnabled(isEnabled);
     }
 

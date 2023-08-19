@@ -54,8 +54,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -423,7 +421,7 @@ class SaveScaledEPSAction extends SaveEPSAction {
  */
 class SavePNGAction2 extends SavePNGAction {
 
-    private static final Logger LOG = Logger.getLogger(SavePNGAction2.class.getName());
+    
 
     SavePNGAction2(String name) {
         super(name);
@@ -442,7 +440,7 @@ class SavePNGAction2 extends SavePNGAction {
             try {
                 saveGraphics(outputStream, ce, dummyArea);
             } catch (java.io.IOException e) {
-                LOG.log(Level.SEVERE, "Error while exporting Graphics:", e);
+                
             }
             return;
         }
@@ -468,9 +466,7 @@ class SavePNGAction2 extends SavePNGAction {
         RenderedImage i = new DeferredBufferedImage(canvasArea,
                 BufferedImage.TYPE_INT_ARGB, ce, scale);
 
-        LOG.log(Level.FINE,
-                "Created DeferredBufferedImage - drawingArea = {0} , scale = {1}",
-                new Object[]{canvasArea, scale});
+        
 
         ImageIO.write(i, "png", s);
     }

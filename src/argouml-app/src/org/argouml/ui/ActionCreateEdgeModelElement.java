@@ -40,8 +40,6 @@ package org.argouml.ui;
 
 import java.awt.event.ActionEvent;
 import java.text.MessageFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 
@@ -57,8 +55,7 @@ import org.argouml.ui.explorer.ExplorerPopup;
  */
 public class ActionCreateEdgeModelElement extends AbstractAction {
 
-    private static final Logger LOG =
-        Logger.getLogger(ExplorerPopup.class.getName());
+    
 
     private final Object metaType;
     private final Object source;
@@ -103,7 +100,7 @@ public class ActionCreateEdgeModelElement extends AbstractAction {
                 null,
                 rootModel);
         } catch (IllegalModelElementConnectionException e1) {
-            LOG.log(Level.SEVERE, "Exception", e1);
+            
         }
     }
 }

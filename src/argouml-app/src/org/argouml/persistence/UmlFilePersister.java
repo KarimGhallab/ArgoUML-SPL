@@ -65,8 +65,6 @@ import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -111,11 +109,7 @@ public class UmlFilePersister extends AbstractFilePersister {
      */
     protected static final int UML_PHASES_LOAD = 2;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UmlFilePersister.class.getName());
+    
 
     private static final String ARGO_TEE = "/org/argouml/persistence/argo.tee";
 
@@ -191,7 +185,7 @@ public class UmlFilePersister extends AbstractFilePersister {
 
             String path = file.getParent();
 
-            LOG.log(Level.INFO, "Dir == {0}", path);
+            
 
             if (doSafeSaves) {
                 // if save did not raise an exception
@@ -211,7 +205,7 @@ public class UmlFilePersister extends AbstractFilePersister {
             progressMgr.nextPhase();
 
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Exception occured during save attempt", e);
+            
 
             if (doSafeSaves) {
                 // frank: in case of exception
@@ -284,7 +278,7 @@ public class UmlFilePersister extends AbstractFilePersister {
             // Note we assume members are ordered correctly already
             for (ProjectMember projectMember : project.getMembers()) {
 
-                LOG.log(Level.INFO, "Saving member: {0}", projectMember);
+                
 
                 MemberFilePersister persister = getMemberFilePersister(projectMember);
                 filteredStream.startEntry();
@@ -332,7 +326,7 @@ public class UmlFilePersister extends AbstractFilePersister {
             // Run through any stylesheet upgrades
             int fileVersion = getPersistenceVersionFromFile(file);
 
-            LOG.log(Level.INFO, "Loading uml file of version {0}", fileVersion);
+            
             if (!checkVersion(fileVersion, getReleaseVersionFromFile(file))) {
                 // If we're about to upgrade the file lets take an archive
                 // of it first.
@@ -346,14 +340,13 @@ public class UmlFilePersister extends AbstractFilePersister {
                 while (fileVersion < PERSISTENCE_VERSION) {
                     ++fileVersion;
 
-                    LOG.log(Level.INFO, "Upgrading to version {0}", fileVersion);
+                    
 
                     long startTime = System.currentTimeMillis();
                     file = transform(file, fileVersion);
 
                     long endTime = System.currentTimeMillis();
-                    LOG.log(Level.INFO, "Upgrading took " + ((endTime - startTime) / 1000)
-                            + " seconds");
+                    
                     progressMgr.nextPhase();
                 }
             }
@@ -370,12 +363,12 @@ public class UmlFilePersister extends AbstractFilePersister {
 
             List memberList = parser.getMemberList();
 
-            LOG.log(Level.INFO,memberList.size() + " members");
+            
 
             for (int i = 0; i < memberList.size(); ++i) {
                 MemberFilePersister persister = getMemberFilePersister((String) memberList
                         .get(i));
-                LOG.log(Level.INFO, "Loading member with "+ persister.getClass().getName());
+                
 
                 inputStream.reopen(persister.getMainTag());
                 // TODO: Do we need to set the input encoding here? It was
@@ -455,7 +448,7 @@ public class UmlFilePersister extends AbstractFilePersister {
             String xsltFileName = upgradeFilesPath + upgradeFile;
             URL xsltUrl = UmlFilePersister.class.getResource(xsltFileName);
 
-            LOG.log(Level.INFO, "Resource is {0}", xsltUrl);
+            
 
             // Read xsltStream into a temporary file
             // Get url for temp file.

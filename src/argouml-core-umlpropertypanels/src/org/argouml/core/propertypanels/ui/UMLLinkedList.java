@@ -44,8 +44,6 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JList;
 import javax.swing.JPopupMenu;
@@ -72,8 +70,7 @@ import org.argouml.uml.ui.UMLLinkedListCellRenderer;
  */
 class UMLLinkedList extends JList implements MouseListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLLinkedList.class.getName());
+    
 
     /**
      * Constructor for UMLLinkedList.
@@ -191,7 +188,7 @@ class UMLLinkedList extends JList implements MouseListener {
             ListModel lm = getModel();
             if (lm instanceof UMLModelElementListModel) {
                 if (((UMLModelElementListModel) lm).buildPopup(popup, index)) {
-                    LOG.log(Level.FINE, "Showing popup");
+                    
                     popup.show(this, point.x, point.y);
                 }
             }

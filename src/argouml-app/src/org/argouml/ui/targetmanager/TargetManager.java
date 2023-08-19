@@ -47,8 +47,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.management.ListenerNotFoundException;
 import javax.management.Notification;
@@ -359,11 +357,7 @@ public final class TargetManager {
         }
 
     }
-    /**
-     * The log4j logger to log messages to.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(TargetManager.class.getName());
+    
 
     /**
      * The singleton instance.
@@ -484,7 +478,7 @@ public final class TargetManager {
 	    return;
 	}
 
-        LOG.log(Level.SEVERE, "Unknown eventName: " + eventName);
+        
     }
 
     /**
@@ -598,9 +592,7 @@ public final class TargetManager {
      */
     public synchronized void addTarget(Object target) {
         if (target instanceof TargetListener) {
-            LOG.log(Level.WARNING,
-                    "addTarget method received a TargetListener, "
-                    + "perhaps addTargetListener was intended! - " + target);
+            
         }
 	if (isInTargetTransaction()) {
             return;
@@ -775,12 +767,7 @@ public final class TargetManager {
 	            ((TargetListener) listeners[i + 1]).targetSet(targetEvent);
 	        }
 	    } catch (RuntimeException e) {
-                LOG.log(Level.SEVERE, "While calling targetSet for "
-	                + targetEvent
-	                + " in "
-	                + listeners[i + 1]
-	                            + " an error is thrown.",
-	                            e);
+                
                 e.printStackTrace();
             }
         }
@@ -797,11 +784,7 @@ public final class TargetManager {
 		        .targetAdded(targetEvent);
 		}
 	    } catch (RuntimeException e) {
-                LOG.log(Level.SEVERE,
-                        "While calling targetAdded for "
-                        + targetEvent + " in " + listeners[i + 1]
-                        + " an error is thrown.",
-                        e);
+                
                 e.printStackTrace();
 	    }
         }
@@ -818,10 +801,7 @@ public final class TargetManager {
 		        .targetRemoved(targetEvent);
 		}
 	    } catch (RuntimeException e) {
-                LOG.log(Level.WARNING, "While calling targetRemoved for "
-                        + targetEvent + " in " + listeners[i + 1]
-                        + " an error is thrown.",
-                        e);
+                
 	    }
         }
     }
@@ -910,7 +890,7 @@ public final class TargetManager {
      */
     public void navigateForward() throws IllegalStateException {
         historyManager.navigateForward();
-        LOG.log(Level.FINE, "Navigate forward");
+        
     }
 
     /**
@@ -922,7 +902,7 @@ public final class TargetManager {
      */
     public void navigateBackward() throws IllegalStateException {
         historyManager.navigateBackward();
-        LOG.log(Level.FINE, "Navigate backward");
+        
 
     }
 
@@ -997,9 +977,7 @@ public final class TargetManager {
                 try {
                     ((NotificationEmitter) o).removeNotificationListener(this);
                 } catch (ListenerNotFoundException e) {
-                    LOG.log(Level.SEVERE,
-                            "Notification Listener for CommentEdge not found",
-                            e);
+                    
                 }
             }
         }

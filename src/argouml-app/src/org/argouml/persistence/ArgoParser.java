@@ -41,8 +41,6 @@ package org.argouml.persistence;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectSettings;
@@ -57,11 +55,7 @@ import org.xml.sax.SAXException;
  */
 class ArgoParser extends SAXParserBase {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ArgoParser.class.getName());
+    
 
     private Project project;
 
@@ -130,10 +124,7 @@ class ArgoParser extends SAXParserBase {
     }
 
     private void preRead(Project theProject) {
-        LOG.log(Level.INFO,
-                "=======================================\n"
-                + "== READING PROJECT {0}",
-                theProject);
+        
 
         project = theProject;
         ps = project.getProjectSettings();
@@ -142,8 +133,7 @@ class ArgoParser extends SAXParserBase {
     }
 
     private void logError(String projectName, SAXException e) {
-        LOG.log(Level.SEVERE,
-                "Exception reading project ================"+projectName, e);
+        
     }
 
     /**
@@ -169,8 +159,7 @@ class ArgoParser extends SAXParserBase {
      */
     public void handleStartElement(XMLElement e) throws SAXException {
         if (DBG) {
-            LOG.log(Level.FINE,
-                    "NOTE: ArgoParser handleStartTag: {0}", e.getName());
+            
         }
         switch (tokens.toToken(e.getName(), true)) {
         case ArgoTokenTable.TOKEN_ARGO:
@@ -184,7 +173,7 @@ class ArgoParser extends SAXParserBase {
             break;
         default:
             if (DBG) {
-                LOG.log(Level.WARNING, "WARNING: unknown tag:" + e.getName());
+                
             }
             break;
         }
@@ -197,8 +186,7 @@ class ArgoParser extends SAXParserBase {
     @SuppressWarnings("deprecation")
     public void handleEndElement(XMLElement e) throws SAXException {
         if (DBG) {
-            LOG.log(Level.FINE,
-                    "NOTE: ArgoParser handleEndTag: {0}", e.getName());
+            
         }
         switch (tokens.toToken(e.getName(), false)) {
         case ArgoTokenTable.TOKEN_MEMBER:
@@ -275,8 +263,7 @@ class ArgoParser extends SAXParserBase {
             break;
         default:
             if (DBG) {
-                LOG.log(Level.WARNING,
-                        "WARNING: unknown end tag:" + e.getName());
+                
             }
             break;
         }
@@ -489,8 +476,7 @@ class ArgoParser extends SAXParserBase {
         try {
             diagramDefaults.setFontSize(Integer.parseInt(dsw));
         } catch (NumberFormatException e1) {
-            LOG.log(Level.SEVERE,
-                    "NumberFormatException while parsing Font Size", e1);
+            
         }
     }
 

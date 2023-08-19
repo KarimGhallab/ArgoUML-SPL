@@ -40,8 +40,6 @@ package org.argouml.uml.diagram.deployment.ui;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.CommentEdge;
@@ -72,11 +70,7 @@ public class DeploymentDiagramRenderer extends UmlDiagramRenderer {
 
     static final long serialVersionUID = 8002278834226522224L;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(DeploymentDiagramRenderer.class.getName());
+    
 
     /*
      * @see org.tigris.gef.graph.GraphNodeRenderer#getFigNodeFor(
@@ -97,7 +91,7 @@ public class DeploymentDiagramRenderer extends UmlDiagramRenderer {
         if (((UMLDiagram) diag).doesAccept(node)) {
             figNode = (FigNode) ((UMLDiagram) diag).drop(node, null);
         } else {
-            LOG.log(Level.FINE, "TODO: DeploymentDiagramRenderer getFigNodeFor");
+            
             return null;
         }
         lay.add(figNode);

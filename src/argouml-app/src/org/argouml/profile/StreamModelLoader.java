@@ -41,8 +41,6 @@ package org.argouml.profile;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.model.UmlException;
@@ -52,12 +50,11 @@ import org.xml.sax.InputSource;
 /**
  * Abstract ProfileModelLoader which loads models from an InputStream.
  *
- * @author Marcos Aurélio
+ * @author Marcos Aurï¿½lio
  */
 public abstract class StreamModelLoader implements ProfileModelLoader {
 
-    private static final Logger LOG =
-        Logger.getLogger(StreamModelLoader.class.getName());
+    
 
 
 
@@ -72,7 +69,7 @@ public abstract class StreamModelLoader implements ProfileModelLoader {
         throws ProfileException {
 
         if (inputStream == null) {
-            LOG.log(Level.SEVERE, "Profile not found");
+            
             throw new ProfileException("Profile not found!");
         }
 

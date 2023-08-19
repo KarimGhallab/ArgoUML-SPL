@@ -38,8 +38,6 @@
 
 package org.argouml.core.propertypanels.ui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 
@@ -50,8 +48,7 @@ import org.argouml.model.Model;
  */
 class UMLTimeExpressionModel extends UMLExpressionModel {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLTimeExpressionModel.class.getName());
+    
 
     /**
      * The constructor.
@@ -86,7 +83,7 @@ class UMLTimeExpressionModel extends UMLExpressionModel {
      * @see org.argouml.uml.ui.UMLExpressionModel2#newExpression()
      */
     public Object newExpression(String lang, String body) {
-        LOG.log(Level.FINE, "new time expression");
+        
         return Model.getDataTypesFactory().createTimeExpression(lang, body);
     }
 

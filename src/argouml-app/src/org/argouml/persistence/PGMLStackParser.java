@@ -50,8 +50,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.diagram.ArgoDiagram;
@@ -87,8 +85,7 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 class PGMLStackParser extends org.tigris.gef.persistence.pgml.PGMLStackParser {
 
-    private static final Logger LOG =
-        Logger.getLogger(PGMLStackParser.class.getName());
+    
 
     private List<EdgeData> figEdges = new ArrayList<EdgeData>(50);
 
@@ -161,8 +158,7 @@ class PGMLStackParser extends org.tigris.gef.persistence.pgml.PGMLStackParser {
         if (href != null) {
             owner = findOwner(href);
             if (owner == null) {
-                LOG.log(Level.WARNING, "Found href of " + href
-                        + " with no matching element in model");
+                
                 return null;
             }
         }
@@ -241,7 +237,7 @@ class PGMLStackParser extends org.tigris.gef.persistence.pgml.PGMLStackParser {
         if (href != null && !href.equals("")) {
             Object modelElement = findOwner(href);
             if (modelElement == null) {
-                LOG.log(Level.SEVERE, "Can't find href of " + href);
+                
                 throw new SAXException("Found href of " + href
                         + " with no matching element in model");
             }
@@ -254,9 +250,7 @@ class PGMLStackParser extends org.tigris.gef.persistence.pgml.PGMLStackParser {
                     f.setOwner(modelElement);
                 }
             } else {
-                LOG.log(Level.FINE,
-                        "Ignoring href on {0} as it's already set",
-                        f.getClass().getName());
+                
             }
         }
     }
@@ -443,9 +437,7 @@ class PGMLStackParser extends org.tigris.gef.persistence.pgml.PGMLStackParser {
 
             if (sourcePortFig == null || destPortFig == null
                     || sourceFigNode == null || destFigNode == null) {
-                LOG.log(Level.SEVERE,
-                        "Can't find nodes for FigEdge: " + edge.getId() + ":"
-                        + edge.toString());
+                
                 edge.removeFromDiagram();
             } else {
                 edge.setSourcePortFig(sourcePortFig);
@@ -513,8 +505,7 @@ class PGMLStackParser extends org.tigris.gef.persistence.pgml.PGMLStackParser {
             if (f instanceof FigNode) {
                 return (FigNode) f;
             } else {
-                LOG.log(Level.SEVERE,
-                        "FigID " + figId + " is not a node, edge ignored");
+                
                 return null;
             }
         }
@@ -756,9 +747,7 @@ class PGMLStackParser extends org.tigris.gef.persistence.pgml.PGMLStackParser {
 
                         constructor.setAccessible(true);
                         f = (Fig) constructor.newInstance(parameters);
-                        LOG.log(Level.WARNING,
-                                "Fig created by old style constructor "
-                                + f.getClass().getName());
+                        
                         break;
                     }
                 }
@@ -776,9 +765,7 @@ class PGMLStackParser extends org.tigris.gef.persistence.pgml.PGMLStackParser {
         // Fall back to GEF's handling if we couldn't find an appropriate
         // constructor
         if (f == null) {
-            LOG.log(Level.WARNING,
-                    "No ArgoUML constructor found for " + className
-                    + " falling back to GEF's default constructors");
+            
             f = super.constructFig(className, href, bounds, attributes);
         }
 
@@ -795,16 +782,12 @@ class PGMLStackParser extends org.tigris.gef.persistence.pgml.PGMLStackParser {
      */
     private Object getOwner(String className, String id) {
         if (id == null) {
-            LOG.log(Level.WARNING,
-                    "There is no href attribute provided for a " + className
-                    + " so the diagram element is ignored on load");
+            
             return null;
         }
         final Object owner = findOwner(id);
         if (owner == null) {
-            LOG.log(Level.WARNING,
-                    "The href " + id + " is not found for a " + className
-                    + " so the diagram element is ignored on load");
+            
             return null;
         }
         return owner;

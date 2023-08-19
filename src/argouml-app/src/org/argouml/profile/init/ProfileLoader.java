@@ -52,10 +52,7 @@ import java.util.StringTokenizer;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import org.argouml.cognitive.Critic;
 import org.argouml.i18n.Translator;
 import org.argouml.moduleloader.ModuleLoader2;
 import org.argouml.profile.ProfileException;
@@ -68,11 +65,7 @@ import org.argouml.profile.UserDefinedProfile;
  * @author maurelio1234
  */
 public final class ProfileLoader {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ProfileLoader.class.getName());
+    
 
     /**
      * The prefix in URL:s that are jars.
@@ -98,7 +91,7 @@ public final class ProfileLoader {
     }
 
     private void huntForProfilesInDir(String dir) {
-        LOG.log(Level.INFO, "Looking for Profiles in {0}", dir);
+        
 
         File extensionDir = new File(dir);
         if (extensionDir.isDirectory()) {
@@ -108,9 +101,7 @@ public final class ProfileLoader {
                 try {
                     jarfile = new JarFile(file);
                     if (jarfile != null) {
-                        LOG.log(Level.INFO,
-                                "Looking for Profiles in the Jar {0}",
-                                jarfile.getName());
+                        
 
                         ClassLoader classloader = new URLClassLoader(
                                 new URL[] {file.toURI().toURL()});
@@ -118,7 +109,7 @@ public final class ProfileLoader {
                                 classloader);
                     }
                 } catch (IOException ioe) {
-                    LOG.log(Level.FINE, "Cannot open Jar file " + file, ioe);
+                    
                 }
             }
         }
@@ -150,8 +141,7 @@ public final class ProfileLoader {
                         Translator.addClassLoader(classloader);
                         classLoaderAlreadyAdded = true;
                     }
-                    Set<Critic> critics = loadJavaCriticsForProfile(attr,
-                            classloader);
+                    
                     String modelPath = attr.getValue("Model");
                     URL modelURL = null;
 
@@ -160,18 +150,10 @@ public final class ProfileLoader {
                                 + file.getCanonicalPath() + "!" + modelPath);
                     }
 
-                    UserDefinedProfile udp = new UserDefinedProfile(entryName,
-                            modelURL, critics,
-                            loadManifestDependenciesForProfile(attr),
-                            ProfileFacade.getManager());
+                    
 
-                    ProfileFacade.getManager().registerProfile(udp);
-                    LOG.log(Level.FINE,
-                            "Registered Profile: {0}", udp.getDisplayName());
-                } catch (ProfileException e) {
-                    LOG.log(Level.SEVERE, "Exception", e);
-                } catch (IOException e) {
-                    LOG.log(Level.SEVERE, "Exception", e);
+                    } catch (IOException e) {
+                    
                 }
             }
 
@@ -200,42 +182,7 @@ public final class ProfileLoader {
         return ret;
     }
 
-    /**
-     * Loads the Java critics defined by a profile.
-     *
-     * @param attr the Manifest section of the profile
-     * @param classloader the classloader of the Jar
-     *
-     * @return the set of defined critics
-     */
-    private Set<Critic> loadJavaCriticsForProfile(Attributes attr,
-            ClassLoader classloader) {
-        Set<Critic> ret = new HashSet<Critic>();
-
-        String value = attr.getValue("Java-Critics");
-        if (value != null) {
-            StringTokenizer st = new StringTokenizer(value, ",");
-
-            while (st.hasMoreElements()) {
-                String entry = st.nextToken().trim();
-
-                try {
-                    Class cl = classloader.loadClass(entry);
-                    Critic critic = (Critic) cl.newInstance();
-                    ret.add(critic);
-                } catch (ClassNotFoundException e) {
-                    LOG.log(Level.SEVERE, "Error loading class: " + entry, e);
-                } catch (InstantiationException e) {
-                    LOG.log(Level.SEVERE,
-                            "Error instantianting class: " + entry, e);
-                } catch (IllegalAccessException e) {
-                    LOG.log(Level.SEVERE, "Exception", e);
-                }
-            }
-        }
-
-        return ret;
-    }
+    
 
     /**
      * The file filter that selects Jar files.

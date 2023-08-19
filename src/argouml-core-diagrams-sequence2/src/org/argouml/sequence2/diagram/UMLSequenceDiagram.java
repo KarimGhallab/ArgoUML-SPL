@@ -44,8 +44,6 @@ import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.i18n.Translator;
 import org.argouml.model.CollaborationsHelper;
@@ -80,8 +78,7 @@ public class UMLSequenceDiagram extends UMLDiagram
 
     private Object[] actions;
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLSequenceDiagram.class.getName());
+    
 
     /**
      * TODO: Document!
@@ -106,7 +103,7 @@ public class UMLSequenceDiagram extends UMLDiagram
         lay.setGraphNodeRenderer(renderer);
         lay.setGraphEdgeRenderer(renderer);
 
-        LOG.log(Level.FINE, "Created sequence diagram");
+        
     }
 
     /**
@@ -116,13 +113,11 @@ public class UMLSequenceDiagram extends UMLDiagram
      */
     public UMLSequenceDiagram(Object collaboration) {
         this();
-        LOG.log(Level.FINE,
-                "Constructing Sequence Diagram for collaboration {0}",
-                collaboration);
+        
         try {
             this.setName(getNewDiagramName());
         } catch (PropertyVetoException e) {
-            LOG.log(Level.SEVERE, "Exception", e);
+            
         }
         ((SequenceDiagramGraphModel) getGraphModel()).
             setCollaboration(collaboration);
@@ -322,11 +317,9 @@ public class UMLSequenceDiagram extends UMLDiagram
         }
 
         if (figNode != null) {
-            LOG.log(Level.FINE,
-                    "Model element {0} converted to {1}",
-                    new Object[]{modelElement, figNode});
+            
         } else {
-            LOG.log(Level.FINE, "Dropped object NOT added {0}", modelElement);
+            
         }
         return figNode;
     }
@@ -361,7 +354,7 @@ public class UMLSequenceDiagram extends UMLDiagram
         super.postLoad();
 
         final Facade facade = Model.getFacade();
-        LOG.log(Level.INFO, "doing postLoad on {0}", getName());
+        
 
         // See issue 5811. We have collaborationroles, associationroles
         // and messages and actions saved to the incorrect interaction and
@@ -386,16 +379,13 @@ public class UMLSequenceDiagram extends UMLDiagram
             for (final Fig f : getLayer().getContents()) {
                 if (f instanceof FigMessage) {
                     final Object message = f.getOwner();
-                    LOG.log(Level.INFO, "Checking message {0}", f.getOwner());
+                    
 
                     final Object interaction = facade.getInteraction(message);
                     final Object context = facade.getContext(interaction);
                     final Object action = facade.getAction(message);
                     if (context != collaboration) {
-                        LOG.log(Level.WARNING,
-                                "namespace of interaction does not match "
-                                + "collaboration - moving "
-                                + message + " to " + correctInteraction);
+                        
                         collabHelper.addMessage(correctInteraction, message);
                         Model.getCoreHelper().setNamespace(
                                 action, collaboration);
@@ -404,10 +394,7 @@ public class UMLSequenceDiagram extends UMLDiagram
                     final Object cr = f.getOwner();
                     final Object namespace = facade.getNamespace(cr);
                     if (namespace != collaboration) {
-                        LOG.log(Level.WARNING,
-                                "namespace of classifierrole does not match "
-                                + "collaboration - moving "
-                                + cr + " to " + collaboration);
+                        
 
                         Model.getCoreHelper().setNamespace(
                                 cr, collaboration);

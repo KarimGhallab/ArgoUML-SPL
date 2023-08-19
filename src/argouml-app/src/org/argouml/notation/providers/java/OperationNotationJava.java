@@ -42,8 +42,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.events.ArgoEventPump;
 import org.argouml.application.events.ArgoEventTypes;
@@ -59,11 +57,7 @@ import org.argouml.notation.providers.OperationNotation;
  */
 public class OperationNotationJava extends OperationNotation {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(OperationNotationJava.class.getName());
+    
 
     /**
      * The constructor.
@@ -139,10 +133,7 @@ public class OperationNotationJava extends OperationNotation {
             rp = returnParams.iterator().next();
         }
         if (returnParams.size() > 1)  {
-            LOG.log(Level.WARNING,
-                    "Java generator only handles one return parameter"
-                    + " - Found " + returnParams.size()
-                    + " for " + Model.getFacade().getName(modelElement));
+            
         }
         if (rp != null && !constructor) {
             Object returnType = Model.getFacade().getType(rp);

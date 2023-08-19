@@ -40,8 +40,6 @@ package org.argouml.ocl;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectManager;
@@ -108,10 +106,7 @@ public class ArgoFacade implements tudresden.ocl.check.types.ModelFacade {
  * A class that is the wrapper for any type.
  */
 class ArgoAny implements Any, Type2 {
-    /**
-     * Logger for the ArgoAny class.
-     */
-    private static final Logger LOG = Logger.getLogger(ArgoAny.class.getName());
+    
 
     private Object classifier;
 
@@ -307,13 +302,11 @@ class ArgoAny implements Any, Type2 {
             rp = returnParams.iterator().next();
         }
         if (returnParams.size() > 1)  {
-            LOG.log(Level.WARNING, "OCL compiler only handles one return parameter"
-                    + " - Found " + returnParams.size()
-                    + " for " + Model.getFacade().getName(foundOp));
+            
         }
 
 	if (rp == null || Model.getFacade().getType(rp) == null) {
-            LOG.log(Level.WARNING, "WARNING: supposing return type void!");
+            
 	    return new ArgoAny(null);
 	}
 	Object returnType = Model.getFacade().getType(rp);
@@ -370,9 +363,7 @@ class ArgoAny implements Any, Type2 {
      * @see tudresden.ocl.check.types.Type#hasState(java.lang.String)
      */
     public boolean hasState(String name) {
-        LOG.log(Level.WARNING,
-                "ArgoAny.hasState() has been called, but is "
-                + "not implemented yet!");
+        
 	return false;
     }
 
@@ -424,10 +415,7 @@ class ArgoAny implements Any, Type2 {
                 Model.getFacade().getParameters(operation);
 	if (!Model.getFacade().isReturn(
                         operationParameters.iterator().next())) {
-            LOG.log(Level.WARNING,
-                "ArgoFacade$ArgoAny expects the first operation parameter "
-		+ "to be the return type; this isn't the case"
-	    );
+            
 	}
 	if (!(Model.getFacade().isReturn(operationParameters.iterator().next())
 	      && operationParameters.size() == (callParams.length + 1))) {

@@ -48,8 +48,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -57,10 +55,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import org.argouml.cognitive.critics.ui.ActionOpenCritics;
-import org.argouml.cognitive.ui.ActionAutoCritique;
-import org.argouml.cognitive.ui.ActionOpenDecisions;
-import org.argouml.cognitive.ui.ActionOpenGoals;
 import org.argouml.configuration.Configuration;
 import org.argouml.ui.ActionExportXMI;
 import org.argouml.ui.ActionImportXMI;
@@ -311,10 +305,7 @@ public class ShortcutMgr {
     /** Action key for reorder to back */
     public static final String ACTION_REORDER_TO_BACK = "reorderToBack";
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG = Logger.getLogger(ShortcutMgr.class.getName());
+    
 
     private static final int DEFAULT_MASK = Toolkit.getDefaultToolkit()
             .getMenuShortcutKeyMask();
@@ -487,7 +478,7 @@ public class ShortcutMgr {
                     return KeyStroke.getKeyStroke(f.getInt(null), modifiers);
 
                 } catch (Exception exc) {
-                    LOG.log(Level.SEVERE, "Exception: " + exc);
+                    
                 }
             }
         }
@@ -541,7 +532,7 @@ public class ShortcutMgr {
             return InputEvent.SHIFT_DOWN_MASK;
         } else {
             // it should never go here!
-            LOG.log(Level.FINE, "Unknown modifier: {0}", modifier);
+            
             return 0;
         }
     }
@@ -680,12 +671,7 @@ public class ShortcutMgr {
         // critique menu
         // TODO: This dependency should be inverted with the Critics subsystem
         // registering its desired shortcuts with us - tfm
-        putDefaultShortcut(ACTION_AUTO_CRITIQUE, null,
-                new ActionAutoCritique());
-        putDefaultShortcut(ACTION_OPEN_DECISIONS, null,
-                new ActionOpenDecisions());
-        putDefaultShortcut(ACTION_OPEN_GOALS, null, new ActionOpenGoals());
-        putDefaultShortcut(ACTION_OPEN_CRITICS, null, new ActionOpenCritics());
+        
 
         // help menu
         putDefaultShortcut(ACTION_SYSTEM_INFORMATION, null,

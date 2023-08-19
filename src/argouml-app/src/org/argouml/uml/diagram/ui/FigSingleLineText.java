@@ -44,8 +44,6 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -72,8 +70,7 @@ import org.tigris.gef.presentation.FigText;
  */
 public class FigSingleLineText extends ArgoFigText  {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigSingleLineText.class.getName());
+    
 
     /**
      * The properties of 'owner' that this is interested in
@@ -233,8 +230,7 @@ public class FigSingleLineText extends ArgoFigText  {
                     try {
                         updateLayout(event);
                     } catch (InvalidElementException e) {
-                        LOG.log(Level.FINE, "event = {0}", event);
-                        LOG.log(Level.FINE, "updateLayout method accessed deleted element ", e);
+                        
                     }
                 }
             };

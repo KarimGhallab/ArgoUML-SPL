@@ -42,7 +42,6 @@ package org.argouml.sequence2.diagram;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.argouml.uml.diagram.ui.FigEdgeModelElement;
 import org.argouml.uml.diagram.ui.SelectionRerouteEdge;
@@ -56,11 +55,7 @@ import org.tigris.gef.presentation.Handle;
  */
 class SelectionMessage extends SelectionRerouteEdge {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(SelectionMessage.class.getName());
+    
 
     /**
      * The constructor.

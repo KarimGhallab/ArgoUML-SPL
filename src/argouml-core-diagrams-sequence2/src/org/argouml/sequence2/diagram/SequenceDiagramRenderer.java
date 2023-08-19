@@ -39,8 +39,6 @@
 package org.argouml.sequence2.diagram;
 
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.CommentEdge;
@@ -62,11 +60,7 @@ import org.tigris.gef.presentation.FigNode;
  */
 class SequenceDiagramRenderer extends UmlDiagramRenderer {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(SequenceDiagramRenderer.class.getName());
+    
 
     /*
      * @see org.tigris.gef.graph.GraphNodeRenderer#getFigNodeFor(
@@ -83,11 +77,10 @@ class SequenceDiagramRenderer extends UmlDiagramRenderer {
                 && ((UMLDiagram) diag).doesAccept(node)) {
             result = (FigNode) ((UMLDiagram) diag).drop(node, null);
         } else {
-            LOG.log(Level.WARNING, "SequenceDiagramRenderer getFigNodeFor unexpected node "
-                    + node);
+            
             return null;
         }
-        LOG.log(Level.FINE, "SequenceDiagramRenderer getFigNodeFor {0}", result);
+        
         lay.add(result);
         return result;
     }
