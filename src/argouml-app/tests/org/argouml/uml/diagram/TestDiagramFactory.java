@@ -113,19 +113,7 @@ public class TestDiagramFactory extends TestCase {
                         .buildStateMachine(context);
                 diagram = DiagramFactory.getInstance().create(type, machine,
                         settings);
-            } else if (type == DiagramType.Collaboration
-                    || type == DiagramType.Sequence) {
-                Object collab = Model.getCollaborationsFactory()
-                        .buildCollaboration(model);
-                diagram = DiagramFactory.getInstance().create(type, collab,
-                        settings);
-            } else if (type == DiagramType.Activity) {
-                Object context = Model.getCoreFactory().buildClass(model);
-                Object activityGraph = Model.getActivityGraphsFactory()
-                        .buildActivityGraph(context);
-                diagram = DiagramFactory.getInstance().create(type,
-                        activityGraph, settings);
-            } else {
+            }   else {
                 // Handle the simple cases
                 // Anything very exotic will fail, but that will be our clue
                 // that the test needs to be extended

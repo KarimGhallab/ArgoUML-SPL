@@ -52,8 +52,6 @@ import javax.swing.JTree;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-import org.argouml.cognitive.ToDoItem;
-import org.argouml.cognitive.ToDoList;
 import org.argouml.i18n.Translator;
 import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectManager;
@@ -149,13 +147,7 @@ public class DisplayTextTree extends JTree {
     public String convertValueToText(Object value, boolean selected,
             boolean expanded, boolean leaf, int row, boolean hasFocus) {
 
-        if (value instanceof ToDoItem) {
-            return ((ToDoItem) value).getHeadline();
-        }
-        if (value instanceof ToDoList) {
-            // TODO: Localize
-            return "ToDoList";
-        }
+        
 
         if (Model.getFacade().isAModelElement(value)) {
             String name = null;

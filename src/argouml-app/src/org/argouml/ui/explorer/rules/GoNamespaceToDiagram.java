@@ -50,7 +50,6 @@ import org.argouml.kernel.ProjectManager;
 import org.argouml.model.Model;
 import org.argouml.uml.diagram.ArgoDiagram;
 import org.argouml.uml.diagram.SequenceDiagram;
-import org.argouml.uml.diagram.activity.ui.UMLActivityDiagram;
 import org.argouml.uml.diagram.state.ui.UMLStateDiagram;
 
 /**
@@ -83,7 +82,7 @@ public class GoNamespaceToDiagram extends AbstractPerspectiveRule {
                 // Statediagrams and activitydiagrams are shown as children
                 // of the statemachine or activitygraph they belong to.
                 if (diagram instanceof UMLStateDiagram
-                        || diagram instanceof UMLActivityDiagram
+                        || false
                         || diagram instanceof SequenceDiagram) {
                     continue;
                 }

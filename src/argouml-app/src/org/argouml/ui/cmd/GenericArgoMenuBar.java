@@ -58,10 +58,6 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import org.argouml.application.helpers.ResourceLoaderWrapper;
-import org.argouml.cognitive.critics.ui.ActionOpenCritics;
-import org.argouml.cognitive.ui.ActionAutoCritique;
-import org.argouml.cognitive.ui.ActionOpenDecisions;
-import org.argouml.cognitive.ui.ActionOpenGoals;
 import org.argouml.i18n.Translator;
 import org.argouml.ui.ActionExportXMI;
 import org.argouml.ui.ActionImportXMI;
@@ -76,9 +72,7 @@ import org.argouml.ui.explorer.ActionPerspectiveConfig;
 import org.argouml.ui.targetmanager.TargetEvent;
 import org.argouml.ui.targetmanager.TargetListener;
 import org.argouml.ui.targetmanager.TargetManager;
-import org.argouml.uml.ui.ActionActivityDiagram;
 import org.argouml.uml.ui.ActionClassDiagram;
-import org.argouml.uml.ui.ActionCollaborationDiagram;
 import org.argouml.uml.ui.ActionDeleteModelElements;
 import org.argouml.uml.ui.ActionDeploymentDiagram;
 import org.argouml.uml.ui.ActionGenerateAll;
@@ -93,7 +87,6 @@ import org.argouml.uml.ui.ActionSaveGraphics;
 import org.argouml.uml.ui.ActionSaveProjectAs;
 import org.argouml.uml.ui.ActionSequenceDiagram;
 import org.argouml.uml.ui.ActionStateDiagram;
-import org.argouml.uml.ui.ActionUseCaseDiagram;
 import org.argouml.util.osdep.OSXAdapter;
 import org.argouml.util.osdep.OsUtil;
 import org.tigris.gef.base.AlignAction;
@@ -313,7 +306,7 @@ public class GenericArgoMenuBar extends JMenuBar implements
         initMenuCreate();
         initMenuArrange();
         initMenuGeneration();
-        initMenuCritique();
+        
         initMenuTools();
         initMenuHelp();
     }
@@ -615,12 +608,8 @@ public class GenericArgoMenuBar extends JMenuBar implements
         Collection<Action> toolbarTools = new ArrayList<Action>();
         createDiagramMenu = add(new JMenu(menuLocalize("Create Diagram")));
         setMnemonic(createDiagramMenu, "Create Diagram");
-        JMenuItem usecaseDiagram = createDiagramMenu
-                .add(new ActionUseCaseDiagram());
-        setMnemonic(usecaseDiagram, "Usecase Diagram");
-        toolbarTools.add((new ActionUseCaseDiagram()));
-        ShortcutMgr.assignAccelerator(usecaseDiagram,
-                ShortcutMgr.ACTION_USE_CASE_DIAGRAM);
+        
+        
 
         JMenuItem classDiagram =
             createDiagramMenu.add(new ActionClassDiagram());
@@ -636,12 +625,7 @@ public class GenericArgoMenuBar extends JMenuBar implements
         ShortcutMgr.assignAccelerator(sequenzDiagram,
                 ShortcutMgr.ACTION_SEQUENCE_DIAGRAM);
 
-        JMenuItem collaborationDiagram =
-            createDiagramMenu.add(new ActionCollaborationDiagram());
-        setMnemonic(collaborationDiagram, "Collaboration Diagram");
-        toolbarTools.add((new ActionCollaborationDiagram()));
-        ShortcutMgr.assignAccelerator(collaborationDiagram,
-                ShortcutMgr.ACTION_COLLABORATION_DIAGRAM);
+        
 
         JMenuItem stateDiagram =
             createDiagramMenu.add(new ActionStateDiagram());
@@ -650,12 +634,7 @@ public class GenericArgoMenuBar extends JMenuBar implements
         ShortcutMgr.assignAccelerator(stateDiagram,
                 ShortcutMgr.ACTION_STATE_DIAGRAM);
 
-        JMenuItem activityDiagram =
-            createDiagramMenu.add(new ActionActivityDiagram());
-        setMnemonic(activityDiagram, "Activity Diagram");
-        toolbarTools.add((new ActionActivityDiagram()));
-        ShortcutMgr.assignAccelerator(activityDiagram,
-                ShortcutMgr.ACTION_ACTIVITY_DIAGRAM);
+        
 
         JMenuItem deploymentDiagram =
             createDiagramMenu.add(new ActionDeploymentDiagram());
@@ -890,34 +869,7 @@ public class GenericArgoMenuBar extends JMenuBar implements
         // generate.add(Actions.GenerateWeb);
     }
 
-    /**
-     * Build the menu "Critique".
-     */
-    private void initMenuCritique() {
-        // TODO: This creates a dependency on the Critics subsystem.
-        // Instead that subsystem should register its desired menus and actions.
-        critique =
-            (ArgoJMenu) add(new ArgoJMenu(MENU + prepareKey("Critique")));
-        setMnemonic(critique, "Critique");
-        JMenuItem toggleAutoCritique = critique
-                .addCheckItem(new ActionAutoCritique());
-        setMnemonic(toggleAutoCritique, "Toggle Auto Critique");
-        ShortcutMgr.assignAccelerator(toggleAutoCritique,
-                ShortcutMgr.ACTION_AUTO_CRITIQUE);
-        critique.addSeparator();
-        JMenuItem designIssues = critique.add(new ActionOpenDecisions());
-        setMnemonic(designIssues, "Design Issues");
-        ShortcutMgr.assignAccelerator(designIssues,
-                ShortcutMgr.ACTION_OPEN_DECISIONS);
-        JMenuItem designGoals = critique.add(new ActionOpenGoals());
-        setMnemonic(designGoals, "Design Goals");
-        ShortcutMgr.assignAccelerator(designGoals,
-                ShortcutMgr.ACTION_OPEN_GOALS);
-        JMenuItem browseCritics = critique.add(new ActionOpenCritics());
-        setMnemonic(browseCritics, "Browse Critics");
-        ShortcutMgr.assignAccelerator(designIssues,
-                ShortcutMgr.ACTION_OPEN_CRITICS);
-    }
+    
 
     /**
      * Build the menu "Tools".

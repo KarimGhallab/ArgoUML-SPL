@@ -77,11 +77,6 @@ import org.argouml.application.events.ArgoEventTypes;
 import org.argouml.application.events.ArgoHelpEvent;
 import org.argouml.application.events.ArgoNotationEvent;
 import org.argouml.application.events.ArgoNotationEventListener;
-import org.argouml.cognitive.Designer;
-import org.argouml.cognitive.Highlightable;
-import org.argouml.cognitive.ToDoItem;
-import org.argouml.cognitive.ToDoList;
-import org.argouml.cognitive.ui.ActionGoToCritique;
 import org.argouml.i18n.Translator;
 import org.argouml.kernel.DelayedChangeNotify;
 import org.argouml.kernel.DelayedVChangeListener;
@@ -103,7 +98,6 @@ import org.argouml.notation.NotationRenderer;
 import org.argouml.notation.NotationSettings;
 import org.argouml.profile.FigNodeStrategy;
 import org.argouml.ui.ArgoJMenu;
-import org.argouml.ui.Clarifier;
 import org.argouml.ui.ContextActionFactoryManager;
 import org.argouml.ui.ProjectActions;
 import org.argouml.ui.UndoableAction;
@@ -155,9 +149,9 @@ public abstract class FigNodeModelElement
         ArgoDiagramAppearanceEventListener,
         ArgoNotationEventListener,
         NotationRenderer,
-        Highlightable,
+        
         IItemUID,
-        Clarifiable,
+        
         ArgoFig,
         StereotypeStyled,
         DiagramElement,
@@ -649,34 +643,7 @@ public abstract class FigNodeModelElement
             popupAddOffset++;
         }
 
-        /* Check if multiple items are selected: */
-        if (TargetManager.getInstance().getTargets().size() == 1) {
-
-            // TODO: Having Critics actions here introduces an unnecessary
-            // dependency on the Critics subsystem.  Have it register its
-            // desired actions using an extension mechanism - tfm
-            ToDoList tdList = Designer.theDesigner().getToDoList();
-            List<ToDoItem> items = tdList.elementListForOffender(getOwner());
-            if (items != null && items.size() > 0) {
-                // TODO: This creates a dependency on the Critics subsystem.
-                // We need a generic way for modules (including our internal
-                // subsystems) to request addition of actions to the popup
-                // menu. - tfm 20080430
-                ArgoJMenu critiques = new ArgoJMenu("menu.popup.critiques");
-                ToDoItem itemUnderMouse = hitClarifier(me.getX(), me.getY());
-                if (itemUnderMouse != null) {
-                    critiques.add(new ActionGoToCritique(itemUnderMouse));
-                    critiques.addSeparator();
-                }
-                for (ToDoItem item : items) {
-                    if (item != itemUnderMouse) {
-                        critiques.add(new ActionGoToCritique(item));
-                    }
-                }
-                popUpActions.add(0, new JSeparator());
-                popUpActions.add(0, critiques);
-            }
-        }
+        
 
         // Add stereotypes submenu
         Collection<Object> elements = new ArrayList<Object>();
@@ -933,123 +900,7 @@ public abstract class FigNodeModelElement
         return new SelectionDefaultClarifiers(this);
     }
 
-    /**
-     * Displays visual indications of pending ToDoItems.
-     * Please note that the list of advices (ToDoList) is not the same
-     * as the list of element known by the FigNode (_figs). Therefore,
-     * it is necessary to check if the graphic item exists before drawing
-     * on it. See ClAttributeCompartment for an example.
-     * @param g the graphics device
-     * @see org.argouml.uml.cognitive.critics.ClAttributeCompartment
-     */
-    public void paintClarifiers(Graphics g) {
-        // TODO: Generalize extension and remove critic specific stuff
-        int iconX = getX();
-        int iconY = getY() - 10;
-        ToDoList tdList = Designer.theDesigner().getToDoList();
-        List<ToDoItem> items = tdList.elementListForOffender(getOwner());
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-            }
-            if (icon != null) {
-                icon.paintIcon(null, g, iconX, iconY);
-                iconX += icon.getIconWidth();
-            }
-        }
-        items = tdList.elementListForOffender(this);
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-            }
-            if (icon != null) {
-                icon.paintIcon(null, g, iconX, iconY);
-                iconX += icon.getIconWidth();
-            }
-        }
-    }
-
-    /**
-     * @param x the x of the hit
-     * @param y the y of the hit
-     * @return the todo item of which the clarifier has been hit
-     */
-    protected ToDoItem hitClarifier(int x, int y) {
-        // TODO: ToDoItem stuff should be made an opaque extension
-        int iconX = getX();
-        ToDoList tdList = Designer.theDesigner().getToDoList();
-        List<ToDoItem> items = tdList.elementListForOffender(getOwner());
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            int width = icon.getIconWidth();
-            if (y >= getY() - 15
-                    && y <= getY() + 10
-                    && x >= iconX
-                    && x <= iconX + width) {
-                return item;
-            }
-            iconX += width;
-        }
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-                if (((Clarifier) icon).hit(x, y)) {
-                    return item;
-                }
-            }
-        }
-        items = tdList.elementListForOffender(this);
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            int width = icon.getIconWidth();
-            if (y >= getY() - 15
-                    && y <= getY() + 10
-                    && x >= iconX
-                    && x <= iconX + width) {
-                return item;
-            }
-            iconX += width;
-        }
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-                if (((Clarifier) icon).hit(x, y)) {
-                    return item;
-                }
-            }
-        }
-        return null;
-    }
-
-    /*
-     * @see org.tigris.gef.presentation.Fig#getTipString(java.awt.event.MouseEvent)
-     */
-    @Override
-    public String getTipString(MouseEvent me) {
-        // TODO: Generalize extension and remove critic specific code
-        ToDoItem item = hitClarifier(me.getX(), me.getY());
-        String tip = "";
-        if (item != null
-            && Globals.curEditor().getSelectionManager().containsFig(this)) {
-            tip = item.getHeadline() + " ";
-        } else if (getOwner() != null) {
-            tip = Model.getFacade().getTipString(getOwner());
-        } else {
-            tip = toString();
-        }
-        if (tip != null && tip.length() > 0 && !tip.endsWith(" ")) {
-            tip += " ";
-        }
-        return tip;
-    }
+    
 
     ////////////////////////////////////////////////////////////////
     // event handlers

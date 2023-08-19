@@ -76,8 +76,6 @@ import org.argouml.uml.diagram.ui.ModeCreateDependency;
 import org.argouml.uml.diagram.ui.ModeCreatePermission;
 import org.argouml.uml.diagram.ui.ModeCreateUsage;
 import org.argouml.uml.diagram.ui.UMLDiagram;
-import org.argouml.uml.diagram.use_case.ui.FigActor;
-import org.argouml.uml.diagram.use_case.ui.FigUseCase;
 import org.argouml.uml.ui.foundation.core.ActionAddAttribute;
 import org.argouml.uml.ui.foundation.core.ActionAddOperation;
 import org.argouml.util.ToolBarUtility;
@@ -915,9 +913,9 @@ public class UMLClassDiagram extends UMLDiagram implements ClassDiagram {
         } else if (Model.getFacade().isASignal(modelElement)) {
             figNode = new FigSignal(modelElement, bounds, settings);
         } else if (Model.getFacade().isAActor(modelElement)) {
-            figNode = new FigActor(modelElement, bounds, settings);
+            
         } else if (Model.getFacade().isAUseCase(modelElement)) {
-            figNode = new FigUseCase(modelElement, bounds, settings);
+            
         } else if (Model.getFacade().isAObject(modelElement)) {
             figNode = new FigObject(modelElement, bounds, settings);
         } else if (Model.getFacade().isAInstanceSpecification(modelElement)) {

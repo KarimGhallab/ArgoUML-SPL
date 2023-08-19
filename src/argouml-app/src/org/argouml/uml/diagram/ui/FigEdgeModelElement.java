@@ -75,11 +75,6 @@ import org.argouml.application.events.ArgoEventTypes;
 import org.argouml.application.events.ArgoHelpEvent;
 import org.argouml.application.events.ArgoNotationEvent;
 import org.argouml.application.events.ArgoNotationEventListener;
-import org.argouml.cognitive.Designer;
-import org.argouml.cognitive.Highlightable;
-import org.argouml.cognitive.ToDoItem;
-import org.argouml.cognitive.ToDoList;
-import org.argouml.cognitive.ui.ActionGoToCritique;
 import org.argouml.i18n.Translator;
 import org.argouml.kernel.DelayedChangeNotify;
 import org.argouml.kernel.DelayedVChangeListener;
@@ -101,7 +96,6 @@ import org.argouml.notation.NotationProviderFactory2;
 import org.argouml.notation.NotationRenderer;
 import org.argouml.notation.NotationSettings;
 import org.argouml.ui.ArgoJMenu;
-import org.argouml.ui.Clarifier;
 import org.argouml.ui.ContextActionFactoryManager;
 import org.argouml.ui.ProjectActions;
 import org.argouml.ui.targetmanager.TargetManager;
@@ -148,10 +142,10 @@ public abstract class FigEdgeModelElement
         ArgoNotationEventListener,
         NotationRenderer,
         ArgoDiagramAppearanceEventListener,
-        Highlightable,
+        
         IItemUID,
         ArgoFig,
-        Clarifiable,
+        
         DiagramElement,
         Owned {
 
@@ -302,34 +296,7 @@ public abstract class FigEdgeModelElement
         return itemUid;
     }
 
-    /*
-     * @see org.tigris.gef.presentation.Fig#getTipString(java.awt.event.MouseEvent)
-     */
-    @Override
-    public String getTipString(MouseEvent me) {
-        ToDoItem item = hitClarifier(me.getX(), me.getY());
-        String tip = "";
-        if (item != null
-            && Globals.curEditor().getSelectionManager().containsFig(this)) {
-            tip = item.getHeadline();
-        } else if (getOwner() != null) {
-            try {
-                tip = Model.getFacade().getTipString(getOwner());
-            } catch (InvalidElementException e) {
-                // We moused over an object just as it was deleted
-                // transient condition - doesn't require I18N
-                LOG.log(Level.WARNING, "A deleted element still exists on the diagram");
-                return Translator.localize("misc.name.deleted");
-            }
-        } else {
-            tip = toString();
-        }
-
-        if (tip != null && tip.length() > 0 && !tip.endsWith(" ")) {
-            tip += " ";
-        }
-        return tip;
-    }
+    
 
     /**
      * @param me the MouseEvent that triggered the popup menu request
@@ -368,30 +335,7 @@ public abstract class FigEdgeModelElement
         popUpActions.add(new ActionDeleteModelElements());
         popupAddOffset++;
 
-        if (TargetManager.getInstance().getTargets().size() == 1) {
-            ToDoList list = Designer.theDesigner().getToDoList();
-            List<ToDoItem> items = list.elementListForOffender(getOwner());
-            if (items != null && items.size() > 0) {
-                // TODO: This creates a dependency on the Critics subsystem.
-                // We need a generic way for modules (including our internal
-                // subsystems) to request addition of actions to the popup
-                // menu. - tfm 20080430
-                ArgoJMenu critiques = new ArgoJMenu("menu.popup.critiques");
-                ToDoItem itemUnderMouse = hitClarifier(me.getX(), me.getY());
-                if (itemUnderMouse != null) {
-                    critiques.add(new ActionGoToCritique(itemUnderMouse));
-                    critiques.addSeparator();
-                }
-                for (ToDoItem item : items) {
-                    if (item == itemUnderMouse) {
-                        continue;
-                    }
-                    critiques.add(new ActionGoToCritique(item));
-                }
-                popUpActions.add(0, new JSeparator());
-                popUpActions.add(0, critiques);
-            }
-        }
+        
 
         // Add stereotypes submenu
         Action[] stereoActions = getApplyStereotypeActions();
@@ -449,104 +393,7 @@ public abstract class FigEdgeModelElement
         return xSquared + ySquared;
     }
 
-    /**
-     * @param g the <code>Graphics</code> object
-     */
-    public void paintClarifiers(Graphics g) {
-        int iconPos = 25, gap = 1, xOff = -4, yOff = -4;
-        Point p = new Point();
-        ToDoList tdList = Designer.theDesigner().getToDoList();
-        /* Owner related todo items: */
-        List<ToDoItem> items = tdList.elementListForOffender(getOwner());
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-            }
-            if (icon != null) {
-                stuffPointAlongPerimeter(iconPos, p);
-                icon.paintIcon(null, g, p.x + xOff, p.y + yOff);
-                iconPos += icon.getIconWidth() + gap;
-            }
-        }
-        /* Fig related todo items: */
-        items = tdList.elementListForOffender(this);
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-            }
-            if (icon != null) {
-                stuffPointAlongPerimeter(iconPos, p);
-                icon.paintIcon(null, g, p.x + xOff, p.y + yOff);
-                iconPos += icon.getIconWidth() + gap;
-            }
-        }
-    }
-
-    /**
-     * The user clicked on the clarifier.
-     *
-     * @param x the x of the point clicked
-     * @param y the y of the point clicked
-     * @return the todo item clicked
-     */
-    public ToDoItem hitClarifier(int x, int y) {
-        int iconPos = 25, xOff = -4, yOff = -4;
-        Point p = new Point();
-        ToDoList tdList = Designer.theDesigner().getToDoList();
-        List<ToDoItem> items = tdList.elementListForOffender(getOwner());
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            stuffPointAlongPerimeter(iconPos, p);
-            int width = icon.getIconWidth();
-            int height = icon.getIconHeight();
-            if (y >= p.y + yOff
-                && y <= p.y + height + yOff
-                && x >= p.x + xOff
-                && x <= p.x + width + xOff) {
-                return item;
-            }
-            iconPos += width;
-        }
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-                if (((Clarifier) icon).hit(x, y)) {
-                    return item;
-                }
-            }
-        }
-        items = tdList.elementListForOffender(this);
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            stuffPointAlongPerimeter(iconPos, p);
-            int width = icon.getIconWidth();
-            int height = icon.getIconHeight();
-            if (y >= p.y + yOff
-                && y <= p.y + height + yOff
-                && x >= p.x + xOff
-                && x <= p.x + width + xOff) {
-                return item;
-            }
-            iconPos += width;
-        }
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-                if (((Clarifier) icon).hit(x, y)) {
-                    return item;
-                }
-            }
-        }
-        return null;
-    }
+    
 
     /**
      * @return a {@link SelectionRerouteEdge} object that manages selection and

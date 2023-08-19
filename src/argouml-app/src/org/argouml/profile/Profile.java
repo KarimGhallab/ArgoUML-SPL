@@ -44,7 +44,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.argouml.cognitive.Critic;
 
 /**
  * Abstract class representing an ArgoUML Profile. It contains default types and
@@ -63,10 +62,7 @@ public abstract class Profile {
 
     private Set<String> dependencies = new HashSet<String>();
 
-    /**
-     * The critics provided by this profile
-     */
-    private Set<Critic> critics = new HashSet<Critic>();
+    
 
     /**
      * Add a dependency on the given profile from this profile.
@@ -173,12 +169,7 @@ public abstract class Profile {
         return getDisplayName();
     }
 
-    /**
-     * @return Returns the critics defined by this profile.
-     */
-    public Set<Critic> getCritics() {
-        return critics;
-    }
+    
 
     /**
      * @return a unique identifier for this profile
@@ -189,10 +180,5 @@ public abstract class Profile {
         return getDisplayName();
     }
 
-    /**
-     * @param criticsSet The critics to set.
-     */
-    protected void setCritics(Set<Critic> criticsSet) {
-        this.critics = criticsSet;
-    }
+    
 }
