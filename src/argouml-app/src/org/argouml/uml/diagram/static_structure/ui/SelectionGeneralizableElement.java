@@ -44,7 +44,6 @@ import javax.swing.Icon;
 
 import org.argouml.application.helpers.ResourceLoaderWrapper;
 import org.argouml.model.Model;
-import org.argouml.uml.diagram.deployment.DeploymentDiagramGraphModel;
 import org.argouml.uml.diagram.ui.SelectionClassifierBox;
 import org.tigris.gef.base.Editor;
 import org.tigris.gef.base.Globals;
@@ -97,10 +96,7 @@ public abstract class SelectionGeneralizableElement extends
         Editor ce = Globals.curEditor();
         GraphModel gm = ce.getGraphModel();
     
-        // No generalizations in Deployment Diagrams
-        if (gm instanceof DeploymentDiagramGraphModel) {
-            return null;
-        }
+        
         if (Model.getModelManagementHelper().isReadOnly(
                 getContent().getOwner())) {
             return new Icon[] {null, inherit, null, null, null };

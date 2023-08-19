@@ -86,7 +86,7 @@ public class ProfileGoodPractices extends Profile {
             critics.add(new CrTooManyStates());
         }
         critics.add(new CrTooManyClasses());
-        critics.add(new CrWrongLinkEnds());
+        
         critics.add(new CrUtilityViolated());
 
         this.setCritics(critics);

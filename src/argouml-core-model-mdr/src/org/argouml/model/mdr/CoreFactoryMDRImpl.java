@@ -44,8 +44,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jmi.reflect.InvalidObjectException;
 import javax.jmi.reflect.RefObject;
@@ -137,8 +135,7 @@ import org.omg.uml.modelmanagement.UmlPackage;
 class CoreFactoryMDRImpl extends AbstractUmlModelFactoryMDR implements
         CoreFactory {
 
-    private static final Logger LOG =
-        Logger.getLogger(CoreFactoryMDRImpl.class.getName());
+    
 
     /**
      * The model implementation.
@@ -854,7 +851,7 @@ class CoreFactoryMDRImpl extends AbstractUmlModelFactoryMDR implements
                 try {
                     cl.refDelete();
                 } catch (InvalidObjectException e) {
-                    LOG.log(Level.WARNING, "Object already deleted " + cl);
+                    
                 }
             }
 
@@ -1736,7 +1733,7 @@ class CoreFactoryMDRImpl extends AbstractUmlModelFactoryMDR implements
      *            is the namespace.
      */
     void deleteNamespace(Object elem) {
-        LOG.log(Level.FINE, "Deleting namespace {0}", elem);
+        
 
         if (!(elem instanceof Namespace)) {
             throw new IllegalArgumentException("elem: " + elem);
@@ -1749,7 +1746,7 @@ class CoreFactoryMDRImpl extends AbstractUmlModelFactoryMDR implements
         ownedElements.addAll(((Namespace) elem).getOwnedElement());
         for (ModelElement element : ownedElements) {
 
-            LOG.log(Level.FINE, "Deleting ownedElement {0}", element);
+            
 
             modelImpl.getUmlFactory().delete(element);
         }

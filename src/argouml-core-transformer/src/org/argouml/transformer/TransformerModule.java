@@ -14,8 +14,6 @@
 
 package org.argouml.transformer;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.moduleloader.ModuleInterface;
 import org.argouml.ui.ContextActionFactoryManager;
@@ -23,8 +21,7 @@ import org.argouml.ui.ContextActionFactoryManager;
 
 public class TransformerModule implements ModuleInterface {
 
-    private static final Logger LOG =
-        Logger.getLogger(TransformerModule.class.getName());
+    
 
     public boolean enable() {
 
@@ -33,14 +30,14 @@ public class TransformerModule implements ModuleInterface {
         TransformerManager.getInstance().addTransformer(
                 new SimpleStateTransformer());
         ContextActionFactoryManager.addContextPopupFactory(TransformerManager.getInstance());
-        LOG.log(Level.INFO, "Transformer Module enabled.");
+        
         return true;
     }
 
     public boolean disable() {
         ContextActionFactoryManager.removeContextPopupFactory(TransformerManager.getInstance());
 
-        LOG.log(Level.INFO, "Transformer Module disabled.");
+        
         return true;
     }
 

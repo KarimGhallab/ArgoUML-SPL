@@ -42,8 +42,6 @@ package org.argouml.uml.diagram.static_structure.ui;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.i18n.Translator;
 import org.argouml.kernel.Owned;
@@ -74,8 +72,7 @@ import org.tigris.gef.presentation.FigNode;
 public class FigEdgeNote extends FigEdgePoly
         implements ArgoFig, DiagramElement, Owned, IItemUID, PropertyChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigEdgeNote.class.getName());
+    
 
     private Object comment;
     private Object annotatedElement;
@@ -116,7 +113,7 @@ public class FigEdgeNote extends FigEdgePoly
      */
     @Override
     public void setFig(Fig f) {
-        LOG.log(Level.INFO, "Setting the internal fig to {0}", f);
+        
 
         super.setFig(f);
         getFig().setDashed(true);

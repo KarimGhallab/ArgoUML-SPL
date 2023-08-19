@@ -45,8 +45,6 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -92,11 +90,7 @@ public final class Designer
      implements Poster,
          Runnable,
          PropertyChangeListener {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(Designer.class.getName());
+    
 
     /**
      * the singleton of this class.
@@ -311,7 +305,7 @@ public final class Designer
                         try {
                             this.wait();
                         } catch (InterruptedException ignore) {
-                            LOG.log(Level.SEVERE, "InterruptedException!!!", ignore);
+                            
                         }
                     }
                 }
@@ -376,9 +370,7 @@ public final class Designer
                                 }
                             } catch (InvalidElementException e) {
                                 // Don't let a transient error kill the thread
-                                LOG.log(Level.WARNING, "Element " + dm
-                                        + "caused an InvalidElementException.  "
-                                        + "Ignoring for this pass.");
+                                
                             }
                         }
                     }
@@ -392,15 +384,15 @@ public final class Designer
                 long sleepDuration =
                     Math.min(cycleDuration - critiqueDuration, 3000);
                 sleepDuration = Math.max(sleepDuration, 1000);
-                LOG.log(Level.FINE, "sleepDuration= {0}", sleepDuration);
+                
                 try {
                     Thread.sleep(sleepDuration);
                 } catch (InterruptedException ignore) {
-                    LOG.log(Level.SEVERE, "InterruptedException!!!", ignore);
+                    
                 }
             }
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Critic thread killed by exception", e);
+            
         }
     }
 
@@ -424,7 +416,7 @@ public final class Designer
         if ("remove".equals(reason)) {
             return;
         }
-        LOG.log(Level.FINE, "critiqueASAP: {0}", dm);
+        
         int addQueueIndex = addQueue.indexOf(dm);
         if (addQueueIndex == -1) {
             addQueue.add(dm);
@@ -461,7 +453,7 @@ public final class Designer
         if (pcs == null) {
             pcs = new PropertyChangeSupport(theDesigner());
         }
-        LOG.log(Level.FINE, "addPropertyChangeListener({0})", pcl);
+        
         pcs.addPropertyChangeListener(pcl);
     }
 
@@ -473,7 +465,7 @@ public final class Designer
      */
     public static void removeListener(PropertyChangeListener p) {
         if (pcs != null) {
-            LOG.log(Level.FINE, "removePropertyChangeListener()");
+            
             pcs.removePropertyChangeListener(p);
         }
     }

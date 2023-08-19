@@ -16,8 +16,6 @@ package org.argouml.model.euml;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.model.StateMachinesHelper;
@@ -34,8 +32,7 @@ import org.eclipse.uml2.uml.Vertex;
  */
 class StateMachinesHelperEUMLImpl implements StateMachinesHelper {
 
-    private static final Logger LOG =
-        Logger.getLogger(StateMachinesHelperEUMLImpl.class.getName());
+    
 
     /**
      * The model implementation.
@@ -260,7 +257,7 @@ class StateMachinesHelperEUMLImpl implements StateMachinesHelper {
                 // If the region is changed to another region then
                 // we make sure that a delete event is not fired
                 // as a result.
-                LOG.log(Level.INFO, "Setting ignore delete for {0}", vertex); //$NON-NLS-1$
+                
 
                 ModelEventPumpEUMLImpl pump =
                     (ModelEventPumpEUMLImpl) Model.getPump();

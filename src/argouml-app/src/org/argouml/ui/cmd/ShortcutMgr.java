@@ -48,8 +48,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -71,9 +69,7 @@ import org.argouml.ui.ProjectBrowser;
 import org.argouml.ui.explorer.ActionPerspectiveConfig;
 import org.argouml.uml.ui.ActionActivityDiagram;
 import org.argouml.uml.ui.ActionClassDiagram;
-import org.argouml.uml.ui.ActionCollaborationDiagram;
 import org.argouml.uml.ui.ActionDeleteModelElements;
-import org.argouml.uml.ui.ActionDeploymentDiagram;
 import org.argouml.uml.ui.ActionGenerateAll;
 import org.argouml.uml.ui.ActionGenerateOne;
 import org.argouml.uml.ui.ActionGenerateProjectCode;
@@ -84,9 +80,7 @@ import org.argouml.uml.ui.ActionRevertToSaved;
 import org.argouml.uml.ui.ActionSaveAllGraphics;
 import org.argouml.uml.ui.ActionSaveGraphics;
 import org.argouml.uml.ui.ActionSaveProjectAs;
-import org.argouml.uml.ui.ActionSequenceDiagram;
 import org.argouml.uml.ui.ActionStateDiagram;
-import org.argouml.uml.ui.ActionUseCaseDiagram;
 import org.argouml.util.KeyEventUtils;
 import org.tigris.gef.base.AlignAction;
 import org.tigris.gef.base.DistributeAction;
@@ -211,18 +205,14 @@ public class ShortcutMgr {
     /** Action key for show xml dump */
     public static final String ACTION_SHOW_XML_DUMP = "showXmlDump";
 
-    /** Action key for use case diagram */
-    public static final String ACTION_USE_CASE_DIAGRAM = "useCaseDiagrams";
+    
 
     /** Action key for class diagram */
     public static final String ACTION_CLASS_DIAGRAM = "classDiagrams";
 
-    /** Action key for sequence diagram */
-    public static final String ACTION_SEQUENCE_DIAGRAM = "sequenceDiagrams";
+    
 
-    /** Action key for collaboration diagram */
-    public static final String ACTION_COLLABORATION_DIAGRAM =
-        "collaborationDiagrams";
+    
 
     /** Action key for state diagram */
     public static final String ACTION_STATE_DIAGRAM = "stateDiagrams";
@@ -230,8 +220,7 @@ public class ShortcutMgr {
     /** Action key for activity diagram */
     public static final String ACTION_ACTIVITY_DIAGRAM = "activityDiagrams";
 
-    /** Action key for deployment diagram */
-    public static final String ACTION_DEPLOYMENT_DIAGRAM = "deploymentDiagrams";
+    
 
     /** Action key for generate one */
     public static final String ACTION_GENERATE_ONE = "generateOne";
@@ -311,10 +300,7 @@ public class ShortcutMgr {
     /** Action key for reorder to back */
     public static final String ACTION_REORDER_TO_BACK = "reorderToBack";
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG = Logger.getLogger(ShortcutMgr.class.getName());
+    
 
     private static final int DEFAULT_MASK = Toolkit.getDefaultToolkit()
             .getMenuShortcutKeyMask();
@@ -487,7 +473,7 @@ public class ShortcutMgr {
                     return KeyStroke.getKeyStroke(f.getInt(null), modifiers);
 
                 } catch (Exception exc) {
-                    LOG.log(Level.SEVERE, "Exception: " + exc);
+                    
                 }
             }
         }
@@ -541,7 +527,7 @@ public class ShortcutMgr {
             return InputEvent.SHIFT_DOWN_MASK;
         } else {
             // it should never go here!
-            LOG.log(Level.FINE, "Unknown modifier: {0}", modifier);
+            
             return 0;
         }
     }
@@ -653,20 +639,16 @@ public class ShortcutMgr {
                 0), new ActionFind());
 
         // create menu
-        putDefaultShortcut(ACTION_USE_CASE_DIAGRAM, null,
-                new ActionUseCaseDiagram());
+        
         putDefaultShortcut(ACTION_CLASS_DIAGRAM, null,
                 new ActionClassDiagram());
-        putDefaultShortcut(ACTION_SEQUENCE_DIAGRAM, null,
-                new ActionSequenceDiagram());
-        putDefaultShortcut(ACTION_COLLABORATION_DIAGRAM, null,
-                new ActionCollaborationDiagram());
+        
+        
         putDefaultShortcut(ACTION_STATE_DIAGRAM, null,
                 new ActionStateDiagram());
         putDefaultShortcut(ACTION_ACTIVITY_DIAGRAM, null,
                 new ActionActivityDiagram());
-        putDefaultShortcut(ACTION_DEPLOYMENT_DIAGRAM, null,
-                new ActionDeploymentDiagram());
+        
 
         // generate menu
         putDefaultShortcut(ACTION_GENERATE_ONE, null, new ActionGenerateOne());

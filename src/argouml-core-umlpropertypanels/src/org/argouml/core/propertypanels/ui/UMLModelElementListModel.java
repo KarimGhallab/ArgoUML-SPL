@@ -45,8 +45,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.DefaultListModel;
@@ -77,8 +75,7 @@ import org.tigris.toolbar.ToolBar;
 abstract class UMLModelElementListModel
         extends DefaultListModel implements PropertyChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLModelElementListModel.class.getName());
+    
 
     private String eventName = null;
     private Object listTarget = null;
@@ -340,7 +337,7 @@ abstract class UMLModelElementListModel
                         if (isValidEvent(e)) {
                             Object o = getChangedElement(e);
                             if (o instanceof Collection) {
-                                LOG.log(Level.INFO, "Elements added");
+                                
                                 ArrayList tempList = new ArrayList((Collection) o);
                                 Iterator it = tempList.iterator();
                                 while (it.hasNext()) {
@@ -404,9 +401,7 @@ abstract class UMLModelElementListModel
                         }
                     }
                 } catch (InvalidElementException e) {
-                    LOG.log(Level.FINE,
-                            "updateLayout method accessed deleted element ",
-                            e);
+                    
                 }
             }
         };
@@ -419,7 +414,7 @@ abstract class UMLModelElementListModel
      * Delete and rebuild the model list from scratch.
      */
     private void rebuildModelList() {
-        LOG.log(Level.INFO, "Rebuilding");
+        
         removeAllElements();
         buildingModel = true;
         try {
@@ -432,9 +427,7 @@ abstract class UMLModelElementListModel
              * could cause a deadlock. Instead catch the exception and
              * leave the model empty.
              */
-            LOG.log(Level.FINE, "buildModelList threw exception for target "
-                    + getTarget() + ": "
-                    + exception);
+            
         } finally {
             buildingModel = false;
         }

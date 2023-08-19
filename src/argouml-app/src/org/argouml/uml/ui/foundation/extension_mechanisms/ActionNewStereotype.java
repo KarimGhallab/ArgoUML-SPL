@@ -40,8 +40,6 @@ package org.argouml.uml.ui.foundation.extension_mechanisms;
 
 import java.awt.event.ActionEvent;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -61,8 +59,7 @@ import org.tigris.gef.presentation.Fig;
  */
 public class ActionNewStereotype extends AbstractActionNewModelElement {
 
-    static final Logger LOG =
-        Logger.getLogger(ActionNewStereotype.class.getName());
+    
 
     /**
      * The constructor.
@@ -99,7 +96,7 @@ public class ActionNewStereotype extends AbstractActionNewModelElement {
             }
             TargetManager.getInstance().setTarget(newStereo);
         } else {
-            LOG.log(Level.SEVERE, "We failed to create a stereotype");
+            
         }
         super.actionPerformed(e);
     }

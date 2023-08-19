@@ -45,8 +45,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectManager;
@@ -62,8 +60,7 @@ import org.argouml.uml.util.PathComparator;
  */
 public class UMLTagDefinitionComboBoxModel  extends UMLComboBoxModel2 {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLTagDefinitionComboBoxModel.class.getName());
+    
 
     /**
      * Constructor for UMLTagDefinitionComboBoxModel.
@@ -95,17 +92,17 @@ public class UMLTagDefinitionComboBoxModel  extends UMLComboBoxModel2 {
         // the default implementation won't work for us
 
         if (Model.getFacade().isATagDefinition(evt.getSource())) {
-            LOG.log(Level.FINE, "Got TagDefinition event {0}", evt);
+            
 
             // Just mark for rebuild next time since we use lazy loading
             setModelInvalid();
         } else if ("stereotype".equals(evt.getPropertyName())) {
-            LOG.log(Level.FINE, "Got stereotype event {0}", evt);
+            
             // A stereotype got applied or removed
             // Just mark for rebuild next time since we use lazy loading
             setModelInvalid();
         } else {
-            LOG.log(Level.FINE, "Got other event {0}", evt);
+            
         }
     }
 

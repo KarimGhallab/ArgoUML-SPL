@@ -50,7 +50,6 @@ import java.util.Vector;
 import org.argouml.model.Model;
 import org.argouml.notation.NotationProviderFactory2;
 import org.argouml.uml.diagram.DiagramSettings;
-import org.argouml.uml.diagram.collaboration.ui.FigAssociationRole;
 import org.tigris.gef.base.Layer;
 import org.tigris.gef.presentation.Fig;
 import org.tigris.gef.presentation.FigPoly;
@@ -519,14 +518,7 @@ public class FigMessage extends FigNodeModelElement {
     public void addPathItemToFigAssociationRole(Layer lay) {
 	Object associationRole =
 	    Model.getFacade().getCommunicationConnection(getOwner());
-	if (associationRole != null && lay != null) {
-	    FigAssociationRole figAssocRole =
-		(FigAssociationRole) lay.presentationFor(associationRole);
-	    if (figAssocRole != null) {
-		figAssocRole.addMessage(this);
-		lay.bringToFront(this);
-	    }
-	}
+	
     }
 
     /*

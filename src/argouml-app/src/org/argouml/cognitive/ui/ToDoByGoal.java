@@ -38,8 +38,6 @@
 
 package org.argouml.cognitive.ui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.Designer;
 import org.argouml.cognitive.Goal;
@@ -53,8 +51,7 @@ import org.argouml.cognitive.ToDoListListener;
  */
 public class ToDoByGoal extends ToDoPerspective
     implements ToDoListListener {
-    private static final Logger LOG =
-        Logger.getLogger(ToDoByGoal.class.getName());
+    
 
 
     /**
@@ -73,7 +70,7 @@ public class ToDoByGoal extends ToDoPerspective
      * @see org.argouml.cognitive.ToDoListListener#toDoItemsChanged(org.argouml.cognitive.ToDoListEvent)
      */
     public void toDoItemsChanged(ToDoListEvent tde) {
-        LOG.log(Level.FINE, "toDoItemsChanged");
+        
 	Object[] path = new Object[2];
 	path[0] = Designer.theDesigner().getToDoList();
 
@@ -108,7 +105,7 @@ public class ToDoByGoal extends ToDoPerspective
      * @see org.argouml.cognitive.ToDoListListener#toDoItemsAdded(org.argouml.cognitive.ToDoListEvent)
      */
     public void toDoItemsAdded(ToDoListEvent tde) {
-        LOG.log(Level.FINE, "toDoItemAdded");
+        
 	Object[] path = new Object[2];
 	path[0] = Designer.theDesigner().getToDoList();
 
@@ -144,12 +141,12 @@ public class ToDoByGoal extends ToDoPerspective
      * @see org.argouml.cognitive.ToDoListListener#toDoItemsRemoved(org.argouml.cognitive.ToDoListEvent)
      */
     public void toDoItemsRemoved(ToDoListEvent tde) {
-        LOG.log(Level.FINE, "toDoItemAdded");
+        
 	Object[] path = new Object[2];
 	path[0] = Designer.theDesigner().getToDoList();
 
         for (Goal g : Designer.theDesigner().getGoalList()) {
-            LOG.log(Level.FINE, "toDoItemRemoved updating decision node!");
+            
 	    boolean anyInGoal = false;
             for (ToDoItem item : tde.getToDoItemList()) {
 		if (item.supports(g)) {

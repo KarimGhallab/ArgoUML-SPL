@@ -46,7 +46,6 @@ import javax.swing.Icon;
 
 import org.argouml.application.helpers.ResourceLoaderWrapper;
 import org.argouml.model.Model;
-import org.argouml.uml.diagram.deployment.DeploymentDiagramGraphModel;
 import org.argouml.uml.diagram.ui.SelectionClassifierBox;
 import org.argouml.uml.diagram.ui.SelectionNodeClarifiers2;
 import org.tigris.gef.base.Editor;
@@ -114,12 +113,7 @@ public class SelectionClass extends SelectionClassifierBox {
         Icon workingIcons[] = new Icon[icons.length];
         System.arraycopy(icons, 0, workingIcons, 0, icons.length);
 
-        // No Generalizations on Deployment Diagram
-        if (Globals.curEditor().getGraphModel() 
-                instanceof DeploymentDiagramGraphModel) {
-            workingIcons[TOP - BASE] = null;
-            workingIcons[BOTTOM - BASE] = null;
-        }
+        
         if (useComposite) {
             workingIcons[LEFT - BASE] = compos;
             workingIcons[RIGHT - BASE] = compos;

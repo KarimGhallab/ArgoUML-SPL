@@ -43,8 +43,6 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.text.MessageFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.JOptionPane;
@@ -108,8 +106,7 @@ public class ActionDeleteModelElements extends UndoableAction {
         return targetFollower;
     }
 
-    private static final Logger LOG =
-        Logger.getLogger(ActionDeleteModelElements.class.getName());
+    
 
     /**
      * Constructor.
@@ -165,7 +162,7 @@ public class ActionDeleteModelElements extends UndoableAction {
                     p.moveToTrash(target);
                 }
             } catch (InvalidElementException e) {
-                LOG.log(Level.FINE, "Model element deleted twice - ignoring 2nd delete");
+                
             }
         }
     }

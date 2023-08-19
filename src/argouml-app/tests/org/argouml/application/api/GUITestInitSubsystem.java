@@ -57,12 +57,9 @@ import org.argouml.ui.ProjectBrowser;
 import org.argouml.ui.cmd.InitUiCmdSubsystem;
 import org.argouml.uml.cognitive.critics.InitCognitiveCritics;
 import org.argouml.uml.diagram.activity.ui.InitActivityDiagram;
-import org.argouml.uml.diagram.collaboration.ui.InitCollaborationDiagram;
-import org.argouml.uml.diagram.deployment.ui.InitDeploymentDiagram;
 import org.argouml.uml.diagram.state.ui.InitStateDiagram;
 import org.argouml.uml.diagram.static_structure.ui.InitClassDiagram;
 import org.argouml.uml.diagram.ui.InitDiagramAppearanceUI;
-import org.argouml.uml.diagram.use_case.ui.InitUseCaseDiagram;
 import org.argouml.uml.ui.InitUmlUI;
 
 /**
@@ -87,8 +84,8 @@ public class GUITestInitSubsystem extends TestCase {
         initialisers.add(new InitClassDiagram());
         initialisers.add(new InitCognitiveCritics());
         initialisers.add(new InitCognitiveUI());
-        initialisers.add(new InitCollaborationDiagram());
-        initialisers.add(new InitDeploymentDiagram());
+        
+        
         initialisers.add(new InitDiagramAppearanceUI());
         initialisers.add(new InitModuleLoader());
         initialisers.add(new InitNotation());
@@ -99,7 +96,7 @@ public class GUITestInitSubsystem extends TestCase {
         initialisers.add(new InitStateDiagram());
         initialisers.add(new InitUiCmdSubsystem()); // X
         initialisers.add(new InitUmlUI()); // X
-        initialisers.add(new InitUseCaseDiagram());
+        
     }
 
     /**

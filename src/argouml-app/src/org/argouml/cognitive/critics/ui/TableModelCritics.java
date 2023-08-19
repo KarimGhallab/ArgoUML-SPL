@@ -45,8 +45,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
@@ -66,8 +64,7 @@ import org.argouml.cognitive.Translator;
 class TableModelCritics extends AbstractTableModel
     implements VetoableChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(TableModelCritics.class.getName());
+    
 
     private List<Critic> critics;
     private boolean advanced;
@@ -218,9 +215,7 @@ class TableModelCritics extends AbstractTableModel
      * @see javax.swing.table.TableModel#setValueAt(java.lang.Object, int, int)
      */
     public void setValueAt(Object aValue, int rowIndex, int columnIndex)  {
-        LOG.log(Level.FINE,
-                "setting table value {0}, {1}",
-                new Object[]{rowIndex, columnIndex});
+        
         if (columnIndex != 0) {
             return;
         }

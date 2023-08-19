@@ -45,8 +45,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.Critic;
 import org.argouml.cognitive.ToDoItem;
@@ -68,8 +66,7 @@ import org.argouml.profile.internal.ocl.InvalidOclException;
  */
 public class ProfileMeta extends Profile {
 
-    private static final Logger LOG =
-        Logger.getLogger(ProfileMeta.class.getName());
+    
 
     private static final String PROFILE_FILE = "metaprofile.xmi";
     private ProfileReference profileReference = null;
@@ -99,8 +96,7 @@ public class ProfileMeta extends Profile {
             try {
                 model = profileModelLoader.loadModel(profileReference);
             } catch (ProfileException e) {
-                LOG.log(Level.SEVERE,
-                        "Exception loading metaprofile " + PROFILE_FILE, e);
+                
             }
 
             if (model == null) {

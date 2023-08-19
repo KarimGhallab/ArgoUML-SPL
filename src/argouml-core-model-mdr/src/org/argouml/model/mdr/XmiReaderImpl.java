@@ -56,8 +56,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jmi.reflect.InvalidObjectException;
 import javax.jmi.reflect.RefObject;
@@ -103,11 +101,7 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
 
     static final String TEMP_XMI_FILE_PREFIX = "zargo_model_";
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(XmiReaderImpl.class.getName());
+    
 
     private static String tempXMIFileURIPrefix;
 
@@ -182,11 +176,11 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
 
         extent = (UmlPackage) modelImpl.createExtent(extentName, readOnly);
         if (extent == null) {
-            LOG.log(Level.SEVERE, "Failed to create extent " + extentName);
+            
         }
 
         try {
-            LOG.log(Level.INFO, "Loading to extent {0} {1}", new Object[]{extentName, extent});
+            
 
             InputConfig config = new InputConfig();
             config.setUnknownElementsListener(this);
@@ -196,9 +190,7 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
             String sId = modelImpl.getPublic2SystemIds().get(pId);
             if (sId != null) {
                 if (sId.equals(inputSource.getSystemId())) {
-                    LOG.log(Level.INFO, "Attempt to reread profile - ignoring - "
-                            + "publicId = \"" + pId + "\";  systemId = \""
-                            + sId + "\".");
+                    
                     return Collections.emptySet();
                 } else {
                     throw new UmlException("Profile with the duplicate publicId "
@@ -329,8 +321,7 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
             }
 
             if (ignoredElementCount > 0) {
-                LOG.log(Level.WARNING, "Ignored one or more elements from list "
-                        + ignoredElements);
+                
             }
 
         } catch (MalformedXMIException e) {
@@ -378,8 +369,7 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
         throws FileNotFoundException, UmlException, IOException,
             MalformedXMIException {
 
-        LOG.log(Level.INFO, "XMI file doesn't appear to be UML 1.4 - "
-                + "attempting UML 1.3->UML 1.4 conversion");
+        
         final String[] transformFiles = new String[] {
             "NormalizeNSUML.xsl",
             "uml13touml14.xsl", };
@@ -402,7 +392,7 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
     private InputSource convertFromInvalidXMI(InputSource input)
         throws UmlException {
 
-        LOG.log(Level.INFO, "XMI file doesn't appear to be a valid XMI");
+        
 
         final String[] transformFiles = new String[] {
             "umbrello.xsl",
@@ -560,7 +550,7 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
                 // Set up source for style sheet
                 String xsltFileName = STYLE_PATH + styles[i];
 
-                LOG.log(Level.INFO, "Transforming with {0}", xsltFileName);
+                
 
                 URL xsltUrl = getClass().getResource(xsltFileName);
                 if (xsltUrl == null) {
@@ -582,8 +572,7 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
                 Transformer transformer = stf.newTransformer(xsltStreamSource);
                 transformer.transform(myInput, result);
 
-                LOG.log(Level.INFO, "Wrote converted XMI file - {0} converted using : {1}",
-                        new Object[]{tmpOutFile, xsltFileName});
+                
 
                 // Set up for next iteration
                 myInput =
@@ -631,7 +620,7 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
         }
         out.close();
 
-        LOG.log(Level.FINE, "Wrote copied XMI file to {0}", tmpOutFile);
+        
         return tmpOutFile;
     }
 
@@ -726,7 +715,7 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
         if (unknownElementName == null) {
             unknownElementName = name;
         }
-        LOG.log(Level.SEVERE, "Unknown XMI element named : " + name);
+        
 
     }
 
@@ -775,7 +764,7 @@ class XmiReaderImpl implements XmiReader, UnknownElementsListener,
             // we presume the stream is encoded using the default char encoding
             xmiHeader = new String(bytes);
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "Exception reading XMI file header", e);
+            
         }
     }
 

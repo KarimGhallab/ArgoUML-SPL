@@ -40,8 +40,6 @@ package org.argouml.cognitive.ui;
 
 import java.awt.BorderLayout;
 import java.text.MessageFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -63,11 +61,7 @@ import org.argouml.model.Model;
  * tree in the todo panel.
  */
 public class WizDescription extends WizStep {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(WizDescription.class.getName());
+    
 
     ////////////////////////////////////////////////////////////////
     // instance variables
@@ -81,7 +75,7 @@ public class WizDescription extends WizStep {
      */
     public WizDescription() {
 	super();
-	LOG.log(Level.INFO, "making WizDescription");
+	
 
 	description.setLineWrap(true);
 	description.setWrapStyleWord(true);

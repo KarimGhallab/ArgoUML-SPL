@@ -45,8 +45,6 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JTree;
 import javax.swing.tree.TreeModel;
@@ -73,8 +71,7 @@ import org.argouml.uml.ui.UMLTreeCellRenderer;
  */
 public class DisplayTextTree extends JTree {
 
-    private static final Logger LOG =
-        Logger.getLogger(DisplayTextTree.class.getName());
+    
 
     /**
      * A Map helping the tree maintain a consistent expanded paths state.
@@ -373,7 +370,7 @@ public class DisplayTextTree extends JTree {
 
         super.fireTreeExpanded(path);
 
-        LOG.log(Level.FINE, "fireTreeExpanded");
+        
         if (reexpanding || path == null) {
             return;
         }
@@ -389,7 +386,7 @@ public class DisplayTextTree extends JTree {
 
         super.fireTreeCollapsed(path);
 
-        LOG.log(Level.FINE, "fireTreeCollapsed");
+        
         if (path == null || expandedPathsInModel == null) {
             return;
         }
@@ -402,7 +399,7 @@ public class DisplayTextTree extends JTree {
      */
     public void setModel(TreeModel newModel) {
 
-        LOG.log(Level.FINE, "setModel");
+        
         Object r = newModel.getRoot();
         if (r != null) {
             super.setModel(newModel);
@@ -419,7 +416,7 @@ public class DisplayTextTree extends JTree {
      */
     protected List<TreePath> getExpandedPaths() {
 
-        LOG.log(Level.FINE, "getExpandedPaths");
+        
         TreeModel tm = getModel();
         List<TreePath> res = expandedPathsInModel.get(tm);
         if (res == null) {
@@ -437,7 +434,7 @@ public class DisplayTextTree extends JTree {
      */
     private void reexpand() {
 
-        LOG.log(Level.FINE, "reexpand");
+        
         if (expandedPathsInModel == null) {
             return;
         }

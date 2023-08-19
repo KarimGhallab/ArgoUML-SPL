@@ -40,8 +40,6 @@ package org.argouml.uml.diagram.ui;
 
 import java.util.Hashtable;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.ImageIcon;
@@ -57,8 +55,7 @@ import org.tigris.gef.base.SetModeAction;
  */
 public class ActionSetMode extends SetModeAction {
 
-    private static final Logger LOG =
-        Logger.getLogger(ActionSetMode.class.getName());
+    
 
     /**
      * The constructor.
@@ -201,7 +198,7 @@ public class ActionSetMode extends SetModeAction {
         if (icon != null) {
             putValue(Action.SMALL_ICON, icon);
         } else {
-            LOG.log(Level.FINE, "Failed to find icon for key {0}", key);
+            
         }
     }
 }

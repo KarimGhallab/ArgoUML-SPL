@@ -45,8 +45,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Observable;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 
@@ -75,10 +73,7 @@ public class Critic
     extends Observable
     implements Poster, Serializable {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG = Logger.getLogger(Critic.class.getName());
+    
 
     ////////////////////////////////////////////////////////////////
     // constants
@@ -448,7 +443,7 @@ public class Critic
      */
     public boolean stillValid(ToDoItem i, Designer dsgr) {
 	if (!isActive()) {
-      LOG.log(Level.WARNING, "got to stillvalid while not active");
+      
 	    return false;
 	}
 	if (i.getOffenders().size() != 1) {
@@ -795,9 +790,9 @@ public class Critic
                 initWizard(w);
                 return w;
             } catch (IllegalAccessException illEx) {
-                LOG.log(Level.SEVERE, "Could not access wizard: ", illEx);
+                
             } catch (InstantiationException instEx) {
-                LOG.log(Level.SEVERE, "Could not instantiate wizard: ", instEx);
+                
             }
         }
         return null;

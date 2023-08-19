@@ -46,8 +46,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.uml.diagram.ArgoDiagram;
 import org.argouml.uml.diagram.DiagramUtils;
@@ -79,8 +77,7 @@ public class ModeAddToDiagram extends FigModifyingModeImpl {
 
     private final String instructions;
 
-    private static final Logger LOG =
-        Logger.getLogger(ModeAddToDiagram.class.getName());
+    
 
     /**
      * Create a mode to add the given elements to the diagram
@@ -124,8 +121,7 @@ public class ModeAddToDiagram extends FigModifyingModeImpl {
     @Override
     public void mouseReleased(final MouseEvent me) {
     	if (me.isConsumed()) {
-            LOG.log(Level.FINE,
-                    "MouseReleased but rejected as already consumed");
+            
             return;
         }
         // TODO: Use per-project undo manager, not global
@@ -155,9 +151,7 @@ public class ModeAddToDiagram extends FigModifyingModeImpl {
                         renderer.getFigNodeFor(gm, lay, node, null);
                     pers.setLocation(snapPt.x + (count++ * 100), snapPt.y);
                     
-                    LOG.log(Level.FINE,
-                            "mouseMoved: Location set ({0},{1})",
-                            new Object[]{pers.getX(), pers.getY()});
+                    
                     
                     // TODO: Use per-project undo manager, not global
                     UndoManager.getInstance().startChain();
@@ -215,7 +209,7 @@ public class ModeAddToDiagram extends FigModifyingModeImpl {
 
     public void keyTyped(KeyEvent ke) {
         if (ke.getKeyChar() == KeyEvent.VK_ESCAPE) {
-            LOG.log(Level.FINE, "ESC pressed");
+            
             leave();
         }
     }

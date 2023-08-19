@@ -38,8 +38,6 @@
 
 package org.argouml.uml.cognitive.critics;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -54,8 +52,7 @@ import org.argouml.model.Model;
  * @author jrobbins
  */
 public class WizMEName extends UMLWizard {
-    private static final Logger LOG =
-        Logger.getLogger(WizMEName.class.getName());
+    
 
     private String instructions = Translator.localize("critics.WizMEName-ins");
     private String label = Translator.localize("label.name");
@@ -131,7 +128,7 @@ public class WizMEName extends UMLWizard {
      * @see org.argouml.cognitive.ui.Wizard#doAction(int)
      */
     public void doAction(int oldStep) {
-        LOG.log(Level.FINE, "doAction {0}", oldStep);
+        
 
 	switch (oldStep) {
 	case 1:
@@ -144,7 +141,7 @@ public class WizMEName extends UMLWizard {
 		Model.getCoreHelper().setName(me, newName);
 	    }
 	    catch (Exception pve) {
-                LOG.log(Level.SEVERE, "could not set name", pve);
+                
 	    }
             break;
 	}

@@ -41,8 +41,6 @@ package org.argouml.uml.cognitive.critics;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -67,11 +65,7 @@ import org.argouml.model.Model;
  * @author jrobbins@ics.uci.edu
  */
 public class WizAssocComposite extends UMLWizard {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(WizAssocComposite.class.getName());
+    
 
     /**
      * The initial instructions on the Step 1 screen. May be set to a different
@@ -309,8 +303,7 @@ public class WizAssocComposite extends UMLWizard {
             }
 
             if (choice == -1) {
-                LOG.log(Level.WARNING, "WizAssocComposite: nothing selected, "
-                        + "should not get here");
+                
                 return;
             }
 
@@ -384,9 +377,7 @@ public class WizAssocComposite extends UMLWizard {
 
                 // Someone took our association away.
 
-                LOG.log(Level.SEVERE,
-                        "WizAssocComposite: could not set " + "aggregation.",
-                        pve);
+                
             }
 
         default:

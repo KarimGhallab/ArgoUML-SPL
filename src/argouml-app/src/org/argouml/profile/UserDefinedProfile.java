@@ -55,8 +55,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
@@ -77,11 +75,7 @@ import org.argouml.uml.cognitive.UMLDecision;
  */
 public class UserDefinedProfile extends Profile {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UserDefinedProfile.class.getName());
+    
 
     private String displayName;
 
@@ -145,7 +139,7 @@ public class UserDefinedProfile extends Profile {
     public UserDefinedProfile(File file, ProfileManager manager)
         throws ProfileException {
 
-        LOG.log(Level.INFO, "load {0}", file);
+        
 
         displayName = file.getName();
         modelFile = file;
@@ -235,7 +229,7 @@ public class UserDefinedProfile extends Profile {
     public UserDefinedProfile(URL url, ProfileManager manager)
         throws ProfileException {
 
-        LOG.log(Level.INFO, "load {0}", url);
+        
 
         reference = new UserProfileReference(url.getPath(), url);
         profileManager = manager;
@@ -272,7 +266,7 @@ public class UserDefinedProfile extends Profile {
             Set<String> dependencies, ProfileManager manager)
         throws ProfileException {
 
-        LOG.log(Level.INFO, "load {0}", url);
+        
 
         this.displayName = dn;
         reference = new UserProfileReference(url.getPath(), url);
@@ -329,9 +323,7 @@ public class UserDefinedProfile extends Profile {
                                 .loadModel(reference);
                     }
                 } catch (ProfileException e1) {
-                    LOG.log(Level.SEVERE,
-                            "Exception loading profile "+ reference.getPath(),
-                            e1);
+                    
                     profilePackages = Collections.emptySet();
                     return;
                 }
@@ -358,7 +350,7 @@ public class UserDefinedProfile extends Profile {
                                     .localize("misc.profile.unnamed");
                         }
                     }
-                    LOG.log(Level.INFO, "profile {0}", displayName);
+                    
 
                     loadDependentProfiles(obj);
                 }
@@ -394,15 +386,13 @@ public class UserDefinedProfile extends Profile {
         while (st.hasMoreTokens()) {
             dependencyName = st.nextToken();
             if (dependencyName != null) {
-                LOG.log(Level.FINE, "Adding dependency {0}", dependencyName);
+                
                 Profile profile = profileManager
                         .lookForRegisteredProfile(dependencyName);
                 if (profile != null) {
                     addProfileDependency(profile);
                 } else {
-                    LOG.log(Level.WARNING, "The profile \"" + displayName
-                            + "\" has a dependency named \"" + dependencyName
-                            + "\" which isn't solvable.");
+                    
                 }
             }
         }
@@ -423,13 +413,9 @@ public class UserDefinedProfile extends Profile {
             for (Object tag : tags) {
                 String tagName = Model.getFacade().getTag(tag);
                 if (tagName == null) {
-                    LOG.log(Level.FINE,
-                            "profile package with stereotype {0} contains "
-                            + "a null tag definition",
-                            Model.getFacade().getName(stereotype));
+                    
                 } else if (tagName.toLowerCase().equals("figure")) {
-                    LOG.log(Level.FINE, "AddFigNode {0}",
-                            Model.getFacade().getName(stereotype));
+                    
 
                     String value = Model.getFacade().getValueOfTag(tag);
                     File f = new File(value);
@@ -439,7 +425,7 @@ public class UserDefinedProfile extends Profile {
                                 .toString(), f);
                         figNodeStrategy.addDesrciptor(fnd);
                     } catch (IOException e) {
-                        LOG.log(Level.SEVERE, "Error loading FigNode", e);
+                        
                     }
                 }
             }
@@ -540,13 +526,13 @@ public class UserDefinedProfile extends Profile {
 
         }
 
-        LOG.log(Level.FINE, "OCL-Critic: {0}", ocl);
+        
 
         try {
             return new CrOCL(ocl, headline, description, priority,
                     supportedDecisions, knowledgeTypes, moreInfoURL);
         } catch (InvalidOclException e) {
-            LOG.log(Level.SEVERE, "Invalid OCL in XMI!", e);
+            
             return null;
         }
 

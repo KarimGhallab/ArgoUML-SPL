@@ -43,8 +43,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -76,8 +74,7 @@ public class ActionSaveGraphics extends AbstractAction
 
     private static final long serialVersionUID = 3062674953320109889L;
 
-    private static final Logger LOG =
-        Logger.getLogger(ActionSaveGraphics.class.getName());
+    
 
     /**
      * Constructor for this action.
@@ -165,7 +162,7 @@ public class ActionSaveGraphics extends AbstractAction
                 new ExceptionDialog(ArgoFrame.getFrame(), e);
             ed.setModal(true);
             ed.setVisible(true);
-            LOG.log(Level.SEVERE, "Got some exception", e);
+            
         }
 
         return false;
@@ -257,9 +254,9 @@ public class ActionSaveGraphics extends AbstractAction
 	try {
 	    return doSave(file, suffix, false);
 	} catch (FileNotFoundException e) {
-            LOG.log(Level.SEVERE, "File not found error when writing.", e);
+            
 	} catch (IOException e) {
-            LOG.log(Level.SEVERE, "IO error when writing.", e);
+            
 	}
 	return false;
     }

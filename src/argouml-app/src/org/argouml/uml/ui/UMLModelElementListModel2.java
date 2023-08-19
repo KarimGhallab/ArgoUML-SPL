@@ -43,8 +43,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JPopupMenu;
@@ -74,8 +72,7 @@ import org.tigris.gef.presentation.Fig;
 public abstract class UMLModelElementListModel2 extends DefaultListModel
         implements TargetListener, PropertyChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLModelElementListModel2.class.getName());
+    
 
     private String eventName = null;
     private Object listTarget = null;
@@ -260,8 +257,7 @@ public abstract class UMLModelElementListModel2 extends DefaultListModel
              * could cause a deadlock. Instead catch the exception and
              * leave the model empty.
              */
-            LOG.log(Level.FINE, "buildModelList threw exception for target "+ getTarget() + ": ",
-                    exception);
+            
         } finally {
             buildingModel = false;
         }

@@ -42,8 +42,6 @@ import java.awt.Rectangle;
 import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.Project;
 import org.argouml.model.Model;
@@ -73,8 +71,7 @@ public class DiagramInterface {
     private static final char DIAGRAM_NAME_SEPARATOR = '_';
     private static final String DIAGRAM_NAME_SUFFIX = "classes";
 
-    private static final Logger LOG =
-        Logger.getLogger(DiagramInterface.class.getName());
+    
 
     private Editor currentEditor;
 
@@ -275,7 +272,7 @@ public class DiagramInterface {
         try {
             d.setName(getDiagramName(name));
         } catch (PropertyVetoException pve) {
-            LOG.log(Level.SEVERE, "Failed to set diagram name.", pve);
+            
         }
         currentProject.addMember(d);
         setCurrentDiagram(d);

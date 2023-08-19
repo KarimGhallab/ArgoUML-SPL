@@ -46,8 +46,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.events.ArgoEventPump;
 import org.argouml.application.events.ArgoEventTypes;
@@ -70,11 +68,7 @@ import org.argouml.profile.ProfileFacade;
  *   @author maurelio1234
  */
 public class ProfileConfiguration extends AbstractProjectMember {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ProfileConfiguration.class.getName());
+    
 
     private FormatingStrategy formatingStrategy;
 
@@ -221,9 +215,7 @@ public class ProfileConfiguration extends AbstractProjectMember {
                 }
                 profileModels.addAll(p.getProfilePackages());
             } catch (ProfileException e) {
-                LOG.log(Level.WARNING,
-                        "Error retrieving profile's " + p + " packages.",
-                        e);
+                
             }
 
             FigNodeStrategy fns = p.getFigureStrategy();
@@ -276,7 +268,7 @@ public class ProfileConfiguration extends AbstractProjectMember {
             }
             profileModels.removeAll(p.getProfilePackages());
         } catch (ProfileException e) {
-            LOG.log(Level.SEVERE, "Exception", e);
+            
         }
 
         FigNodeStrategy fns = p.getFigureStrategy();
