@@ -15,15 +15,13 @@
 package org.argouml.core.propertypanels.ui;
 
 import java.awt.Component;
-import java.util.logging.Logger;
 
 abstract class UMLValueSpecificationValueField {
 
     /**
      * TODO: see if protected or need to be present in each subclass
      */
-    protected static final Logger LOG =
-        Logger.getLogger(UMLValueSpecificationValueField.class.getName());
+    
 
     /**
      *

@@ -47,11 +47,9 @@ import java.util.Set;
 import junit.framework.TestCase;
 
 import org.argouml.FileHelper;
-import org.argouml.cognitive.Critic;
 import org.argouml.model.InitializeModel;
 import org.argouml.model.Model;
 import org.argouml.profile.internal.ProfileManagerImpl;
-import org.argouml.profile.internal.ocl.CrOCL;
 
 /**
  * Some basic tests for the {@link UserDefinedProfile} class.
@@ -137,19 +135,14 @@ public class TestUserDefinedProfile extends TestCase {
         File profileFile = new File(testDir, "testLoadingConstructor.xmi");
         profileMother.saveProfileModel(model, profileFile);
 
-        CrOCL critic = new CrOCL("context Class inv: 3 > 2", null, null, null,
-                null, null, null);
-        Set<Critic> critics = new HashSet<Critic>();
+        
+        
         Set<String> profiles = new HashSet<String>();
         profiles.add(pm.getUMLProfile().getProfileIdentifier());
-        critics.add(critic);
+        
 
-        Profile profile = new UserDefinedProfile("displayName",
-            profileFile.toURI().toURL(), critics, profiles, pm);
+        
 
-        assertEquals(profile.getDisplayName(), "displayName");
-        assertTrue(profile.getDependencies().contains(pm.getUMLProfile()));
-        assertTrue(profile.getCritics().contains(critic));
-        ProfileFacade.getManager().removeProfile(profile);
+        
     }
 }

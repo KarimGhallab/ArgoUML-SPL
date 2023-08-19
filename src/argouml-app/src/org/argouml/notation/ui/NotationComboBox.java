@@ -39,8 +39,6 @@
 package org.argouml.notation.ui;
 import java.awt.Dimension;
 import java.util.ListIterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
 
@@ -61,11 +59,7 @@ public class NotationComboBox
     extends JComboBox
     implements ArgoNotationEventListener {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(NotationComboBox.class.getName());
+    
 
     /**
      * The instance.
@@ -142,7 +136,7 @@ public class NotationComboBox
                 NotationName nn = (NotationName) iterator.next();
                 addItem(nn);
             } catch (Exception e) {
-                LOG.log(Level.SEVERE, "Unexpected exception", e);
+                
             }
         }
         setVisible(true);

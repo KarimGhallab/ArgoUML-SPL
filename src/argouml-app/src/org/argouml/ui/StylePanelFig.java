@@ -46,8 +46,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
@@ -84,8 +82,7 @@ public class StylePanelFig
     implements ItemListener,
         FocusListener, KeyListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(StylePanelFig.class.getName());
+    
 
     private static final String CUSTOM_ITEM =
         Translator.localize("label.stylepane.custom") + "...";
@@ -425,8 +422,7 @@ public class StylePanelFig
                 // TODO: This exception will be thrown during autoscrolling
                 // when the edge of the canvas is reached causing either
                 // the width or height to be "adjusted" to a negative value
-                LOG.log(Level.WARNING,
-                        "Part of bounding box is off screen " + res);
+                
             }
             if (res.width < 0 || res.height < 0) {
                 // TODO: This exception will be thrown during autoscrolling

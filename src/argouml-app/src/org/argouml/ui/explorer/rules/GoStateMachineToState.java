@@ -45,8 +45,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.i18n.Translator;
 import org.argouml.model.Model;
@@ -59,8 +57,7 @@ import org.argouml.model.Model;
  */
 public class GoStateMachineToState extends AbstractPerspectiveRule {
 
-    private static final Logger LOG =
-        Logger.getLogger(GoStateMachineToState.class.getName());
+    
 
     /*
      * @see org.argouml.ui.explorer.rules.PerspectiveRule#getRuleName()
@@ -105,7 +102,7 @@ public class GoStateMachineToState extends AbstractPerspectiveRule {
 	        if (Model.getFacade().getUmlVersion().startsWith("2")) {
                     // TODO: Ignore and report exception until getTop
 	            // implemented.
-                    LOG.log(Level.SEVERE, "Explorer caught exception ", e);
+                    
 	        } else {
                     throw e;
 	        }

@@ -42,8 +42,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.profile.internal.ocl.DefaultOclEvaluator;
@@ -57,11 +55,7 @@ import org.argouml.profile.internal.ocl.ModelInterpreter;
  */
 public class ModelAccessModelInterpreter implements ModelInterpreter {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ModelAccessModelInterpreter.class.getName());
+    
 
     private static Uml14ModelInterpreter uml14mi = new Uml14ModelInterpreter();
 
@@ -838,7 +832,7 @@ public class ModelAccessModelInterpreter implements ModelInterpreter {
             vt.put("self", oldSelf);
             return ret;
         } catch (InvalidOclException e) {
-            LOG.log(Level.SEVERE, "Exception", e);
+            
             return null;
         }
     }

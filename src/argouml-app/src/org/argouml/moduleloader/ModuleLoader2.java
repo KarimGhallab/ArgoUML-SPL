@@ -60,8 +60,6 @@ import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.api.AbstractArgoJPanel;
 import org.argouml.application.api.Argo;
@@ -80,11 +78,7 @@ import org.argouml.i18n.Translator;
  * @since 0.15.4
  */
 public final class ModuleLoader2 {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ModuleLoader2.class.getName());
+    
 
     /**
      * This map contains the module loader information about the module.<p>
@@ -345,10 +339,7 @@ public final class ModuleLoader2 {
                     }
                     // Catch all exceptions and errors, however severe
 		    catch (Throwable e) {
-                        LOG.log(Level.SEVERE,
-                                "Exception or error while trying to "
-                                + "enable module " + module.getName(),
-                                e);
+                        
 		    }
 		} else if (status.isEnabled() && !status.isSelected()) {
 		    try {
@@ -359,10 +350,7 @@ public final class ModuleLoader2 {
 		    }
                     // Catch all exceptions and errors, however severe
 		    catch (Throwable e) {
-                        LOG.log(Level.SEVERE,
-                                "Exception or error while trying to "
-                                + "disable module " + module.getName(),
-                                e);
+                        
 		    }
 		}
 	    }
@@ -394,13 +382,9 @@ public final class ModuleLoader2 {
 		}
 
 		if (status.isSelected()) {
-                    LOG.log(Level.WARNING,
-                            "ModuleLoader was not able to enable module "
-                            + module.getName());
+                    
 		} else {
-                    LOG.log(Level.WARNING,
-                            "ModuleLoader was not able to disable module "
-                            + module.getName());
+                    
 		}
 	    }
 	}
@@ -467,8 +451,7 @@ public final class ModuleLoader2 {
                 try {
                     addClass(className);
                 } catch (ClassNotFoundException e) {
-                    LOG.log(Level.SEVERE,
-                            "Could not load module from class " + className);
+                    
                 }
             }
         }
@@ -494,7 +477,7 @@ public final class ModuleLoader2 {
         // TODO: Use a different resource here. ARGOINI is unused and deprecated
         URL extURL = getClass().getResource(Argo.ARGOINI);
         if (extURL == null) {
-            LOG.log(Level.SEVERE, "cannot find {0}", Argo.ARGOINI);
+            
             return;
         }
         String extForm = extURL.toExternalForm();
@@ -513,7 +496,7 @@ public final class ModuleLoader2 {
         String argoHome = null;
 
         if (argoRoot != null) {
-            LOG.log(Level.INFO, "argoRoot is {0}", argoRoot);
+            
             if (argoRoot.startsWith(FILE_PREFIX)) {
                 argoHome =
                     new File(argoRoot.substring(FILE_PREFIX.length()))
@@ -526,13 +509,10 @@ public final class ModuleLoader2 {
                 argoHome = java.net.URLDecoder.decode(argoHome,
                         Argo.getEncoding());
             } catch (UnsupportedEncodingException e) {
-                LOG.log(Level.WARNING,
-                        "Encoding "
-                        + Argo.getEncoding()
-                        + " is unknown.");
+                
             }
 
-            LOG.log(Level.INFO, "argoHome is {0}", argoHome);
+            
         }
 
         if (argoHome != null) {
@@ -584,12 +564,12 @@ public final class ModuleLoader2 {
 	                try {
 	                    processJarFile(classloader, file);
 	                } catch (ClassNotFoundException e) {
-                            LOG.log(Level.SEVERE, "The class is not found.", e);
+                            
 	                    return;
 	                }
 		    }
 		} catch (IOException ioe) {
-                    LOG.log(Level.SEVERE, "Cannot open Jar file " + file, ioe);
+                    
 		}
 	    }
 	}
@@ -609,12 +589,12 @@ public final class ModuleLoader2 {
     private void processJarFile(ClassLoader classloader, File file)
         throws ClassNotFoundException {
 
-        LOG.log(Level.INFO, "Opening jar file {0}", file);
+        
         JarFile jarfile;
 	try {
 	    jarfile = new JarFile(file);
 	} catch (IOException e) {
-            LOG.log(Level.SEVERE, "Unable to open " + file, e);
+            
             return;
 	}
 
@@ -624,10 +604,10 @@ public final class ModuleLoader2 {
             if (manifest == null) {
                 // We expect all extensions to have a manifest even though we
                 // can operate without one if necessary.
-                LOG.log(Level.WARNING,file + " does not have a manifest");
+                
             }
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "Unable to read manifest of " + file, e);
+            
             return;
         }
 
@@ -664,9 +644,7 @@ public final class ModuleLoader2 {
         // a localized property set, warn the user that something funny is in
         // their extension directory
         if (!loadedClass && !file.getName().contains("argouml-i18n-")) {
-            LOG.log(Level.SEVERE,
-                    "Failed to find any loadable ArgoUML modules in jar "
-                    + file);
+            
         }
     }
 
@@ -718,33 +696,26 @@ public final class ModuleLoader2 {
     private boolean addClass(ClassLoader classLoader, String classname)
         throws ClassNotFoundException {
 
-        LOG.log(Level.INFO, "Loading module " + classname);
+        
         Class moduleClass;
         try {
             moduleClass = classLoader.loadClass(classname);
         } catch (UnsupportedClassVersionError e) {
-            LOG.log(Level.SEVERE,
-                    "Unsupported Java class version for " + classname);
+            
             return false;
         } catch (NoClassDefFoundError e) {
-            LOG.log(Level.SEVERE,
-                    "Unable to find required class while loading "
-                    + classname + " - may indicate an obsolete"
-                    + " extension module or an unresolved dependency",
-                    e);
+            
             return false;
         } catch (Throwable e) {
             if (e instanceof ClassNotFoundException) {
                 throw (ClassNotFoundException) e;
             }
-            LOG.log(Level.SEVERE,
-                    "Unexpected error while loading " + classname,
-                    e);
+            
             return false;
         }
 
         if (!ModuleInterface.class.isAssignableFrom(moduleClass)) {
-            LOG.log(Level.FINE, "The class {0} is not a module.", classname);
+            
             return false;
         }
 
@@ -753,89 +724,56 @@ public final class ModuleLoader2 {
             defaultConstructor =
                     moduleClass.getDeclaredConstructor(new Class[] {});
         } catch (SecurityException e) {
-            LOG.log(Level.SEVERE,
-                    "The default constructor for class " + classname
-                    + " is not accessable.",
-                    e);
+            
             return false;
         } catch (NoSuchMethodException e) {
-            LOG.log(Level.SEVERE,
-                    "The default constructor for class " + classname
-                    + " is not found.",
-                    e);
+            
             return false;
         } catch (NoClassDefFoundError e) {
-            LOG.log(Level.SEVERE,
-                    "Unable to find required class while loading "
-                    + classname + " - may indicate an obsolete"
-                    + " extension module or an unresolved dependency",
-                    e);
+            
             return false;
         } catch (Throwable e) {
-            LOG.log(Level.SEVERE,
-                    "Unexpected error while loading " + classname,
-                    e);
+            
             return false;
         }
 
         if (!Modifier.isPublic(defaultConstructor.getModifiers())) {
-            LOG.log(Level.SEVERE,
-                    "The default constructor for class " + classname
-                    + " is not public.  Not loaded.");
+            
             return false;
         }
         Object moduleInstance;
         try {
             moduleInstance = defaultConstructor.newInstance(new Object[]{});
         } catch (IllegalArgumentException e) {
-            LOG.log(Level.SEVERE,
-                    "The constructor for class " + classname
-                    + " is called with incorrect argument.",
-                    e);
+            
             return false;
         } catch (InstantiationException e) {
-            LOG.log(Level.SEVERE,
-                    "The constructor for class " + classname
-                    + " threw an exception.",
-                    e);
+            
             return false;
         } catch (IllegalAccessException e) {
-            LOG.log(Level.SEVERE,
-                    "The constructor for class " + classname
-                    + " is not accessible.",
-                    e);
+            
             return false;
         } catch (InvocationTargetException e) {
-            LOG.log(Level.SEVERE,
-                    "The constructor for class " + classname
-                    + " cannot be called.",
-                    e);
+            
             return false;
         } catch (NoClassDefFoundError e) {
-            LOG.log(Level.SEVERE,
-                    "Unable to find required class while instantiating "
-                    + classname + " - may indicate an obsolete"
-                    + " extension module or an unresolved dependency",
-                    e);
+            
             return false;
         } catch (Throwable e) {
-            LOG.log(Level.SEVERE,
-                    "Unexpected error while instantiating " + classname,
-                    e);
+            
             return false;
         }
 
         // The following check should have been satisfied before we
         // instantiated the module, but double check again
         if (!(moduleInstance instanceof ModuleInterface)) {
-            LOG.log(Level.SEVERE,
-                    "The class " + classname + " is not a module.");
+            
             return false;
         }
         ModuleInterface mf = (ModuleInterface) moduleInstance;
 
         addModule(mf);
-        LOG.log(Level.INFO, "Succesfully loaded module {0}", classname);
+        
         return true;
     }
 

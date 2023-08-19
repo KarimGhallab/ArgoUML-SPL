@@ -16,8 +16,6 @@ package org.argouml.core.propertypanels.ui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -35,8 +33,7 @@ import javax.swing.event.ChangeListener;
 class UMLValueSpecificationPanelOptional extends JPanel implements
 	ChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLValueSpecificationPanel.class.getName());
+    
 
     /**
      *
@@ -58,7 +55,7 @@ class UMLValueSpecificationPanelOptional extends JPanel implements
 
 	super(new BorderLayout());
 
-        LOG.log(Level.FINE, ">>New Optional ValueSpecification panel created");
+        
 
 	TitledBorder border = new TitledBorder(title);
 	this.setBorder(border);
@@ -118,7 +115,7 @@ class UMLValueSpecificationPanelOptional extends JPanel implements
      * @see javax.swing.JComponent#removeNotify()
      */
     public void stateChanged(ChangeEvent e) {
-        LOG.log(Level.FINE, ">>Values shown on panel are changed");
+        
 
     }
 

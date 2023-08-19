@@ -40,8 +40,6 @@ package org.argouml.ui.explorer;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -78,8 +76,7 @@ import org.argouml.notation.Notation;
 public final class ExplorerEventAdaptor
     implements PropertyChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(ExplorerEventAdaptor.class.getName());
+    
 
     /**
      * The singleton instance.
@@ -198,7 +195,7 @@ public final class ExplorerEventAdaptor
                     try {
                         modelChanged((UmlChangeEvent) pce);
                     } catch (InvalidElementException e) {
-                        LOG.log(Level.FINE, "updateLayout method accessed deleted element", e);
+                        
                     }
                 }
             };

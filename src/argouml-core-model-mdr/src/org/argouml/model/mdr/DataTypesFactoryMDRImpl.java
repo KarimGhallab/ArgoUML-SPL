@@ -42,8 +42,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.DataTypesFactory;
 import org.omg.uml.foundation.datatypes.ActionExpression;
@@ -71,8 +69,7 @@ import org.omg.uml.foundation.datatypes.TypeExpression;
 class DataTypesFactoryMDRImpl extends AbstractUmlModelFactoryMDR
         implements DataTypesFactory {
 
-    private static final Logger LOG =
-        Logger.getLogger(DataTypesFactoryMDRImpl.class.getName());
+    
     /**
      * The model implementation.
      */
@@ -186,7 +183,7 @@ class DataTypesFactoryMDRImpl extends AbstractUmlModelFactoryMDR
     Multiplicity createMultiplicityInternal(int lower, int upper) {
         Multiplicity multiplicity = modelImpl.getUmlPackage().getDataTypes()
                 .getMultiplicity().createMultiplicity();
-        LOG.log(Level.FINE, "Multiplicity created for range {0}.. {1}", new Object[]{lower, upper});
+        
         multiplicity.getRange().add(createMultiplicityRange(lower, upper));
         super.initialize(multiplicity);
         return multiplicity;
@@ -207,7 +204,7 @@ class DataTypesFactoryMDRImpl extends AbstractUmlModelFactoryMDR
     Multiplicity createMultiplicityInternal(final List<MultiplicityRange> range) {
         Multiplicity multiplicity = modelImpl.getUmlPackage().getDataTypes()
                 .getMultiplicity().createMultiplicity();
-        LOG.log(Level.FINE, "Multiplicity created for list {0}", range);
+        
         multiplicity.getRange().addAll(range);
         super.initialize(multiplicity);
         return multiplicity;
@@ -236,7 +233,7 @@ class DataTypesFactoryMDRImpl extends AbstractUmlModelFactoryMDR
             rc.add(createMultiplicityRange(stk.nextToken()));
         }
         if (rc.size() > 1) {
-            LOG.log(Level.FINE, "UML 2.x does not support multiple multiplicity ranges {0}", str);
+            
         }
         return rc;
     }

@@ -43,11 +43,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.uml.ProjectMemberModel;
-import org.argouml.uml.cognitive.ProjectMemberTodoList;
 import org.argouml.uml.diagram.ArgoDiagram;
 import org.argouml.uml.diagram.ProjectMemberDiagram;
 
@@ -85,11 +82,7 @@ import org.argouml.uml.diagram.ProjectMemberDiagram;
  */
 class MemberList implements List<ProjectMember> {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(MemberList.class.getName());
+    
 
     private AbstractProjectMember model;
 
@@ -103,7 +96,7 @@ class MemberList implements List<ProjectMember> {
      * The constructor.
      */
     public MemberList() {
-        LOG.log(Level.INFO, "Creating a member list");
+        
     }
 
     public synchronized boolean add(ProjectMember member) {
@@ -112,7 +105,7 @@ class MemberList implements List<ProjectMember> {
             // Always put the model at the top
             model = (AbstractProjectMember) member;
             return true;
-        } else if (member instanceof ProjectMemberTodoList) {
+        } else if (false) {
             // otherwise add the diagram at the start
             setTodoList((AbstractProjectMember) member);
             return true;
@@ -127,7 +120,7 @@ class MemberList implements List<ProjectMember> {
     }
 
     public synchronized boolean remove(Object member) {
-        LOG.log(Level.INFO, "Removing a member");
+        
         if (member instanceof ArgoDiagram) {
             return removeDiagram((ArgoDiagram) member);
         }
@@ -136,18 +129,17 @@ class MemberList implements List<ProjectMember> {
             model = null;
             return true;
         } else if (todoList == member) {
-            LOG.log(Level.INFO, "Removing todo list");
+            
             setTodoList(null);
             return true;
         } else if (profileConfiguration == member) {
-            LOG.log(Level.INFO, "Removing profile configuration");
+            
             profileConfiguration = null;
             return true;
         } else {
             final boolean removed = diagramMembers.remove(member);
             if (!removed) {
-                LOG.log(Level.WARNING,
-                        "Failed to remove diagram member " + member);
+                
             }
             return removed;
         }
@@ -193,7 +185,7 @@ class MemberList implements List<ProjectMember> {
                 return true;
             }
         }
-        LOG.log(Level.FINE, "Failed to remove diagram {0}", d);
+        
         return false;
     }
 
@@ -225,7 +217,7 @@ class MemberList implements List<ProjectMember> {
     }
 
     public synchronized void clear() {
-        LOG.log(Level.INFO, "Clearing members");
+        
         if (model != null) {
             model.remove();
         }
@@ -288,7 +280,7 @@ class MemberList implements List<ProjectMember> {
     }
 
     private void setTodoList(AbstractProjectMember member) {
-        LOG.log(Level.INFO, "Setting todoList to {0}", member);
+        
         todoList = member;
     }
 

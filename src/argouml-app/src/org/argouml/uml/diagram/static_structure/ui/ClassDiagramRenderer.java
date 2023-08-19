@@ -39,8 +39,6 @@
 package org.argouml.uml.diagram.static_structure.ui;
 
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.uml.diagram.GraphChangeAdapter;
 import org.argouml.uml.diagram.UmlDiagramRenderer;
@@ -91,11 +89,7 @@ public class ClassDiagramRenderer extends UmlDiagramRenderer {
      */
     static final long serialVersionUID = 675407719309039112L;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ClassDiagramRenderer.class.getName());
+    
 
     /*
      * @see org.tigris.gef.graph.GraphNodeRenderer#getFigNodeFor(
@@ -118,7 +112,7 @@ public class ClassDiagramRenderer extends UmlDiagramRenderer {
             figNode = (FigNodeModelElement) ((UMLDiagram) diag)
                     .drop(node, null);
         } else {
-            LOG.log(Level.SEVERE, "TODO: ClassDiagramRenderer getFigNodeFor " + node);
+            
             throw new IllegalArgumentException(
                     "Node is not a recognised type. Received "
                     + node.getClass().getName());
@@ -142,7 +136,7 @@ public class ClassDiagramRenderer extends UmlDiagramRenderer {
      */
     public FigEdge getFigEdgeFor(GraphModel gm, Layer lay,
 				 Object edge, Map styleAttribute) {
-        LOG.log(Level.FINE, "making figedge for {0}", edge);
+        
         
         if (edge == null) {
             throw new IllegalArgumentException("A model edge must be supplied");
@@ -160,7 +154,7 @@ public class ClassDiagramRenderer extends UmlDiagramRenderer {
             newEdge = (FigEdge) ((UMLDiagram) diag)
                     .drop(edge, null);
         } else {
-            LOG.log(Level.SEVERE, "TODO: ClassDiagramRenderer getFigEdgeFor " + edge);
+            
             throw new IllegalArgumentException(
                     "Edge is not a recognised type. Received "
                     + edge.getClass().getName());

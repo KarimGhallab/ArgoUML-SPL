@@ -42,8 +42,6 @@ package org.argouml.uml.diagram.ui;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -54,7 +52,6 @@ import org.argouml.model.StateMachinesFactory;
 import org.argouml.ui.UndoableAction;
 import org.argouml.ui.targetmanager.TargetManager;
 import org.argouml.uml.diagram.DiagramSettings;
-import org.argouml.uml.diagram.state.StateDiagramGraphModel;
 import org.argouml.uml.diagram.state.ui.FigCompositeState;
 import org.argouml.uml.diagram.state.ui.FigConcurrentRegion;
 import org.argouml.uml.diagram.state.ui.FigStateVertex;
@@ -81,9 +78,7 @@ import org.tigris.gef.presentation.Fig;
 public class ActionAddConcurrentRegion extends UndoableAction {
 
 
-    /** logger */
-    private static final Logger LOG =
-        Logger.getLogger(ActionAddConcurrentRegion.class.getName());
+    
 
     /**
      * Constructor
@@ -141,7 +136,7 @@ public class ActionAddConcurrentRegion extends UndoableAction {
                 return;
             }
 
-            StateDiagramGraphModel mgm = (StateDiagramGraphModel) gm;
+            
 
             final StateMachinesFactory factory =
                 Model.getStateMachinesFactory();
@@ -169,10 +164,7 @@ public class ActionAddConcurrentRegion extends UndoableAction {
                 firstRegionFig.setLayer(lay);
                 lay.add(firstRegionFig);
 
-                if (mgm.canAddNode(umlRegion1)) {
-                    mgm.getNodes().add(umlRegion1);
-                    mgm.fireNodeAdded(umlRegion1);
-                }
+                
 
                 /* Throw out any previous elements that were
                  * enclosed but are not a concurrent region;
@@ -208,10 +200,7 @@ public class ActionAddConcurrentRegion extends UndoableAction {
             newRegionFig.setLayer(lay);
             lay.add(newRegionFig);
             editor.getSelectionManager().select(f);
-            if (mgm.canAddNode(umlRegion2)) {
-                mgm.getNodes().add(umlRegion2);
-                mgm.fireNodeAdded(umlRegion2);
-            }
+            
 
             /* TODO: Verify this.
              * IIUC, then this triggers the CompountStateFig
@@ -222,7 +211,7 @@ public class ActionAddConcurrentRegion extends UndoableAction {
                     umlCompositeState, true);
 
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Exception caught", ex);
+            
         }
     }
 

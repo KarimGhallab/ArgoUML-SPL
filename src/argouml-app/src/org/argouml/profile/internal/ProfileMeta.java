@@ -45,11 +45,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import org.argouml.cognitive.Critic;
-import org.argouml.cognitive.ToDoItem;
 import org.argouml.model.Model;
 import org.argouml.profile.CoreProfileReference;
 import org.argouml.profile.Profile;
@@ -57,7 +53,6 @@ import org.argouml.profile.ProfileException;
 import org.argouml.profile.ProfileModelLoader;
 import org.argouml.profile.ProfileReference;
 import org.argouml.profile.ResourceModelLoader;
-import org.argouml.profile.internal.ocl.CrOCL;
 import org.argouml.profile.internal.ocl.InvalidOclException;
 
 /**
@@ -68,15 +63,14 @@ import org.argouml.profile.internal.ocl.InvalidOclException;
  */
 public class ProfileMeta extends Profile {
 
-    private static final Logger LOG =
-        Logger.getLogger(ProfileMeta.class.getName());
+    
 
     private static final String PROFILE_FILE = "metaprofile.xmi";
     private ProfileReference profileReference = null;
 
     private Collection model = null;
 
-    Set<Critic> critics = null;
+    
 
     /**
      * Creates a new instance of this profile
@@ -99,8 +93,7 @@ public class ProfileMeta extends Profile {
             try {
                 model = profileModelLoader.loadModel(profileReference);
             } catch (ProfileException e) {
-                LOG.log(Level.SEVERE,
-                        "Exception loading metaprofile " + PROFILE_FILE, e);
+                
             }
 
             if (model == null) {
@@ -111,63 +104,7 @@ public class ProfileMeta extends Profile {
         return model;
     }
 
-    private void loadWellFormednessRules() {
-        critics = new HashSet<Critic>();
-
-        try {
-            critics.add(new CrOCL("context ModelElement inv: "
-                    + "self.taggedValue->"
-                    + "exists(x|x.type.name='Dependency') implies "
-                              + "self.stereotype->exists(x|x.name = 'Profile')",
-                 "The 'Dependency' tag definition should be applied"
-                                + " only to profiles.", null,
-                    ToDoItem.MED_PRIORITY, null, null,
-                    "http://argouml.tigris.org/"));
-        } catch (InvalidOclException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            critics.add(new CrOCL("context ModelElement inv: "
-                    + "self.taggedValue->"
-                    + "exists(x|x.type.name='Figure') or "
-                    + "exists(x|x.type.name='Description') or "
-                    + "exists(x|x.type.name='i18n') or "
-                    + "exists(x|x.type.name='KnowledgeType') or "
-                    + "exists(x|x.type.name='MoreInfoURL') or "
-                    + "exists(x|x.type.name='Priority') or "
-                    + "exists(x|x.type.name='Description') or "
-                    + "exists(x|x.type.name='SupportedDecision') or "
-                    + "exists(x|x.type.name='Headline') "
-                    + "implies "
-                              + "self.stereotype->exists(x|x.name = 'Critic')",
-
-                    "Misuse of Metaprofile TaggedValues",
-                    "The 'Figure', 'i18n', 'KnowledgeType', 'MoreInfoURL', "
-                    + "'Priority', 'SupportedDecision', 'Description' "
-                    + "and 'Headline' tag definitions "
-                    + "should be applied only to OCL critics.",
-
-                    ToDoItem.MED_PRIORITY, null, null,
-                    "http://argouml.tigris.org/"));
-        } catch (InvalidOclException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            critics.add(new CrOCL("context Stereotype inv: "
-                    + "self.namespace.stereotype->exists(x|x.name = 'Profile')",
-                            "Stereotypes should be declared inside a Profile. ",
-                            "Please add the <<Profile>> stereotype to "
-                                   + "the containing Namespace",
-                    ToDoItem.MED_PRIORITY, null, null,
-                    "http://argouml.tigris.org/"));
-        } catch (InvalidOclException e) {
-            e.printStackTrace();
-        }
-
-        setCritics(critics);
-    }
+    
 
     @Override
     public String getDisplayName() {
@@ -189,12 +126,6 @@ public class ProfileMeta extends Profile {
         }
     }
 
-    @Override
-    public Set<Critic> getCritics() {
-        if (critics == null) {
-            loadWellFormednessRules();
-        }
-        return super.getCritics();
-    }
+    
 
 }

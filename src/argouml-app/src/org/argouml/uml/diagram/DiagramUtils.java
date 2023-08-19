@@ -38,8 +38,6 @@
 
 package org.argouml.uml.diagram;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.tigris.gef.base.Editor;
 import org.tigris.gef.base.Globals;
@@ -55,8 +53,7 @@ import org.tigris.gef.base.LayerPerspective;
  */
 public class DiagramUtils {
 
-    private static final Logger LOG =
-        Logger.getLogger(DiagramUtils.class.getName());
+    
 
     /**
      * Instantiation not allowed.  Static methods only.
@@ -74,7 +71,7 @@ public class DiagramUtils {
         if (layer != null) {
             return (ArgoDiagram) layer.getDiagram();
         }
-        LOG.log(Level.FINE, "No active diagram");
+        
         return null;
     }
 

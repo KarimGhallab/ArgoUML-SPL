@@ -51,8 +51,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.api.Argo;
 import org.argouml.application.helpers.ApplicationVersion;
@@ -77,8 +75,7 @@ import org.xml.sax.SAXException;
  */
 public class ProfileConfigurationFilePersister extends MemberFilePersister {
 
-    private static final Logger LOG =
-        Logger.getLogger(ProfileConfigurationFilePersister.class.getName());
+    
 
     /*
      * @see org.argouml.persistence.MemberFilePersister#getMainTag()
@@ -166,9 +163,7 @@ public class ProfileConfigurationFilePersister extends MemberFilePersister {
         writer.write(xmi.toString());
         writer.close();
 
-        LOG.log(Level.INFO,
-                "Wrote user defined profile \"{0}\", with size {1}.",
-                new Object[]{profileFile, xmi.length()});
+        
 
         if (isSomeProfileDirectoryConfigured(profileManager)) {
             profileManager.refreshRegisteredProfiles();
@@ -294,8 +289,7 @@ public class ProfileConfigurationFilePersister extends MemberFilePersister {
  */
 class ProfileConfigurationParser extends SAXParserBase {
 
-    private static final Logger LOG =
-        Logger.getLogger(ProfileConfigurationParser.class.getName());
+    
 
     private ProfileConfigurationTokenTable tokens =
         new ProfileConfigurationTokenTable();
@@ -346,11 +340,11 @@ class ProfileConfigurationParser extends SAXParserBase {
                 break;
 
             default:
-                LOG.log(Level.WARNING, "WARNING: unknown tag:" + e.getName());
+                
                 break;
             }
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Exception in startelement", ex);
+            
         }
     }
 
@@ -382,8 +376,7 @@ class ProfileConfigurationParser extends SAXParserBase {
                 break;
 
             default:
-                LOG.log(Level.WARNING,
-                        "WARNING: unknown end tag:" + e.getName());
+                
                 break;
             }
         } catch (Exception ex) {
@@ -393,7 +386,7 @@ class ProfileConfigurationParser extends SAXParserBase {
 
     protected void handleProfileEnd(XMLElement e) {
         if (profiles.isEmpty()) {
-            LOG.log(Level.WARNING, "No profiles defined");
+            
         }
     }
 
@@ -402,9 +395,9 @@ class ProfileConfigurationParser extends SAXParserBase {
         profile = lookupProfile(name);
         if (profile != null) {
             profiles.add(profile);
-            LOG.log(Level.FINE, "Found plugin profile {0}", name);
+            
         } else {
-            LOG.log(Level.SEVERE, "Unabled to find plugin profile - {0}", name);
+            
         }
     }
 
@@ -430,8 +423,7 @@ class ProfileConfigurationParser extends SAXParserBase {
     protected void handleUserDefinedEnd(XMLElement e) {
         // <model> is not used in current implementation
         if (filename == null /* || model == null */) {
-            LOG.log(Level.SEVERE,
-                    "Got badly formed user defined profile entry " + e);
+            
         }
         profile = getMatchingUserDefinedProfile(filename, ProfileFacade
                 .getManager());
@@ -440,8 +432,7 @@ class ProfileConfigurationParser extends SAXParserBase {
             unresolvedFilenames.add(filename);
         } else {
             profiles.add(profile);
-            LOG.log(Level.FINE,
-                    "Loaded user defined profile - filename = {0}", filename);
+            
         }
 
     }
@@ -465,12 +456,12 @@ class ProfileConfigurationParser extends SAXParserBase {
 
     protected void handleFilenameEnd(XMLElement e) {
         filename = e.getText().trim();
-        LOG.log(Level.FINE, "Got filename = {0}", filename);
+        
     }
 
     protected void handleModelEnd(XMLElement e) {
         model = e.getText().trim();
-        LOG.log(Level.FINE, "Got model = {0}", model);
+        
     }
 
     /**

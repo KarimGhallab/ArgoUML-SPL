@@ -51,7 +51,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.argouml.application.api.Argo;
-import org.argouml.cognitive.Designer;
 import org.argouml.configuration.Configuration;
 import org.argouml.i18n.Translator;
 import org.argouml.kernel.Project;
@@ -532,16 +531,11 @@ public abstract class ImportCommon implements ImportSettingsInternal {
             return;
         }
         Model.getPump().stopPumpingEvents();
-        boolean criticThreadWasOn = Designer.theDesigner().getAutoCritique();
-        if (criticThreadWasOn) {
-            Designer.theDesigner().setAutoCritique(false);
-        }
+        
         try {
             doImportInternal(files, monitor, progress);
         } finally {
-            if (criticThreadWasOn) {
-                Designer.theDesigner().setAutoCritique(true);
-            }
+            
             // TODO: Send an event instead of calling Explorer directly
             ExplorerEventAdaptor.getInstance().structureChanged();
             Model.getPump().startPumpingEvents();

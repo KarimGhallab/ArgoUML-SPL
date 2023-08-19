@@ -41,8 +41,6 @@ package org.argouml.profile.internal.ocl;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.MetaTypes;
 import org.argouml.model.Model;
@@ -57,11 +55,7 @@ import tudresden.ocl.parser.node.AClassifierContext;
  */
 public class ComputeDesignMaterials extends DepthFirstAdapter {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ComputeDesignMaterials.class.getName());
+    
 
     private Set<Object> dms = new HashSet<Object>();
 
@@ -84,7 +78,7 @@ public class ComputeDesignMaterials extends DepthFirstAdapter {
                     dms.add(m.invoke(Model.getMetaTypes(), new Object[0]));
                 }
             } catch (Exception e) {
-                LOG.log(Level.SEVERE, "Metaclass not found: " + str, e);
+                
             }
         }
     }

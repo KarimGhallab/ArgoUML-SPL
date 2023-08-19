@@ -47,8 +47,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -90,9 +88,7 @@ public class MultiEditorPane
         Globals.setDefaultModeFactories(modeFactories);
     }
 
-    /** logger */
-    private static final Logger LOG =
-        Logger.getLogger(MultiEditorPane.class.getName());
+    
 
     /**
      * Classes for tabs to be included in the property panel.
@@ -122,7 +118,7 @@ public class MultiEditorPane
      * can be edited.
      */
     public MultiEditorPane() {
-        LOG.log(Level.INFO, "making MultiEditorPane");
+        
 
         setLayout(new BorderLayout());
         add(tabs, BorderLayout.CENTER);
@@ -257,9 +253,7 @@ public class MultiEditorPane
             lastTab.setVisible(false);
         }
         lastTab = tabs.getSelectedComponent();
-        LOG.log(Level.FINE,
-                "MultiEditorPane state changed: {0}",
-                lastTab.getClass().getName());
+        
 
         lastTab.setVisible(true);
         if (lastTab instanceof TabModelTarget) {
@@ -325,7 +319,7 @@ public class MultiEditorPane
     public void mySingleClick(int tab) {
         //TODO: should fire its own event and ProjectBrowser
         //should register a listener
-        LOG.log(Level.FINE, "single: {0}", tabs.getComponentAt(tab).toString());
+        
     }
 
     /**
@@ -337,7 +331,7 @@ public class MultiEditorPane
     public void myDoubleClick(int tab) {
         //TODO: should fire its own event and ProjectBrowser
         //should register a listener
-        LOG.log(Level.FINE, "double: {0}", tabs.getComponentAt(tab).toString());
+        
 //        JPanel t = (JPanel) tabPanels.elementAt(tab);
         // Currently this feature is disabled for ArgoUML.
 //        if (t instanceof AbstractArgoJPanel)

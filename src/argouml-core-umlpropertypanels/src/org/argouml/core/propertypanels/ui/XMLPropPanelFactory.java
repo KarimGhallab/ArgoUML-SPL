@@ -38,8 +38,6 @@
 
 package org.argouml.core.propertypanels.ui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -54,8 +52,7 @@ import org.argouml.uml.ui.PropPanelFactory;
  */
 public class XMLPropPanelFactory implements PropPanelFactory {
 
-    private static final Logger LOG =
-        Logger.getLogger(XMLPropPanelFactory.class.getName());
+    
 
     /**
      * new cache
@@ -106,7 +103,7 @@ public class XMLPropPanelFactory implements PropPanelFactory {
             builder.createGUI(target, panel);
         } catch (Exception e) {
             // TODO: Auto-generated catch block
-            LOG.log(Level.SEVERE, "Exception", e);
+            
         }
     }
 

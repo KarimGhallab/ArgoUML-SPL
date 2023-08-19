@@ -47,8 +47,6 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -87,8 +85,7 @@ import org.tigris.gef.presentation.FigRect;
  */
 public abstract class FigCompartmentBox extends FigNodeModelElement {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigCompartmentBox.class.getName());
+    
 
 
 
@@ -409,9 +406,7 @@ public abstract class FigCompartmentBox extends FigNodeModelElement {
         calcBounds();
         updateEdges();
 
-        LOG.log(Level.FINE,
-                "Bounds change : old - {0}, new - {1}",
-                new Object[]{oldBounds, getBounds()});
+        
 
         firePropChange("bounds", oldBounds, getBounds());
     }
@@ -460,8 +455,7 @@ public abstract class FigCompartmentBox extends FigNodeModelElement {
                         renderingChanged();
                         updateListeners(getOwner(), getOwner());
                     } catch (InvalidElementException e) {
-                        LOG.log(Level.FINE,
-                                "method accessed deleted element", e);
+                        
                     }
                 }
             };

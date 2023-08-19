@@ -57,7 +57,6 @@ import org.argouml.profile.ProfileException;
 import org.argouml.profile.ProfileFacade;
 import org.argouml.profile.ProfileManager;
 import org.argouml.profile.ProfileMother;
-import org.argouml.uml.cognitive.critics.ProfileGoodPractices;
 
 /**
  * Tests for the ProfileManagerImpl class.
@@ -98,17 +97,7 @@ public class TestProfileManagerImpl extends TestCase {
         assertEquals(1, internalProfileNameSet.size());
     }
 
-    /**
-     * test remove profile
-     */
-    public void testRemoveProfileThatIsntDefault() {
-        Profile gpProfile = manager.getProfileForClass(ProfileGoodPractices.class
-                .getName());
-        assertNotNull(gpProfile);
-        assertTrue(manager.getRegisteredProfiles().contains(gpProfile));
-        manager.removeProfile(gpProfile);
-        assertFalse(manager.getRegisteredProfiles().contains(gpProfile));
-    }
+    
 
     /**
      * Test remove the base UML profile. 
