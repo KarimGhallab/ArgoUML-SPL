@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.AddAssociationEvent;
 import org.argouml.model.Model;
@@ -55,8 +53,7 @@ import org.tigris.gef.presentation.FigText;
  */
 public class FigVertex extends FigNodeModelElement {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigVertex.class.getName());
+    
 
     private static final int MARGIN = 2;
 
@@ -88,7 +85,7 @@ public class FigVertex extends FigNodeModelElement {
                         getOwner(), this, notation);
         updateNameText();
 
-        LOG.log(Level.INFO, "Registering as listener");
+        
         Model.getPump().addModelEventListener(this, getOwner(), "region");
     }
 
@@ -129,15 +126,9 @@ public class FigVertex extends FigNodeModelElement {
             // Get the region as the first Region in the StateMachine.
             // If there is no region in the StateMachine then create one.
             ArgoDiagram diagram = (ArgoDiagram) lp.getDiagram();
-            Object stateMachine = diagram.getOwner();
-            List regions =
-                Model.getStateMachinesHelper().getRegions(stateMachine);
-            if (regions.isEmpty()) {
-                region = Model.getUmlFactory().buildNode(
-                        Model.getMetaTypes().getRegion(), stateMachine);
-            } else {
-                region = regions.get(0);
-            }
+            
+            
+            
         }
         if (region != null
                 && Model.getFacade().getContainer(getOwner()) != region) {
@@ -236,7 +227,7 @@ public class FigVertex extends FigNodeModelElement {
                     damage();
                 }
             }
-            LOG.log(Level.FINE, "Removing region {0}", oldRegion);
+            
         }
     }
 

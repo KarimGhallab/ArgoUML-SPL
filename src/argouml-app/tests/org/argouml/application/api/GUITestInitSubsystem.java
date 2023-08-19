@@ -43,26 +43,17 @@ import java.util.Collection;
 
 import junit.framework.TestCase;
 
-import org.argouml.cognitive.checklist.ui.InitCheckListUI;
-import org.argouml.cognitive.ui.InitCognitiveUI;
 import org.argouml.model.InitializeModel;
 import org.argouml.moduleloader.InitModuleLoader;
 import org.argouml.notation.InitNotation;
 import org.argouml.notation.providers.java.InitNotationJava;
 import org.argouml.notation.providers.uml.InitNotationUml;
 import org.argouml.notation.ui.InitNotationUI;
-import org.argouml.pattern.cognitive.critics.InitPatternCritics;
 import org.argouml.profile.init.InitProfileSubsystem;
 import org.argouml.ui.ProjectBrowser;
 import org.argouml.ui.cmd.InitUiCmdSubsystem;
-import org.argouml.uml.cognitive.critics.InitCognitiveCritics;
-import org.argouml.uml.diagram.activity.ui.InitActivityDiagram;
-import org.argouml.uml.diagram.collaboration.ui.InitCollaborationDiagram;
-import org.argouml.uml.diagram.deployment.ui.InitDeploymentDiagram;
-import org.argouml.uml.diagram.state.ui.InitStateDiagram;
 import org.argouml.uml.diagram.static_structure.ui.InitClassDiagram;
 import org.argouml.uml.diagram.ui.InitDiagramAppearanceUI;
-import org.argouml.uml.diagram.use_case.ui.InitUseCaseDiagram;
 import org.argouml.uml.ui.InitUmlUI;
 
 /**
@@ -82,24 +73,23 @@ public class GUITestInitSubsystem extends TestCase {
         ProjectBrowser.makeInstance(null, false, null);
 
         initialisers = new ArrayList<InitSubsystem>();
-        initialisers.add(new InitActivityDiagram());
-        initialisers.add(new InitCheckListUI());
+        
+        
         initialisers.add(new InitClassDiagram());
-        initialisers.add(new InitCognitiveCritics());
-        initialisers.add(new InitCognitiveUI());
-        initialisers.add(new InitCollaborationDiagram());
-        initialisers.add(new InitDeploymentDiagram());
+        
+        
+        
         initialisers.add(new InitDiagramAppearanceUI());
         initialisers.add(new InitModuleLoader());
         initialisers.add(new InitNotation());
         initialisers.add(new InitNotationJava());
         initialisers.add(new InitNotationUI());
         initialisers.add(new InitNotationUml());
-        initialisers.add(new InitPatternCritics());
-        initialisers.add(new InitStateDiagram());
+        
+        
         initialisers.add(new InitUiCmdSubsystem()); // X
         initialisers.add(new InitUmlUI()); // X
-        initialisers.add(new InitUseCaseDiagram());
+        
     }
 
     /**

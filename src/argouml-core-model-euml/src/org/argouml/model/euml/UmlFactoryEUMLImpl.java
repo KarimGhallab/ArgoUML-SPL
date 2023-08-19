@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.AbstractModelFactory;
 import org.argouml.model.Defaults;
@@ -91,8 +89,7 @@ import org.eclipse.uml2.uml.UseCase;
  */
 class UmlFactoryEUMLImpl implements UmlFactory, AbstractModelFactory {
 
-    private static final Logger LOG =
-        Logger.getLogger(UmlFactoryEUMLImpl.class.getName());
+    
 
     /**
      * The model implementation.
@@ -765,7 +762,7 @@ class UmlFactoryEUMLImpl implements UmlFactory, AbstractModelFactory {
         if (resource != null) {
             modelImpl.unloadResource(resource);
         } else {
-            LOG.log(Level.WARNING, "Tried to delete null resource"); //$NON-NLS-1$
+            
             throw new InvalidElementException(
                     element != null ? element.toString() : "Null" ); //$NON-NLS-1$
         }
@@ -780,7 +777,7 @@ class UmlFactoryEUMLImpl implements UmlFactory, AbstractModelFactory {
                 modelImpl.getReadOnlyMap().put(r, Boolean.TRUE);
                 return r.getContents();
             } catch (Exception ex) {
-                LOG.log(Level.WARNING, "failed to get resource: " + extentName); //$NON-NLS-1$
+                
             }
         }
         return null;

@@ -40,8 +40,6 @@ package org.argouml.uml.util.namespace;
 
 import java.util.Iterator;
 import java.util.Stack;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A StringNamespace is a string based namespace (StringNamespaceElement)
@@ -52,8 +50,7 @@ import java.util.logging.Logger;
  */
 public class StringNamespace implements Namespace, Cloneable {
 
-    private static final Logger LOG =
-        Logger.getLogger(StringNamespace.class.getName());
+    
 
     private Stack ns = new Stack();
 
@@ -169,7 +166,7 @@ public class StringNamespace implements Namespace, Cloneable {
         try {
             result = (StringNamespace) this.clone();
         } catch (CloneNotSupportedException e) {
-            LOG.log(Level.FINE, "", e);
+            
             return null;
         }
         result.popNamespaceElement();

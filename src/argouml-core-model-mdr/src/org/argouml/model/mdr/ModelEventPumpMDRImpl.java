@@ -48,8 +48,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jmi.model.Association;
 import javax.jmi.model.AssociationEnd;
@@ -101,11 +99,7 @@ import org.netbeans.api.mdr.events.VetoChangeException;
 class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
         MDRPreChangeListener {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ModelEventPumpMDRImpl.class.getName());
+    
 
     private static final boolean VETO_READONLY_CHANGES = true;
 
@@ -371,15 +365,15 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
                         ae.getNewElement(), // will always be null
                         mdrEvent));
             } else if (ae.isOfType(AssociationEvent.EVENT_ASSOCIATION_SET)) {
-                LOG.log(Level.SEVERE, "Unexpected EVENT_ASSOCIATION_SET received");
+                
             } else {
-                LOG.log(Level.SEVERE, "Unknown association event type " + ae.getType());
+                
             }
         } else {
             String name = mdrEvent.getClass().getName();
             // Cut down on debugging noise
             if (!name.endsWith("CreateInstanceEvent")) {
-                LOG.log(Level.FINE, "Ignoring MDR event " + mdrEvent);
+                
             }
         }
 
@@ -495,23 +489,12 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
                     .getPropertyName()));
         }
 
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.log(Level.FINE, "Firing "
-                    + modelImpl.getMetaTypes().getName(event)
-                    + " source "
-                    + modelImpl.getMetaTypes().getName(
-                            event.getSource())
-                    + " [" + ((RefBaseObject) event.getSource()).refMofId()
-                    + "]."  + event.getPropertyName()
-                    + "," + formatElement(event.getOldValue())
-                    + "->" + formatElement(event.getNewValue()));
-        }
+        
 
         if (!listeners.isEmpty()) {
             for (PropertyChangeListener pcl : listeners) {
                 if (false /*(LOG.isDebugEnabled()*/) {
-                    LOG.log(Level.FINE, "Firing event on " + pcl.getClass().getName()
-                            + "[" + pcl + "]");
+                    
                 }
                 pcl.propertyChange(event);
             }
@@ -519,15 +502,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
             // For debugging you probably want either this
             // OR the logging for every event which is fired - not both
             if (false/*LOG.isDebugEnabled()*/) {
-                LOG.log(Level.FINE, "No listener for "
-                        + modelImpl.getMetaTypes().getName(event)
-                        + " source "
-                        + modelImpl.getMetaTypes().getName(
-                                event.getSource())
-                        + " ["
-                        + ((RefBaseObject) event.getSource()).refMofId() + "]."
-                        + event.getPropertyName() + "," + event.getOldValue()
-                        + "->" + event.getNewValue());
+                
             }
         }
     }
@@ -553,13 +528,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
         } catch (InvalidObjectException e) {
             throw new InvalidElementException(e);
         }
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.log(Level.FINE, "Register ["
-                    + " element:" + formatElement(modelElement)
-                    + ", properties:" + formatArray(propertyNames)
-                    + ", listener:" + listener
-                    + "]");
-        }
+        
         synchronized (registrationMutex) {
             elements.register(listener, mofId, propertyNames);
         }
@@ -571,24 +540,15 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
     private void unregisterModelEvent(PropertyChangeListener listener,
             Object modelElement, String[] propertyNames) {
         if (listener == null || modelElement == null) {
-            LOG.log(Level.SEVERE, "Attempt to unregister null listener(" + listener
-                    + ") or modelElement (" + modelElement
-                    + ")! [Property names: " + propertyNames + "]");
+            
             return;
         }
         if (!(modelElement instanceof RefBaseObject)) {
-            LOG.log(Level.SEVERE, "Ignoring non-RefBaseObject received by "
-                    + "unregisterModelEvent - " + modelElement);
+            
             return;
         }
         String mofId = ((RefBaseObject) modelElement).refMofId();
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.log(Level.FINE, "Unregister ["
-                    + " element:" + formatElement(modelElement)
-                    + ", properties:" + formatArray(propertyNames)
-                    + ", listener:" + listener
-                    + "]");
-        }
+        
         synchronized (registrationMutex) {
             elements.unregister(listener, mofId, propertyNames);
         }
@@ -607,12 +567,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
 
         if (modelClass instanceof Class) {
             String className = getClassName(modelClass);
-            if (LOG.isLoggable(Level.FINE)) {
-                LOG.log(Level.FINE, "Register class ["
-                        + modelImpl.getMetaTypes().getName(modelClass)
-                        + "properties:" + formatArray(propertyNames)
-                        + ", listener:" + listener + "]");
-            }
+            
             Collection<String> subtypes = subtypeMap.get(className);
             verifyAttributeNames(className, propertyNames);
             synchronized (registrationMutex) {
@@ -636,12 +591,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
             Object modelClass, String[] propertyNames) {
         if (modelClass instanceof Class) {
             String className = getClassName(modelClass);
-            if (LOG.isLoggable(Level.FINE)) {
-                LOG.log(Level.FINE,
-                        "Unregister class [" + className
-                        + ", properties:" + formatArray(propertyNames)
-                        + ", listener:" + listener + "]");
-            }
+            
             Collection<String> subtypes = subtypeMap.get(className);
             synchronized (registrationMutex) {
                 listenedClasses.unregister(listener, className, propertyNames);
@@ -665,7 +615,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
      * @see org.argouml.model.ModelEventPump#startPumpingEvents()
      */
     public void startPumpingEvents() {
-        LOG.log(Level.FINE, "Start pumping events");
+        
         repository.addListener(this);
     }
 
@@ -673,7 +623,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
      * @see org.argouml.model.ModelEventPump#stopPumpingEvents()
      */
     public void stopPumpingEvents() {
-        LOG.log(Level.FINE, "Stop pumping events");
+        
         repository.removeListener(this);
     }
 
@@ -692,7 +642,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
                 try {
                     eventCountMutex.wait();
                 } catch (InterruptedException e) {
-                    LOG.log(Level.SEVERE, "Interrupted while waiting in flushModelEvents");
+                    
                 }
             }
         }
@@ -710,8 +660,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
         try {
             aend = (AssociationEnd) a.lookupElementExtended(ae.getEndName());
         } catch (NameNotFoundException e) {
-            LOG.log(Level.SEVERE, "Failed to find other end of association : "
-                    + ae.getSource() + " -> " + ae.getEndName());
+            
             return null;
         }
         return aend.otherEnd().getName();
@@ -779,8 +728,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
             ModelElement element = (ModelElement) metaclass;
             String name = element.getName();
             if (names.containsKey(name)) {
-                LOG.log(Level.SEVERE,
-                        "Found duplicate class '" + name + "' in metamodel");
+                
             } else {
                 names.put(name, getSubtypes(extent, element));
                 // LOG.log(Level.FINE, " Class " + name + " has subtypes : "
@@ -863,7 +811,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
             // names twice
 //                LOG.log(Level.FINE, "Duplicate property name found - {0}:{1}", new Object[]{typeName, propertyName});
         } else {
-            LOG.log(Level.FINE, "Added property name - {0}:{1}", new Object[]{typeName, propertyName});
+            
         }
         return added;
     }
@@ -886,44 +834,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
             String[] attributes) {
         // Only do verification if debug level logging is on
         // TODO: Should we leave this on always? - tfm
-        if (LOG.isLoggable(Level.FINE)) {
-            if (metaobject == null || attributes == null) {
-                return;
-            }
-            // If we don't have a MofClass, see if we can get one from the
-            // instance
-            if (!(metaobject instanceof MofClass)) {
-                metaobject = metaobject.refMetaObject();
-            }
-
-            // If we still don't have a MofClass, something's wrong
-            if (!(metaobject instanceof MofClass)) {
-                throw new IllegalArgumentException(
-                        "Argument must be MofClass or instance of MofClass");
-            }
-
-            MofClass metaclass = (MofClass) metaobject;
-            Collection<String> names = propertyNameMap.get(metaclass.getName());
-            if (names == null) {
-                names = Collections.emptySet();
-            }
-
-            for (String attribute : attributes) {
-                if (!names.contains(attribute)
-                        && !"remove".equals(attribute)) {
-
-                    // TODO: We also have code registering for the names of
-                    // a tagged value like "derived"
-                    LOG.log(Level.SEVERE,
-                            "Property '" + attribute
-                             + "' for class '"
-                             + metaclass.getName()
-                             + "' doesn't exist in metamodel");
-//                    throw new IllegalArgumentException("Property '"
-//                            + attribute + "' doesn't exist in metamodel");
-                }
-            }
-        }
+        
     }
 
 
@@ -987,7 +898,7 @@ class ModelEventPumpMDRImpl extends AbstractModelEventPump implements
  */
 class Registry<T> {
 
-    private static final Logger LOG = Logger.getLogger(Registry.class.getName());
+    
 
     Map<String, Map<String, List<T>>> registry;
 
@@ -1040,8 +951,7 @@ class Registry<T> {
             if (!list.contains(item)) {
                 list.add(item);
             } else {
-                LOG.log(Level.FINE, "Duplicate registration attempt for {0}: {1} Listener: {2}",
-                        new Object[]{key,subkeys,item});
+                
             }
         }
     }
@@ -1084,13 +994,7 @@ class Registry<T> {
             map.remove(key);
             return;
         }
-        if (LOG.isLoggable(Level.FINE)) {
-            if (!list.contains(item)) {
-                LOG.log(Level.FINE,
-                        "Attempt to unregister non-existant registration {0} Listener: {1}",
-                        new Object[]{key, item});
-            }
-        }
+        
         while (list.contains(item)) {
             list.remove(item);
         }

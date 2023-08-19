@@ -21,8 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -45,8 +43,7 @@ class UMLValueSpecificationPanel extends JPanel {
      */
     private static final long serialVersionUID = 1494398250907085817L;
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLValueSpecificationPanel.class.getName());
+    
 
     /**
      *
@@ -79,7 +76,7 @@ class UMLValueSpecificationPanel extends JPanel {
 
 	//super(new LabelledLayout());
 	super(new GridBagLayout());
-        LOG.log(Level.FINE, ">>New ValueSpecification panel created");
+        
 
 	TitledBorder border = new TitledBorder(title);
 	this.setBorder(border);
@@ -135,7 +132,7 @@ class UMLValueSpecificationPanel extends JPanel {
 	    Constructor<?> constructeur = oClass.getConstructor (new Class [] {UMLValueSpecificationModel.class,boolean.class});
 	    ret=(UMLValueSpecificationValueField) constructeur.newInstance (new Object [] {model, true});
 	} catch (Exception e) {
-            LOG.log(Level.SEVERE, "Unknow type "+sType+" : "+e, e);
+            
 	    return null;
 	}
 

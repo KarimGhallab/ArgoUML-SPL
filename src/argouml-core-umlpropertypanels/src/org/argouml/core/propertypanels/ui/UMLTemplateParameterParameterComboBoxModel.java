@@ -42,8 +42,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -63,9 +61,7 @@ class UMLTemplateParameterParameterComboBoxModel
      */
     private static final long serialVersionUID = -1295242702819038923L;
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLTemplateParameterParameterComboBoxModel.class
-                         .getName());
+    
 
     /**
      * Constructor for UMLStructuralFeatureTypeComboBoxModel.
@@ -111,12 +107,10 @@ class UMLTemplateParameterParameterComboBoxModel
         Collection list = new ArrayList(1);
         Object element = getSelectedModelElement();
         
-        LOG.log(Level.INFO, "The selected element is {0}", element);
+        
         
         if (element != null) {
-            LOG.log(Level.INFO,
-                    "The selected element is {0}",
-                    Model.getFacade().getName(element));
+            
         }
         if (element != null) {
             list.add(element);

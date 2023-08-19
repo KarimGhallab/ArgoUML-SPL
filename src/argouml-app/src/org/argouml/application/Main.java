@@ -50,8 +50,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -62,11 +60,6 @@ import javax.swing.UIManager;
 import org.argouml.application.api.Argo;
 import org.argouml.application.api.CommandLineInterface;
 import org.argouml.application.security.ArgoAwtExceptionHandler;
-import org.argouml.cognitive.AbstractCognitiveTranslator;
-import org.argouml.cognitive.Designer;
-import org.argouml.cognitive.checklist.ui.InitCheckListUI;
-import org.argouml.cognitive.ui.InitCognitiveUI;
-import org.argouml.cognitive.ui.ToDoPane;
 import org.argouml.configuration.Configuration;
 import org.argouml.i18n.Translator;
 import org.argouml.kernel.Project;
@@ -86,13 +79,8 @@ import org.argouml.ui.SplashScreen;
 import org.argouml.ui.cmd.ActionExit;
 import org.argouml.ui.cmd.InitUiCmdSubsystem;
 import org.argouml.ui.cmd.PrintManager;
-import org.argouml.uml.diagram.activity.ui.InitActivityDiagram;
-import org.argouml.uml.diagram.collaboration.ui.InitCollaborationDiagram;
-import org.argouml.uml.diagram.deployment.ui.InitDeploymentDiagram;
-import org.argouml.uml.diagram.state.ui.InitStateDiagram;
 import org.argouml.uml.diagram.static_structure.ui.InitClassDiagram;
 import org.argouml.uml.diagram.ui.InitDiagramAppearanceUI;
-import org.argouml.uml.diagram.use_case.ui.InitUseCaseDiagram;
 import org.argouml.uml.ui.InitUmlUI;
 import org.argouml.util.ArgoFrame;
 import org.argouml.util.JavaRuntimeUtility;
@@ -112,8 +100,7 @@ import org.argouml.util.logging.SimpleTimer;
  */
 public class Main {
 
-    // initialized in static initializer block below
-    private static final Logger LOG;
+    
 
     /**
      * The location of the default logging configuration (.lcf) file.
@@ -150,7 +137,7 @@ public class Main {
      */
     public static void main(String[] args) {
         try {
-            LOG.log(Level.INFO, "ArgoUML Started.");
+            
 
             SimpleTimer st = new SimpleTimer();
             st.mark("begin");
@@ -227,8 +214,7 @@ public class Main {
             commands = null;
 
             st.mark("start critics");
-            Runnable startCritics = new StartCritics();
-            Main.addPostLoadAction(startCritics);
+            
 
             st.mark("start loading modules");
             Runnable moduleLoader = new LoadModules();
@@ -238,11 +224,7 @@ public class Main {
             Thread postLoadThead = new Thread(pl);
             postLoadThead.start();
 
-            LOG.log(Level.INFO, "\nprofile of load time ############");
-            for (Enumeration i = st.result(); i.hasMoreElements();) {
-                LOG.log(Level.INFO, "{0}", i.nextElement());
-            }
-            LOG.log(Level.INFO, "#################################\n");
+            
 
             st = null;
             ArgoFrame.getFrame().setCursor(
@@ -262,11 +244,7 @@ public class Main {
             //ToolTipManager.sharedInstance().setInitialDelay(500);
             ToolTipManager.sharedInstance().setDismissDelay(50000000);
         } catch (Throwable t) {
-            try {
-                LOG.log(Level.SEVERE, "Fatal error on startup.  ArgoUML failed to start", t);
-            } finally {
-                System.exit(1);
-            }
+            
         }
     }
 
@@ -283,7 +261,7 @@ public class Main {
         org.tigris.gef.base.Globals.setLastDirectory(directory);
 
         initVersion();
-        initTranslator();
+        
 
         // then, print out some version info for debuggers...
         org.argouml.util.Tools.logVersionInfo();
@@ -291,24 +269,7 @@ public class Main {
     }
 
 
-    private static void initTranslator() {
-        // Set the i18n locale
-        Translator.init(Configuration.getString(Argo.KEY_LOCALE));
-
-        // create an anonymous class as a kind of adaptor for the cognitive
-        // System to provide proper translation/i18n.
-        org.argouml.cognitive.Translator.setTranslator(
-                new AbstractCognitiveTranslator() {
-                    public String i18nlocalize(String key) {
-                        return Translator.localize(key);
-                    }
-
-                    public String i18nmessageFormat(String key,
-                            Object[] iArgs) {
-                        return Translator.messageFormat(key, iArgs);
-                    }
-                });
-    }
+    
 
 
     private static void setSystemProperties() {
@@ -421,15 +382,14 @@ public class Main {
         SubsystemUtility.initSubsystem(new InitNotationUml());
         SubsystemUtility.initSubsystem(new InitNotationJava());
         SubsystemUtility.initSubsystem(new InitDiagramAppearanceUI());
-        SubsystemUtility.initSubsystem(new InitActivityDiagram());
-        SubsystemUtility.initSubsystem(new InitCollaborationDiagram());
-        SubsystemUtility.initSubsystem(new InitDeploymentDiagram());
-        SubsystemUtility.initSubsystem(new InitStateDiagram());
+        
+        
+        
+        
         SubsystemUtility.initSubsystem(new InitClassDiagram());
-        SubsystemUtility.initSubsystem(new InitUseCaseDiagram());
+        
         SubsystemUtility.initSubsystem(new InitUmlUI());
-        SubsystemUtility.initSubsystem(new InitCheckListUI());
-        SubsystemUtility.initSubsystem(new InitCognitiveUI());
+        
 
         /*
          * Initialize the module loader. At least the plug-ins that provide
@@ -455,7 +415,7 @@ public class Main {
                 DEFAULT_MODEL_IMPLEMENTATION);
         Throwable ret = Model.initialise(className);
         if (ret != null) {
-            LOG.log(Level.SEVERE, "Model component not correctly initialized.", ret);
+            
             System.err.println(className
                     + " is not a working Model implementation.");
             System.exit(1);
@@ -470,8 +430,7 @@ public class Main {
         }
 
         st.mark("open project");
-        Designer.disableCritiquing();
-        Designer.clearCritiquing();
+        
 
         Project project = null;
         if (fileToOpen != null) {
@@ -500,7 +459,7 @@ public class Main {
         project.setDirty(false);
 
         st.mark("set project");
-        Designer.enableCritiquing();
+        
     }
 
 
@@ -512,10 +471,10 @@ public class Main {
         if (!("".equals(s))) {
             File file = new File(s);
             if (file.exists()) {
-                LOG.log(Level.INFO, "Re-opening project {0}", s);
+                
                 return s;
             } else {
-                LOG.log(Level.WARNING, "Cannot re-open {0} because it does not exist", s);
+                
             }
         }
         return null;
@@ -781,7 +740,7 @@ public class Main {
 //        }
 
         // initLogging();
-        LOG = Logger.getLogger(Main.class.getName());
+        
     }
 
 
@@ -815,8 +774,8 @@ public class Main {
      */
     private static ProjectBrowser initializeGUI(SplashScreen splash) {
         // make the projectbrowser
-        JPanel todoPane = new ToDoPane();
-        ProjectBrowser pb = ProjectBrowser.makeInstance(splash, true, todoPane);
+        
+        ProjectBrowser pb = ProjectBrowser.makeInstance(splash, true, new JPanel());
 
         JOptionPane.setRootFrame(pb);
 
@@ -881,10 +840,7 @@ public class Main {
  * after the initializations is done.
  */
 class PostLoad implements Runnable {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG = Logger.getLogger(PostLoad.class.getName());
+    
 
     /**
      * The list of actions to perform.
@@ -908,14 +864,14 @@ class PostLoad implements Runnable {
         try {
             Thread.sleep(1000);
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "post load no sleep", ex);
+            
         }
         for (Runnable r : postLoadActions) {
             r.run();
             try {
                 Thread.sleep(100);
             } catch (Exception ex) {
-                LOG.log(Level.SEVERE, "post load no sleep2", ex);
+                
             }
         }
     }
@@ -925,10 +881,7 @@ class PostLoad implements Runnable {
  * Class to load modules.
  */
 class LoadModules implements Runnable {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG = Logger.getLogger(LoadModules.class.getName());
+    
 
 
     private static final String[] OPTIONAL_INTERNAL_MODULES = {
@@ -945,7 +898,7 @@ class LoadModules implements Runnable {
                 ModuleLoader2.addClass(module);
             } catch (ClassNotFoundException e) {
                 /* We don't care if optional modules aren't found. */
-                LOG.log(Level.FINE, "Module {0} not found", module);
+                
             }
         }
     }
@@ -955,7 +908,7 @@ class LoadModules implements Runnable {
      */
     public void run() {
         huntForInternalModules();
-        LOG.log(Level.INFO, "Module loading done");
+        
     }
 
 } /* end class LoadModules */

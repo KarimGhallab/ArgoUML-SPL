@@ -53,8 +53,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -79,11 +77,7 @@ import org.argouml.ui.explorer.rules.PerspectiveRule;
  */
 public class ExplorerTreeModel extends DefaultTreeModel
 		implements TreeModelUMLEventListener, ItemListener {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ExplorerTreeModel.class.getName());
+    
 
     /**
      * an array of
@@ -463,13 +457,12 @@ public class ExplorerTreeModel extends DefaultTreeModel
             try {
                 children = rule.getChildren(modelElement);
             } catch (InvalidElementException e) {
-                LOG.log(Level.FINE, "InvalidElementException in ExplorerTree : ", e );
+                
             }
 
             for (Object child : children) {
                 if (child == null) {
-                    LOG.log(Level.WARNING, "PerspectiveRule " + rule + " wanted to "
-                            + "add null to the explorer tree!");
+                    
                 } else if (!newChildren.contains(child)) {
                     newChildren.add(child);
                 }
@@ -480,7 +473,7 @@ public class ExplorerTreeModel extends DefaultTreeModel
                 Set dependencies = rule.getDependencies(modelElement);
                 deps.addAll(dependencies);
             } catch (InvalidElementException e) {
-                LOG.log(Level.FINE, "InvalidElementException in ExplorerTree : ", e );
+                
             }
 
         }

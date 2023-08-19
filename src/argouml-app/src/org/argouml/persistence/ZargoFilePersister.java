@@ -57,8 +57,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -82,11 +80,7 @@ import org.xml.sax.SAXException;
  * @author Bob Tarling
  */
 class ZargoFilePersister extends UmlFilePersister {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ZargoFilePersister.class.getName());
+    
 
     /**
      * The constructor.
@@ -129,7 +123,7 @@ class ZargoFilePersister extends UmlFilePersister {
     public void doSave(Project project, File file) throws SaveException,
     InterruptedException {
 
-        LOG.log(Level.INFO, "Saving");
+        
         /* Retain the previous project file even when the save operation
          * crashes in the middle. Also create a backup file after saving. */
         boolean doSafeSaves = useSafeSaves();
@@ -165,9 +159,7 @@ class ZargoFilePersister extends UmlFilePersister {
             for (ProjectMember projectMember : project.getMembers()) {
                 if (projectMember.getType().equalsIgnoreCase("xmi")) {
 
-                    LOG.log(Level.INFO,
-                            "Saving member of type: {0}",
-                            projectMember.getType());
+                    
 
                     stream.putNextEntry(
                             new ZipEntry(projectMember.getZipName()));
@@ -195,7 +187,7 @@ class ZargoFilePersister extends UmlFilePersister {
             progressMgr.nextPhase();
 
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Exception occured during save attempt", e);
+            
             try {
                 if (stream != null) {
                     stream.close();
@@ -218,7 +210,7 @@ class ZargoFilePersister extends UmlFilePersister {
         try {
             stream.close();
         } catch (IOException ex) {
-            LOG.log(Level.SEVERE, "Failed to close save output writer", ex);
+            
         }
     }
 
@@ -266,7 +258,7 @@ class ZargoFilePersister extends UmlFilePersister {
             upgradeRequired = false;
         }
 
-        LOG.log(Level.INFO, "Loading zargo file of version {0}", fileVersion);
+        
 
         final Project p;
         if (upgradeRequired) {
@@ -298,7 +290,7 @@ class ZargoFilePersister extends UmlFilePersister {
 
             List memberList = parser.getMemberList();
 
-            LOG.log(Level.INFO,memberList.size() + " members");
+            
 
             // Load .xmi file before any PGML files
             // FIXME: the following is loading the model before anything else.
@@ -317,9 +309,7 @@ class ZargoFilePersister extends UmlFilePersister {
                 if (!"argo".equals(ext) && !"xmi".equals(ext)) {
                     persister = getMemberFilePersister(ext);
 
-                    LOG.log(Level.INFO,
-                            "Loading member with "
-                            + persister.getClass().getName());
+                    
 
                     url = makeZipEntryUrl(toURL(file), name);
                     persister.load(p, new InputSource(url.toExternalForm()));
@@ -352,10 +342,7 @@ class ZargoFilePersister extends UmlFilePersister {
         File combinedFile = null;
         try {
             combinedFile = File.createTempFile("combinedzargo_", ".uml");
-            LOG.log(Level.INFO,
-                    "Combining old style zargo sub files "
-                    + "into new style uml file {0}",
-                    combinedFile.getAbsolutePath());
+            
 
             combinedFile.deleteOnExit();
 
@@ -387,7 +374,7 @@ class ZargoFilePersister extends UmlFilePersister {
 
             writer.println("</uml>");
             writer.close();
-            LOG.log(Level.INFO, "Completed combining files");
+            
         } catch (IOException e) {
             throw new OpenException(e);
         }
@@ -430,14 +417,14 @@ class ZargoFilePersister extends UmlFilePersister {
         String version = getVersion(rootLine);
         writer.println("<uml version=\"" + version + "\">");
         writer.println(rootLine);
-        LOG.log(Level.INFO, "Transfering argo contents");
+        
         int memberCount = 0;
         while ((line = reader.readLine()) != null) {
             if (line.trim().startsWith("<member")) {
                 ++memberCount;
             }
             if (line.trim().equals("</argo>") && memberCount == 0) {
-                LOG.log(Level.INFO, "Inserting member info");
+                
                 writer.println("<member type='xmi' name='.xmi' />");
                 for (int i = 0; i < pgmlCount; ++i) {
                     writer.println("<member type='pgml' name='.pgml' />");
@@ -454,7 +441,7 @@ class ZargoFilePersister extends UmlFilePersister {
             writer.println(line);
         }
 
-        LOG.log(Level.INFO, "Member count = {0}", memberCount);
+        
 
         zis.close();
         reader.close();
@@ -544,9 +531,9 @@ class ZargoFilePersister extends UmlFilePersister {
         int ch;
         while ((ch = reader.read()) != -1) {
             if (ch == 0xFFFF) {
-                LOG.log(Level.INFO, "Stripping out 0xFFFF from save file");
+                
             } else if (ch == 8) {
-                LOG.log(Level.INFO, "Stripping out 0x8 from save file");
+                
             } else {
                 writer.write(ch);
             }

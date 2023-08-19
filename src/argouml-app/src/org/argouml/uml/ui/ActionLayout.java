@@ -47,8 +47,6 @@ import org.argouml.ui.UndoableAction;
 import org.argouml.ui.targetmanager.TargetManager;
 import org.argouml.uml.diagram.ArgoDiagram;
 import org.argouml.uml.diagram.DiagramUtils;
-import org.argouml.uml.diagram.activity.layout.ActivityDiagramLayouter;
-import org.argouml.uml.diagram.activity.ui.UMLActivityDiagram;
 import org.argouml.uml.diagram.layout.Layouter;
 import org.argouml.uml.diagram.static_structure.layout.ClassdiagramLayouter;
 import org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram;
@@ -90,7 +88,7 @@ public class ActionLayout extends UndoableAction {
             d = DiagramUtils.getActiveDiagram();
         }
         if (d instanceof UMLClassDiagram
-                || d instanceof UMLActivityDiagram) {
+                || false) {
             return true;
         }
         return false;
@@ -109,8 +107,6 @@ public class ActionLayout extends UndoableAction {
         Layouter layouter;
         if (diagram instanceof UMLClassDiagram) {
             layouter = new ClassdiagramLayouter(diagram);
-        } else if (diagram instanceof UMLActivityDiagram) {
-            layouter = new ActivityDiagramLayouter(diagram);
         } else {
             return;
         }

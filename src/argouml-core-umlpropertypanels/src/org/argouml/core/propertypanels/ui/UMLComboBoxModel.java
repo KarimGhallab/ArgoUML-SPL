@@ -45,8 +45,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
@@ -78,8 +76,7 @@ abstract class UMLComboBoxModel extends AbstractListModel
      */
     private static final long serialVersionUID = 6038919811554379037L;
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLComboBoxModel.class.getName());
+    
 
     /**
      * The target of the comboboxmodel. This is some UML modelelement
@@ -197,10 +194,7 @@ abstract class UMLComboBoxModel extends AbstractListModel
                     try {
                         modelChanged(event);
                     } catch (InvalidElementException e) {
-                        LOG.log(Level.FINE, "event = {0}", event);
-                        LOG.log(Level.FINE,
-                                "updateLayout method accessed deleted element ",
-                                e);
+                        
                     }
                 }
             };
@@ -428,7 +422,7 @@ abstract class UMLComboBoxModel extends AbstractListModel
         assert (theNewTarget != null);
         modelValid = false;
 
-        LOG.log(Level.FINE, "setTarget target: {0}", theNewTarget);
+        
 
         /* Add new listeners: */
         target = theNewTarget;
@@ -476,16 +470,9 @@ abstract class UMLComboBoxModel extends AbstractListModel
         try {
             buildModelList();
 
-            if (LOG.isLoggable(Level.FINE)) {
-                long endTime = System.currentTimeMillis();
-                LOG.log(Level.FINE,
-                        "buildModelList took " + (endTime - startTime)
-                        + " msec. for " + this.getClass().getName());
-            }
+            
         } catch (InvalidElementException e) {
-            LOG.log(Level.WARNING,
-                    "buildModelList attempted to operate on "
-                    + "deleted element");
+            
         }
     }
 

@@ -40,8 +40,6 @@ package org.argouml.uml.ui;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
@@ -59,11 +57,7 @@ public class UMLExpressionBodyField extends JTextArea
     implements DocumentListener, UMLUserInterfaceComponent,
     PropertyChangeListener, TargettableModelView {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UMLExpressionBodyField.class.getName());
+    
 
     private UMLExpressionModel2 model;
     private boolean notifyModel;
@@ -92,7 +86,7 @@ public class UMLExpressionBodyField extends JTextArea
      * @see org.argouml.uml.ui.UMLUserInterfaceComponent#targetChanged()
      */
     public void targetChanged() {
-        LOG.log(Level.FINE, "UMLExpressionBodyField: targetChanged");
+        
 	if (notifyModel) {
 	    model.targetChanged();
 	}
@@ -107,7 +101,7 @@ public class UMLExpressionBodyField extends JTextArea
 
     /* TODO: This does not work - no event arrives. */
     public void propertyChange(PropertyChangeEvent event) {
-        LOG.log(Level.FINE, "UMLExpressionBodyField: propertySet {0}", event);
+        
         update();
     }
 

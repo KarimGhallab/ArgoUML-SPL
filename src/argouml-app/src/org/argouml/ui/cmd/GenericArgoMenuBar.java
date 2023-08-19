@@ -44,8 +44,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
@@ -58,10 +56,6 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import org.argouml.application.helpers.ResourceLoaderWrapper;
-import org.argouml.cognitive.critics.ui.ActionOpenCritics;
-import org.argouml.cognitive.ui.ActionAutoCritique;
-import org.argouml.cognitive.ui.ActionOpenDecisions;
-import org.argouml.cognitive.ui.ActionOpenGoals;
 import org.argouml.i18n.Translator;
 import org.argouml.ui.ActionExportXMI;
 import org.argouml.ui.ActionImportXMI;
@@ -76,11 +70,8 @@ import org.argouml.ui.explorer.ActionPerspectiveConfig;
 import org.argouml.ui.targetmanager.TargetEvent;
 import org.argouml.ui.targetmanager.TargetListener;
 import org.argouml.ui.targetmanager.TargetManager;
-import org.argouml.uml.ui.ActionActivityDiagram;
 import org.argouml.uml.ui.ActionClassDiagram;
-import org.argouml.uml.ui.ActionCollaborationDiagram;
 import org.argouml.uml.ui.ActionDeleteModelElements;
-import org.argouml.uml.ui.ActionDeploymentDiagram;
 import org.argouml.uml.ui.ActionGenerateAll;
 import org.argouml.uml.ui.ActionGenerateProjectCode;
 import org.argouml.uml.ui.ActionGenerationSettings;
@@ -91,9 +82,6 @@ import org.argouml.uml.ui.ActionRevertToSaved;
 import org.argouml.uml.ui.ActionSaveAllGraphics;
 import org.argouml.uml.ui.ActionSaveGraphics;
 import org.argouml.uml.ui.ActionSaveProjectAs;
-import org.argouml.uml.ui.ActionSequenceDiagram;
-import org.argouml.uml.ui.ActionStateDiagram;
-import org.argouml.uml.ui.ActionUseCaseDiagram;
 import org.argouml.util.osdep.OSXAdapter;
 import org.argouml.util.osdep.OsUtil;
 import org.tigris.gef.base.AlignAction;
@@ -134,8 +122,7 @@ import org.tigris.toolbar.ToolBarFactory;
 public class GenericArgoMenuBar extends JMenuBar implements
         TargetListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(GenericArgoMenuBar.class.getName());
+    
 
     private static List<JMenu> moduleMenus = new ArrayList<JMenu>();
 
@@ -313,7 +300,7 @@ public class GenericArgoMenuBar extends JMenuBar implements
         initMenuCreate();
         initMenuArrange();
         initMenuGeneration();
-        initMenuCritique();
+        
         initMenuTools();
         initMenuHelp();
     }
@@ -615,12 +602,8 @@ public class GenericArgoMenuBar extends JMenuBar implements
         Collection<Action> toolbarTools = new ArrayList<Action>();
         createDiagramMenu = add(new JMenu(menuLocalize("Create Diagram")));
         setMnemonic(createDiagramMenu, "Create Diagram");
-        JMenuItem usecaseDiagram = createDiagramMenu
-                .add(new ActionUseCaseDiagram());
-        setMnemonic(usecaseDiagram, "Usecase Diagram");
-        toolbarTools.add((new ActionUseCaseDiagram()));
-        ShortcutMgr.assignAccelerator(usecaseDiagram,
-                ShortcutMgr.ACTION_USE_CASE_DIAGRAM);
+        
+        
 
         JMenuItem classDiagram =
             createDiagramMenu.add(new ActionClassDiagram());
@@ -629,40 +612,15 @@ public class GenericArgoMenuBar extends JMenuBar implements
         ShortcutMgr.assignAccelerator(classDiagram,
                 ShortcutMgr.ACTION_CLASS_DIAGRAM);
 
-        JMenuItem sequenzDiagram =
-            createDiagramMenu.add(new ActionSequenceDiagram());
-        setMnemonic(sequenzDiagram, "Sequenz Diagram");
-        toolbarTools.add((new ActionSequenceDiagram()));
-        ShortcutMgr.assignAccelerator(sequenzDiagram,
-                ShortcutMgr.ACTION_SEQUENCE_DIAGRAM);
+        
 
-        JMenuItem collaborationDiagram =
-            createDiagramMenu.add(new ActionCollaborationDiagram());
-        setMnemonic(collaborationDiagram, "Collaboration Diagram");
-        toolbarTools.add((new ActionCollaborationDiagram()));
-        ShortcutMgr.assignAccelerator(collaborationDiagram,
-                ShortcutMgr.ACTION_COLLABORATION_DIAGRAM);
+        
 
-        JMenuItem stateDiagram =
-            createDiagramMenu.add(new ActionStateDiagram());
-        setMnemonic(stateDiagram, "State Diagram");
-        toolbarTools.add((new ActionStateDiagram()));
-        ShortcutMgr.assignAccelerator(stateDiagram,
-                ShortcutMgr.ACTION_STATE_DIAGRAM);
+        
 
-        JMenuItem activityDiagram =
-            createDiagramMenu.add(new ActionActivityDiagram());
-        setMnemonic(activityDiagram, "Activity Diagram");
-        toolbarTools.add((new ActionActivityDiagram()));
-        ShortcutMgr.assignAccelerator(activityDiagram,
-                ShortcutMgr.ACTION_ACTIVITY_DIAGRAM);
+        
 
-        JMenuItem deploymentDiagram =
-            createDiagramMenu.add(new ActionDeploymentDiagram());
-        setMnemonic(deploymentDiagram, "Deployment Diagram");
-        toolbarTools.add((new ActionDeploymentDiagram()));
-        ShortcutMgr.assignAccelerator(deploymentDiagram,
-                ShortcutMgr.ACTION_DEPLOYMENT_DIAGRAM);
+        
 
         createDiagramToolbar =
             (new ToolBarFactory(toolbarTools)).createToolBar();
@@ -890,34 +848,7 @@ public class GenericArgoMenuBar extends JMenuBar implements
         // generate.add(Actions.GenerateWeb);
     }
 
-    /**
-     * Build the menu "Critique".
-     */
-    private void initMenuCritique() {
-        // TODO: This creates a dependency on the Critics subsystem.
-        // Instead that subsystem should register its desired menus and actions.
-        critique =
-            (ArgoJMenu) add(new ArgoJMenu(MENU + prepareKey("Critique")));
-        setMnemonic(critique, "Critique");
-        JMenuItem toggleAutoCritique = critique
-                .addCheckItem(new ActionAutoCritique());
-        setMnemonic(toggleAutoCritique, "Toggle Auto Critique");
-        ShortcutMgr.assignAccelerator(toggleAutoCritique,
-                ShortcutMgr.ACTION_AUTO_CRITIQUE);
-        critique.addSeparator();
-        JMenuItem designIssues = critique.add(new ActionOpenDecisions());
-        setMnemonic(designIssues, "Design Issues");
-        ShortcutMgr.assignAccelerator(designIssues,
-                ShortcutMgr.ACTION_OPEN_DECISIONS);
-        JMenuItem designGoals = critique.add(new ActionOpenGoals());
-        setMnemonic(designGoals, "Design Goals");
-        ShortcutMgr.assignAccelerator(designGoals,
-                ShortcutMgr.ACTION_OPEN_GOALS);
-        JMenuItem browseCritics = critique.add(new ActionOpenCritics());
-        setMnemonic(browseCritics, "Browse Critics");
-        ShortcutMgr.assignAccelerator(designIssues,
-                ShortcutMgr.ACTION_OPEN_CRITICS);
-    }
+    
 
     /**
      * Build the menu "Tools".
@@ -1146,28 +1077,28 @@ public class GenericArgoMenuBar extends JMenuBar implements
     }
 
     private void registerForMacEvents() {
-        LOG.log(Level.INFO, "Determining if Mac OS to set special handlers");
+        
         if (OsUtil.isMacOSX()) {
-            LOG.log(Level.INFO, "System is Mac OS - setting special handlers");
+            
             try {
                 // Generate and register the OSXAdapter, passing the methods
                 // we wish to use as delegates for various
                 // com.apple.eawt.ApplicationListener methods
-                LOG.log(Level.INFO, "Registering Quit handler for Mac");
+                
                 OSXAdapter.setQuitHandler(this, getClass().getMethod(
                         "macQuit", (Class[]) null));
-                LOG.log(Level.INFO, "Registering About handler for Mac");
+                
                 OSXAdapter.setAboutHandler(this, getClass().getMethod(
                         "macAbout", (Class[]) null));
-                LOG.log(Level.INFO, "Registering Preferences handler for Mac");
+                
                 OSXAdapter.setPreferencesHandler(this, getClass()
                         .getMethod("macPreferences", (Class[]) null));
-                LOG.log(Level.INFO, "Registering File handler for Mac");
+                
                 OSXAdapter.setFileHandler(this, getClass().getMethod(
                         "macOpenFile", new Class[] {String.class}));
-                LOG.log(Level.INFO, "All Mac handlers set");
+                
             } catch (Exception e) {
-                LOG.log(Level.SEVERE, "Error while loading the OSXAdapter:", e);
+                
             }
         }
     }
@@ -1176,7 +1107,7 @@ public class GenericArgoMenuBar extends JMenuBar implements
      * Internal use only.  Do not use.
      */
     public boolean macQuit() {
-        LOG.log(Level.INFO, "Quit has been chosen on a Mac");
+        
         return ProjectBrowser.getInstance().tryExit();
     }
 

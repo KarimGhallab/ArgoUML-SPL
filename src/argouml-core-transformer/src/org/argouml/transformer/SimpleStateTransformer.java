@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -62,8 +60,7 @@ import org.tigris.gef.presentation.FigNode;
  */
 class SimpleStateTransformer implements Transformer {
 
-    private static final Logger LOG =
-        Logger.getLogger(SimpleStateTransformer.class.getName());
+    
 
     public List<Action> actions(Project p, Object sourceModelElement) {
         assert Model.getFacade().isASimpleState(sourceModelElement);
@@ -84,8 +81,7 @@ class SimpleStateTransformer implements Transformer {
         }
 
         public void actionPerformed(ActionEvent e) {
-            LOG.log(Level.FINE,
-                    "Transforming a SimpleState into a CompositeState");
+            
 //            Editor editor = Globals.curEditor();
 //            GraphModel gm = editor.getGraphModel();
 //            LayerDiagram lay =
@@ -107,15 +103,7 @@ class SimpleStateTransformer implements Transformer {
             outgoings.removeAll(intTrans);
             incomings.removeAll(intTrans);
 
-            LOG.log(Level.FINE,
-                    "Transformer found {0} internal transitions.",
-                    intTrans.size());
-            LOG.log(Level.FINE,
-                    "Transformer found {0} incoming transitions.",
-                    incomings.size());
-            LOG.log(Level.FINE,
-                    "Transformer found {0} outgoing transitions.",
-                    outgoings.size());
+            
 
             String name = Model.getFacade().getName(getSource());
             Object cs = Model.getStateMachinesFactory().buildCompositeState(container);
@@ -147,13 +135,11 @@ class SimpleStateTransformer implements Transformer {
             // This is not necessarily the current diagram!
             Collection<Fig> figs = getProject().findAllPresentationsFor(getSource());
 
-            LOG.log(Level.FINE,
-                    "Transformer found {0} representations (Figs).",
-                    figs.size());
+            
 
             for (Fig ssFig : figs) {
 
-                LOG.log(Level.FINE, "Transformer found a Fig: {0}", ssFig);
+                
 
                 assert ssFig.getOwner() == getSource();
                 assert ssFig instanceof FigSimpleState;

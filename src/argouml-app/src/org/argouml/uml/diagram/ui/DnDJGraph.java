@@ -51,8 +51,6 @@ import java.awt.dnd.DropTargetListener;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.Owned;
 import org.argouml.model.Model;
@@ -80,8 +78,7 @@ class DnDJGraph
     extends JGraph
     implements DropTargetListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(DnDJGraph.class.getName());
+    
 
     /**
      * The constructor.
@@ -258,9 +255,9 @@ class DnDJGraph
             }
             dropTargetDropEvent.getDropTargetContext().dropComplete(true);
         } catch (UnsupportedFlavorException e) {
-            LOG.log(Level.SEVERE, "Exception caught", e);
+            
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "Exception caught", e);
+            
         }
     }
 

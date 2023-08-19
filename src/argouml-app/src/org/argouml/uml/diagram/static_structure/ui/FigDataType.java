@@ -39,8 +39,6 @@
 package org.argouml.uml.diagram.static_structure.ui;
 
 import java.awt.Rectangle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.ui.targetmanager.TargetManager;
@@ -70,8 +68,7 @@ import org.tigris.gef.presentation.Fig;
  */
 public class FigDataType extends FigClassifierBox {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigDataType.class.getName());
+    
 
     private void constructFigs(Rectangle bounds) {
         enableSizeChecking(false);
@@ -189,9 +186,7 @@ public class FigDataType extends FigClassifierBox {
                 Model.getCoreHelper().setNamespace(me, m);
             }
         } catch (Exception e) {
-            LOG.log(Level.SEVERE,
-                    "could not set package due to:" + e
-                    + "' at " + encloser, e);
+            
         }
 
     }

@@ -45,8 +45,6 @@ import java.beans.VetoableChangeListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.events.ArgoDiagramAppearanceEvent;
 import org.argouml.application.events.ArgoEventPump;
@@ -59,7 +57,6 @@ import org.argouml.model.DeleteInstanceEvent;
 import org.argouml.model.InvalidElementException;
 import org.argouml.model.Model;
 import org.argouml.model.ModelManagementHelper;
-import org.argouml.uml.diagram.activity.ui.FigPool;
 import org.argouml.uml.diagram.static_structure.ui.FigComment;
 import org.argouml.uml.diagram.ui.ArgoFig;
 import org.argouml.uml.diagram.ui.FigEdgeModelElement;
@@ -116,8 +113,7 @@ public abstract class ArgoDiagramImpl extends Diagram
 
     private DiagramSettings settings;
 
-    private static final Logger LOG =
-        Logger.getLogger(ArgoDiagramImpl.class.getName());
+    
 
     /**
      * Default constructor.  Used by PGML parser when diagram is first created.
@@ -192,9 +188,9 @@ public abstract class ArgoDiagramImpl extends Diagram
         // for a global one
         if (!(UndoManager.getInstance() instanceof DiagramUndoManager)) {
             UndoManager.setInstance(new DiagramUndoManager());
-            LOG.log(Level.INFO, "Setting Diagram undo manager");
+            
         } else {
-            LOG.log(Level.INFO, "Diagram undo manager already set");
+            
         }
 
         // Register for notification of any global changes that would affect
@@ -310,9 +306,7 @@ public abstract class ArgoDiagramImpl extends Diagram
     }
 
     private boolean repairFig(Fig f, StringBuffer report) {
-        if (LOG.isLoggable(Level.INFO)) {
-            LOG.log(Level.INFO, "Checking " + figDescription(f) + f.getOwner());
-        }
+        
         boolean faultFixed = false;
         String figDescription = null;
 
@@ -410,7 +404,7 @@ public abstract class ArgoDiagramImpl extends Diagram
                 f.removeFromDiagram();
             }
         } else if ((f instanceof FigNode || f instanceof FigEdge)
-                && f.getOwner() == null && !(f instanceof FigPool)) {
+                && f.getOwner() == null && !(false)) {
             if (figDescription == null) {
                 figDescription = figDescription(f);
                 report.append(figDescription);
@@ -547,7 +541,7 @@ public abstract class ArgoDiagramImpl extends Diagram
 
     public void setNamespace(Object ns) {
         if (!Model.getFacade().isANamespace(ns)) {
-            LOG.log(Level.SEVERE, "Not a namespace {0}", ns);
+            
             throw new IllegalArgumentException("Given object not a namespace");
         }
         if ((namespace != null) && (namespace != ns)) {
@@ -658,11 +652,10 @@ public abstract class ArgoDiagramImpl extends Diagram
                 if (fig instanceof ArgoFig) {
                     ((ArgoFig) fig).renderingChanged();
                 } else {
-                    LOG.log(Level.WARNING, "Diagram " + getName() + " contains non-ArgoFig "
-                            + fig);
+                    
                 }
             } catch (InvalidElementException e) {
-                LOG.log(Level.SEVERE, "Tried to refresh deleted element ", e);
+                
             }
         }
         damage();
