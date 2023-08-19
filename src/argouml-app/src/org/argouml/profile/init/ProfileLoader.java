@@ -52,8 +52,6 @@ import java.util.StringTokenizer;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.Critic;
 import org.argouml.i18n.Translator;
@@ -68,11 +66,7 @@ import org.argouml.profile.UserDefinedProfile;
  * @author maurelio1234
  */
 public final class ProfileLoader {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ProfileLoader.class.getName());
+    
 
     /**
      * The prefix in URL:s that are jars.
@@ -98,7 +92,7 @@ public final class ProfileLoader {
     }
 
     private void huntForProfilesInDir(String dir) {
-        LOG.log(Level.INFO, "Looking for Profiles in {0}", dir);
+        
 
         File extensionDir = new File(dir);
         if (extensionDir.isDirectory()) {
@@ -108,9 +102,7 @@ public final class ProfileLoader {
                 try {
                     jarfile = new JarFile(file);
                     if (jarfile != null) {
-                        LOG.log(Level.INFO,
-                                "Looking for Profiles in the Jar {0}",
-                                jarfile.getName());
+                        
 
                         ClassLoader classloader = new URLClassLoader(
                                 new URL[] {file.toURI().toURL()});
@@ -118,7 +110,7 @@ public final class ProfileLoader {
                                 classloader);
                     }
                 } catch (IOException ioe) {
-                    LOG.log(Level.FINE, "Cannot open Jar file " + file, ioe);
+                    
                 }
             }
         }
@@ -166,12 +158,11 @@ public final class ProfileLoader {
                             ProfileFacade.getManager());
 
                     ProfileFacade.getManager().registerProfile(udp);
-                    LOG.log(Level.FINE,
-                            "Registered Profile: {0}", udp.getDisplayName());
+                    
                 } catch (ProfileException e) {
-                    LOG.log(Level.SEVERE, "Exception", e);
+                    
                 } catch (IOException e) {
-                    LOG.log(Level.SEVERE, "Exception", e);
+                    
                 }
             }
 
@@ -224,12 +215,11 @@ public final class ProfileLoader {
                     Critic critic = (Critic) cl.newInstance();
                     ret.add(critic);
                 } catch (ClassNotFoundException e) {
-                    LOG.log(Level.SEVERE, "Error loading class: " + entry, e);
+                    
                 } catch (InstantiationException e) {
-                    LOG.log(Level.SEVERE,
-                            "Error instantianting class: " + entry, e);
+                    
                 } catch (IllegalAccessException e) {
-                    LOG.log(Level.SEVERE, "Exception", e);
+                    
                 }
             }
         }

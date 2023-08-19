@@ -50,8 +50,6 @@ import java.awt.event.MouseListener;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -104,11 +102,7 @@ public class ToDoPane extends JPanel
         TreeSelectionListener,
         MouseListener,
         ToDoListListener {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ToDoPane.class.getName());
+    
 
     private static final int WARN_THRESHOLD = 50;
     private static final int ALARM_THRESHOLD = 100;
@@ -304,13 +298,12 @@ public class ToDoPane extends JPanel
      * @see javax.swing.event.TreeSelectionListener#valueChanged(javax.swing.event.TreeSelectionEvent)
      */
     public void valueChanged(TreeSelectionEvent e) {
-        LOG.log(Level.FINE, "ToDoPane valueChanged");
+        
         //TODO: should fire its own event and ProjectBrowser
         //should register a listener - tfm
         Object sel = getSelectedObject();
         ProjectBrowser.getInstance().setToDoItem(sel);
-        LOG.log(Level.FINE, "lastselection: {0}", lastSel);
-        LOG.log(Level.FINE, "sel: {0}", sel);
+        
         if (lastSel instanceof ToDoItem) {
 	    ((ToDoItem) lastSel).deselect();
 	}
@@ -495,7 +488,7 @@ public class ToDoPane extends JPanel
         if (curPerspective == null) {
             tree.setVisible(false);
 	} else {
-            LOG.log(Level.FINE, "ToDoPane setting tree model");
+            
             curPerspective.setRoot(root);
             tree.setShowsRootHandles(true);
             tree.setModel(curPerspective);
@@ -547,7 +540,7 @@ public class ToDoPane extends JPanel
 
         //TODO: should fire its own event and ProjectBrowser
         //TODO: should register a listener
-        LOG.log(Level.FINE, "2: {0}", getSelectedObject() );
+        
     }
 
     /**

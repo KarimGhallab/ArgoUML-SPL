@@ -50,8 +50,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -116,8 +114,7 @@ import org.tigris.gef.presentation.FigText;
 public class FigPackage extends FigNodeModelElement
     implements StereotypeContainer, VisibilityContainer {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigPackage.class.getName());
+    
 
     /** The minimal height of the name. */
     private static final int MIN_HEIGHT = 21;
@@ -641,8 +638,7 @@ public class FigPackage extends FigNodeModelElement
         // the outer class. It fails with the error:
         // "The type org.apache.commons.logging.Log cannot be resolved.
         // It is indirectly referenced from required .class files."
-        private final Logger LOG1 =
-                Logger.getLogger(FigPackage.class.getName());
+        
 
         /**
          * Construct a text fig for a Package which will jump to diagram for
@@ -723,7 +719,7 @@ public class FigPackage extends FigNodeModelElement
 		    try {
 		        createClassDiagram(lNS, lsDefaultName, lP);
 		    } catch (Exception ex) {
-                        LOG1.log(Level.SEVERE, "consume caused: ", ex);
+                        
 		    }
 
 		    return;
@@ -863,15 +859,7 @@ public class FigPackage extends FigNodeModelElement
 	    // this package.
 	    // TODO: In my view the Fig representing the model element should be
 	    // removed from the diagram. Yet to be agreed. Bob.
-	    if ((mee.getNewValue() == null)
-                && LOG.isLoggable(Level.INFO)) {
-
-                LOG.log(Level.INFO,
-                        Model.getFacade().getName(mee.getOldValue())
-                        + " has been removed from the namespace of "
-                        + Model.getFacade().getName(getOwner())
-                        + " by notice of " + mee.toString());
-	    }
+	    
 
 	    LayerPerspective layer = (LayerPerspective) getLayer();
 	    Fig f = layer.presentationFor(mee.getOldValue());

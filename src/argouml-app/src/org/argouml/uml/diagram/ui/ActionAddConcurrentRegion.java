@@ -42,8 +42,6 @@ package org.argouml.uml.diagram.ui;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -81,9 +79,7 @@ import org.tigris.gef.presentation.Fig;
 public class ActionAddConcurrentRegion extends UndoableAction {
 
 
-    /** logger */
-    private static final Logger LOG =
-        Logger.getLogger(ActionAddConcurrentRegion.class.getName());
+    
 
     /**
      * Constructor
@@ -222,7 +218,7 @@ public class ActionAddConcurrentRegion extends UndoableAction {
                     umlCompositeState, true);
 
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Exception caught", ex);
+            
         }
     }
 

@@ -39,8 +39,6 @@
 
 package org.argouml.core.propertypanels.ui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -60,8 +58,7 @@ import org.tigris.swidgets.LabelledLayout;
 class UMLExpressionPanel extends JPanel
 	implements ChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLExpressionPanel.class.getName());
+    
 
     private final UMLExpressionModel model;
     private final UMLExpressionLanguageField languageField;
@@ -70,7 +67,7 @@ class UMLExpressionPanel extends JPanel
     public UMLExpressionPanel(UMLExpressionModel model, String title) {
 
         super(new LabelledLayout());
-        LOG.log(Level.FINE, ">>New Expression panel created");
+        
 
         TitledBorder border = new TitledBorder(title);
         this.setBorder(border);
@@ -99,7 +96,7 @@ class UMLExpressionPanel extends JPanel
     }
 
     public void stateChanged(ChangeEvent e) {
-        LOG.log(Level.FINE, ">>Values shown on panel are changed");
+        
 	bodyField.update();
 	languageField.update();
     }

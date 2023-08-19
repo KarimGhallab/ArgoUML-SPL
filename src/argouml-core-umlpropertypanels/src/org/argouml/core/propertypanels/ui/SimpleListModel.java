@@ -17,8 +17,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.SwingUtilities;
@@ -43,8 +41,7 @@ class SimpleListModel
      */
     private static final long serialVersionUID = -8491023641828449064L;
 
-    private static final Logger LOG =
-        Logger.getLogger(SimpleListModel.class.getName());
+    
 
     /**
      * The metatypes to provide buttons to create.
@@ -141,9 +138,7 @@ class SimpleListModel
         		                final int index =
         		                    CollectionUtil.indexOf(c, newElement);
         		                if (index < 0 || index > getSize() - 1) {
-                                            LOG.log(Level.WARNING,
-        		                            "Unable to add element at correct position "
-        		                            + index + " added to end instead");
+                                            
         		                    addElement(newElement);
         		                } else {
         		                    add(index, newElement);
@@ -155,9 +150,7 @@ class SimpleListModel
         	            }
                         }
                     } catch (InvalidElementException e) {
-                        LOG.log(Level.FINE,
-                                "propertyChange accessed a deleted element ",
-                                e);
+                        
                     }
                 }
             };
@@ -172,10 +165,7 @@ class SimpleListModel
        	    removeAllElements();
             build();
         } else {
-            LOG.log(Level.FINE,
-                    "We are listening for too much here. "
-                    + "An event we don't need {0}",
-                    e);
+            
         }
     }
 
@@ -184,9 +174,7 @@ class SimpleListModel
      */
     private void build() {
         try {
-            LOG.log(Level.FINE,
-                    "Getting options for {0} {1} {2}",
-                    new Object[]{umlElement, propertyName, metaTypes});
+            
             
             final Collection c = (Collection) getterSetterManager.getOptions(
                     umlElement,
@@ -196,9 +184,7 @@ class SimpleListModel
                 addElement(o);
             }
         } catch (InvalidElementException exception) {
-            LOG.log(Level.FINE, "buildModelList threw exception for target "
-                    + umlElement + ": "
-                    + exception);
+            
         }
     }
 

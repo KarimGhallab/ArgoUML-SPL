@@ -44,18 +44,13 @@ import java.util.Map;
 import org.argouml.kernel.ProjectManager;
 import org.argouml.model.ActivityDiagram;
 import org.argouml.model.ClassDiagram;
-import org.argouml.model.CollaborationDiagram;
-import org.argouml.model.DeploymentDiagram;
 import org.argouml.model.DiDiagram;
 import org.argouml.model.Model;
 import org.argouml.model.StateDiagram;
 import org.argouml.model.UseCaseDiagram;
 import org.argouml.uml.diagram.activity.ui.UMLActivityDiagram;
-import org.argouml.uml.diagram.collaboration.ui.UMLCollaborationDiagram;
-import org.argouml.uml.diagram.deployment.ui.UMLDeploymentDiagram;
 import org.argouml.uml.diagram.state.ui.UMLStateDiagram;
 import org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram;
-import org.argouml.uml.diagram.use_case.ui.UMLUseCaseDiagram;
 
 /**
 * Provide a factory method to create different UML diagrams.
@@ -83,7 +78,7 @@ public final class DiagramFactory {
      * Enumeration containing all the different types of UML diagrams.
      */
     public enum DiagramType {
-        Class, UseCase, State, Deployment, Collaboration, Activity, Sequence
+        Class,  State,   Activity
     }
 
     private Map<DiagramType, DiagramFactoryInterface2> factories =
@@ -94,11 +89,10 @@ public final class DiagramFactory {
         // TODO: Use our extension registration mechanism for our internal
         // classes as well, so everything is treated the same
         diagramClasses.put(DiagramType.Class, UMLClassDiagram.class);
-        diagramClasses.put(DiagramType.UseCase, UMLUseCaseDiagram.class);
+        
         diagramClasses.put(DiagramType.State, UMLStateDiagram.class);
-        diagramClasses.put(DiagramType.Deployment, UMLDeploymentDiagram.class);
-        diagramClasses.put(DiagramType.Collaboration, 
-                UMLCollaborationDiagram.class);
+        
+        
         diagramClasses.put(DiagramType.Activity, UMLActivityDiagram.class);
     }
 
@@ -241,19 +235,10 @@ public final class DiagramFactory {
         if (type == UMLClassDiagram.class) {
             diagram = new UMLClassDiagram(namespace);
             diType = ClassDiagram.class;
-        } else if (type == UMLUseCaseDiagram.class) {
-            diagram = new UMLUseCaseDiagram(namespace);
-            diType = UseCaseDiagram.class;
         } else if (type == UMLStateDiagram.class) {
             diagram = new UMLStateDiagram(namespace, machine);
             diType = StateDiagram.class;
-        } else if (type == UMLDeploymentDiagram.class) {
-            diagram = new UMLDeploymentDiagram(namespace);
-            diType = DeploymentDiagram.class;
-        } else if (type == UMLCollaborationDiagram.class) {
-            diagram = new UMLCollaborationDiagram(namespace);
-            diType = CollaborationDiagram.class;
-        } else if (type == UMLActivityDiagram.class) {
+        }  else if (type == UMLActivityDiagram.class) {
             diagram = new UMLActivityDiagram(namespace, machine);
             diType = ActivityDiagram.class;
         }

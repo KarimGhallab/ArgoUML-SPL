@@ -47,8 +47,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.tigris.gef.util.Localizer;
 
@@ -60,11 +58,7 @@ import org.tigris.gef.util.Localizer;
  * @author Linus Tolke
  */
 public final class Translator {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(Translator.class.getName());
+    
 
     /**
      * Where we search for bundles.
@@ -267,29 +261,24 @@ public final class Translator {
         String resource = BUNDLES_PATH + "." + name;
         ResourceBundle bundle = null;
         try {
-            LOG.log(Level.FINE, "Loading {0}", resource);
+            
             Locale locale = Locale.getDefault();
             bundle = ResourceBundle.getBundle(resource, locale);
         } catch (MissingResourceException e1) {
-            LOG.log(Level.FINE,
-                    "Resource {0} not found in the default class loader.",
-                    resource);
+            
 
 	    Iterator iter = classLoaders.iterator();
 	    while (iter.hasNext()) {
 		ClassLoader cl = (ClassLoader) iter.next();
 		try {
-            LOG.log(Level.FINE,
-                    "Loading {0} from {1}",
-                    new Object[]{resource, cl});
+            
 		    bundle =
 			ResourceBundle.getBundle(resource,
 						 Locale.getDefault(),
 						 cl);
 		    break;
 		} catch (MissingResourceException e2) {
-                    LOG.log(Level.FINE,
-                            "Resource " + resource + " not found in " + cl);
+                    
 		}
 	    }
         }
@@ -360,16 +349,14 @@ public final class Translator {
 
         ResourceBundle bundle = bundles.get(name);
         if (bundle == null) {
-            LOG.log(Level.FINE,
-                    "Bundle ({0}) for resource {1} not found.",
-                    new Object[]{name, key});
+            
             return key;
         }
 
         try {
             return bundle.getString(key);
         } catch (MissingResourceException e) {
-            LOG.log(Level.FINE, "Resource {0} not found.", key);
+            
             return key;
         }
     }

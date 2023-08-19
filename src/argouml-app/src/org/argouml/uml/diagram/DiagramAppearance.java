@@ -40,8 +40,6 @@ package org.argouml.uml.diagram;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.UIManager;
 
@@ -63,11 +61,7 @@ import org.argouml.configuration.ConfigurationKey;
  */
 public final class DiagramAppearance implements PropertyChangeListener {
 
-    /**
-     * Define a static log4j category variable for ArgoUML diagram appearance.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(DiagramAppearance.class.getName());
+    
 
     /**
      * The configuration key for the font name.
@@ -161,9 +155,7 @@ public final class DiagramAppearance implements PropertyChangeListener {
      * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
      */
     public void propertyChange(PropertyChangeEvent pce) {
-        LOG.log(Level.INFO,
-                "Diagram appearance change:{0} to {1}",
-                new Object[]{pce.getOldValue(), pce.getNewValue()});
+        
 
         ArgoEventPump.fireEvent(
                 new ArgoDiagramAppearanceEvent(ArgoEventTypes.DIAGRAM_FONT_CHANGED, pce));

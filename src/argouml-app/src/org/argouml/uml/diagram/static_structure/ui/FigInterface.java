@@ -41,8 +41,6 @@ package org.argouml.uml.diagram.static_structure.ui;
 import java.awt.Rectangle;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.ui.targetmanager.TargetManager;
@@ -59,8 +57,7 @@ import org.tigris.gef.presentation.Fig;
  */
 public class FigInterface extends FigClassifierBox {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigInterface.class.getName());
+    
 
     /**
      * Initialization common to multiple constructors.
@@ -159,9 +156,7 @@ public class FigInterface extends FigClassifierBox {
                 Model.getCoreHelper().setNamespace(me, m);
             }
         } catch (Exception e) {
-            LOG.log(Level.SEVERE,
-                    "could not set package at " + encloser,
-                    e);
+            
         }
 
         // The next if-clause is important for the Deployment-diagram

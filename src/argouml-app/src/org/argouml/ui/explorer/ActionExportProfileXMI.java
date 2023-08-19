@@ -44,8 +44,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -67,15 +65,11 @@ import org.argouml.util.ArgoFrame;
 /**
  * Exports the model of a selected profile as XMI.
  *
- * @author Marcos Aurélio
+ * @author Marcos Aurï¿½lio
  */
 public class ActionExportProfileXMI extends AbstractAction {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ActionExportProfileXMI.class.getName());
+    
 
     private Profile selectedProfile;
 
@@ -104,11 +98,11 @@ public class ActionExportProfileXMI extends AbstractAction {
             }
         } catch (ProfileException e) {
             // TODO: We should be giving the user more direct feedback
-            LOG.log(Level.SEVERE, "Exception", e);
+            
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "Exception", e);
+            
         } catch (UmlException e) {
-            LOG.log(Level.SEVERE, "Exception", e);
+            
         }
     }
 

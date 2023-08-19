@@ -45,8 +45,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.i18n.Translator;
 
@@ -58,8 +56,7 @@ import org.argouml.i18n.Translator;
  */
 class DefaultUndoManager implements UndoManager {
 
-    private static final Logger LOG =
-        Logger.getLogger(DefaultUndoManager.class.getName());
+    
 
     /**
      * The number of undoable commands to store. When set to zero undo is
@@ -177,7 +174,7 @@ class DefaultUndoManager implements UndoManager {
     }
 
     public synchronized void startInteraction(String label) {
-        LOG.log(Level.FINE, "Starting interaction {0}", label);
+        
         this.newInteractionLabel = label;
         newInteraction = true;
     }

@@ -41,8 +41,6 @@ package org.argouml.application.api;
 import java.awt.BorderLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.JDialog;
@@ -80,11 +78,7 @@ import org.tigris.swidgets.Orientation;
  */
 public abstract class AbstractArgoJPanel extends JPanel
     implements Cloneable, Orientable {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(AbstractArgoJPanel.class.getName());
+    
 
     private static final int OVERLAPP = 30;
 
@@ -150,7 +144,7 @@ public abstract class AbstractArgoJPanel extends JPanel
         try {
             return this.getClass().newInstance();
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "exception in clone()", ex);
+            
         }
         return null;
     }

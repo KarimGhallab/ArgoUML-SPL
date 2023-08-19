@@ -50,8 +50,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -101,11 +99,7 @@ public class TabDiagram
     implements TabModelTarget, GraphSelectionListener, ModeChangeListener,
     PropertyChangeListener {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(TabDiagram.class.getName());
+    
 
     /**
      * The diagram object.
@@ -193,7 +187,7 @@ public class TabDiagram
         if (!(t instanceof UMLDiagram)) {
             // This is perfectly normal and happens among other things
             // within the call to setDiagram (below).
-            LOG.log(Level.FINE, "target is null in set target or not an instance of UMLDiagram");
+            
             return;
         }
         UMLDiagram newTarget = (UMLDiagram) t;
@@ -329,7 +323,7 @@ public class TabDiagram
      * @see org.tigris.gef.event.ModeChangeListener#modeChange(org.tigris.gef.event.ModeChangeEvent)
      */
     public void modeChange(ModeChangeEvent mce) {
-        LOG.log(Level.FINE, "TabDiagram got mode change event");
+        
         if (target != null    // Target might not have been initialised yet.
                 && !Globals.getSticky()
                 && Globals.mode() instanceof ModeSelect) {
@@ -480,8 +474,7 @@ public class TabDiagram
         // since we don't know what thread our event will arrive on
 
         if ("remove".equals(arg0.getPropertyName())) {
-            LOG.log(Level.FINE, "Got remove event for diagram = {0} old value = {1}",
-                    new Object[]{arg0.getSource(), arg0.getOldValue()});
+            
 
             // Although we register for notification of diagrams being
             // deleted, we currently depend on the TargetManager to assign

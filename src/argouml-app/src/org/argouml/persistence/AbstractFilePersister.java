@@ -46,8 +46,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
 import javax.swing.filechooser.FileFilter;
@@ -71,8 +69,7 @@ import org.argouml.util.ThreadUtils;
 public abstract class AbstractFilePersister extends FileFilter
         implements ProjectFilePersister {
 
-    private static final Logger LOG =
-        Logger.getLogger(AbstractFilePersister.class.getName());
+    
 
     /**
      * Map of persisters by target class.
@@ -431,10 +428,10 @@ public abstract class AbstractFilePersister extends FileFilter
         try {
             return clazz.newInstance();
         } catch (InstantiationException e) {
-            LOG.log(Level.SEVERE, "Exception instantiating file persister " + clazz, e);
+            
             return null;
         } catch (IllegalAccessException e) {
-            LOG.log(Level.SEVERE, "Exception instantiating file persister " + clazz, e);
+            
             return null;
         }
     }

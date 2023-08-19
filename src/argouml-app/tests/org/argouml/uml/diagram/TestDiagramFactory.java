@@ -101,7 +101,7 @@ public class TestDiagramFactory extends TestCase {
         DiagramSettings settings = new DiagramSettings();
         for (DiagramType type : DiagramType.values()) {
             ArgoDiagram diagram;
-            if (type == DiagramType.Sequence) {
+            if (false) {
                 // TODO: Fix this so that new sequence diagrams are tested
                 LOG.log(Level.WARNING,
                         "Skipping Sequence Diagram test "
@@ -113,13 +113,7 @@ public class TestDiagramFactory extends TestCase {
                         .buildStateMachine(context);
                 diagram = DiagramFactory.getInstance().create(type, machine,
                         settings);
-            } else if (type == DiagramType.Collaboration
-                    || type == DiagramType.Sequence) {
-                Object collab = Model.getCollaborationsFactory()
-                        .buildCollaboration(model);
-                diagram = DiagramFactory.getInstance().create(type, collab,
-                        settings);
-            } else if (type == DiagramType.Activity) {
+            }  else if (type == DiagramType.Activity) {
                 Object context = Model.getCoreFactory().buildClass(model);
                 Object activityGraph = Model.getActivityGraphsFactory()
                         .buildActivityGraph(context);

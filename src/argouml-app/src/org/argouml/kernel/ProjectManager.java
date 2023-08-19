@@ -45,8 +45,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.event.EventListenerList;
@@ -102,8 +100,7 @@ public final class ProjectManager implements ModelCommandCreationObserver {
      */
     public static final String OPEN_PROJECTS_PROPERTY = "openProjects";
 
-    private static final Logger LOG =
-        Logger.getLogger(ProjectManager.class.getName());
+    
 
     /**
      * The singleton instance of this class.
@@ -312,7 +309,7 @@ public final class ProjectManager implements ModelCommandCreationObserver {
                 Model.getPump().stopPumpingEvents();
 
                 creatingCurrentProject = true;
-                LOG.log(Level.INFO, "making empty project");
+                
                 Project newProject = new ProjectImpl();
                 createDefaultModel(newProject);
                 if (addDefaultDiagrams) {
@@ -358,7 +355,7 @@ public final class ProjectManager implements ModelCommandCreationObserver {
                 Model.getPump().stopPumpingEvents();
 
                 creatingCurrentProject = true;
-                LOG.log(Level.INFO, "making empty profile project");
+                
                 Project newProject = new ProjectImpl(Project.PROFILE_PROJECT);
                 createDefaultProfile(newProject);
                 if (addDefaultDiagrams) {
@@ -396,9 +393,7 @@ public final class ProjectManager implements ModelCommandCreationObserver {
                             .applyProfile(model, profile);
                     }
                 } catch (ProfileException pe) {
-                    LOG.log(Level.WARNING,
-                            "Failed to get profile packages from profile {0}",
-                            p);
+                    
                 }
             }
         }
@@ -411,14 +406,12 @@ public final class ProjectManager implements ModelCommandCreationObserver {
      * @param project the project to create the diagrams in.
      */
     private void createDefaultDiagrams(Project project) {
-        LOG.log(Level.FINE, "Creating default diagrams");
+        
         Object model = project.getRoots().iterator().next();
         DiagramFactory df = DiagramFactory.getInstance();
         ArgoDiagram d = createClassDiagram(project);
-        LOG.log(Level.FINE, "Creating use case diagram");
-        project.addMember(df.create(
-                DiagramFactory.DiagramType.UseCase, model,
-                project.getProjectSettings().getDefaultDiagramSettings()));
+        
+        
         project.addMember(new ProjectMemberTodoList("",
                 project));
         createTodoList(project);
@@ -432,7 +425,7 @@ public final class ProjectManager implements ModelCommandCreationObserver {
      * @return the created class diagram
      */
     private ArgoDiagram createClassDiagram(Project project) {
-        LOG.log(Level.FINE, "Creating class diagram");
+        
         Object model = project.getRoots().iterator().next();
         DiagramFactory df = DiagramFactory.getInstance();
         ArgoDiagram d = df.create(DiagramFactory.DiagramType.Class,
@@ -448,7 +441,7 @@ public final class ProjectManager implements ModelCommandCreationObserver {
      * @param project the project to create the todo list in.
      */
     private void createTodoList(Project project) {
-        LOG.log(Level.FINE, "Creating todo list");
+        
         project.addMember(new ProjectMemberTodoList("",
                 project));
     }

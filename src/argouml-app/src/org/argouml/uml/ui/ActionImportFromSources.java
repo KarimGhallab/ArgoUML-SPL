@@ -41,8 +41,6 @@ package org.argouml.uml.ui;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.JFrame;
@@ -65,11 +63,7 @@ import org.argouml.util.ArgoFrame;
 public class ActionImportFromSources extends UndoableAction
         implements CommandLineInterface {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ActionImportFromSources.class.getName());
+    
 
     /**
      * The singleton.
@@ -97,8 +91,7 @@ public class ActionImportFromSources extends UndoableAction
     	if (ImporterManager.getInstance().hasImporters()) {
             new Import(ArgoFrame.getFrame());
     	} else {
-            LOG.log(Level.INFO,
-                    "Import sources dialog not shown: no importers!");
+            
             ExceptionDialog ed = new ExceptionDialog(ArgoFrame.getFrame(),
                 Translator.localize("dialog.title.problem"),
                 Translator.localize("dialog.import.no-importers.intro"),
@@ -123,33 +116,30 @@ public class ActionImportFromSources extends UndoableAction
 */
     public boolean doCommand(String argument) {
         if (argument == null) {
-            LOG.log(Level.SEVERE, "An argument has to be provided.");
+            
             return false;
         }
         int index = argument.indexOf(':');
         if (index == -1 || argument.length() <= index) {
-            LOG.log(Level.SEVERE,
-                    "Argument must be <importmodule>:<importpath>");
+            
             return false;
         }
         Import imp = new Import(null);
         Collection languages = imp.getLanguages();
         if (languages == null || languages.isEmpty()) {
-            LOG.log(Level.SEVERE, "No importers available.");
+            
             return false;
         }
         String importerName = argument.substring(0, index);
         ImportInterface importer = imp.getImporter(importerName);
         if (importer == null) {
-            LOG.log(Level.SEVERE,
-                    "No import support for language " + importerName);
+            
             return false;
         }
         imp.setCurrentModule(importer);
         File file = new File(argument.substring(index + 1));
         if (!file.exists()) {
-            LOG.log(Level.SEVERE,
-                    "The specified file/directory doesn't exist.");
+            
             return false;
         }
         imp.setFiles(new File[]{file});

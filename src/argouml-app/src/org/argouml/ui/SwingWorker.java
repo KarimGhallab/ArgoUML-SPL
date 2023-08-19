@@ -41,8 +41,6 @@ package org.argouml.ui;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -65,8 +63,7 @@ import org.argouml.util.ArgoFrame;
  */
 public abstract class SwingWorker {
 
-    private static final Logger LOG =
-        Logger.getLogger(SwingWorker.class.getName());
+    
 
     private Object value;  // see getValue(), setValue()
 
@@ -154,7 +151,7 @@ public abstract class SwingWorker {
     	    retVal = construct(pmw);
     	} catch (Exception exc) {
 	    // TODO: This error needs to be reported!
-            LOG.log(Level.SEVERE, "Error while loading project: ", exc);
+            
         } finally {
             pmw.close();
         }

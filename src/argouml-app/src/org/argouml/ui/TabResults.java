@@ -52,8 +52,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -91,11 +89,7 @@ public class TabResults
                 ActionListener,
                 ListSelectionListener,
                 KeyListener {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(TabResults.class.getName());
+    
 
     private static int numJumpToRelated;
 
@@ -329,8 +323,7 @@ public class TabResults
 	}
 
 	if (d != null) {
-            LOG.log(Level.FINE,
-                    "go {0} in {1}", new Object[]{sel, d.getName()});
+            
             TargetManager.getInstance().setTarget(d);
         }
 	if (Model.getFacade().isATaggedValue(sel)) {
@@ -382,7 +375,7 @@ public class TabResults
 	if (relatedShown) {
 	    int row = lse.getFirstIndex();
 	    Object sel = results.get(row);
-            LOG.log(Level.FINE, "selected {0}", sel);
+            
 	    related.clear();
 	    Enumeration elems =
 		ChildGenRelated.getSingleton().gen(sel);

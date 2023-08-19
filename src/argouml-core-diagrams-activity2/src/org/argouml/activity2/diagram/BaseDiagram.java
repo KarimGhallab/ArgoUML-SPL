@@ -21,8 +21,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.xml.parsers.DocumentBuilder;
@@ -50,8 +48,7 @@ import org.xml.sax.SAXException;
 
 abstract class BaseDiagram extends UMLDiagram implements Owned {
 
-    private static final Logger LOG =
-        Logger.getLogger(BaseDiagram.class.getName());
+    
 
     final Object owner;
 
@@ -71,7 +68,7 @@ abstract class BaseDiagram extends UMLDiagram implements Owned {
         lay.setGraphNodeRenderer(renderer);
         lay.setGraphEdgeRenderer(renderer);
         
-        LOG.log(Level.FINE, "Constructing diagram for {0}", owner);
+        
     }
 
     public Object getOwner() {
@@ -98,13 +95,13 @@ abstract class BaseDiagram extends UMLDiagram implements Owned {
                 getElement(doc.getDocumentElement(), "toolbar");
             return getToolbarActions(toolbarElement);
         } catch (DOMException e) {
-            LOG.log(Level.SEVERE, "", e);
+            
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "", e);
+            
         } catch (ParserConfigurationException e) {
-            LOG.log(Level.SEVERE, "", e);
+            
         } catch (SAXException e) {
-            LOG.log(Level.SEVERE, "", e);
+            
         }
         return null;
     }
@@ -179,7 +176,7 @@ abstract class BaseDiagram extends UMLDiagram implements Owned {
                 metaTypeByName.put(name, clazz);
                 nameByMetaType.put(clazz, name);
             } catch (ClassNotFoundException e) {
-                LOG.log(Level.SEVERE, "Class not found " + className, e);
+                
             }
         }
     }

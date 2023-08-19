@@ -43,8 +43,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -68,8 +66,7 @@ import org.tigris.swidgets.Dialog;
  */
 public class DismissToDoItemDialog extends ArgoDialog {
 
-    private static final Logger LOG =
-        Logger.getLogger(DismissToDoItemDialog.class.getName());
+    
 
     ////////////////////////////////////////////////////////////////
     // instance variables
@@ -173,8 +170,7 @@ public class DismissToDoItemDialog extends ArgoDialog {
                     explain(e);
                 }
                 else {
-                    LOG.log(Level.WARNING,
-                            "DissmissToDoItemDialog: Unknown action: " + e);
+                    
                 }
             }
         });
@@ -251,7 +247,7 @@ public class DismissToDoItemDialog extends ArgoDialog {
                     Designer.MODEL_TODOITEM_DISMISSED, null, null);
         }
         catch (UnresolvableException ure) {
-            LOG.log(Level.SEVERE, "Resolve failed (ure): ", ure);
+            
             JOptionPane.showMessageDialog(
 		    this,
 		    ure.getMessage(),

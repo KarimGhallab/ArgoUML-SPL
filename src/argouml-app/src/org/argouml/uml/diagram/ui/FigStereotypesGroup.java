@@ -45,8 +45,6 @@ import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.Project;
 import org.argouml.model.AddAssociationEvent;
@@ -86,11 +84,7 @@ public class FigStereotypesGroup extends ArgoFigGroup {
 
     private Fig bigPort;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(FigStereotypesGroup.class.getName());
+    
 
     /**
      * One UML keyword is allowed. These are not strictly stereotypes but are
@@ -172,7 +166,7 @@ public class FigStereotypesGroup extends ArgoFigGroup {
                     damage();
                 }
             } else {
-                LOG.log(Level.WARNING, "Unexpected property " + event.getPropertyName());
+                
             }
         }
         if (event instanceof RemoveAssociationEvent) {
@@ -186,7 +180,7 @@ public class FigStereotypesGroup extends ArgoFigGroup {
                     --stereotypeCount;
                 }
             } else {
-                LOG.log(Level.WARNING, "Unexpected property " + event.getPropertyName());
+                
             }
         }
     }
@@ -272,15 +266,11 @@ public class FigStereotypesGroup extends ArgoFigGroup {
         Object modelElement = getOwner();
         if (modelElement == null) {
             // TODO: This block can be removed after issue 4075 is tackled
-            LOG.log(Level.FINE, "Cannot populate the stereotype compartment "
-                     + "unless the parent has an owner.");
+            
             return;
         }
 
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.log(Level.FINE, "Populating stereotypes compartment for {0}",
-                    Model.getFacade().getName(modelElement));
-        }
+        
 
         /* This will contain the Figs that we do not need anymore: */
         Collection<Fig> removeCollection = new ArrayList<Fig>(getFigs());
@@ -367,7 +357,7 @@ public class FigStereotypesGroup extends ArgoFigGroup {
         // TODO: Find a way to replace this dependency on Project
         Project project = getProject();
         if (project == null) {
-            LOG.log(Level.WARNING, "getProject() returned null");
+            
             return null;
         }
         Object owner = fs.getOwner();

@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -43,8 +41,7 @@ import org.xml.sax.SAXException;
  */
 public class MetaDataCache {
 
-    private static final Logger LOG =
-        Logger.getLogger(MetaDataCache.class.getName());
+    
 
     private Map<Class<?>, PanelData> cache =
         new HashMap<Class<?>, PanelData>();
@@ -109,7 +106,7 @@ public class MetaDataCache {
                 metaTypeByName.put(name, clazz);
     	        nameByMetaType.put(clazz, name);
             } catch (ClassNotFoundException e) {
-                LOG.log(Level.SEVERE, "Class not found " + className, e);
+                
             }
         }
     }
@@ -128,8 +125,7 @@ public class MetaDataCache {
             Class<?> clazz = metaTypeByName.get(name);
 
             if (clazz == null) {
-                LOG.log(Level.WARNING,
-                        "No class name translation found for panel: " + name);
+                
             } else {
                 final List<Class<?>> newChildTypes =
                     stringToMetaTypes(panelNode.getAttribute("new-child"));

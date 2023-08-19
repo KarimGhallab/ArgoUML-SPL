@@ -44,8 +44,6 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.Project;
 import org.argouml.model.Model;
@@ -72,8 +70,7 @@ import org.tigris.gef.util.ChildGenerator;
  */
 public class ChildGenUML implements ChildGenerator {
 
-    private static final Logger LOG =
-        Logger.getLogger(ChildGenUML.class.getName());
+    
 
     /**
      * Reply a java.util.Enumeration of the children of the given Object
@@ -99,7 +96,7 @@ public class ChildGenUML implements ChildGenerator {
     public Iterator gen2(Object o) {
 
         if (o == null) {
-            LOG.log(Level.FINE, "Object is null");
+            
         } else {
 //                LOG.log(Level.FINE, "Finding children for " + o.getClass());
         }

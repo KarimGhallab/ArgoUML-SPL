@@ -48,8 +48,6 @@ import java.awt.event.ComponentListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.VetoableChangeListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -304,11 +302,7 @@ public class TabChecklist extends AbstractArgoJPanel
  */
 class TableModelChecklist extends AbstractTableModel
     implements VetoableChangeListener, PropertyChangeListener {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(TableModelChecklist.class.getName());
+    
 
     ////////////////
     // instance varables
@@ -432,9 +426,7 @@ class TableModelChecklist extends AbstractTableModel
      */
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex)  {
-        LOG.log(Level.FINE,
-                "setting table value {0}, {1}",
-                new Object[]{rowIndex, columnIndex});
+        
 	if (columnIndex != 0) {
 	    return;
 	}

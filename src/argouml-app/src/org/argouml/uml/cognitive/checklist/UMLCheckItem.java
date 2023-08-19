@@ -38,8 +38,6 @@
 
 package org.argouml.uml.cognitive.checklist;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.checklist.CheckItem;
 import org.argouml.i18n.Translator;
@@ -55,8 +53,7 @@ import org.tigris.gef.ocl.ExpansionException;
  * @see org.argouml.ocl.OCLEvaluator */
 
 public class UMLCheckItem extends CheckItem {
-    private static final Logger LOG =
-        Logger.getLogger(UMLCheckItem.class.getName());
+    
 
     /**
      * The constructor.
@@ -101,14 +98,13 @@ public class UMLCheckItem extends CheckItem {
 	                            .evalToString(dm, expr);
 	    } catch (ExpansionException e) {
 	        // Really ought to have a CriticException to throw here.
-                LOG.log(Level.SEVERE,
-                        "Failed to evaluate critic expression", e);
+                
 	    } catch (InvalidElementException e) {
                 /* The modelelement must have been
                  * deleted - ignore this - it will pass. */
                 evalStr = Translator.localize("misc.name.deleted");
             }
-            LOG.log(Level.FINE, "expr={0} = {1}", new Object[]{expr, evalStr});
+            
 
 	    res = res.substring(0, matchPos) + evalStr
 	        + res.substring(endExpr + OCLEvaluator.OCL_END.length());

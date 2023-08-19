@@ -42,8 +42,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -59,8 +57,7 @@ import org.argouml.model.Model;
  * to make non-aggregate.
  */
 public class WizBreakCircularComp extends UMLWizard {
-    private static final Logger LOG =
-        Logger.getLogger(WizBreakCircularComp.class.getName());
+    
 
     private String instructions1 =
         Translator.localize("critics.WizBreakCircularComp-ins1");
@@ -171,7 +168,7 @@ public class WizBreakCircularComp extends UMLWizard {
      * @see org.argouml.cognitive.ui.Wizard#doAction(int)
      */
     public void doAction(int oldStep) {
-        LOG.log(Level.FINE, "doAction {0}", oldStep);
+        
 
 	int choice = -1;
 	ToDoItem item = (ToDoItem) getToDoItem();
@@ -217,7 +214,7 @@ public class WizBreakCircularComp extends UMLWizard {
 		            ae1,
 		            Model.getAggregationKind().getNone());
 		} catch (Exception pve) {
-                    LOG.log(Level.SEVERE, "could not set aggregation", pve);
+                    
 		}
 	    }
 	    break;

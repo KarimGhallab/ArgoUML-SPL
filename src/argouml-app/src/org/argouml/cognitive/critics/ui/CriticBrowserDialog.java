@@ -50,8 +50,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -89,8 +87,7 @@ public class CriticBrowserDialog extends ArgoDialog
 	       DocumentListener,
                TableModelListener,
                Observer {
-    private static final Logger LOG =
-        Logger.getLogger(CriticBrowserDialog.class.getName());
+    
 
     private static int numCriticBrowser = 0;
 
@@ -409,7 +406,7 @@ public class CriticBrowserDialog extends ArgoDialog
     }
 
     private void setTargetUseClarifiers() {
-        LOG.log(Level.FINE, "setting clarifier usage rule");
+        
     }
 
     ////////////////////////////////////////////////////////////////
@@ -426,11 +423,11 @@ public class CriticBrowserDialog extends ArgoDialog
 	    return;
 	}
 	if (e.getSource() == networkButton) {
-            LOG.log(Level.FINE, "TODO: network!");
+            
 	    return;
 	}
 	if (e.getSource() == configButton) {
-            LOG.log(Level.FINE, "TODO: config!");
+            
 	    return;
 	}
 	if (e.getSource() == wakeButton) {
@@ -443,8 +440,7 @@ public class CriticBrowserDialog extends ArgoDialog
             table.setAdvanced(true);
             advancedButton.setEnabled(false);
         }
-        LOG.log(Level.FINE,
-                "unknown src in CriticBrowserDialog: {0}", e.getSource());
+        
     }
 
     /*
@@ -456,10 +452,10 @@ public class CriticBrowserDialog extends ArgoDialog
 	}
 	Object src = lse.getSource();
 	if (src != table.getSelectionModel()) {
-            LOG.log(Level.FINE, "src = {0}", src);
+            
 	    return;
 	}
-        LOG.log(Level.FINE, "got valueChanged from {0}", src);
+        
 	int row = table.getSelectedRow();
         if (this.target != null) {
             this.target.deleteObserver(this);
@@ -484,7 +480,7 @@ public class CriticBrowserDialog extends ArgoDialog
      * @see javax.swing.event.DocumentListener#insertUpdate(javax.swing.event.DocumentEvent)
      */
     public void insertUpdate(DocumentEvent e) {
-        LOG.log(Level.FINE, "{0} insert", getClass().getName());
+        
 	Document hDoc = headline.getDocument();
 	Document miDoc = moreInfo.getDocument();
 	Document dDoc = desc.getDocument();
@@ -508,7 +504,7 @@ public class CriticBrowserDialog extends ArgoDialog
      * @see javax.swing.event.DocumentListener#changedUpdate(javax.swing.event.DocumentEvent)
      */
     public void changedUpdate(DocumentEvent e) {
-        LOG.log(Level.FINE, "{0} changed", getClass().getName());
+        
 	// Apparently, this method is never called.
     }
 
@@ -523,7 +519,7 @@ public class CriticBrowserDialog extends ArgoDialog
 	else if (src == useClar) {
 	    setTargetUseClarifiers();
 	} else {
-            LOG.log(Level.FINE, "unknown itemStateChanged src: {0}", src);
+            
 	}
     }
 

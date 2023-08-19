@@ -40,8 +40,6 @@ package org.argouml.cognitive;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.util.ItemUID;
 
@@ -54,11 +52,7 @@ import org.argouml.util.ItemUID;
  * @author	Michael Stockman
  */
 public class ResolvedCritic {
-    /**
-     * The logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ResolvedCritic.class.getName());
+    
 
     /**
      * The name of the critic.
@@ -267,8 +261,7 @@ public class ResolvedCritic {
 		    fail = fail + ", " + obj.getClass().toString();
 		}
 
-                LOG.log(Level.WARNING,
-                        "Offender {0} unresolvable", obj.getClass());
+                
 
 		// Use this for fast fail instead.
 		// Sacrificed for complete fail. d00mst

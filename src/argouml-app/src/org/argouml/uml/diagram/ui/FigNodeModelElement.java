@@ -61,8 +61,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -164,8 +162,7 @@ public abstract class FigNodeModelElement
         Owned {
 
 
-    private static final Logger LOG =
-        Logger.getLogger(FigNodeModelElement.class.getName());
+    
 
     // TODO: There are lots and LOTS of magic numbers used in calculating
     // positions and sizes.  Any time you see Figs being placed at 10,10 use
@@ -893,7 +890,7 @@ public abstract class FigNodeModelElement
                         owner, null, component,
                         null, null, namespace);
             } catch (IllegalModelElementConnectionException e) {
-                LOG.log(Level.SEVERE, "Exception", e);
+                
             }
         }
     }
@@ -1058,7 +1055,7 @@ public abstract class FigNodeModelElement
      * @see java.beans.VetoableChangeListener#vetoableChange(java.beans.PropertyChangeEvent)
      */
     public void vetoableChange(PropertyChangeEvent pce) {
-        LOG.log(Level.FINE, "in vetoableChange");
+        
 
         Object src = pce.getSource();
         if (src == getOwner()) {
@@ -1066,9 +1063,7 @@ public abstract class FigNodeModelElement
                 new DelayedChangeNotify(this, pce);
             SwingUtilities.invokeLater(delayedNotify);
         } else {
-            LOG.log(Level.FINE,
-                    "FigNodeModelElement got vetoableChange from non-owner: {0}",
-                    src);
+            
         }
     }
 
@@ -1076,7 +1071,7 @@ public abstract class FigNodeModelElement
      * @see org.argouml.kernel.DelayedVChangeListener#delayedVetoableChange(java.beans.PropertyChangeEvent)
      */
     public void delayedVetoableChange(PropertyChangeEvent pce) {
-        LOG.log(Level.FINE, "in delayedVetoableChange");
+        
         // update any text, colors, fonts, etc.
         renderingChanged();
         endTrans();
@@ -1145,9 +1140,7 @@ public abstract class FigNodeModelElement
                 setBounds(bbox.x, bbox.y, bbox.width, bbox.height);
                 endTrans();
             } catch (PropertyVetoException ex) {
-                LOG.log(Level.SEVERE, "could not parse the text entered. "
-                        + "PropertyVetoException",
-                        ex);
+                
             }
         } else if (pName.equals("editing")
                 && Boolean.TRUE.equals(pve.getNewValue())) {
@@ -1173,11 +1166,7 @@ public abstract class FigNodeModelElement
             try {
                 modelChanged(event);
             } catch (InvalidElementException e) {
-                if (LOG.isLoggable(Level.FINE)) {
-                    LOG.log(Level.FINE, "modelChanged method accessed deleted element "
-                            + formatEvent(event),
-                            e);
-                }
+                
             }
 
             if (event.getSource() == owner
@@ -1190,10 +1179,7 @@ public abstract class FigNodeModelElement
                     try {
                         updateLayout(event);
                     } catch (InvalidElementException e) {
-                        if (LOG.isLoggable(Level.FINE)) {
-                            LOG.log(Level.FINE, "updateLayout method accessed deleted element "
-                                    + formatEvent(event), e);
-                        }
+                        
                     }
                 }
             };
@@ -1247,7 +1233,7 @@ public abstract class FigNodeModelElement
                 addElementListener(event.getNewValue(), "name");
             }
         } catch (InvalidElementException e) {
-            LOG.log(Level.FINE, "stereotypeChanged method accessed deleted element ", e);
+            
         }
     }
 
@@ -1346,7 +1332,7 @@ public abstract class FigNodeModelElement
                 Model.getCoreHelper().setName(getOwner(), "");
                 readyToEdit = true;
             } else {
-                LOG.log(Level.FINE, "not ready to edit name");
+                
                 return;
             }
         }
@@ -1407,7 +1393,7 @@ public abstract class FigNodeModelElement
                 Model.getCoreHelper().setName(getOwner(), "");
                 readyToEdit = true;
             } else {
-                LOG.log(Level.FINE, "not ready to edit name");
+                
                 return;
             }
         }
@@ -1607,8 +1593,7 @@ public abstract class FigNodeModelElement
      */
     protected void updateStereotypeText() {
         if (getOwner() == null) {
-            LOG.log(Level.WARNING, "Null owner for [" + this.toString() + "/"
-                    + this.getClass());
+            
             return;
         }
         if (getStereotypeFig() != null) {
@@ -1763,7 +1748,7 @@ public abstract class FigNodeModelElement
         try {
             renderingChanged();
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Exception", e);
+            
         }
     }
 
@@ -1822,9 +1807,7 @@ public abstract class FigNodeModelElement
 
     protected void updateStereotypeIcon() {
         if (getOwner() == null) {
-            LOG.log(Level.WARNING, "Owner of [" + this.toString() + "/" + this.getClass()
-                    + "] is null.");
-            LOG.log(Level.WARNING, "I return...");
+            
             return;
         }
 
@@ -2553,7 +2536,7 @@ public abstract class FigNodeModelElement
         // TODO: This is a temporary crutch to use until all Figs are updated
         // to use the constructor that accepts a DiagramSettings object
         if (settings == null) {
-            LOG.log(Level.FINE, "Falling back to project-wide settings");
+            
             Project p = getProject();
             if (p != null) {
                 return p.getProjectSettings().getDefaultDiagramSettings();

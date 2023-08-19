@@ -40,8 +40,6 @@ package org.argouml.uml.cognitive.critics;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.Critic;
 import org.argouml.cognitive.Designer;
@@ -59,11 +57,7 @@ import org.argouml.uml.cognitive.UMLDecision;
  * @author jrobbins
  */
 public class CrCircularInheritance extends CrUML {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(CrCircularInheritance.class.getName());
+    
 
     /**
      * The constructor.
@@ -89,7 +83,7 @@ public class CrCircularInheritance extends CrUML {
 		Model.getCoreHelper().getChildren(dm);
 	    } catch (IllegalStateException ex) {
                 problem = PROBLEM_FOUND;
-                LOG.log(Level.INFO, "problem found for: {0}", this);
+                
 	    }
 	}
 	return problem;

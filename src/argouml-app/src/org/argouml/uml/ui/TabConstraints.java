@@ -45,8 +45,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
@@ -85,8 +83,7 @@ import tudresden.ocl.parser.node.TName;
 public class TabConstraints extends AbstractArgoJPanel
     implements TabModelTarget, ComponentListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(TabConstraints.class.getName());
+    
 
     /**
      * The actual editor pane.
@@ -410,8 +407,7 @@ public class TabConstraints extends AbstractArgoJPanel
                     } catch (IOException ioe) {
                         // Ignored: Highly unlikely, and what would we
                         // do anyway?  log it
-                        LOG.log(Level.SEVERE, "problem parsing And Checking Constraints",
-				   ioe);
+                        
                         return;
                     }
 
@@ -522,15 +518,15 @@ public class TabConstraints extends AbstractArgoJPanel
                             theMMcConstraint);
 
                 } catch (OclTypeException pe) {
-                    LOG.log(Level.WARNING, "There was some sort of OCL Type problem", pe);
+                    
                     throw pe;
                 } catch (OclParserException pe1) {
-                    LOG.log(Level.WARNING, "Could not parse the constraint", pe1);
+                    
                     throw pe1;
                 } catch (OclException oclExc) {
                     // a runtime exception that occurs when some
                     // internal test fails
-                    LOG.log(Level.WARNING, "There was some unidentified problem");
+                    
                     throw oclExc;
                 }
             }
@@ -603,7 +599,7 @@ public class TabConstraints extends AbstractArgoJPanel
                         // OK, so that didn't work out... Just ignore
                         // any problems and don't set the name in the
                         // constraint body better had log it.
-                        LOG.log(Level.SEVERE, "some unidentified problem", t);
+                        
                     }
                 } else {
                     throw new IllegalStateException(
