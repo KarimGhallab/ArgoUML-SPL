@@ -118,7 +118,7 @@ public abstract class SelectionNodeClarifiers2 extends SelectionButtons {
             // If the user has selected ModePlace either by a diagram
             // tool or AddToDiagram then we don't want to show the
             // clarifiers.
-            ((Clarifiable) getContent()).paintClarifiers(g);
+            
         }
         super.paint(g);
     }

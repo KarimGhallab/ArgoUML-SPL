@@ -546,14 +546,7 @@ class ArgoEditor extends Editor {
 	setUnderMouse(me);
         Fig currentFig = getCurrentFig();
 	if (currentFig != null && Globals.getShowFigTips()) {
-	    String tip = currentFig.getTipString(me);
-	    if (tip != null && (getJComponent() != null)) {
-	        JComponent c = getJComponent();
-	        if (c.getToolTipText() == null
-		    || !(c.getToolTipText().equals(tip))) {
-	            c.setToolTipText(tip);
-	        }
-            }
+	    
 	} else if (getJComponent() != null
 		   && getJComponent().getToolTipText() != null) {
             getJComponent().setToolTipText(null); //was ""

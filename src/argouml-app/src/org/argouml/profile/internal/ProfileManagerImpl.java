@@ -49,8 +49,6 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.argouml.cognitive.Agency;
-import org.argouml.cognitive.Critic;
 import org.argouml.configuration.Configuration;
 import org.argouml.configuration.ConfigurationKey;
 import org.argouml.kernel.ProfileConfiguration;
@@ -61,8 +59,6 @@ import org.argouml.profile.ProfileException;
 import org.argouml.profile.ProfileManager;
 import org.argouml.profile.UserDefinedProfile;
 import org.argouml.profile.UserDefinedProfileHelper;
-import org.argouml.uml.cognitive.critics.ProfileCodeGeneration;
-import org.argouml.uml.cognitive.critics.ProfileGoodPractices;
 
 /**
  * Default <code>ProfileManager</code> implementation.
@@ -101,9 +97,7 @@ public class ProfileManagerImpl implements ProfileManager {
 
     private ProfileUML profileUML;
 
-    private ProfileGoodPractices profileGoodPractices;
-
-    private ProfileCodeGeneration profileCodeGeneration;
+    
 
     private DependencyResolver<File> resolver;
 
@@ -115,17 +109,14 @@ public class ProfileManagerImpl implements ProfileManager {
             disableConfigurationUpdate = true;
 
             profileUML = new ProfileUML();
-            profileGoodPractices = new ProfileGoodPractices();
-            profileCodeGeneration = new ProfileCodeGeneration(
-                    profileGoodPractices);
+            
 
             registerProfileInternal(profileUML);
             addToDefaultProfiles(profileUML);
                 // the UML Profile is always present and default
 
             // register the built-in profiles
-            registerProfileInternal(profileGoodPractices);
-            registerProfileInternal(profileCodeGeneration);
+            
             registerProfileInternal(new ProfileMeta());
 
         } catch (ProfileException e) {
@@ -179,8 +170,7 @@ public class ProfileManagerImpl implements ProfileManager {
             if (defaultProfilesList.equals("")) {
                 // if the list does not exist add the code generation and
                 // good practices profiles as default
-                addToDefaultProfiles(profileGoodPractices);
-                addToDefaultProfiles(profileCodeGeneration);
+                
             } else {
                 StringTokenizer tokenizer = new StringTokenizer(
                         defaultProfilesList, DIRECTORY_SEPARATOR, false);
@@ -306,12 +296,7 @@ public class ProfileManagerImpl implements ProfileManager {
                         || getProfileForClass(p.getClass().getName()) == null) {
                     loadDefaultProfilesFromConfiguration = true;
                     profiles.add(p);
-                    for (Critic critic : p.getCritics()) {
-                        for (Object meta : critic.getCriticizedDesignMaterials()) {
-                            Agency.register(critic, meta);
-                        }
-                        critic.setEnabled(false);
-                    }
+                    
                 }
             }
             return loadDefaultProfilesFromConfiguration;
@@ -471,17 +456,6 @@ public class ProfileManagerImpl implements ProfileManager {
      * @see org.argouml.profile.ProfileManager#applyConfiguration(org.argouml.kernel.ProfileConfiguration)
      */
     public void applyConfiguration(ProfileConfiguration pc) {
-        for (Profile p : this.profiles) {
-            for (Critic c : p.getCritics()) {
-                c.setEnabled(false);
-                Configuration.setBoolean(c.getCriticKey(), false);
-            }
-        }
-        for (Profile p : pc.getProfiles()) {
-            for (Critic c : p.getCritics()) {
-                c.setEnabled(true);
-                Configuration.setBoolean(c.getCriticKey(), true);
-            }
-        }
+        
     }
 }

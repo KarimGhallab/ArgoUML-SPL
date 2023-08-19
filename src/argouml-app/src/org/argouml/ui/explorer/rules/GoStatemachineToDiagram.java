@@ -48,7 +48,6 @@ import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectManager;
 import org.argouml.model.Model;
 import org.argouml.uml.diagram.ArgoDiagram;
-import org.argouml.uml.diagram.activity.ui.UMLActivityDiagram;
 import org.argouml.uml.diagram.state.ui.UMLStateDiagram;
 
 /**
@@ -68,15 +67,7 @@ public class GoStatemachineToDiagram extends AbstractPerspectiveRule {
             Set<ArgoDiagram> returnList = new HashSet<ArgoDiagram>();
             Project proj = ProjectManager.getManager().getCurrentProject();
             for (ArgoDiagram diagram : proj.getDiagramList()) {
-                if (diagram instanceof UMLActivityDiagram) {
-                    UMLActivityDiagram activityDiagram =
-                        (UMLActivityDiagram) diagram;
-                    Object activityGraph = activityDiagram.getStateMachine();
-                    if (activityGraph == parent) {
-                        returnList.add(activityDiagram);
-                        continue;
-                    }
-                }
+                
                 if (diagram instanceof UMLStateDiagram) {
                     UMLStateDiagram stateDiagram = (UMLStateDiagram) diagram;
                     Object stateMachine = stateDiagram.getStateMachine();

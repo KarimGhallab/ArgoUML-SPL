@@ -62,11 +62,6 @@ import javax.swing.UIManager;
 import org.argouml.application.api.Argo;
 import org.argouml.application.api.CommandLineInterface;
 import org.argouml.application.security.ArgoAwtExceptionHandler;
-import org.argouml.cognitive.AbstractCognitiveTranslator;
-import org.argouml.cognitive.Designer;
-import org.argouml.cognitive.checklist.ui.InitCheckListUI;
-import org.argouml.cognitive.ui.InitCognitiveUI;
-import org.argouml.cognitive.ui.ToDoPane;
 import org.argouml.configuration.Configuration;
 import org.argouml.i18n.Translator;
 import org.argouml.kernel.Project;
@@ -86,13 +81,10 @@ import org.argouml.ui.SplashScreen;
 import org.argouml.ui.cmd.ActionExit;
 import org.argouml.ui.cmd.InitUiCmdSubsystem;
 import org.argouml.ui.cmd.PrintManager;
-import org.argouml.uml.diagram.activity.ui.InitActivityDiagram;
-import org.argouml.uml.diagram.collaboration.ui.InitCollaborationDiagram;
 import org.argouml.uml.diagram.deployment.ui.InitDeploymentDiagram;
 import org.argouml.uml.diagram.state.ui.InitStateDiagram;
 import org.argouml.uml.diagram.static_structure.ui.InitClassDiagram;
 import org.argouml.uml.diagram.ui.InitDiagramAppearanceUI;
-import org.argouml.uml.diagram.use_case.ui.InitUseCaseDiagram;
 import org.argouml.uml.ui.InitUmlUI;
 import org.argouml.util.ArgoFrame;
 import org.argouml.util.JavaRuntimeUtility;
@@ -227,8 +219,7 @@ public class Main {
             commands = null;
 
             st.mark("start critics");
-            Runnable startCritics = new StartCritics();
-            Main.addPostLoadAction(startCritics);
+            
 
             st.mark("start loading modules");
             Runnable moduleLoader = new LoadModules();
@@ -283,7 +274,7 @@ public class Main {
         org.tigris.gef.base.Globals.setLastDirectory(directory);
 
         initVersion();
-        initTranslator();
+        
 
         // then, print out some version info for debuggers...
         org.argouml.util.Tools.logVersionInfo();
@@ -291,24 +282,7 @@ public class Main {
     }
 
 
-    private static void initTranslator() {
-        // Set the i18n locale
-        Translator.init(Configuration.getString(Argo.KEY_LOCALE));
-
-        // create an anonymous class as a kind of adaptor for the cognitive
-        // System to provide proper translation/i18n.
-        org.argouml.cognitive.Translator.setTranslator(
-                new AbstractCognitiveTranslator() {
-                    public String i18nlocalize(String key) {
-                        return Translator.localize(key);
-                    }
-
-                    public String i18nmessageFormat(String key,
-                            Object[] iArgs) {
-                        return Translator.messageFormat(key, iArgs);
-                    }
-                });
-    }
+    
 
 
     private static void setSystemProperties() {
@@ -421,15 +395,14 @@ public class Main {
         SubsystemUtility.initSubsystem(new InitNotationUml());
         SubsystemUtility.initSubsystem(new InitNotationJava());
         SubsystemUtility.initSubsystem(new InitDiagramAppearanceUI());
-        SubsystemUtility.initSubsystem(new InitActivityDiagram());
-        SubsystemUtility.initSubsystem(new InitCollaborationDiagram());
+        
+        
         SubsystemUtility.initSubsystem(new InitDeploymentDiagram());
         SubsystemUtility.initSubsystem(new InitStateDiagram());
         SubsystemUtility.initSubsystem(new InitClassDiagram());
-        SubsystemUtility.initSubsystem(new InitUseCaseDiagram());
+        
         SubsystemUtility.initSubsystem(new InitUmlUI());
-        SubsystemUtility.initSubsystem(new InitCheckListUI());
-        SubsystemUtility.initSubsystem(new InitCognitiveUI());
+        
 
         /*
          * Initialize the module loader. At least the plug-ins that provide
@@ -470,8 +443,7 @@ public class Main {
         }
 
         st.mark("open project");
-        Designer.disableCritiquing();
-        Designer.clearCritiquing();
+        
 
         Project project = null;
         if (fileToOpen != null) {
@@ -500,7 +472,7 @@ public class Main {
         project.setDirty(false);
 
         st.mark("set project");
-        Designer.enableCritiquing();
+        
     }
 
 
@@ -815,8 +787,8 @@ public class Main {
      */
     private static ProjectBrowser initializeGUI(SplashScreen splash) {
         // make the projectbrowser
-        JPanel todoPane = new ToDoPane();
-        ProjectBrowser pb = ProjectBrowser.makeInstance(splash, true, todoPane);
+        
+        ProjectBrowser pb = ProjectBrowser.makeInstance(splash, true, new JPanel());
 
         JOptionPane.setRootFrame(pb);
 

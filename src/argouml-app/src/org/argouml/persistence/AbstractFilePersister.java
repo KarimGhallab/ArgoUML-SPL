@@ -59,7 +59,6 @@ import org.argouml.kernel.ProjectMember;
 import org.argouml.taskmgmt.ProgressEvent;
 import org.argouml.taskmgmt.ProgressListener;
 import org.argouml.uml.ProjectMemberModel;
-import org.argouml.uml.cognitive.ProjectMemberTodoList;
 import org.argouml.uml.diagram.ProjectMemberDiagram;
 import org.argouml.util.ThreadUtils;
 
@@ -93,8 +92,7 @@ public abstract class AbstractFilePersister extends FileFilter
                 DiagramMemberFilePersister.class);
         registerPersister(ProfileConfiguration.class, "profile",
                 ProfileConfigurationFilePersister.class);
-        registerPersister(ProjectMemberTodoList.class, "todo",
-                TodoListMemberFilePersister.class);
+        
         registerPersister(ProjectMemberModel.class, "xmi",
                 ModelMemberFilePersister.class);
     }

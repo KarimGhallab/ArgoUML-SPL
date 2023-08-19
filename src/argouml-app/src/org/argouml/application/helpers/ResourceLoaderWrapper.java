@@ -332,13 +332,13 @@ public final class ResourceLoaderWrapper {
     private static Map<String, String> images = new HashMap<String, String>();
     static {
         images.put("action.about-argouml", "AboutArgoUML");
-        images.put("action.activity-diagram", "Activity Diagram");
+        
         images.put("action.class-diagram", "Class Diagram");
-        images.put("action.collaboration-diagram", "Collaboration Diagram");
+        
         images.put("action.deployment-diagram", "Deployment Diagram");
         images.put("action.sequence-diagram", "Sequence Diagram");
         images.put("action.state-diagram", "State Diagram");
-        images.put("action.usecase-diagram", "Use Case Diagram");
+        
     }
 
     static {

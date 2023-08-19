@@ -59,7 +59,6 @@ import org.argouml.uml.diagram.DiagramElement;
 import org.argouml.uml.diagram.DiagramFactory;
 import org.argouml.uml.diagram.DiagramSettings;
 import org.argouml.uml.diagram.UMLMutableGraphSupport;
-import org.argouml.uml.diagram.activity.ui.FigActionState;
 import org.argouml.uml.diagram.state.StateDiagramGraphModel;
 import org.argouml.uml.diagram.static_structure.ui.FigComment;
 import org.argouml.uml.diagram.ui.ActionSetMode;
@@ -818,7 +817,7 @@ public class UMLStateDiagram extends UMLDiagram implements StateDiagram {
         DiagramSettings settings = getDiagramSettings();
 
         if (Model.getFacade().isAActionState(droppedObject)) {
-            figNode = new FigActionState(droppedObject, bounds, settings);
+            
         } else if (Model.getFacade().isAFinalState(droppedObject)) {
             figNode = new FigFinalState(droppedObject, bounds, settings);
         } else if (Model.getFacade().isAStubState(droppedObject)) {
@@ -892,7 +891,7 @@ public class UMLStateDiagram extends UMLDiagram implements StateDiagram {
         DiagramSettings settings = getDiagramSettings();
 
         if (Model.getFacade().isAActionState(modelElement)) {
-            figNode = new FigActionState(modelElement, bounds, settings);
+            
         } else if (Model.getFacade().isAFinalState(modelElement)) {
             figNode = new FigFinalState(modelElement, bounds, settings);
         } else if (Model.getFacade().isAStubState(modelElement)) {

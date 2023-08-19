@@ -42,13 +42,10 @@ import javax.swing.JMenuItem;
 
 import org.argouml.ui.cmd.GenericArgoMenuBar;
 import org.argouml.ui.cmd.ShortcutMgr;
-import org.argouml.uml.ui.ActionActivityDiagram;
 import org.argouml.uml.ui.ActionClassDiagram;
-import org.argouml.uml.ui.ActionCollaborationDiagram;
 import org.argouml.uml.ui.ActionDeploymentDiagram;
 import org.argouml.uml.ui.ActionSequenceDiagram;
 import org.argouml.uml.ui.ActionStateDiagram;
-import org.argouml.uml.ui.ActionUseCaseDiagram;
 
 /**
  * The Menu and Toolbar for UML1.4
@@ -67,12 +64,7 @@ public class MenuBar14 extends GenericArgoMenuBar {
         super.initMenuCreate();
         getCreateDiagramMenu().removeAll();
         getCreateDiagramToolbar().removeAll();
-        JMenuItem usecaseDiagram = getCreateDiagramMenu()
-                .add(new ActionUseCaseDiagram());
-        setMnemonic(usecaseDiagram, "Usecase Diagram");
-        getCreateDiagramToolbar().add((new ActionUseCaseDiagram()));
-        ShortcutMgr.assignAccelerator(usecaseDiagram,
-                ShortcutMgr.ACTION_USE_CASE_DIAGRAM);
+        
 
         JMenuItem classDiagram =
             getCreateDiagramMenu().add(new ActionClassDiagram());
@@ -88,12 +80,7 @@ public class MenuBar14 extends GenericArgoMenuBar {
         ShortcutMgr.assignAccelerator(sequenzDiagram,
                 ShortcutMgr.ACTION_SEQUENCE_DIAGRAM);
         
-        JMenuItem collaborationDiagram =
-            getCreateDiagramMenu().add(new ActionCollaborationDiagram());
-        setMnemonic(collaborationDiagram, "Collaboration Diagram");
-        getCreateDiagramToolbar().add((new ActionCollaborationDiagram()));
-        ShortcutMgr.assignAccelerator(collaborationDiagram,
-                ShortcutMgr.ACTION_COLLABORATION_DIAGRAM);
+        
 
         JMenuItem stateDiagram =
             getCreateDiagramMenu().add(new ActionStateDiagram());
@@ -102,12 +89,7 @@ public class MenuBar14 extends GenericArgoMenuBar {
         ShortcutMgr.assignAccelerator(stateDiagram,
                 ShortcutMgr.ACTION_STATE_DIAGRAM);
 
-        JMenuItem activityDiagram =
-            getCreateDiagramMenu().add(new ActionActivityDiagram());
-        setMnemonic(activityDiagram, "Activity Diagram");
-        getCreateDiagramToolbar().add((new ActionActivityDiagram()));
-        ShortcutMgr.assignAccelerator(activityDiagram,
-                ShortcutMgr.ACTION_ACTIVITY_DIAGRAM);
+        
 
         JMenuItem deploymentDiagram =
             getCreateDiagramMenu().add(new ActionDeploymentDiagram());
