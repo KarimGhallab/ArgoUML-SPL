@@ -73,7 +73,6 @@ import org.argouml.ui.targetmanager.TargetManager;
 import org.argouml.uml.diagram.ArgoDiagram;
 import org.argouml.uml.diagram.DiagramUtils;
 import org.argouml.uml.diagram.SequenceDiagram;
-import org.argouml.uml.diagram.activity.ui.UMLActivityDiagram;
 import org.argouml.uml.diagram.state.ui.UMLStateDiagram;
 import org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram;
 import org.argouml.uml.diagram.ui.ActionAddAllClassesFromModel;
@@ -82,15 +81,12 @@ import org.argouml.uml.diagram.ui.ActionAddExistingNode;
 import org.argouml.uml.diagram.ui.ActionAddExistingNodes;
 import org.argouml.uml.diagram.ui.ActionSaveDiagramToClipboard;
 import org.argouml.uml.diagram.ui.ModeAddToDiagram;
-import org.argouml.uml.ui.ActionActivityDiagram;
 import org.argouml.uml.ui.ActionClassDiagram;
-import org.argouml.uml.ui.ActionCollaborationDiagram;
 import org.argouml.uml.ui.ActionDeleteModelElements;
 import org.argouml.uml.ui.ActionDeploymentDiagram;
 import org.argouml.uml.ui.ActionSequenceDiagram;
 import org.argouml.uml.ui.ActionSetSourcePath;
 import org.argouml.uml.ui.ActionStateDiagram;
-import org.argouml.uml.ui.ActionUseCaseDiagram;
 import org.tigris.gef.base.Diagram;
 import org.tigris.gef.base.Editor;
 import org.tigris.gef.base.Globals;
@@ -217,8 +213,7 @@ public class ExplorerPopup extends JPopupMenu {
                 Model.getFacade().isALink(selectedItem);
             final boolean transitionSelected =
                 Model.getFacade().isATransition(selectedItem);
-            final boolean activityDiagramActive =
-                activeDiagram instanceof UMLActivityDiagram;
+            
             final boolean sequenceDiagramActive =
                 activeDiagram instanceof SequenceDiagram;
             final boolean stateDiagramActive =
@@ -231,10 +226,7 @@ public class ExplorerPopup extends JPopupMenu {
                 (stateDiagramActive) ? ((UMLStateDiagram) activeDiagram)
                     .getStateMachine()
                     : null;
-            final Object diagramActivity =
-                (activityDiagramActive)
-                    ? ((UMLActivityDiagram) activeDiagram).getStateMachine()
-                    : null;
+            
 
             Collection projectModels =
                 ProjectManager.getManager().getCurrentProject().getModels();
@@ -244,8 +236,8 @@ public class ExplorerPopup extends JPopupMenu {
                                 // TODO: Allow adding models to a diagram - issue 4172.
                                 && !projectModels.contains(selectedItem))
                         || (stateVertexSelected
-                                && activityDiagramActive
-                                && diagramActivity == selectedStateMachine)
+                                
+                                )
                         || (stateVertexSelected
                                 && stateDiagramActive
                                 && diagramStateMachine == selectedStateMachine)
@@ -355,17 +347,17 @@ public class ExplorerPopup extends JPopupMenu {
      *
      */
     private void initMenuCreateDiagrams() {
-        createDiagrams.add(new ActionUseCaseDiagram());
+        
 
         createDiagrams.add(new ActionClassDiagram());
 
         createDiagrams.add(new ActionSequenceDiagram());
 
-        createDiagrams.add(new ActionCollaborationDiagram());
+        
 
         createDiagrams.add(new ActionStateDiagram());
 
-        createDiagrams.add(new ActionActivityDiagram());
+        
 
         createDiagrams.add(new ActionDeploymentDiagram());
     }

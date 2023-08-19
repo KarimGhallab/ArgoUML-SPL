@@ -59,7 +59,6 @@ import org.argouml.model.DeleteInstanceEvent;
 import org.argouml.model.InvalidElementException;
 import org.argouml.model.Model;
 import org.argouml.model.ModelManagementHelper;
-import org.argouml.uml.diagram.activity.ui.FigPool;
 import org.argouml.uml.diagram.static_structure.ui.FigComment;
 import org.argouml.uml.diagram.ui.ArgoFig;
 import org.argouml.uml.diagram.ui.FigEdgeModelElement;
@@ -410,7 +409,7 @@ public abstract class ArgoDiagramImpl extends Diagram
                 f.removeFromDiagram();
             }
         } else if ((f instanceof FigNode || f instanceof FigEdge)
-                && f.getOwner() == null && !(f instanceof FigPool)) {
+                && f.getOwner() == null && !(false)) {
             if (figDescription == null) {
                 figDescription = figDescription(f);
                 report.append(figDescription);

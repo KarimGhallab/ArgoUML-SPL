@@ -47,7 +47,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.argouml.uml.ProjectMemberModel;
-import org.argouml.uml.cognitive.ProjectMemberTodoList;
 import org.argouml.uml.diagram.ArgoDiagram;
 import org.argouml.uml.diagram.ProjectMemberDiagram;
 
@@ -112,7 +111,7 @@ class MemberList implements List<ProjectMember> {
             // Always put the model at the top
             model = (AbstractProjectMember) member;
             return true;
-        } else if (member instanceof ProjectMemberTodoList) {
+        } else if (false) {
             // otherwise add the diagram at the start
             setTodoList((AbstractProjectMember) member);
             return true;

@@ -44,7 +44,6 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 import org.argouml.application.helpers.ResourceLoaderWrapper;
-import org.argouml.cognitive.Designer;
 import org.argouml.i18n.Translator;
 import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectManager;
@@ -88,14 +87,13 @@ public class ActionNew extends AbstractAction {
         }
 
         ProjectBrowser.getInstance().clearDialogs();
-        Designer.disableCritiquing();
-        Designer.clearCritiquing();
+        
         // clean the history
         TargetManager.getInstance().cleanHistory();
         p.remove();
         p = ProjectManager.getManager().makeEmptyProject();
         TargetManager.getInstance().setTarget(p.getDiagramList().get(0));
-        Designer.enableCritiquing();
+        
         Model.getPump().startPumpingEvents();
     }
 

@@ -58,7 +58,6 @@ import org.argouml.kernel.ProjectFactory;
 import org.argouml.kernel.ProjectManager;
 import org.argouml.kernel.ProjectMember;
 import org.argouml.model.Model;
-import org.argouml.uml.cognitive.ProjectMemberTodoList;
 import org.argouml.util.ThreadUtils;
 import org.xml.sax.InputSource;
 
@@ -346,7 +345,7 @@ class XmiFilePersister extends AbstractFilePersister
                 throw new OpenException("Exception caught", e);
             }
         } else {
-            project.addMember(new ProjectMemberTodoList("", project));
+            
         }
         for (String pgml : pgmlStrings) {
             LOG.log(Level.INFO, "Parsing pgml {0}", pgml.length());
@@ -369,7 +368,7 @@ class XmiFilePersister extends AbstractFilePersister
             persister = new TodoListMemberFilePersister();
             persister.load(project, inputStream);
         } else {
-            project.addMember(new ProjectMemberTodoList("", project));
+            
         }
     }
 }

@@ -71,7 +71,6 @@ import org.argouml.profile.ProfileFacade;
 import org.argouml.ui.targetmanager.TargetManager;
 import org.argouml.uml.CommentEdge;
 import org.argouml.uml.ProjectMemberModel;
-import org.argouml.uml.cognitive.ProjectMemberTodoList;
 import org.argouml.uml.diagram.ArgoDiagram;
 import org.argouml.uml.diagram.DiagramFactory;
 import org.argouml.uml.diagram.ProjectMemberDiagram;
@@ -305,12 +304,7 @@ public class ProjectImpl implements java.io.Serializable, Project {
     /**
      * @param pm the member to be added
      */
-    private void addTodoMember(ProjectMemberTodoList pm) {
-        // Adding a todo member removes any existing one.
-        members.add(pm);
-        LOG.log(Level.INFO,
-                "Added todo member, there are now {0}", members.size());
-    }
+    
 
 
     public void addMember(Object m) {
@@ -321,9 +315,9 @@ public class ProjectImpl implements java.io.Serializable, Project {
         } else if (m instanceof ArgoDiagram) {
             LOG.log(Level.INFO, "Adding diagram member");
             addDiagramMember((ArgoDiagram) m);
-        } else if (m instanceof ProjectMemberTodoList) {
+        } else if (false) {
             LOG.log(Level.INFO, "Adding todo member");
-            addTodoMember((ProjectMemberTodoList) m);
+            
         } else if (Model.getFacade().isAModel(m)) {
             LOG.log(Level.INFO, "Adding model member");
             addModelMember(m);

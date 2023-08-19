@@ -52,7 +52,6 @@ import java.util.logging.Logger;
 import org.argouml.application.events.ArgoEventPump;
 import org.argouml.application.events.ArgoEventTypes;
 import org.argouml.application.events.ArgoProfileEvent;
-import org.argouml.cognitive.Translator;
 import org.argouml.configuration.Configuration;
 import org.argouml.configuration.ConfigurationKey;
 import org.argouml.model.Model;
@@ -355,7 +354,7 @@ public class ProfileConfiguration extends AbstractProjectMember {
      */
     @Override
     public String toString() {
-        return Translator.localize("misc.project.profileconfigurationname");
+        return "No-translator-config";
     }
 
 

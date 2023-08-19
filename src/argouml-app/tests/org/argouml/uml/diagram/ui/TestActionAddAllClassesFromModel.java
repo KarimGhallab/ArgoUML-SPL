@@ -46,13 +46,10 @@ import org.argouml.notation.InitNotation;
 import org.argouml.notation.providers.java.InitNotationJava;
 import org.argouml.notation.providers.uml.InitNotationUml;
 import org.argouml.profile.init.InitProfileSubsystem;
-import org.argouml.uml.diagram.activity.ui.InitActivityDiagram;
-import org.argouml.uml.diagram.collaboration.ui.InitCollaborationDiagram;
 import org.argouml.uml.diagram.deployment.ui.InitDeploymentDiagram;
 import org.argouml.uml.diagram.state.ui.InitStateDiagram;
 import org.argouml.uml.diagram.static_structure.ui.InitClassDiagram;
 import org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram;
-import org.argouml.uml.diagram.use_case.ui.InitUseCaseDiagram;
 
 /**
  * @author Timothy M. Lebo
@@ -82,12 +79,12 @@ public class TestActionAddAllClassesFromModel extends TestCase {
         (new InitNotationUml()).init();
         (new InitNotationJava()).init();
         (new InitDiagramAppearanceUI()).init();
-        (new InitActivityDiagram()).init();
-        (new InitCollaborationDiagram()).init();
+        
+        
         (new InitDeploymentDiagram()).init();
         (new InitStateDiagram()).init();
         (new InitClassDiagram()).init();
-        (new InitUseCaseDiagram()).init();
+        
         (new InitProfileSubsystem()).init();
         ProjectManager.getManager().makeEmptyProject();
         

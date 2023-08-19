@@ -87,7 +87,6 @@ import org.argouml.application.events.ArgoEventPump;
 import org.argouml.application.events.ArgoEventTypes;
 import org.argouml.application.events.ArgoStatusEvent;
 import org.argouml.application.helpers.ResourceLoaderWrapper;
-import org.argouml.cognitive.Designer;
 import org.argouml.configuration.Configuration;
 import org.argouml.configuration.ConfigurationKey;
 import org.argouml.i18n.Translator;
@@ -1035,7 +1034,7 @@ public final class ProjectBrowser
             if (p != null) {
                 titleHandler.buildTitle(p.getName(), null);
                 //Designer.TheDesigner.getToDoList().removeAllElements();
-                Designer.setCritiquingRoot(p);
+                
                 // update all panes
                 TargetManager.getInstance().setTarget(p.getInitialTarget());
             }
@@ -1573,14 +1572,13 @@ public final class ProjectBrowser
         // active, so I remove the current project, before
         // loading the new one.
 
-        Designer.disableCritiquing();
-        Designer.clearCritiquing();
+        
         clearDialogs();
         Project project = null;
 
         if (!(file.canRead())) {
             reportError(pmw, "File not found " + file + ".", showUI);
-            Designer.enableCritiquing();
+            
             success = false;
         } else {
             // Hide save action during load. Otherwise we get the
@@ -1743,7 +1741,7 @@ public final class ProjectBrowser
                             "There are {0} diagrams in the current project",
                             project.getDiagramList().size());
 
-                    Designer.enableCritiquing();
+                    
                 } finally {
                     // Make sure save action is always reinstated
                     this.saveAction = rememberedSaveAction;

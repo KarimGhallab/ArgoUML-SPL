@@ -77,9 +77,7 @@ public class SelectionEdgeClarifiers extends SelectionReshape {
             Globals.curEditor().getSelectionManager().getSelections().size();
         if (selectionCount == 1) {
             FigEdge edge = (FigEdge) getContent();
-            if (edge instanceof Clarifiable) {
-                ((Clarifiable) edge).paintClarifiers(g);
-            }
+            
 	    for (PathItemPlacementStrategy strategy
 	            : edge.getPathItemStrategies()) {
 	        strategy.paint(g);

@@ -377,10 +377,7 @@ class ModelMemberFilePersister extends MemberFilePersister
                                 facade.getName(statemachine)
                             });
                 }
-                diagram = diagramFactory.createDiagram(
-                        DiagramType.Activity,
-                	namespace,
-                	statemachine);
+                
             } else {
                 if (LOG.isLoggable(Level.INFO)) {
                     LOG.log(Level.INFO,

@@ -63,7 +63,6 @@ import org.argouml.uml.diagram.ui.ActionSetMode;
 import org.argouml.uml.diagram.ui.FigNodeModelElement;
 import org.argouml.uml.diagram.ui.RadioAction;
 import org.argouml.uml.diagram.ui.UMLDiagram;
-import org.argouml.uml.diagram.use_case.ui.FigActor;
 import org.argouml.util.ToolBarUtility;
 import org.tigris.gef.base.LayerPerspective;
 import org.tigris.gef.base.LayerPerspectiveMutable;
@@ -606,7 +605,7 @@ public class UMLDeploymentDiagram extends UMLDiagram implements DeploymentDiagra
         } else if (Model.getFacade().isAObject(modelElement)) {
             figNode = new FigObject(modelElement, bounds, settings);
         } else if (Model.getFacade().isAActor(modelElement)) {
-            figNode = new FigActor(modelElement, bounds, settings);
+            
         } else if (Model.getFacade().isAComment(modelElement)) {
             figNode = new FigComment(modelElement, bounds, settings);
         }

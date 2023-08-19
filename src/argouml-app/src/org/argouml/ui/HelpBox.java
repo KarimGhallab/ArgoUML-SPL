@@ -55,7 +55,6 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
 import org.argouml.application.helpers.ApplicationVersion;
-import org.argouml.cognitive.Translator;
 
 /**
  * This is what you see after you activate the "Help->Help" menu-item.
@@ -80,16 +79,14 @@ public class HelpBox extends JFrame implements HyperlinkListener {
      */
     private String pages[][] = {
         {
-            Translator.localize("tab.help.manual"),
-            (Translator.localize("tab.help.path.manual")
-                + "manual-" + ApplicationVersion.getStableVersion()
-                + "/"),
-             Translator.localize("tab.help.tip.manual")
+            "Help Manual",
+            "Path Manual",
+             "Tip Manual"
         },
         {
-            Translator.localize("tab.help.support"),
-            Translator.localize("tab.help.path.support"),
-            Translator.localize("tab.help.tip.support")
+            "Support",
+            "Path Support",
+            "Tip Support"
         }
     };
 

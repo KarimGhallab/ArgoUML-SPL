@@ -44,7 +44,6 @@ import javax.swing.Action;
 
 import junit.framework.TestCase;
 
-import org.argouml.cognitive.ui.ToDoPane;
 import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectManager;
 import org.argouml.model.InitializeModel;
@@ -83,8 +82,7 @@ public class GUITestProjectBrowser extends TestCase {
         InitializeModel.initializeDefault();
         new InitProfileSubsystem().init();
         SplashScreen splashScreen = new SplashScreen();
-        assertNotNull(ProjectBrowser.makeInstance(splashScreen, 
-                true, new ToDoPane(splashScreen)));
+        
     }
 
     /**
