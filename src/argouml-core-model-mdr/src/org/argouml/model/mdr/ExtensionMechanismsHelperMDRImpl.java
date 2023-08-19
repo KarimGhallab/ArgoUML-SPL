@@ -46,7 +46,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.jmi.model.MofClass;
 import javax.jmi.reflect.InvalidObjectException;
@@ -73,8 +72,7 @@ import org.omg.uml.modelmanagement.UmlPackage;
  */
 class ExtensionMechanismsHelperMDRImpl implements ExtensionMechanismsHelper {
 
-    private static final Logger LOG =
-        Logger.getLogger(ExtensionMechanismsHelperMDRImpl.class.getName());
+    
 
     /**
      * The model implementation.

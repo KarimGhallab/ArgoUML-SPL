@@ -39,8 +39,6 @@
 package org.argouml.sequence2.diagram;
 
 import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.uml.diagram.ArgoDiagram;
 import org.argouml.uml.diagram.DiagramFactoryInterface;
@@ -55,11 +53,7 @@ import org.argouml.uml.diagram.DiagramSettings;
 public class SequenceDiagramFactory
         implements DiagramFactoryInterface, DiagramFactoryInterface2 {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(SequenceDiagramFactory.class.getName());
+    
 
     /**
      * Factory method to create a new instance of an ArgoDiagram,
@@ -97,8 +91,7 @@ public class SequenceDiagramFactory
             try {
                 diagram.setName(name);
             } catch (PropertyVetoException e) {
-                LOG.log(Level.SEVERE, "Cannot set the name " + name +
-                        " to the diagram just created: "+ diagram.getName(), e);
+                
             }
         }
         return diagram;

@@ -41,17 +41,13 @@ package org.argouml.util.osdep;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
  * @stereotype utility
  */
 public class StartBrowser {
-    /** logger */
-    private static final Logger LOG =
-        Logger.getLogger(StartBrowser.class.getName());
+    
 
     /**
      * Open an URL in the system's default browser.
@@ -77,8 +73,7 @@ public class StartBrowser {
 		    };
 		    m.invoke(c.newInstance(), args);
 		} catch (Exception cnfe) {
-                    LOG.log(Level.SEVERE, "", cnfe);
-                    LOG.log(Level.INFO, "Trying a default browser (netscape)");
+                    
 		    String[] commline = {
 			"netscape", url,
 		    };
@@ -91,7 +86,7 @@ public class StartBrowser {
 	}
 	catch (IOException ioe) {
 	    // Didn't work.
-            LOG.log(Level.SEVERE, "", ioe);
+            
 	}
 
     }

@@ -44,8 +44,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
@@ -58,10 +56,6 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import org.argouml.application.helpers.ResourceLoaderWrapper;
-import org.argouml.cognitive.critics.ui.ActionOpenCritics;
-import org.argouml.cognitive.ui.ActionAutoCritique;
-import org.argouml.cognitive.ui.ActionOpenDecisions;
-import org.argouml.cognitive.ui.ActionOpenGoals;
 import org.argouml.i18n.Translator;
 import org.argouml.ui.ActionExportXMI;
 import org.argouml.ui.ActionImportXMI;
@@ -134,8 +128,7 @@ import org.tigris.toolbar.ToolBarFactory;
 public class GenericArgoMenuBar extends JMenuBar implements
         TargetListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(GenericArgoMenuBar.class.getName());
+    
 
     private static List<JMenu> moduleMenus = new ArrayList<JMenu>();
 
@@ -313,7 +306,7 @@ public class GenericArgoMenuBar extends JMenuBar implements
         initMenuCreate();
         initMenuArrange();
         initMenuGeneration();
-        initMenuCritique();
+        
         initMenuTools();
         initMenuHelp();
     }
@@ -890,34 +883,7 @@ public class GenericArgoMenuBar extends JMenuBar implements
         // generate.add(Actions.GenerateWeb);
     }
 
-    /**
-     * Build the menu "Critique".
-     */
-    private void initMenuCritique() {
-        // TODO: This creates a dependency on the Critics subsystem.
-        // Instead that subsystem should register its desired menus and actions.
-        critique =
-            (ArgoJMenu) add(new ArgoJMenu(MENU + prepareKey("Critique")));
-        setMnemonic(critique, "Critique");
-        JMenuItem toggleAutoCritique = critique
-                .addCheckItem(new ActionAutoCritique());
-        setMnemonic(toggleAutoCritique, "Toggle Auto Critique");
-        ShortcutMgr.assignAccelerator(toggleAutoCritique,
-                ShortcutMgr.ACTION_AUTO_CRITIQUE);
-        critique.addSeparator();
-        JMenuItem designIssues = critique.add(new ActionOpenDecisions());
-        setMnemonic(designIssues, "Design Issues");
-        ShortcutMgr.assignAccelerator(designIssues,
-                ShortcutMgr.ACTION_OPEN_DECISIONS);
-        JMenuItem designGoals = critique.add(new ActionOpenGoals());
-        setMnemonic(designGoals, "Design Goals");
-        ShortcutMgr.assignAccelerator(designGoals,
-                ShortcutMgr.ACTION_OPEN_GOALS);
-        JMenuItem browseCritics = critique.add(new ActionOpenCritics());
-        setMnemonic(browseCritics, "Browse Critics");
-        ShortcutMgr.assignAccelerator(designIssues,
-                ShortcutMgr.ACTION_OPEN_CRITICS);
-    }
+    
 
     /**
      * Build the menu "Tools".
@@ -1146,28 +1112,28 @@ public class GenericArgoMenuBar extends JMenuBar implements
     }
 
     private void registerForMacEvents() {
-        LOG.log(Level.INFO, "Determining if Mac OS to set special handlers");
+        
         if (OsUtil.isMacOSX()) {
-            LOG.log(Level.INFO, "System is Mac OS - setting special handlers");
+            
             try {
                 // Generate and register the OSXAdapter, passing the methods
                 // we wish to use as delegates for various
                 // com.apple.eawt.ApplicationListener methods
-                LOG.log(Level.INFO, "Registering Quit handler for Mac");
+                
                 OSXAdapter.setQuitHandler(this, getClass().getMethod(
                         "macQuit", (Class[]) null));
-                LOG.log(Level.INFO, "Registering About handler for Mac");
+                
                 OSXAdapter.setAboutHandler(this, getClass().getMethod(
                         "macAbout", (Class[]) null));
-                LOG.log(Level.INFO, "Registering Preferences handler for Mac");
+                
                 OSXAdapter.setPreferencesHandler(this, getClass()
                         .getMethod("macPreferences", (Class[]) null));
-                LOG.log(Level.INFO, "Registering File handler for Mac");
+                
                 OSXAdapter.setFileHandler(this, getClass().getMethod(
                         "macOpenFile", new Class[] {String.class}));
-                LOG.log(Level.INFO, "All Mac handlers set");
+                
             } catch (Exception e) {
-                LOG.log(Level.SEVERE, "Error while loading the OSXAdapter:", e);
+                
             }
         }
     }
@@ -1176,7 +1142,7 @@ public class GenericArgoMenuBar extends JMenuBar implements
      * Internal use only.  Do not use.
      */
     public boolean macQuit() {
-        LOG.log(Level.INFO, "Quit has been chosen on a Mac");
+        
         return ProjectBrowser.getInstance().tryExit();
     }
 

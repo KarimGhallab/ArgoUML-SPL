@@ -41,8 +41,6 @@ package org.argouml.sequence2.diagram;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.tigris.gef.base.Editor;
@@ -59,11 +57,7 @@ import org.tigris.gef.presentation.FigPoly;
  */
 public class ModeCreateMessage extends ModeCreatePolyEdge {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ModeCreateMessage.class.getName());
+    
 
     private static final int DEFAULT_ACTIVATION_HEIGHT = 50;
     private static final int DEFAULT_MESSAGE_GAP = 20;
@@ -75,7 +69,7 @@ public class ModeCreateMessage extends ModeCreatePolyEdge {
      */
     public ModeCreateMessage(Editor par) {
         super(par);
-        LOG.log(Level.FINE, "ModeCreateMessage created with editor:{0}", editor);
+        
     }
 
     /**
@@ -83,7 +77,7 @@ public class ModeCreateMessage extends ModeCreatePolyEdge {
      */
     public ModeCreateMessage() {
         super();
-        LOG.log(Level.FINE, "ModeCreateMessage created without editor.");
+        
     }
 
     @Override
@@ -200,7 +194,7 @@ public class ModeCreateMessage extends ModeCreatePolyEdge {
         }
 
         // Make sure there is the minimum gap below the message being drawn
-        LOG.log(Level.INFO, "Looking for minimum space below");
+        
         final FigMessage firstMessageBelow = getNearestMessage(
                 (FigClassifierRole) getSourceFigNode(),
                 figMessage,

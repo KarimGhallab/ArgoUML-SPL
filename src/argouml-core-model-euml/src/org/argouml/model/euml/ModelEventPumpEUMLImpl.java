@@ -27,8 +27,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.AbstractModelEventPump;
 import org.argouml.model.AddAssociationEvent;
@@ -125,8 +123,7 @@ class ModelEventPumpEUMLImpl extends AbstractModelEventPump {
 
     private Object mutex;
 
-    private static final Logger LOG =
-            Logger.getLogger(ModelEventPumpEUMLImpl.class.getName());
+    
 
     public static final int COMMAND_STACK_UPDATE =
             Notification.EVENT_TYPE_COUNT + 1;
@@ -178,9 +175,7 @@ class ModelEventPumpEUMLImpl extends AbstractModelEventPump {
 
     public void addModelEventListener(PropertyChangeListener listener,
             Object modelElement, String[] propertyNames) {
-        LOG.log(Level.FINE,
-                "Adding a listener {0} to {1} for {2}", //$NON-NLS-1$
-                new Object[]{listener, modelElement, propertyNames});
+        
         if (!(modelElement instanceof EObject)) {
             throw new IllegalArgumentException(
                     "The modelelement must be instance " //$NON-NLS-1$
@@ -193,9 +188,7 @@ class ModelEventPumpEUMLImpl extends AbstractModelEventPump {
 
     public void addModelEventListener(UmlChangeListener listener,
             Object modelElement, String[] propertyNames) {
-        LOG.log(Level.FINE,
-                "Adding a listener {0} to {1} for {2}", //$NON-NLS-1$
-                new Object[]{listener, modelElement, propertyNames});
+        
         if (!(modelElement instanceof EObject)) {
             throw new IllegalArgumentException(
                     "The modelelement must be instance " //$NON-NLS-1$
@@ -350,15 +343,7 @@ class ModelEventPumpEUMLImpl extends AbstractModelEventPump {
             String featureName,
             EReference oppositeRef) {
 
-        LOG.log(Level.FINE,
-                "event  - Property: {0} Type : {1} Old: {2} " //$NON-NLS-1$
-                + "New: {3} From: {4}", //$NON-NLS-1$
-                new Object[] {
-                    featureName,
-                    eventType,
-                    oldValue,
-                    newValue,
-                    notifier});
+        
 
         class EventAndListeners {
             public EventAndListeners(PropertyChangeEvent e,
@@ -409,8 +394,7 @@ class ModelEventPumpEUMLImpl extends AbstractModelEventPump {
                                     getListeners(
                                         oldValue)));
                 } else {
-                    LOG.log(Level.INFO,
-                            "Not sending delete event - assume remove");
+                    
                 }
                 events.add(new EventAndListeners(
                         new RemoveAssociationEvent(

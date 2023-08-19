@@ -27,8 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.NotImplementedException;
 import org.argouml.model.UmlException;
@@ -48,8 +46,7 @@ import org.xml.sax.InputSource;
  */
 class XmiReaderEUMLImpl implements XmiReader {
 
-    private static final Logger LOG =
-        Logger.getLogger(XmiReaderEUMLImpl.class.getName());
+    
 
     /**
      * The model implementation.
@@ -109,7 +106,7 @@ class XmiReaderEUMLImpl implements XmiReader {
         if (name == null) {
             name = inputSource.toString();
         }
-        LOG.log(Level.FINE, "Parsing {0}", name); //$NON-NLS-1$
+        
 
         if (inputSource.getByteStream() != null) {
             is = inputSource.getByteStream();
@@ -117,7 +114,7 @@ class XmiReaderEUMLImpl implements XmiReader {
             try {
                 URL url = new URL(inputSource.getSystemId());
                 if (url != null) {
-                    LOG.log(Level.FINE, "Parsing URL {0}", url); //$NON-NLS-1$
+                    
                     is = url.openStream();
                     if (is != null) {
                         is = new BufferedInputStream(is);
@@ -177,10 +174,7 @@ class XmiReaderEUMLImpl implements XmiReader {
             }
         }
         resource = r;
-        LOG.log(Level.FINE,
-                "Parsed resource " + resource  //$NON-NLS-1$
-                + " with " + resource.getContents().size() //$NON-NLS-1$
-                + " elements"); //$NON-NLS-1$
+        
         return r.getContents();
     }
 
@@ -224,20 +218,14 @@ class XmiReaderEUMLImpl implements XmiReader {
                                     String n = x.getEStructuralFeature().getName();
                                     if ("xmi.name".equals(n)) {
                                         if (!("UML".equals((String) x.getValue()))) {
-                                            LOG.log(Level.WARNING,
-                                                    "Tried to parse XMI file with "
-                                                     + "XMI.header/XMI.metamodel/xmi.name = "
-                                                     + (String) x.getValue());
+                                            
                                             return false;
                                         }
                                     } else if ("xmi.version".equals(n)) {
                                         String version = (String) x.getValue();
                                         if (version != null
                                                 && version.startsWith("1.4")) {
-                                            LOG.log(Level.FINE,
-                                                    "Tried to parse XMI file with "
-                                                    + "XMI.header/XMI.metamodel/xmi.version = "
-                                                    + version);
+                                            
                                             return true;
                                         }
                                     }

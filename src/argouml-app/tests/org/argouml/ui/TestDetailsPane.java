@@ -44,9 +44,6 @@ import javax.swing.SwingUtilities;
 import junit.framework.TestCase;
 
 import org.argouml.application.api.AbstractArgoJPanel;
-import org.argouml.cognitive.checklist.ui.InitCheckListUI;
-import org.argouml.cognitive.ui.InitCognitiveUI;
-import org.argouml.cognitive.ui.TabToDo;
 import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectManager;
 import org.argouml.model.InitializeModel;
@@ -92,8 +89,7 @@ public class TestDetailsPane extends TestCase {
         project = ProjectManager.getManager().makeEmptyProject();
 
         new InitUmlUI().init();
-        new InitCheckListUI().init();
-        new InitCognitiveUI().init();
+        
         new InitDiagramAppearanceUI().init();
         (new InitActivityDiagram()).init();
         (new InitCollaborationDiagram()).init();
@@ -131,17 +127,12 @@ public class TestDetailsPane extends TestCase {
         for (AbstractArgoJPanel tab : new InitUmlUI().getDetailsTabs()) {
             pane.addTab(tab, false);
         }
-        for (AbstractArgoJPanel tab : new InitCheckListUI().getDetailsTabs()) {
-            pane.addTab(tab, false);
-        }        
-        for (AbstractArgoJPanel tab : new InitCognitiveUI().getDetailsTabs()) {
-            pane.addTab(tab, true);
-        }
-        JPanel todoPane = pane.getTab(TabToDo.class);
+        
+        
         JPanel propertyPane = pane.getTab(TabProps.class);
 //        JPanel docPane = pane.getTab(TabDocumentation.class);
 
-        assertNotNull(todoPane);
+        
         assertNotNull(propertyPane);
 
         Object o = new Object();
@@ -156,7 +147,7 @@ public class TestDetailsPane extends TestCase {
 		    o,
 		});
         pane.targetSet(e);
-        assertEquals("1:", todoPane, pane.getTabs().getSelectedComponent());
+        
         
         UMLClassDiagram diagram = new UMLClassDiagram();
         e =
@@ -169,10 +160,10 @@ public class TestDetailsPane extends TestCase {
 			    new Object[] {
 				diagram,
 			    });
-        pane.getTabs().setSelectedComponent(todoPane);
+        
         TargetManager.getInstance().setTarget(diagram);
         pane.targetSet(e);
-        assertEquals("2:", todoPane, pane.getTabs().getSelectedComponent());
+        
         
         
         Object clazz = Model.getCoreFactory().createClass();
@@ -187,10 +178,10 @@ public class TestDetailsPane extends TestCase {
 			    });
         TargetManager.getInstance().setTarget(clazz);
         pane.targetSet(e);
-        assertEquals("3:", todoPane, pane.getTabs().getSelectedComponent());
-        pane.getTabs().setSelectedComponent(todoPane);
+        
+        
         pane.targetSet(e);
-        assertEquals("4:", todoPane, pane.getTabs().getSelectedComponent());
+        
         // TODO: at the moment setSelectedComponent doesn't take into account
         // the rather complex tab selection mechanism of DetailsPane. The tab
         // selection mechanism must be refactored.

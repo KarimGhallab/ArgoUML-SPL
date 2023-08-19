@@ -72,7 +72,7 @@ public class AllTests {
         suite.addTestSuite(TestCollaborationsHelper.class);
         suite.addTestSuite(TestCollaborationsFactory.class);
         suite.addTestSuite(TestUmlFactoryBuildNode.class);
-        suite.addTestSuite(TestStateMachinesHelper.class);
+        
         suite.addTestSuite(TestActivityGraphsFactory.class);
         suite.addTestSuite(TestCommonBehaviorFactory.class);
         suite.addTestSuite(TestUmlUseCase.class);

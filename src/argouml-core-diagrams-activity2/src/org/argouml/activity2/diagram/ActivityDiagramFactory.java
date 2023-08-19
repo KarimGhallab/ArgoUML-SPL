@@ -14,8 +14,6 @@
 package org.argouml.activity2.diagram;
 
 import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.uml.diagram.ArgoDiagram;
 import org.argouml.uml.diagram.DiagramFactoryInterface2;
@@ -24,11 +22,7 @@ import org.argouml.uml.diagram.DiagramSettings;
 public class ActivityDiagramFactory
         implements DiagramFactoryInterface2{
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ActivityDiagramFactory.class.getName());
+    
 
     public ArgoDiagram createDiagram(Object owner, String name,
             DiagramSettings settings) {
@@ -37,8 +31,7 @@ public class ActivityDiagramFactory
             try {
                 diagram.setName(name);
             } catch (PropertyVetoException e) {
-                LOG.log(Level.SEVERE, "Cannot set the name " + name +
-                        " to the diagram just created: "+ diagram.getName(), e);
+                
             }
         }
         return diagram;

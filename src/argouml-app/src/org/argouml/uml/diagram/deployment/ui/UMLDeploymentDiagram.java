@@ -42,8 +42,6 @@ import java.awt.Rectangle;
 import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -81,11 +79,7 @@ import org.tigris.gef.presentation.FigNode;
  * @author Clemens Eichler
  */
 public class UMLDeploymentDiagram extends UMLDiagram implements DeploymentDiagram {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UMLDeploymentDiagram.class.getName());
+    
 
     ////////////////
     // actions for toolbar
@@ -153,8 +147,7 @@ public class UMLDeploymentDiagram extends UMLDiagram implements DeploymentDiagra
      */
     public void setNamespace(Object handle) {
         if (!Model.getFacade().isANamespace(handle)) {
-            LOG.log(Level.SEVERE,
-                "Illegal argument. Object " + handle + " is not a namespace");
+            
             throw new IllegalArgumentException(
                 "Illegal argument. Object " + handle + " is not a namespace");
         }
@@ -522,7 +515,7 @@ public class UMLDeploymentDiagram extends UMLDiagram implements DeploymentDiagra
 		|| facade.isAComponent(modelElement)
 		|| facade.isAComponentInstance(modelElement)) {
 
-            LOG.log(Level.INFO, "Setting namespace of {0}", modelElement);
+            
 
             super.setModelElementNamespace(modelElement, namespace);
 	}
@@ -612,11 +605,9 @@ public class UMLDeploymentDiagram extends UMLDiagram implements DeploymentDiagra
         }
 
         if (figNode != null) {
-            LOG.log(Level.FINE,
-                    "Model element {0} converted to {1}",
-                    new Object[]{modelElement, figNode});
+            
         } else {
-            LOG.log(Level.FINE, "Dropped object NOT added {0}", figNode);
+            
         }
         return figNode;
     }

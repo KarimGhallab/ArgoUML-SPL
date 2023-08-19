@@ -43,8 +43,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.SAXParserFactory;
 
@@ -56,10 +54,7 @@ import org.argouml.i18n.Translator;
  */
 public class Tools {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG = Logger.getLogger(Tools.class.getName());
+    
 
     private static final String[] PACKAGELIST =
 	new String[] {
@@ -199,7 +194,7 @@ public class Tools {
                 if (s == null) {
                     break;
                 }
-                LOG.log(Level.INFO, s);
+                
             }
         } catch (IOException ioe) { }
     }

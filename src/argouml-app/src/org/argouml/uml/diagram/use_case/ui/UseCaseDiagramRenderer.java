@@ -39,8 +39,6 @@
 package org.argouml.uml.diagram.use_case.ui;
 
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.CommentEdge;
@@ -90,11 +88,7 @@ public class UseCaseDiagramRenderer extends UmlDiagramRenderer {
 
     static final long serialVersionUID = 2217410137377934879L;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UseCaseDiagramRenderer.class.getName());
+    
 
 
     /**
@@ -125,9 +119,7 @@ public class UseCaseDiagramRenderer extends UmlDiagramRenderer {
                 (FigNodeModelElement) ((UMLDiagram) diag).drop(node, null);
 
         } else {
-            LOG.log(Level.FINE,
-                  "{0}: getFigNodeFor({1}, {2}, {3}) - cannot create this sort of node.",
-                  new Object[]{this.getClass(), gm, lay, node});
+            
             return null;
             // TODO: Shouldn't we throw an exception here?!?!
         }
@@ -164,7 +156,7 @@ public class UseCaseDiagramRenderer extends UmlDiagramRenderer {
     public FigEdge getFigEdgeFor(GraphModel gm, Layer lay, Object edge,
             Map styleAttributes) {
 
-        LOG.log(Level.FINE, "making figedge for {0}", edge);
+        
 
         if (edge == null) {
             throw new IllegalArgumentException("A model edge must be supplied");

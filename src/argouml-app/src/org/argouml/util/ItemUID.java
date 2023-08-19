@@ -40,8 +40,6 @@ package org.argouml.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 
@@ -87,10 +85,7 @@ import org.argouml.model.Model;
  * @author Michael Stockman
  */
 public class ItemUID {
-    /**
-     * The logger.
-     */
-    private static final Logger LOG = Logger.getLogger(ItemUID.class.getName());
+    
 
     /**
      * Keeps a reference to the Class object of this class.
@@ -200,18 +195,14 @@ public class ItemUID {
 	        // Apparently this object had no getUUID
 	        return null;
 	    } catch (IllegalArgumentException iare) {
-                LOG.log(Level.SEVERE, "getUUID for " + obj.getClass()
-	                + " takes strange parameter: ",
-	                iare);
+                
 	        return null;
 	    } catch (IllegalAccessException iace) {
 	        // Apparently it had a getItemUID,
 	        // but we're not allowed to call it
 	        return null;
 	    } catch (InvocationTargetException tie) {
-                LOG.log(Level.SEVERE,
-                        "getUUID for " + obj.getClass() + " threw: ",
-	                tie);
+                
 	        return null;
 	    }
 	} catch (SecurityException se) {
@@ -219,25 +210,17 @@ public class ItemUID {
 	    // but we're not allowed to call it
 	    return null;
 	} catch (InvocationTargetException tie) {
-            LOG.log(Level.SEVERE,
-                    "getItemUID for " + obj.getClass() + " threw: ",
-                    tie);
+            
 	    return null;
 	} catch (IllegalAccessException iace) {
 	    // Apparently it had a getItemUID,
 	    // but we're not allowed to call it
 	    return null;
 	} catch (IllegalArgumentException iare) {
-            LOG.log(Level.SEVERE,
-                    "getItemUID for " + obj.getClass()
-                    + " takes strange parameter: ",
-                    iare);
+            
 	    return null;
 	} catch (ExceptionInInitializerError eiie) {
-            LOG.log(Level.SEVERE,
-                    "getItemUID for " + obj.getClass()
-                    + " exception: ",
-                    eiie);
+            
 	    return null;
 	}
 
@@ -246,9 +229,7 @@ public class ItemUID {
 	}
 
 	if (!(rv instanceof ItemUID)) {
-            LOG.log(Level.SEVERE,
-                    "getItemUID for " + obj.getClass()
-                    + " returns strange value: " + rv.getClass());
+            
 	    return null;
 	}
 
@@ -295,24 +276,17 @@ public class ItemUID {
 	    // but we're not allowed to call it
 	    return null;
 	} catch (InvocationTargetException tie) {
-            LOG.log(Level.SEVERE,
-                    "setItemUID for " + obj.getClass() + " threw",
-                    tie);
+            
 	    return null;
 	} catch (IllegalAccessException iace) {
 	    // Apparently it had a setItemUID,
 	    // but we're not allowed to call it
 	    return null;
 	} catch (IllegalArgumentException iare) {
-            LOG.log(Level.SEVERE,
-                    "setItemUID for " + obj.getClass()
-                    + " takes strange parameter",
-                    iare);
+            
 	    return null;
 	} catch (ExceptionInInitializerError eiie) {
-            LOG.log(Level.SEVERE,
-                    "setItemUID for " + obj.getClass() + " threw",
-                    eiie);
+            
 	    return null;
 	}
 

@@ -50,8 +50,6 @@ import java.awt.image.RenderedImage;
 import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.tigris.gef.base.Editor;
 
@@ -70,8 +68,7 @@ import org.tigris.gef.base.Editor;
  */
 public class DeferredBufferedImage implements RenderedImage {
 
-    private static final Logger LOG =
-        Logger.getLogger(DeferredBufferedImage.class.getName());
+    
 
     /**
      * RGB values for background color for image. Set as transparent. Chosen
@@ -141,14 +138,14 @@ public class DeferredBufferedImage implements RenderedImage {
 
 
     public Raster getData() {
-        LOG.log(Level.FINE, "getData with no params");
+        
         return getData(new Rectangle(x, y, width, height));
     }
 
     public Raster getData(Rectangle clip) {
 //        LOG.log(Level.FINE, "getData Rectangle = " + clip);
         if (!isRasterValid(clip)) {
-            LOG.log(Level.FINE, "Raster not valid, computing new raster");
+            
             computeRaster(clip);
         }
         Rectangle oClip = offsetWindow(clip);
@@ -178,7 +175,7 @@ public class DeferredBufferedImage implements RenderedImage {
      * @param clip clip rectangle of interest
      */
     private void computeRaster(Rectangle clip) {
-        LOG.log(Level.FINE, "Computing raster for rectangle {0}", clip);
+        
 
         // Create a new graphics context so we start with fresh transforms
         Graphics2D graphics = image.createGraphics();
@@ -245,27 +242,27 @@ public class DeferredBufferedImage implements RenderedImage {
     }
 
     public int getMinX() {
-        LOG.log(Level.FINE, "getMinX = 0");
+        
         return 0;
     }
 
     public int getMinY() {
-        LOG.log(Level.FINE, "getMinY = 0");
+        
         return 0;
     }
 
     public int getMinTileX() {
-        LOG.log(Level.FINE, "getMinTileX = 0");
+        
         return 0;
     }
 
     public int getMinTileY() {
-        LOG.log(Level.FINE, "getMinTileY = 0");
+        
         return 0;
     }
 
     public int getNumXTiles() {
-        LOG.log(Level.FINE, "getNumXTiles = 1");
+        
         return 1;
     }
 
@@ -277,7 +274,7 @@ public class DeferredBufferedImage implements RenderedImage {
      */
     public int getNumYTiles() {
         int tiles = (getHeight() + scaledBufferHeight - 1) / scaledBufferHeight;
-        LOG.log(Level.FINE, "getNumYTiles = {0}", tiles);
+        
         return tiles;
     }
 
@@ -302,7 +299,7 @@ public class DeferredBufferedImage implements RenderedImage {
      */
 
     public Raster getTile(int tileX, int tileY) {
-        LOG.log(Level.FINE, "getTile x={0}, y = {1}", new Object[]{tileX, tileY});
+        
         if (tileX < getMinTileX()
                 || tileX >= getMinTileX() + getNumXTiles()
                 || tileY < getMinTileY()
@@ -317,32 +314,32 @@ public class DeferredBufferedImage implements RenderedImage {
     }
 
     public int getTileGridXOffset() {
-        LOG.log(Level.FINE, "getTileGridXOffset = 0");
+        
         return 0;
     }
 
     public int getTileGridYOffset() {
-        LOG.log(Level.FINE, "getTileGridYOffset = 0");
+        
         return 0;
     }
 
     public int getTileWidth() {
-        LOG.log(Level.FINE, "getTileWidth = {0}", width);
+        
         return width;
     }
 
     public int getTileHeight() {
-        LOG.log(Level.FINE, "getTileHeight = {0}", scaledBufferHeight);
+        
         return scaledBufferHeight;
     }
 
     public int getWidth() {
-        LOG.log(Level.FINE, "getWidth = {0}", width);
+        
         return width;
     }
 
     public int getHeight() {
-        LOG.log(Level.FINE, "getHeight = " + height);
+        
         return height;
     }
 }

@@ -13,7 +13,6 @@
 
 package org.argouml.deployment2;
 
-import java.util.logging.Logger;
 
 import org.argouml.deployment2.diagram.DeploymentDiagramFactory;
 import org.argouml.model.Model;
@@ -25,8 +24,7 @@ import org.argouml.uml.ui.PropPanelFactoryManager;
 
 public class DeploymentDiagramModule implements ModuleInterface {
 
-    private static final Logger LOG =
-        Logger.getLogger(DeploymentDiagramModule.class.getName());
+    
 
     private DeploymentDiagramPropPanelFactory propPanelFactory;
 

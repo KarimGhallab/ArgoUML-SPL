@@ -48,8 +48,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -105,11 +103,7 @@ import org.tigris.gef.presentation.FigNode;
  */
 public class UMLActivityDiagram extends UMLDiagram implements ActivityDiagram {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UMLActivityDiagram.class.getName());
+    
 
     /**
      * The UID.
@@ -800,7 +794,7 @@ public class UMLActivityDiagram extends UMLDiagram implements ActivityDiagram {
         } else if (Model.getFacade().isAPseudostate(objectToAccept)) {
             Object kind = Model.getFacade().getKind(objectToAccept);
             if (kind == null) {
-                LOG.log(Level.WARNING, "found a null type pseudostate");
+                
                 return false;
             }
             if (kind.equals(
@@ -840,7 +834,7 @@ public class UMLActivityDiagram extends UMLDiagram implements ActivityDiagram {
         } else if (Model.getFacade().isAPseudostate(modelElement)) {
             Object kind = Model.getFacade().getKind(modelElement);
             if (kind == null) {
-                LOG.log(Level.WARNING, "found a null type pseudostate");
+                
                 return null;
             }
             if (kind.equals(Model.getPseudostateKind().getInitial())) {
@@ -858,18 +852,16 @@ public class UMLActivityDiagram extends UMLDiagram implements ActivityDiagram {
                     Model.getPseudostateKind().getJoin())) {
                 figNode = new FigJoinState(modelElement, bounds, settings);
             } else {
-                LOG.log(Level.WARNING, "found a type not known");
+                
             }
         } else if (Model.getFacade().isAComment(modelElement)) {
             figNode = new FigComment(modelElement, bounds, settings);
         }
 
         if (figNode != null) {
-            LOG.log(Level.FINE,
-                    "Model element {0} converted to {1}",
-                    new Object[]{modelElement, figNode});
+            
         } else {
-            LOG.log(Level.FINE, "Dropped object NOT added {0}", figNode);
+            
         }
         return figNode;
     }

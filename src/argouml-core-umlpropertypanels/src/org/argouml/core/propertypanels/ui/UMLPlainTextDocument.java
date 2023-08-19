@@ -39,8 +39,6 @@
 package org.argouml.core.propertypanels.ui;
 
 import java.beans.PropertyChangeEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -67,8 +65,7 @@ abstract class UMLPlainTextDocument
     extends PlainDocument
     implements UMLDocument {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLPlainTextDocument.class.getName());
+    
 
     /**
      * True if an event should be fired when the text of the document is changed
@@ -235,11 +232,7 @@ abstract class UMLPlainTextDocument
                 super.insertString(0, textValue, null);
             }
         } catch (BadLocationException b) {
-            LOG.log(Level.SEVERE,
-		      "A BadLocationException happened\n"
-		      + "The string to set was: "
-		      + getProperty(),
-		      b);
+            
         } finally {
             setFiring(true);
         }

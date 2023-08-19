@@ -14,8 +14,6 @@
 package org.argouml.activity2.diagram;
 
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.CommentEdge;
@@ -33,8 +31,7 @@ import org.tigris.gef.presentation.FigNode;
 
 class ActivityDiagramRenderer extends UmlDiagramRenderer {
 
-    private static final Logger LOG =
-        Logger.getLogger(ActivityDiagramRenderer.class.getName());
+    
 
     public FigNode getFigNodeFor(GraphModel gm, Layer lay, Object node,
                                  Map styleAttributes) {
@@ -46,12 +43,10 @@ class ActivityDiagramRenderer extends UmlDiagramRenderer {
                 && ((UMLDiagram) diag).doesAccept(node)) {
             result = (FigNode) ((UMLDiagram) diag).drop(node, null);
         } else {
-            LOG.log(Level.WARNING,
-                    "ActivityDiagramRenderer getFigNodeFor unexpected node "
-                    + node);
+            
             return null;
         }
-        LOG.log(Level.FINE, "ActivityDiagramRenderer getFigNodeFor {0}", result);
+        
         lay.add(result);
         return result;
     }

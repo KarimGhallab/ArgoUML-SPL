@@ -39,8 +39,6 @@
 package org.argouml.uml.diagram.ui;
 
 import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -66,8 +64,7 @@ import org.argouml.uml.diagram.ArgoDiagram;
  */
 class DiagramNameDocument implements DocumentListener, TargetListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(DiagramNameDocument.class.getName());
+    
 
     private JTextField field;
     private boolean stopEvents = false;
@@ -176,10 +173,10 @@ class DiagramNameDocument implements DocumentListener, TargetListener {
                                 field.getText().length(),
                                 DefaultHighlighter.DefaultPainter);
                     } catch (BadLocationException e1) {
-                        LOG.log(Level.FINE, "Nested exception", e1);
+                        
                     }
                 } catch (BadLocationException ble) {
-                    LOG.log(Level.FINE, "update caused: ",ble);
+                    
                 }
             }
         }

@@ -46,8 +46,6 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.ProjectManager;
 import org.argouml.model.DeleteInstanceEvent;
@@ -69,11 +67,7 @@ import org.tigris.gef.graph.MutableGraphModel;
 class SequenceDiagramGraphModel extends UMLMutableGraphSupport implements
         VetoableChangeListener, PropertyChangeListener, MutableGraphModel {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(SequenceDiagramGraphModel.class.getName());
+    
 
     /**
      * The collaboration this sequence diagram belongs too.
@@ -164,7 +158,7 @@ class SequenceDiagramGraphModel extends UMLMutableGraphSupport implements
      */
     public Object getCollaboration() {
         if (collaboration == null) {
-            LOG.log(Level.FINE, "The collaboration is null so creating a new collaboration");
+            
             collaboration =
                 Model.getCollaborationsFactory().buildCollaboration(
                         ProjectManager.getManager().getCurrentProject()
@@ -179,7 +173,7 @@ class SequenceDiagramGraphModel extends UMLMutableGraphSupport implements
      * @param c the collaboration
      */
     public void setCollaboration(Object c) {
-        LOG.log(Level.FINE, "Setting the collaboration of sequence diagram to {0}", c);
+        
         collaboration = c;
         Collection interactions = Model.getFacade().getInteractions(c);
         if (!interactions.isEmpty()) {
@@ -196,7 +190,7 @@ class SequenceDiagramGraphModel extends UMLMutableGraphSupport implements
             interaction =
                 Model.getCollaborationsFactory().buildInteraction(
                     collaboration);
-            LOG.log(Level.FINE, "Interaction built.");
+            
             Model.getPump().addModelEventListener(this, interaction);
         }
         return interaction;
@@ -264,20 +258,16 @@ class SequenceDiagramGraphModel extends UMLMutableGraphSupport implements
 
         // Both ends must be defined and nodes that are on the graph already.
         if (end0 == null || end1 == null) {
-            LOG.log(Level.SEVERE, "Edge rejected. Its ends are not attached to anything");
+            
             return false;
         }
 
         if (!containsNode(end0) && !containsEdge(end0)) {
-            LOG.log(Level.SEVERE, "Edge rejected. Its source end is attached to "
-                    + end0
-                    + " but this is not in the graph model");
+            
             return false;
         }
         if (!containsNode(end1) && !containsEdge(end1)) {
-            LOG.log(Level.SEVERE, "Edge rejected. Its destination end is attached to "
-                    + end1
-                    + " but this is not in the graph model");
+            
             return false;
         }
 
@@ -417,7 +407,7 @@ class SequenceDiagramGraphModel extends UMLMutableGraphSupport implements
             edge = message;
         }
         if (edge == null) {
-            LOG.log(Level.FINE, "Incorrect edge");
+            
         }
         return edge;
 
@@ -435,7 +425,7 @@ class SequenceDiagramGraphModel extends UMLMutableGraphSupport implements
             addEdge(message);
             return message;
         }
-        LOG.log(Level.FINE, "Incorrect edge");
+        
         return null;
 
     }

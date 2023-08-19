@@ -49,8 +49,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.AddAssociationEvent;
 import org.argouml.model.AssociationChangeEvent;
@@ -76,8 +74,7 @@ import org.tigris.gef.presentation.FigText;
  */
 public class FigAssociation extends FigEdgeModelElement {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigAssociation.class.getName());
+    
 
     /**
      * Group for the FigTexts concerning the source association end.
@@ -554,7 +551,7 @@ public class FigAssociation extends FigEdgeModelElement {
     @Override
     public void paint(Graphics g) {
         if (getOwner() == null ) {
-            LOG.log(Level.SEVERE, "Trying to paint a FigAssociation without an owner. ");
+            
         } else {
             if (!Model.getFacade().isAConnector(getOwner())) {
                 // If we're a UML2 Connector then we don't need arrows.
