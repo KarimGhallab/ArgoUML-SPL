@@ -39,8 +39,6 @@
 package org.argouml.uml.diagram.collaboration.ui;
 
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.CommentEdge;
@@ -84,11 +82,7 @@ import org.tigris.gef.presentation.FigNode;
  * @author agauthie
  */
 public class CollabDiagramRenderer extends UmlDiagramRenderer {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(CollabDiagramRenderer.class.getName());
+    
 
     /*
      * @see org.tigris.gef.graph.GraphNodeRenderer#getFigNodeFor(
@@ -109,7 +103,7 @@ public class CollabDiagramRenderer extends UmlDiagramRenderer {
                 && ((UMLDiagram) diag).doesAccept(node)) {
             figNode = (FigNode) ((UMLDiagram) diag).drop(node, null);
         } else {
-            LOG.log(Level.SEVERE, "TODO: CollabDiagramRenderer getFigNodeFor");
+            
             throw new IllegalArgumentException(
                     "Node is not a recognised type. Received "
                     + node.getClass().getName());
@@ -128,7 +122,7 @@ public class CollabDiagramRenderer extends UmlDiagramRenderer {
      */
     public FigEdge getFigEdgeFor(GraphModel gm, Layer lay,
 				 Object edge, Map styleAttributes) {
-        LOG.log(Level.FINE, "making figedge for {0}", edge);
+        
 
         if (edge == null) {
             throw new IllegalArgumentException("A model edge must be supplied");

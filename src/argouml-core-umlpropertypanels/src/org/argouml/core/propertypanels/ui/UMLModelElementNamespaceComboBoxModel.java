@@ -43,8 +43,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -64,8 +62,7 @@ class UMLModelElementNamespaceComboBoxModel extends UMLComboBoxModel {
     /**
      * Logger.
      */
-    private static final Logger LOG =
-        Logger.getLogger(UMLModelElementNamespaceComboBoxModel.class.getName());
+    
 
     /**
      * The UID.
@@ -131,7 +128,7 @@ class UMLModelElementNamespaceComboBoxModel extends UMLComboBoxModel {
         Object namespace = Model.getFacade().getNamespace(target);
         if (namespace != null && !elements.contains(namespace)) {
             elements.add(namespace);
-            LOG.log(Level.WARNING, "The current namespace is not a valid one!");
+            
         }
 
         // Our comparator will throw an InvalidElementException if the old

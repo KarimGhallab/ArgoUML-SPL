@@ -46,8 +46,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelEvent;
@@ -70,8 +68,7 @@ import org.argouml.model.Model;
 public class TabTaggedValuesModel extends AbstractTableModel implements
         VetoableChangeListener, DelayedVChangeListener, PropertyChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(TabTaggedValuesModel.class.getName());
+    
 
     /**
      * The ModelElement that is the current target.
@@ -90,7 +87,7 @@ public class TabTaggedValuesModel extends AbstractTableModel implements
      * @param t the target modelelement
      */
     public void setTarget(Object t) {
-        LOG.log(Level.FINE, "Set target to {0} ", t);
+        
         
         if (t != null && !Model.getFacade().isAModelElement(t)) {
             throw new IllegalArgumentException();

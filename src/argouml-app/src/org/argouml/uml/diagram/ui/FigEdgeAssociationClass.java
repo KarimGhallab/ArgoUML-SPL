@@ -43,8 +43,6 @@ import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.VetoableChangeListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.DelayedVChangeListener;
 import org.argouml.uml.diagram.DiagramSettings;
@@ -74,12 +72,11 @@ public class FigEdgeAssociationClass
      */
     private static final long serialVersionUID = 4627163341288968877L;
 
-    private static final Logger LOG =
-        Logger.getLogger(FigEdgeAssociationClass.class.getName());
+    
 
     private void constructFigs(FigClassAssociationClass classBoxFig,
             Fig ownerFig) {
-        LOG.log(Level.INFO, "FigEdgeAssociationClass constructor");
+        
         if (classBoxFig == null) {
             throw new IllegalArgumentException("No class box found while "
                     + "creating FigEdgeAssociationClass");
@@ -176,8 +173,7 @@ public class FigEdgeAssociationClass
             node = getSourceFigNode();
         }
         if (!(node instanceof FigEdgePort || node instanceof FigNodeAssociation)) {
-            LOG.log(Level.WARNING, "The is no FigEdgePort attached"
-                    + " to the association class link");
+            
             return null;
         }
 
@@ -188,7 +184,7 @@ public class FigEdgeAssociationClass
         } else {
             delegate = node;
         }
-        LOG.log(Level.INFO, "Delegating remove to {0}", delegate.getClass().getName());
+        
 //            throw new IllegalArgumentException();
         return delegate;
     }

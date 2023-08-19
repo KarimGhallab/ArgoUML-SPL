@@ -53,8 +53,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -98,11 +96,7 @@ import org.argouml.util.ArgoDialog;
  * @author  alexb
  */
 public class PerspectiveConfigurator extends ArgoDialog {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(PerspectiveConfigurator.class.getName());
+    
 
     /**
      * Insets in pixels.
@@ -661,7 +655,7 @@ public class PerspectiveConfigurator extends ArgoDialog {
             ruleLibraryList.setSelectedIndex(selLibNr);
             updateRuleLabel();
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "problem adding rule", e);
+            
         }
     }
 

@@ -39,8 +39,6 @@
 
 package org.argouml.profile;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.ProfileConfiguration;
 import org.argouml.model.InvalidElementException;
@@ -56,8 +54,7 @@ import org.argouml.model.InvalidElementException;
  */
 public class ProfileFacade {
 
-    private static final Logger LOG =
-        Logger.getLogger(ProfileFacade.class.getName());
+    
 
     /**
      * Register a profile in the {@link ProfileManager}.
@@ -108,8 +105,7 @@ public class ProfileFacade {
                 try {
                     manager.removeProfile(p);
                 } catch (InvalidElementException e) {
-                    LOG.log(Level.FINE,
-                            "Attempted to delete extent twice.");
+                    
                 }
             }
         }

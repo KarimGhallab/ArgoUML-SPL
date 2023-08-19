@@ -41,8 +41,6 @@ package org.argouml.notation;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 
@@ -62,8 +60,7 @@ import org.argouml.configuration.ConfigurationKey;
  */
 public final class Notation implements PropertyChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(Notation.class.getName());
+    
 
     // TODO: Do we have any potential consumers of the unversioned name outside
     // of the notation subsystem?
@@ -187,8 +184,7 @@ public final class Notation implements PropertyChangeListener {
      * @param n the NotationName that will become default
      */
     public static void setDefaultNotation(NotationName n) {
-        LOG.log(Level.INFO,
-                "default notation set to {0}", n.getConfigurationValue());
+        
 
         Configuration.setString(
             KEY_DEFAULT_NOTATION,
@@ -220,7 +216,7 @@ public final class Notation implements PropertyChangeListener {
         if (n == null) {
             n = NotationNameImpl.findNotation(DEFAULT_NOTATION);
 	}
-        LOG.log(Level.FINE, "default notation is {0}", n.getConfigurationValue());
+        
         return n;
     }
 
@@ -243,8 +239,7 @@ public final class Notation implements PropertyChangeListener {
      * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
      */
     public void propertyChange(PropertyChangeEvent pce) {
-        LOG.log(Level.INFO, "Notation change: {0} to {1}",
-                new Object[]{pce.getOldValue(), pce.getNewValue()});
+        
 
         ArgoEventPump.fireEvent(
             new ArgoNotationEvent(ArgoEventTypes.NOTATION_CHANGED, pce));

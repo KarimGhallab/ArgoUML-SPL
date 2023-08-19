@@ -42,8 +42,6 @@ package org.argouml.ui.explorer;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -70,8 +68,7 @@ import org.argouml.util.ArgoFrame;
  */
 public class ActionDeployProfile extends AbstractAction {
 
-    private static final Logger LOG =
-        Logger.getLogger(ActionDeployProfile.class.getName());
+    
 
     private Object undeployedProfile;
 
@@ -109,7 +106,7 @@ public class ActionDeployProfile extends AbstractAction {
             profileManager.registerProfile(new UserDefinedProfile(f,
                 profileManager));
         } catch (ProfileException e) {
-            LOG.log(Level.WARNING, "failed to load profile from file " + f.getPath(), e);
+            
         }
     }
 

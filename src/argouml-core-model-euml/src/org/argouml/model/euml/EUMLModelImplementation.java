@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.DiagramInterchangeModel;
 import org.argouml.model.MessageSort;
@@ -81,8 +79,7 @@ import org.eclipse.uml2.uml.resource.XMI2UMLResource;
  */
 public class EUMLModelImplementation implements ModelImplementation {
 
-    private static final Logger LOG =
-        Logger.getLogger(EUMLModelImplementation.class.getName());
+    
 
     private ActivityGraphsFactoryEUMLlImpl theActivityGraphsFactory;
 
@@ -176,8 +173,7 @@ public class EUMLModelImplementation implements ModelImplementation {
      */
     public EUMLModelImplementation() {
         initializeEditingDomain();
-        LOG.log(Level.FINE,
-                "EUML Init - editing domain initialized"); //$NON-NLS-1$
+        
     }
 
     /**
@@ -241,7 +237,7 @@ public class EUMLModelImplementation implements ModelImplementation {
                         "jar:file:" //$NON-NLS-1$
                         + path
                         + "!/"); //$NON-NLS-1$
-            LOG.log(Level.FINE, "eUML.resource URI --> " + uri); //$NON-NLS-1$
+            
 
             Registry packageRegistry = resourceSet.getPackageRegistry();
             packageRegistry.put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);

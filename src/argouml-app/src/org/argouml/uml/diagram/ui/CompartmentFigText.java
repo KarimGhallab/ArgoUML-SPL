@@ -55,8 +55,7 @@ import org.tigris.gef.presentation.FigText;
  *
  * @author thn
  */
-public abstract class CompartmentFigText extends FigSingleLineTextWithNotation
-        implements Clarifiable {
+public abstract class CompartmentFigText extends FigSingleLineTextWithNotation {
     
     private static final int MARGIN = 3;
 

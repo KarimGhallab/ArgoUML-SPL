@@ -17,8 +17,6 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -34,8 +32,7 @@ import org.argouml.ui.UndoableAction;
 class UMLComponentInstanceClassifierComboBoxModel
     extends  UMLComboBoxModel {
 
-    private static final Logger LOG =
-	Logger.getLogger("UMLComponentInstanceClassifierComboBoxModel");
+    
 
     public UMLComponentInstanceClassifierComboBoxModel(
             final String propertyName,
@@ -68,7 +65,7 @@ class UMLComponentInstanceClassifierComboBoxModel
             } catch (ProfileException e) {
                 // TODO: We need to rethrow this as some other exception
                 // type but that is too much change for the moment.
-                LOG.log(Level.SEVERE, "Exception", e);
+                
             }
         }
         setElements(list);

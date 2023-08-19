@@ -43,8 +43,6 @@ package org.argouml.uml.diagram.static_structure.ui;
 import java.awt.Rectangle;
 import java.beans.PropertyVetoException;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -56,11 +54,6 @@ import org.argouml.uml.CommentEdge;
 import org.argouml.uml.diagram.DiagramEdgeSettings;
 import org.argouml.uml.diagram.DiagramElement;
 import org.argouml.uml.diagram.DiagramSettings;
-import org.argouml.uml.diagram.deployment.ui.FigComponent;
-import org.argouml.uml.diagram.deployment.ui.FigComponentInstance;
-import org.argouml.uml.diagram.deployment.ui.FigMNode;
-import org.argouml.uml.diagram.deployment.ui.FigNodeInstance;
-import org.argouml.uml.diagram.deployment.ui.FigObject;
 import org.argouml.uml.diagram.static_structure.ClassDiagramGraphModel;
 import org.argouml.uml.diagram.ui.FigAbstraction;
 import org.argouml.uml.diagram.ui.FigAssociation;
@@ -95,8 +88,7 @@ import org.tigris.gef.presentation.FigNode;
  */
 public class UMLClassDiagram extends UMLDiagram implements ClassDiagram {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLClassDiagram.class.getName());
+    
 
     ////////////////
     // actions for toolbar
@@ -161,9 +153,7 @@ public class UMLClassDiagram extends UMLDiagram implements ClassDiagram {
         try {
             setName(name);
         } catch (PropertyVetoException pve) {
-            LOG.log(Level.WARNING,
-                    "Generated diagram name '" + name
-                    + "' was vetoed by setName");
+            
         }
     }
 
@@ -172,9 +162,7 @@ public class UMLClassDiagram extends UMLDiagram implements ClassDiagram {
      */
     public void setNamespace(Object ns) {
         if (!Model.getFacade().isANamespace(ns)) {
-            LOG.log(Level.SEVERE,
-                    "Illegal argument. "
-                    + "Object " + ns + " is not a namespace");
+            
             throw new IllegalArgumentException("Illegal argument. "
             			       + "Object " + ns
             			       + " is not a namespace");
@@ -919,24 +907,22 @@ public class UMLClassDiagram extends UMLDiagram implements ClassDiagram {
         } else if (Model.getFacade().isAUseCase(modelElement)) {
             figNode = new FigUseCase(modelElement, bounds, settings);
         } else if (Model.getFacade().isAObject(modelElement)) {
-            figNode = new FigObject(modelElement, bounds, settings);
+            
         } else if (Model.getFacade().isAInstanceSpecification(modelElement)) {
-            figNode = new FigObject(modelElement, bounds, settings);
+            
         } else if (Model.getFacade().isANodeInstance(modelElement)) {
-            figNode = new FigNodeInstance(modelElement, bounds, settings);
+            
         } else if (Model.getFacade().isAComponentInstance(modelElement)) {
-            figNode = new FigComponentInstance(modelElement, bounds, settings);
+            
         } else if (Model.getFacade().isANode(modelElement)) {
-            figNode = new FigMNode(modelElement, bounds, settings);
+            
         } else if (Model.getFacade().isAComponent(modelElement)) {
-            figNode = new FigComponent(modelElement, bounds, settings);
+            
         }
         if (figNode != null) {
-            LOG.log(Level.FINE,
-                    "Model element {0} converted to {1}",
-                    new Object[]{modelElement, figNode});
+            
         } else {
-            LOG.log(Level.FINE, "Dropped object NOT added {0}", figNode);
+            
         }
         return figNode;
     }

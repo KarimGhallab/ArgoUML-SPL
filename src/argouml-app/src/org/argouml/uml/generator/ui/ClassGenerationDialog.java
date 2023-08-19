@@ -53,8 +53,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -88,11 +86,7 @@ public class ClassGenerationDialog extends ArgoDialog
 
     private static final String SOURCE_LANGUAGE_TAG = "src_lang";
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ClassGenerationDialog.class.getName());
+    
 
     private TableModelClassChecks classTableModel;
 
@@ -474,7 +468,7 @@ public class ClassGenerationDialog extends ArgoDialog
             } // else ignore
         } catch (Exception userPressedCancel) {
             // TODO: How does the pressed cancel become a java.lang.Exception?
-            LOG.log(Level.INFO, "user pressed cancel");
+            
         }
     }
 

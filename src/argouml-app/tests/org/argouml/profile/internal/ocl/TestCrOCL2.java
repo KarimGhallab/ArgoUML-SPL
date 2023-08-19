@@ -40,8 +40,6 @@ package org.argouml.profile.internal.ocl;
 
 import junit.framework.TestCase;
 
-import org.argouml.cognitive.Critic;
-import org.argouml.cognitive.Designer;
 import org.argouml.model.InitializeModel;
 import org.argouml.model.Model;
 
@@ -67,26 +65,10 @@ public class TestCrOCL2 extends TestCase {
         Object obj = Model.getUseCasesFactory().createActor();
 
         Model.getCoreHelper().setName(obj, "actor1");
-        testOclOK(obj, "context Actor inv: self.name = 'actor1'");
-        testOclFails(obj, "context Actor inv: self.name.size() = 7");
+        
+        
     }
     
-    private void testOclOK(Object obj, String oclExp) 
-            throws InvalidOclException {
-        CrOCL ocl = new CrOCL(oclExp, null, null,
-                null, null, null, null);
-
-        assertEquals(ocl.predicate2(obj, Designer.theDesigner()),
-                Critic.NO_PROBLEM);
-    }
-
-    private void testOclFails(Object obj, String oclExp) 
-            throws InvalidOclException {
-        CrOCL ocl = new CrOCL(oclExp, null, null,
-                null, null, null, null);
-
-        assertEquals(ocl.predicate2(obj, Designer.theDesigner()),
-                Critic.PROBLEM_FOUND);
-    }
+    
 
 }

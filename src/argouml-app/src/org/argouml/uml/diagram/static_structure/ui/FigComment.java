@@ -54,8 +54,6 @@ import java.beans.VetoableChangeListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -88,11 +86,7 @@ public class FigComment
 	       MouseListener,
 	       KeyListener,
 	       PropertyChangeListener {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(FigComment.class.getName());
+    
 
     ////////////////////////////////////////////////////////////////
     // constants
@@ -273,7 +267,7 @@ public class FigComment
                     && !Model.getModelManagementHelper().isReadOnly(owner)) {
                 readyToEdit = true;
             } else {
-                LOG.log(Level.FINE, "not ready to edit note");
+                
                 return;
             }
         }
@@ -305,9 +299,7 @@ public class FigComment
 		new DelayedChangeNotify(this, pce);
             SwingUtilities.invokeLater(delayedNotify);
         } else {
-            LOG.log(Level.FINE,
-                    "FigNodeModelElement got vetoableChange from non-owner: {0}",
-                    src);
+            
         }
     }
 
@@ -376,7 +368,7 @@ public class FigComment
                 storeBody("");
                 readyToEdit = true;
             } else {
-                LOG.log(Level.FINE, "not ready to edit note");
+                
                 return;
             }
         }

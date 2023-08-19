@@ -38,8 +38,6 @@
 
 package org.argouml.ui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
@@ -53,8 +51,7 @@ import javax.swing.tree.TreePath;
  */
 public class TreeModelComposite extends TreeModelSupport implements TreeModel {
 
-    private static final Logger LOG =
-        Logger.getLogger(TreeModelComposite.class.getName());
+    
 
     /** The root of the model. */
     private Object root;
@@ -114,7 +111,7 @@ public class TreeModelComposite extends TreeModelSupport implements TreeModel {
             }
             childCount += tm.getChildCount(parent);
         }
-        LOG.log(Level.FINE, "child not found!");
+        
 
         //The child is sometimes not found when the tree is being updated
         return -1;

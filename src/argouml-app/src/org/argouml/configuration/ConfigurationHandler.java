@@ -42,8 +42,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *   This class provides a user configuration based upon properties.
@@ -93,11 +91,7 @@ public abstract class ConfigurationHandler {
      */
     private static PropertyChangeSupport pcl;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ConfigurationHandler.class.getName());
+    
 
     /**
      * Anonymous constructor allows configuration changes.
@@ -436,7 +430,7 @@ public abstract class ConfigurationHandler {
         if (pcl == null) {
             pcl = new PropertyChangeSupport(this);
         }
-        LOG.log(Level.FINE, "addPropertyChangeListener({0})", p);
+        
         pcl.addPropertyChangeListener(p);
     }
 
@@ -447,7 +441,7 @@ public abstract class ConfigurationHandler {
      */
     public final void removeListener(PropertyChangeListener p) {
         if (pcl != null) {
-            LOG.log(Level.FINE, "removePropertyChangeListener()");
+            
             pcl.removePropertyChangeListener(p);
         }
     }
@@ -463,7 +457,7 @@ public abstract class ConfigurationHandler {
         if (pcl == null) {
             pcl = new PropertyChangeSupport(this);
         }
-        LOG.log(Level.FINE, "addPropertyChangeListener({0})", key.getKey());
+        
         pcl.addPropertyChangeListener(key.getKey(), p);
     }
 
@@ -476,7 +470,7 @@ public abstract class ConfigurationHandler {
     public final void removeListener(ConfigurationKey key,
                                      PropertyChangeListener p) {
         if (pcl != null) {
-            LOG.log(Level.FINE, "removePropertyChangeListener({0})", key.getKey());
+            
             pcl.removePropertyChangeListener(key.getKey(), p);
         }
     }

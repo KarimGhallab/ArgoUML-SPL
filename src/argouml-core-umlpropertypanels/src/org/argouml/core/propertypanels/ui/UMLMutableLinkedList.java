@@ -43,8 +43,6 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JPopupMenu;
@@ -78,8 +76,7 @@ import org.argouml.uml.ui.AbstractActionRemoveElement;
  */
 class UMLMutableLinkedList extends UMLLinkedList implements MouseListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLMutableLinkedList.class.getName());
+    
 
     private boolean deletePossible = true;
 
@@ -329,8 +326,7 @@ class UMLMutableLinkedList extends UMLLinkedList implements MouseListener {
             }
             if (popup.getComponentCount() > 0) {
                 initActions();
-                LOG.log(Level.INFO,
-                        "Showing popup at " + e.getX() + "," + e.getY());
+                
 
                 popup.show(this, e.getX(), e.getY());
             }
@@ -348,9 +344,7 @@ class UMLMutableLinkedList extends UMLLinkedList implements MouseListener {
             JPopupMenu popup = getPopupMenu();
             if (popup.getComponentCount() > 0) {
                 initActions();
-                LOG.log(Level.FINE,
-                        "Showing popup at {0},{1}",
-                        new Object[]{e.getX(), e.getY()});
+                
                 getPopupMenu().show(this, e.getX(), e.getY());
             }
             e.consume();
@@ -411,8 +405,7 @@ class UMLMutableLinkedList extends UMLLinkedList implements MouseListener {
             JPopupMenu popup = getPopupMenu();
             if (popup.getComponentCount() > 0) {
                 initActions();
-                LOG.log(Level.INFO,
-                        "Showing popup at " + e.getX() + "," + e.getY());
+                
                 getPopupMenu().show(this, e.getX(), e.getY());
             }
             e.consume();

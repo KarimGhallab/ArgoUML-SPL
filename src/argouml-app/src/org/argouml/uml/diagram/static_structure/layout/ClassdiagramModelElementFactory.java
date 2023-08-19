@@ -38,8 +38,6 @@
 
 package org.argouml.uml.diagram.static_structure.layout;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.uml.diagram.layout.LayoutedObject;
 import org.argouml.uml.diagram.static_structure.ui.FigComment;
@@ -58,8 +56,7 @@ import org.tigris.gef.presentation.FigNode;
 */
 public class ClassdiagramModelElementFactory
 {
-    private static final Logger LOG =
-        Logger.getLogger(ClassdiagramModelElementFactory.class.getName());
+    
 
     /**
      * The singleton.
@@ -88,9 +85,7 @@ public class ClassdiagramModelElementFactory
         } else if (f instanceof FigEdgeNote) {
             return (new ClassdiagramNoteEdge((FigEdgeNote) f));
         }
-        LOG.log(Level.FINE,
-                "Do not know how to deal with: {0}\nUsing standard layout",
-                f.getClass().getName());
+        
         return null;
     }
 }
