@@ -44,8 +44,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -56,14 +54,12 @@ import java.util.zip.ZipInputStream;
  */
 public class ZipModelLoader extends StreamModelLoader {
 
-    private static final Logger LOG =
-        Logger.getLogger(ZipModelLoader.class.getName());
+    
 
 
     public Collection loadModel(ProfileReference reference)
         throws ProfileException {
-        LOG.log(Level.INFO,
-                "Loading profile from ZIP {0}", reference.getPath());
+        
 
         if (!reference.getPath().endsWith("zip")) {
             throw new ProfileException("Profile could not be loaded!");
@@ -86,16 +82,10 @@ public class ZipModelLoader extends StreamModelLoader {
         try {
             is = openZipStreamAt(modelFile.toURI().toURL(), extension);
         } catch (MalformedURLException e) {
-            LOG.log(Level.SEVERE,
-                    "Exception while loading profile '"
-                    + reference.getPath() + "'",
-                    e);
+            
             throw new ProfileException(e);
         } catch (IOException e) {
-            LOG.log(Level.SEVERE,
-                    "Exception while loading profile '"
-                    + reference.getPath() + "'",
-                    e);
+            
             throw new ProfileException(e);
         }
 

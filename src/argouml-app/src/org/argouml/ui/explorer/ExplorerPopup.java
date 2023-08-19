@@ -48,8 +48,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -108,8 +106,7 @@ public class ExplorerPopup extends JPopupMenu {
     private JMenu createDiagrams =
         new JMenu(menuLocalize("menu.popup.create-diagram"));
 
-    private static final Logger LOG =
-        Logger.getLogger(ExplorerPopup.class.getName());
+    
 
     /**
      * Creates a new instance of ExplorerPopup.
@@ -480,7 +477,7 @@ public class ExplorerPopup extends JPopupMenu {
         final List<Action> contextActions =
             ContextActionFactoryManager.getContextPopupActions();
         
-        LOG.log(Level.INFO, "{0}", contextActions);
+        
         
         if (contextActions instanceof ActionList) {
             recursiveAdd(this, (Action) contextActions);
@@ -776,7 +773,7 @@ public class ExplorerPopup extends JPopupMenu {
                             null);
                 }
             } catch (IllegalModelElementConnectionException e1) {
-                LOG.log(Level.SEVERE, "Exception", e1);
+                
             }
         }
     }
@@ -822,7 +819,7 @@ public class ExplorerPopup extends JPopupMenu {
                             null);
                 }
             } catch (IllegalModelElementConnectionException e1) {
-                LOG.log(Level.SEVERE, "Exception", e1);
+                
             }
         }
     }

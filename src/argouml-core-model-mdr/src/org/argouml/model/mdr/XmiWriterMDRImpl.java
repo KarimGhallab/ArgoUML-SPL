@@ -41,7 +41,6 @@ package org.argouml.model.mdr;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
-import java.util.logging.Logger;
 
 import javax.jmi.reflect.RefObject;
 import javax.jmi.reflect.RefPackage;
@@ -69,8 +68,7 @@ import org.netbeans.lib.jmi.xmi.OutputConfig;
  */
 class XmiWriterMDRImpl implements XmiWriter {
 
-    private static final Logger LOG =
-        Logger.getLogger(XmiWriterMDRImpl.class.getName());
+    
 
     private MDRModelImplementation modelImpl;
 

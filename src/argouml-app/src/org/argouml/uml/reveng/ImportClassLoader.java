@@ -46,8 +46,6 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.api.Argo;
 import org.argouml.configuration.Configuration;
@@ -102,11 +100,7 @@ import org.argouml.configuration.Configuration;
  */
 public final class ImportClassLoader extends URLClassLoader {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ImportClassLoader.class.getName());
+    
 
     private static ImportClassLoader instance;
 
@@ -173,7 +167,7 @@ public final class ImportClassLoader extends URLClassLoader {
         try {
             url = f.toURI().toURL();
         } catch (MalformedURLException e) {
-            LOG.log(Level.WARNING, "could not remove file ", e);
+            
             return;
 	}
 
@@ -211,7 +205,7 @@ public final class ImportClassLoader extends URLClassLoader {
             try {
 		this.addFile(new File(token));
             } catch (MalformedURLException e) {
-                LOG.log(Level.WARNING, "could not set path ", e);
+                
 	    }
         }
     }
@@ -233,7 +227,7 @@ public final class ImportClassLoader extends URLClassLoader {
             try {
 		urlList.add(new File(token).toURI().toURL());
             } catch (MalformedURLException e) {
-                LOG.log(Level.SEVERE, "getURLs "+path,e);
+                
 	    }
         }
 
@@ -255,7 +249,7 @@ public final class ImportClassLoader extends URLClassLoader {
             try {
 		this.addFile(new File(paths[i].toString()));
             } catch (Exception e) {
-                LOG.log(Level.WARNING, "could not set path ", e);
+                
 	    }
         }
     }

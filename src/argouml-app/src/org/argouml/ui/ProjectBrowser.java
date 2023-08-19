@@ -67,8 +67,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -87,7 +85,6 @@ import org.argouml.application.events.ArgoEventPump;
 import org.argouml.application.events.ArgoEventTypes;
 import org.argouml.application.events.ArgoStatusEvent;
 import org.argouml.application.helpers.ResourceLoaderWrapper;
-import org.argouml.cognitive.Designer;
 import org.argouml.configuration.Configuration;
 import org.argouml.configuration.ConfigurationKey;
 import org.argouml.i18n.Translator;
@@ -149,11 +146,7 @@ public final class ProjectBrowser
      */
     public static final int DEFAULT_COMPONENTHEIGHT = 350;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ProjectBrowser.class.getName());
+    
 
 
     /**
@@ -952,9 +945,9 @@ public final class ProjectBrowser
      * save and exit, exit without saving or cancel the exit operation.
      */
     public boolean tryExit() {
-        LOG.log(Level.INFO, "Trying to exit the application");
+        
         if (saveAction != null && saveAction.isEnabled()) {
-            LOG.log(Level.INFO, "A save is needed - prompting the user");
+            
             Project p = ProjectManager.getManager().getCurrentProject();
 
             String t =
@@ -969,18 +962,18 @@ public final class ProjectBrowser
                 // The trySave method results in the save taking place in another thread.
                 // If that completes without error the ProjectBrowser.exit() method will
                 // be called which will actually exist the system.
-                LOG.log(Level.INFO, "The user chose to exit and save");
+                
                 trySave(ProjectManager.getManager().getCurrentProject() != null
                         && ProjectManager.getManager().getCurrentProject()
                                 .getURI() != null,
                                 false, true);
                 return false;
             } else if (response == JOptionPane.CANCEL_OPTION) {
-                LOG.log(Level.INFO, "The user cancelled the save dialog");
+                
                 return false;
             }
         }
-        LOG.log(Level.INFO, "We will now exit");
+        
         exit();
         return true;
     }
@@ -1016,9 +1009,7 @@ public final class ProjectBrowser
          * @see java.awt.event.WindowListener#windowClosing(java.awt.event.WindowEvent)
          */
         public void windowClosing(WindowEvent e) {
-            LOG.log(Level.INFO,
-                    "Detected attempt to close application - "
-                    + "checking if save needed");
+            
             tryExit();
         }
     } /* end class WindowCloser */
@@ -1035,7 +1026,7 @@ public final class ProjectBrowser
             if (p != null) {
                 titleHandler.buildTitle(p.getName(), null);
                 //Designer.TheDesigner.getToDoList().removeAllElements();
-                Designer.setCritiquingRoot(p);
+                
                 // update all panes
                 TargetManager.getInstance().setTarget(p.getInitialTarget());
             }
@@ -1174,7 +1165,7 @@ public final class ProjectBrowser
 
             // does the file really exists?
             if (!file.exists()) {
-                LOG.log(Level.WARNING, "Project file not found - URI: " + uri);
+                
                 // project file doesn't exist. let's pop up a message dialog..
                 int response = JOptionPane.showConfirmDialog(
                         this,
@@ -1260,7 +1251,7 @@ public final class ProjectBrowser
                 ProjectManager.getManager().getCurrentProject(),
                 file,
                 exit);
-        LOG.log(Level.INFO, "Starting save thread");
+        
         worker.start();
     }
 
@@ -1288,7 +1279,7 @@ public final class ProjectBrowser
     public boolean trySave(boolean overwrite,
             File file,
             ProgressMonitor pmw) {
-        LOG.log(Level.INFO, "Saving the project");
+        
 
         if (!PersistenceManager.getInstance().confirmOverwrite(
                 ArgoFrame.getFrame(), overwrite, file)) {
@@ -1321,7 +1312,7 @@ public final class ProjectBrowser
             final File file,
             final ProgressMonitor pmw,
             final Project project) {
-        LOG.log(Level.INFO, "Saving the project");
+        
         PersistenceManager pm = PersistenceManager.getInstance();
         ProjectFilePersister persister = null;
 
@@ -1370,8 +1361,7 @@ public final class ProjectBrowser
             ArgoEventPump.fireEvent(new ArgoStatusEvent(
                     ArgoEventTypes.STATUS_PROJECT_SAVED, this,
                     file.getAbsolutePath()));
-            LOG.fine ("setting most recent project file to "
-                   + file.getCanonicalPath());
+            
 
             /*
              * notification of menu bar
@@ -1409,7 +1399,7 @@ public final class ProjectBrowser
                             new Object[] {file.getName()}),
                     true, ex);
 
-            LOG.log(Level.SEVERE,sMessage, ex);
+            
         }
 
         return false;
@@ -1428,8 +1418,7 @@ public final class ProjectBrowser
             // A Fig with a null owner
             if (figs.size() > 0) {
                 Fig fig = (Fig) figs.get(0);
-                LOG.log(Level.SEVERE, "Setting owner of "
-                        + fig.getClass().getName() + " to null");
+                
                 fig.setOwner(null);
             }
             // A Fig with a null layer
@@ -1549,7 +1538,7 @@ public final class ProjectBrowser
      */
     public Project loadProject2(File file, boolean showUI,
             ProgressMonitor pmw) {
-        LOG.log(Level.INFO, "Loading project.");
+        
 
         PersistenceManager pm = PersistenceManager.getInstance();
         Project oldProject = ProjectManager.getManager().getCurrentProject();
@@ -1573,14 +1562,13 @@ public final class ProjectBrowser
         // active, so I remove the current project, before
         // loading the new one.
 
-        Designer.disableCritiquing();
-        Designer.clearCritiquing();
+        
         clearDialogs();
         Project project = null;
 
         if (!(file.canRead())) {
             reportError(pmw, "File not found " + file + ".", showUI);
-            Designer.enableCritiquing();
+            
             success = false;
         } else {
             // Hide save action during load. Otherwise we get the
@@ -1647,14 +1635,13 @@ public final class ProjectBrowser
                                 new Object[] {ex.getMessage()}),
                         showUI);
             } catch (OutOfMemoryError ex) {
-                LOG.log(Level.SEVERE,
-                        "Out of memory while loading project", ex);
+                
                 reportError(
                         pmw,
                         Translator.localize("dialog.error.memory.limit"),
                         showUI);
             } catch (java.lang.InterruptedException ex) {
-                LOG.log(Level.SEVERE, "Project loading interrupted by user");
+                
             } catch (UmlVersionException ex) {
                 reportError(
                         pmw,
@@ -1684,7 +1671,7 @@ public final class ProjectBrowser
                                     showUI, ex);
                 }
             } catch (IOException ex) {
-                LOG.log(Level.SEVERE, "Exception while loading project", ex);
+                
                 reportError(
                         pmw,
                         Translator.localize(
@@ -1692,7 +1679,7 @@ public final class ProjectBrowser
                                 new Object[] {file.getName()}),
                         showUI, ex);
             } catch (OpenException ex) {
-                LOG.log(Level.SEVERE, "Exception while loading project", ex);
+                
                 reportError(
                         pmw,
                         Translator.localize(
@@ -1707,7 +1694,7 @@ public final class ProjectBrowser
                         new Object[] {ex.getReference(), ex.getMessage()}),
                     ex.toString(), showUI);
             } catch (RuntimeException ex) {
-                LOG.log(Level.SEVERE, "Exception while loading project", ex);
+                
                 reportError(
                         pmw,
                         Translator.localize(
@@ -1739,11 +1726,9 @@ public final class ProjectBrowser
                     };
                     project.getUndoManager().addCommand(cmd);
 
-                    LOG.log(Level.INFO,
-                            "There are {0} diagrams in the current project",
-                            project.getDiagramList().size());
+                    
 
-                    Designer.enableCritiquing();
+                    
                 } finally {
                     // Make sure save action is always reinstated
                     this.saveAction = rememberedSaveAction;

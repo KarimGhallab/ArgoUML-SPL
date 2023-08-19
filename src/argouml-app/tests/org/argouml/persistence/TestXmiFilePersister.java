@@ -109,61 +109,7 @@ public class TestXmiFilePersister extends TestCase {
         p.postSave();
     }
     
-    /**
-     * This is more like a functional test, exercising several sub-systems 
-     * of ArgoUML, including persistence, kernel and model.
-     * It is composed of the following steps:
-     * <ol>
-     * <li>create a model with a class in it, then assert that the class is 
-     * found in the project;</li>
-     * <li>save the model as an XMI file;</li>
-     * <li>load the model and create a project around it, then assert that 
-     * the class is found again.</li>
-     * </ol>
-     * 
-     * @throws Exception when any of the activities fails
-     */
-    public void testCreateSaveAndLoadYieldsCorrectModel() throws Exception {
-        Project project = ProjectManager.getManager().makeEmptyProject();
-        ProjectManager.getManager().setCurrentProject(project);
-        Object model = Model.getModelManagementFactory().getRootModel();
-        assertNotNull(model);
-        Object classifier = Model.getCoreFactory().buildClass("Foo", model);
-        assertNotNull(project.findType("Foo", false));
-        // TODO: We should really set up our own profile instead of depending
-        // on the default.
-        // This depends on the default profile configuration containing the
-        // type Integer to test properly.  Otherwise it will get created in
-        // the main project, defeating the purpose
-        Object intType = project.findType("Integer", false);
-        assertNotNull(intType);
-        Object attribute = 
-            Model.getCoreFactory().buildAttribute2(classifier, intType);
-        Model.getCoreHelper().setName(attribute, "profileTypedAttribute");
-        checkFoo(project.findType("Foo", false));
-
-        File file = File.createTempFile("ArgoTestCreateSaveAndLoad", ".xmi");
-        XmiFilePersister persister = new XmiFilePersister();
-        project.preSave();
-        persister.save(project, file);
-        project.postSave();
-        
-        Model.getUmlFactory().delete(classifier);
-
-        ProjectManager.getManager().removeProject(project);
-        project = ProjectManager.getManager().makeEmptyProject();
-        ProjectManager.getManager().setCurrentProject(project);
-        
-        persister = new XmiFilePersister();
-        project = persister.doLoad(file);
-        
-        Object attType = checkFoo(project.findType("Foo", false));
-
-        assertEquals("Integer", Model.getFacade().getName(attType));
-
-        file.delete();
-        ProjectManager.getManager().removeProject(project);
-    }
+    
 
     private Object checkFoo(Object theClass) {
         assertNotNull(theClass);

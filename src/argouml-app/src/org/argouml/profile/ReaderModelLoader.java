@@ -40,8 +40,6 @@ package org.argouml.profile;
 
 import java.io.Reader;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.model.UmlException;
@@ -57,8 +55,7 @@ import org.xml.sax.InputSource;
  */
 public class ReaderModelLoader implements ProfileModelLoader {
 
-    private static final Logger LOG =
-        Logger.getLogger(ReaderModelLoader.class.getName());
+    
 
     private Reader reader;
 
@@ -79,7 +76,7 @@ public class ReaderModelLoader implements ProfileModelLoader {
         throws ProfileException {
 
         if (reader == null) {
-            LOG.log(Level.SEVERE, "Profile not found");
+            
             throw new ProfileException("Profile not found!");
         }
 

@@ -44,8 +44,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -68,11 +66,7 @@ import org.argouml.model.Model;
  */
 public final class ResourceLoaderWrapper {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ResourceLoaderWrapper.class.getName());
+    
 
     private static ImageIcon initialStateIcon;
     private static ImageIcon deepIcon;
@@ -310,8 +304,7 @@ public final class ResourceLoaderWrapper {
 
                 icon = lookupIconResource(cName);
                 if (icon == null) {
-                    LOG.log(Level.FINE,
-                            "Can't find icon for {0}", cName);
+                    
                 } else {
                     synchronized (iconCache) {
                         iconCache.put(value.getClass(), icon);
@@ -320,7 +313,7 @@ public final class ResourceLoaderWrapper {
 
             }
         } catch (InvalidElementException e) {
-            LOG.log(Level.FINE, "Attempted to get icon for deleted element");
+            
             return null;
         }
         return icon;

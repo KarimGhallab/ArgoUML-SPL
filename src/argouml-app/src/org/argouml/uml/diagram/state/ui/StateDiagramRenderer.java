@@ -39,8 +39,6 @@
 package org.argouml.uml.diagram.state.ui;
 
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.CommentEdge;
@@ -84,8 +82,7 @@ import org.tigris.gef.presentation.FigNode;
  */
 public class StateDiagramRenderer extends UmlDiagramRenderer {
 
-    private static final Logger LOG =
-        Logger.getLogger(StateDiagramRenderer.class.getName());
+    
 
     /*
      * @see org.tigris.gef.graph.GraphNodeRenderer#getFigNodeFor(
@@ -105,7 +102,7 @@ public class StateDiagramRenderer extends UmlDiagramRenderer {
                 && ((UMLDiagram) diag).doesAccept(node)) {
             figNode = (FigNode) ((UMLDiagram) diag).drop(node, null);
         } else {
-            LOG.log(Level.FINE, "TODO: StateDiagramRenderer getFigNodeFor");
+            
 
             throw new IllegalArgumentException(
                     "Node is not a recognised type. Received "

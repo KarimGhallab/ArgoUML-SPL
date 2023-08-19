@@ -49,8 +49,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JSeparator;
 
@@ -82,8 +80,7 @@ public class FigMessage extends FigEdgeModelElement {
 
     private static final long serialVersionUID = -2961220746360335159L;
 
-    private static final Logger LOG =
-        Logger.getLogger(FigEdgeModelElement.class.getName());
+    
 
     private FigTextGroup textGroup;
 
@@ -446,7 +443,7 @@ public class FigMessage extends FigEdgeModelElement {
             updateElementListeners(listeners);
         } catch (Exception e) {
             // This call seems not very robust. Yet to determine cause.
-            LOG.log(Level.SEVERE, "Exception caught", e);
+            
         }
     }
 

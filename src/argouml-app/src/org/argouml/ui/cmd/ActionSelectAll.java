@@ -38,7 +38,6 @@
 
 package org.argouml.ui.cmd;
 
-import org.argouml.cognitive.Translator;
 import org.tigris.gef.base.SelectAllAction;
 
 /**
@@ -52,7 +51,7 @@ public class ActionSelectAll extends SelectAllAction {
      * The constructor.
      */
     public ActionSelectAll() {
-        this(Translator.localize("menu.item.select-all"));
+        this("No-translator-config");
     }
 
     /**

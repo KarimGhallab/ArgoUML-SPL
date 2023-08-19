@@ -45,8 +45,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jmi.reflect.InvalidObjectException;
 import javax.jmi.reflect.RefClass;
@@ -81,8 +79,7 @@ import org.omg.uml.modelmanagement.UmlPackage;
  */
 class ModelManagementHelperMDRImpl implements ModelManagementHelper {
 
-    private static final Logger LOG =
-        Logger.getLogger(ModelManagementHelperMDRImpl.class.getName());
+    
 
     /**
      * The model implementation.
@@ -230,10 +227,7 @@ class ModelManagementHelperMDRImpl implements ModelManagementHelper {
                 returnElements.add(me);
             }
         }
-        if ( LOG.isLoggable( Level.FINE ) ) {
-            long duration = System.currentTimeMillis() - startTime;
-            LOG.log(Level.FINE, "Get allOfKind took {0} msec.", duration);
-        }
+        
         return returnElements;
     }
 
@@ -894,8 +888,7 @@ class ModelManagementHelperMDRImpl implements ModelManagementHelper {
              */
             if (pack instanceof Collaboration) {
                 // TODO: Not implemented
-                LOG.log(Level.FINE,
-                        "Not implemented - getAllContents for: {0}", pack);
+                
             }
         } catch (InvalidObjectException e) {
             throw new InvalidElementException(e);

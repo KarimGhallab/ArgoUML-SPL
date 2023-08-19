@@ -42,8 +42,6 @@ import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -62,8 +60,7 @@ import org.tigris.toolbar.toolbutton.PopupToolBoxButton;
  */
 public class ToolBarUtility {
 
-    private static final Logger LOG =
-        Logger.getLogger(ToolBarUtility.class.getName());
+    
 
     /**
      * Manages the selection of the default tool
@@ -181,7 +178,7 @@ public class ToolBarUtility {
         PopupToolBoxButton toolBox = null;
         for (int i = 0; i < actions.length; ++i) {
             if (actions[i] instanceof Action) {
-                LOG.log(Level.INFO, "Adding a {0} to the toolbar", actions[i]);
+                
 
                 Action a = (Action) actions[i];
                 if (toolBox == null) {
@@ -201,8 +198,7 @@ public class ToolBarUtility {
                     toolBox.add(a);
                 }
             } else {
-                LOG.log(Level.SEVERE,
-                        "Can't add a " + actions[i] + " to the toolbar");
+                
             }
         }
         return toolBox;

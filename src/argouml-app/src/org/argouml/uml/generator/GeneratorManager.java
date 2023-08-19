@@ -42,8 +42,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.events.ArgoEventPump;
 import org.argouml.application.events.ArgoEventTypes;
@@ -57,11 +55,7 @@ import org.argouml.uml.reveng.ImportInterface;
  * language. GeneratorManager is a singleton.
  */
 public final class GeneratorManager {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(GeneratorManager.class.getName());
+    
 
     /**
      * The instance.
@@ -102,7 +96,7 @@ public final class GeneratorManager {
         generators.put(lang, gen);
         ArgoEventPump.fireEvent(
                 new ArgoGeneratorEvent(ArgoEventTypes.GENERATOR_ADDED, gen));
-        LOG.log(Level.FINE, "Added generator {0} for {1}", new Object[]{gen, lang});
+        
     }
 
     /**
@@ -127,7 +121,7 @@ public final class GeneratorManager {
                     new ArgoGeneratorEvent(
                             ArgoEventTypes.GENERATOR_REMOVED, old));
         }
-        LOG.log(Level.FINE, "Removed generator {0} for {1}", new Object[]{old, lang});
+        
         return old;
     }
 

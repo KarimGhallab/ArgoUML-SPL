@@ -47,8 +47,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jmi.reflect.InvalidObjectException;
 import javax.jmi.reflect.RefObject;
@@ -178,11 +176,7 @@ import org.omg.uml.modelmanagement.UmlPackage;
 class UmlFactoryMDRImpl extends AbstractUmlModelFactoryMDR implements
         UmlFactory {
 
-    /**
-     * The logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UmlFactoryMDRImpl.class.getName());
+    
 
     /**
      * The model implementation.
@@ -1247,9 +1241,9 @@ class UmlFactoryMDRImpl extends AbstractUmlModelFactoryMDR implements
         }
 
         if (top == elem) {
-            LOG.log(Level.FINE, "Set top for cascade delete to {0}", elem);
+            
         }
-        LOG.log(Level.FINE, "Deleting {0}", elem);
+        
 
         // Begin a transaction - we'll do a bunch of reads first
         // to collect a set of elements to delete - then delete them all
@@ -1360,10 +1354,10 @@ class UmlFactoryMDRImpl extends AbstractUmlModelFactoryMDR implements
         } catch (InvalidObjectException e) {
             // If we get this with the repository locked, it means our root
             // model element was already deleted.  Nothing to do...
-            LOG.log(Level.SEVERE, "Encountered deleted object during delete of " + elem);
+            
         } catch (InvalidElementException e) {
             // Our wrapped version of the same error
-            LOG.log(Level.SEVERE, "Encountered deleted object during delete of " + elem);
+            
         } finally {
             // end our transaction
             modelImpl.getRepository().endTrans();
@@ -1393,7 +1387,7 @@ class UmlFactoryMDRImpl extends AbstractUmlModelFactoryMDR implements
                     elementsInDeletionOrder.add((RefObject) elem);
                 }
             } catch (InvalidObjectException e) {
-                LOG.log(Level.FINE, "Object already deleted {0}", elem);
+                
             }
 
             if (elem == top) {
@@ -1422,20 +1416,20 @@ class UmlFactoryMDRImpl extends AbstractUmlModelFactoryMDR implements
                                 containingCompositeState.setConcurrent(false);
                             }
                         } catch (InvalidObjectException e) {
-                            LOG.log(Level.FINE, "Object already deleted {0}", o);
+                            
                         }
                     }
                     try {
                         o.refDelete();
                     } catch (InvalidObjectException e) {
-                        LOG.log(Level.FINE, "Object already deleted {0}", o);
+                        
                     }
                     elementsToBeDeleted.remove(o);
                 }
                 top = null;
                 elementsInDeletionOrder.clear();
                 if (!elementsToBeDeleted.isEmpty()) {
-                    LOG.log(Level.FINE, "**Skipped deleting {0} elements (probably in a deleted container", elementsToBeDeleted.size());
+                    
                     elementsToBeDeleted.clear();
                 }
             }
@@ -1674,7 +1668,7 @@ class UmlFactoryMDRImpl extends AbstractUmlModelFactoryMDR implements
                 (org.omg.uml.UmlPackage) ((RefObject) element)
                     .refOutermostPackage();
 
-            LOG.log(Level.FINE, "Removing extent {0}", extent);
+            
 
             modelImpl.deleteExtent(extent);
         } catch (InvalidObjectException e) {

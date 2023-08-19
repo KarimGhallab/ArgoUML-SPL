@@ -44,8 +44,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.CommentEdge;
@@ -62,11 +60,7 @@ import org.tigris.gef.base.Globals;
  */
 public class ClassDiagramGraphModel extends UMLMutableGraphSupport
     implements VetoableChangeListener {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ClassDiagramGraphModel.class.getName());
+    
 
     ////////////////////////////////////////////////////////////////
     // GraphModel implementation
@@ -207,8 +201,7 @@ public class ClassDiagramGraphModel extends UMLMutableGraphSupport
         if (Model.getFacade().isAAssociation(node)
                 && !Model.getFacade().isANaryAssociation(node)) {
             // A binary association is not a node so reject.
-            LOG.log(Level.FINE,
-                    "A binary association cannot be added as a node");
+            
             return false;
         }
 
@@ -217,9 +210,7 @@ public class ClassDiagramGraphModel extends UMLMutableGraphSupport
         }
 
     	if (containsNode(node)) {
-            LOG.log(Level.SEVERE, "Addition of node of type "
-                    + node.getClass().getName()
-                    + " rejected because its already in the graph model");
+            
     	    return false;
     	}
         if (Model.getFacade().isAAssociation(node)) {
@@ -231,10 +222,7 @@ public class ClassDiagramGraphModel extends UMLMutableGraphSupport
                 Object classifier =
                     Model.getFacade().getClassifier(iter.next());
                 if (!containsNode(classifier)) {
-                    LOG.log(Level.SEVERE, "Addition of node of type "
-                            + node.getClass().getName()
-                            + " rejected because it is connected to a "
-                            + "classifier that is not in the diagram");
+                    
                     return false;
                 }
             }
@@ -272,15 +260,14 @@ public class ClassDiagramGraphModel extends UMLMutableGraphSupport
         if (Model.getFacade().isAAssociation(edge)) {
             Collection conns = Model.getFacade().getConnections(edge);
             if (conns.size() < 2) {
-                LOG.log(Level.SEVERE,
-                        "Association rejected. Must have at least 2 ends");
+                
                 return false;
             }
             Iterator iter = conns.iterator();
             Object associationEnd0 = iter.next();
             Object associationEnd1 = iter.next();
             if (associationEnd0 == null || associationEnd1 == null) {
-                LOG.log(Level.SEVERE, "Association rejected. An end is null");
+                
                 return false;
             }
             sourceModelElement = Model.getFacade().getType(associationEnd0);
@@ -289,24 +276,18 @@ public class ClassDiagramGraphModel extends UMLMutableGraphSupport
             sourceModelElement = Model.getFacade().getAssociation(edge);
             destModelElement = Model.getFacade().getType(edge);
             if (sourceModelElement == null || destModelElement == null) {
-                LOG.log(Level.SEVERE,
-                        "Association end rejected. An end is null");
+                
                 return false;
             }
 
             if (!containsEdge(sourceModelElement)
                     && !containsNode(sourceModelElement)) {
-                LOG.log(Level.SEVERE,
-                        "Association end rejected. The source model element ("
-                        + sourceModelElement.getClass().getName()
-                        + ") must be on the diagram");
+                
                 return false;
             }
 
             if (!containsNode(destModelElement)) {
-                LOG.log(Level.SEVERE, "Association end rejected. "
-                        + "The destination model element must be "
-                        + "on the diagram.");
+                
                 return false;
             }
 
@@ -344,9 +325,7 @@ public class ClassDiagramGraphModel extends UMLMutableGraphSupport
                 sourceModelElement = sources.iterator().next();
                 destModelElement = targets.iterator().next();
             } else {
-                LOG.log(Level.SEVERE,
-                        "Edge rejected. More than one source or target "
-                        + "for a DirectedRelationship");
+                
                 return false;
             }
         } else {
@@ -354,25 +333,18 @@ public class ClassDiagramGraphModel extends UMLMutableGraphSupport
         }
 
         if (sourceModelElement == null || destModelElement == null) {
-            LOG.log(Level.SEVERE,
-                    "Edge rejected. Its ends are not attached to anything");
+            
             return false;
         }
 
         if (!containsNode(sourceModelElement)
                 && !containsEdge(sourceModelElement)) {
-            LOG.log(Level.SEVERE,
-                    "Edge rejected. Its source end is attached to "
-                    + sourceModelElement
-                    + " but this is not in the graph model");
+            
             return false;
         }
         if (!containsNode(destModelElement)
                 && !containsEdge(destModelElement)) {
-            LOG.log(Level.SEVERE,
-                    "Edge rejected. Its destination end is attached to "
-                    + destModelElement
-                    + " but this is not in the graph model");
+            
             return false;
         }
 
@@ -419,12 +391,10 @@ public class ClassDiagramGraphModel extends UMLMutableGraphSupport
                     "The source and dest port should be provided on an edge");
         }
 
-        LOG.log(Level.INFO,
-                "Adding an edge of type {0} to class diagram.",
-                edge.getClass().getName());
+        
 
         if (!canAddEdge(edge)) {
-            LOG.log(Level.INFO, "Attempt to add edge rejected");
+            
             return;
         }
 
@@ -524,7 +494,7 @@ public class ClassDiagramGraphModel extends UMLMutableGraphSupport
 	    //MModelElement modelElement = elementImport.getModelElement();
 	    if (oldOwned.contains(elementImport)) {
 
-                LOG.log(Level.FINE, "model removed {0}", modelElement);
+                
 
 		if (Model.getFacade().isAClassifier(modelElement)) {
 		    removeNode(modelElement);
@@ -542,7 +512,7 @@ public class ClassDiagramGraphModel extends UMLMutableGraphSupport
 		    removeEdge(modelElement);
 		}
 	    } else {
-                LOG.log(Level.FINE, "model added {0}", modelElement);
+                
 	    }
 	}
     }

@@ -53,8 +53,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jmi.reflect.RefObject;
 import javax.jmi.reflect.RefPackage;
@@ -100,8 +98,7 @@ import org.xml.sax.InputSource;
  */
 class XmiReferenceResolverImpl extends XmiContext {
 
-    private static final Logger LOG =
-        Logger.getLogger(XmiReferenceResolverImpl.class.getName());
+    
 
     /**
      * Map of href/id to object.  IDs for top level document will have no
@@ -192,21 +189,14 @@ class XmiReferenceResolverImpl extends XmiContext {
         modelPublicId = publicId;
         if (isProfile) {
             if (publicId == null) {
-                LOG.log(Level.WARNING, "Profile load with null public ID.  Using system ID - "
-                        + systemId);
+                
                 modelPublicId = publicId = systemId;
             }
             if (public2SystemIds.containsKey(modelPublicId)) {
                 if (systemId.equals(public2SystemIds.get(publicId))) {
-                    LOG.log(Level.WARNING, "Loaded profile is being re-read "
-                            + "publicId = \"" + publicId + "\";  systemId = \""
-                            + systemId + "\".");
+                    
                 } else {
-                    LOG.log(Level.WARNING, "Profile with the duplicate publicId "
-                            + "is being loaded! publicId = \"" + publicId
-                            + "\"; existing systemId = \""
-                            + public2SystemIds.get(publicId)
-                            + "\"; new systemId = \"" + systemId + "\".");
+                    
                 }
             }
             public2SystemIds.put(publicId, systemId);
@@ -227,9 +217,7 @@ class XmiReferenceResolverImpl extends XmiContext {
     public void register(final String systemId, final String xmiId,
             final RefObject object) {
 
-        LOG.log(Level.FINE,
-                "Registering XMI ID {0} in system ID {1} to object with MOF ID {2}",
-                new Object[]{xmiId, systemId, object.refMofId()});
+        
 
         if (topSystemId == null) {
             topSystemId = systemId;
@@ -237,11 +225,10 @@ class XmiReferenceResolverImpl extends XmiContext {
                 baseUri = new URI(
                         systemId.substring(0, systemId.lastIndexOf('/') + 1));
             } catch (URISyntaxException e) {
-                LOG.log(Level.WARNING, "Bad URI syntax for base URI from XMI document "
-                        + systemId, e);
+                
                 baseUri = null;
             }
-            LOG.log(Level.FINE, "Top system ID set to {0}", topSystemId);
+            
         }
 
         String resolvedSystemId = systemId;
@@ -250,7 +237,7 @@ class XmiReferenceResolverImpl extends XmiContext {
         } else if (reverseUrlMap.get(systemId) != null) {
             resolvedSystemId = reverseUrlMap.get(systemId);
         } else {
-            LOG.log(Level.FINE, "Unable to map systemId - {0}", systemId);
+            
         }
 
         RefObject o = getReferenceInt(resolvedSystemId, xmiId);
@@ -261,11 +248,7 @@ class XmiReferenceResolverImpl extends XmiContext {
                 // but the real issue is that MagicDraw serializes the same
                 // object in two different composition associations, first in
                 // the referencing file and second in the referenced file
-                LOG.log(Level.FINE, "register called twice for the same object "
-                        + "- ignoring second");
-                LOG.log(Level.FINE, " - first reference = {0}#{1}", new Object[]{ref.getSystemId(), ref.getXmiId()});
-                LOG.log(Level.FINE, " - 2nd reference   = {0}#{1}", new Object[]{systemId, xmiId});
-                LOG.log(Level.FINE, " -   resolved system id = {0}", resolvedSystemId );
+                
             } else {
                 registerInt(resolvedSystemId, xmiId, object);
                 super.register(resolvedSystemId, xmiId, object);
@@ -276,8 +259,7 @@ class XmiReferenceResolverImpl extends XmiContext {
                 // can resolve all references
                 super.register(resolvedSystemId, xmiId, object);
             } else {
-               LOG.log(Level.SEVERE, "Collision - multiple elements with same xmi.id : "
-                        + xmiId);
+               
                 throw new IllegalStateException(
                         "Multiple elements with same xmi.id");
             }
@@ -289,7 +271,7 @@ class XmiReferenceResolverImpl extends XmiContext {
         if (map != null) {
             RefObject result = (RefObject) map.get(xmiId);
             if (result == null ) {
-                LOG.log(Level.FINE, "No internal reference for - {0}#{1}", new Object[]{docId, xmiId});
+                
             }
             return result;
         }
@@ -317,7 +299,7 @@ class XmiReferenceResolverImpl extends XmiContext {
         if (ro == null) {
             // TODO: Distinguish between deferred resolution and things which
             // are unresolved at end of load and should be reported to user.
-            LOG.log(Level.SEVERE, "Failed to resolve " + docId + "#" + xmiId );
+            
         }
         // TODO: Count/report unresolved references
         return ro;
@@ -370,8 +352,7 @@ class XmiReferenceResolverImpl extends XmiContext {
      */
     @Override
     public URL toURL(String systemId) {
-        LOG.log(Level.FINE,
-                "attempting to resolve Xmi Href --> {0}", systemId);
+        
 
         // TODO: Using just the last piece of the ID leaves the potential for
         // name collisions if two linked files have the same name in different
@@ -416,7 +397,7 @@ class XmiReferenceResolverImpl extends XmiContext {
             // and place it in the map so we don't have to
             // find it if we need it again.
             if (modelUrl != null) {
-                LOG.log(Level.INFO, "Referenced model --> {0}", modelUrl);
+                
 
                 urlMap.put(suffixWithExt, modelUrl);
                 pendingProfiles.put(systemId, modelUrl);
@@ -425,13 +406,12 @@ class XmiReferenceResolverImpl extends XmiContext {
                     if (baseUri != null) {
                         relativeUri = baseUri.relativize(modelUrl.toURI())
                                 .toString();
-                        LOG.log(Level.FINE, "  system ID {0} modelUrl {1}\n  relativized as {2}",
-                                new Object[]{systemId, modelUrl, relativeUri});
+                        
                     } else {
                         relativeUri = systemId;
                     }
                 } catch (URISyntaxException e) {
-                    LOG.log(Level.SEVERE, "Error relativizing system ID " + systemId, e);
+                    
                     relativeUri = systemId;
                 }
                 // TODO: Check whether this is really needed.  I think it's
@@ -462,14 +442,12 @@ class XmiReferenceResolverImpl extends XmiContext {
             return null;
         }
 
-        LOG.log(Level.FINE, "findModuleURL: modulesPath.size() = {0}", modulesPath.size());
+        
 
         for (String moduleDirectory : modulesPath) {
             File candidate = new File(moduleDirectory, moduleName);
 
-            LOG.log(Level.FINE,
-                    "candidate {0} exists={1}",
-                    new Object[]{candidate, candidate.exists()});
+            
 
             if (candidate.exists()) {
                 String urlString;
@@ -483,9 +461,7 @@ class XmiReferenceResolverImpl extends XmiContext {
             }
         }
         if (public2SystemIds.containsKey(moduleName)) {
-            LOG.log(Level.FINE,
-                    "Couldn't find user model ({0}) in modulesPath, attempt to use a model stored within the zargo file.",
-                    moduleName);
+            
 
             return moduleName;
         }
@@ -543,7 +519,7 @@ class XmiReferenceResolverImpl extends XmiContext {
                 modelName = systemId.substring(filenameIndex + 1, systemId
                         .length());
             } else {
-                LOG.log(Level.WARNING, "Received systemId with no '/'" + systemId);
+                
             }
 
 
@@ -568,8 +544,7 @@ class XmiReferenceResolverImpl extends XmiContext {
                     && CLASSPATH_MODEL_SUFFIXES.length > 0) {
                 for (String suffix : CLASSPATH_MODEL_SUFFIXES) {
 
-                    LOG.log(Level.FINE,
-                            "searching for model reference --> {0}", modelUrl);
+                    
 
                     modelUrl = Thread.currentThread().getContextClassLoader()
                             .getResource(modelName + dot + suffix);
@@ -670,7 +645,7 @@ class XmiReferenceResolverImpl extends XmiContext {
             try {
                 reader.parse(is, true);
             } catch (UmlException e) {
-                LOG.log(Level.SEVERE, "Error reading referenced profile " + arg0);
+                
                 throw new XmiReferenceRuntimeException(arg0, e);
             }
         } else if (!(public2SystemIds.containsKey(arg0))) {
@@ -683,7 +658,7 @@ class XmiReferenceResolverImpl extends XmiContext {
                 // DebugException with just the message from the causing
                 // exception rather than nesting the exception itself, so
                 // we don't have all the information we'd like
-                LOG.log(Level.SEVERE, "Error reading external document " + arg0);
+                
                 throw new XmiReferenceRuntimeException(arg0, e);
             }
         }

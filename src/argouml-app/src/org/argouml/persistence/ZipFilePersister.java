@@ -47,8 +47,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -68,11 +66,7 @@ import org.xml.sax.InputSource;
  * @author Ludovic Ma&icirc;tre
  */
 class ZipFilePersister extends XmiFilePersister {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ZipFilePersister.class.getName());
+    
 
     /**
      * The constructor.
@@ -116,7 +110,7 @@ class ZipFilePersister extends XmiFilePersister {
      */
     public void doSave(Project project, File file) throws SaveException {
 
-        LOG.log(Level.INFO, "Receiving file {0}", file.getName());
+        
 
         /* Retain the previous project file even when the save operation
          * crashes in the middle. Also create a backup file after saving. */
@@ -154,9 +148,7 @@ class ZipFilePersister extends XmiFilePersister {
                 ProjectMember projectMember =
                     project.getMembers().get(i);
                 if (projectMember.getType().equalsIgnoreCase("xmi")) {
-                    LOG.log(Level.FINE,
-                            "Saving member of type: {0}",
-                            projectMember.getType());
+                    
 
                     MemberFilePersister persister
                         = new ModelMemberFilePersister();
@@ -180,7 +172,7 @@ class ZipFilePersister extends XmiFilePersister {
                 }
             }
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Exception occured during save attempt", e);
+            
             try {
                 bufferedStream.close();
             } catch (IOException ex) {
@@ -201,7 +193,7 @@ class ZipFilePersister extends XmiFilePersister {
         try {
             bufferedStream.close();
         } catch (IOException ex) {
-            LOG.log(Level.SEVERE, "Failed to close save output writer", ex);
+            
         }
     }
 
@@ -211,7 +203,7 @@ class ZipFilePersister extends XmiFilePersister {
     public Project doLoad(File file)
         throws OpenException {
 
-        LOG.log(Level.INFO, "Receiving file {0}", file.getName());
+        
 
         try {
             Project p = ProjectFactory.getInstance().createProject();

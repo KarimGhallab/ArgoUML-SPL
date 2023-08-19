@@ -44,8 +44,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.events.ArgoEventPump;
 import org.argouml.application.events.ArgoEventTypes;
@@ -132,8 +130,7 @@ import org.argouml.util.MyTokenizer;
  */
 public abstract class AbstractMessageNotationUml extends MessageNotation {
 
-    private static final Logger LOG =
-        Logger.getLogger(AbstractMessageNotationUml.class.getName());
+    
 
     /**
      * The list of CustomSeparators to use when tokenizing parameters.
@@ -744,8 +741,7 @@ public abstract class AbstractMessageNotationUml extends MessageNotation {
 
         List<String> args = parseArguments(paramExpr, mayDeleteExpr);
 
-        printDebugInfo(s, fname, guard, paramExpr, varname, predecessors,
-                seqno, parallell, iterative);
+        
 
         /* Now apply the changes to the model: */
 
@@ -770,39 +766,7 @@ public abstract class AbstractMessageNotationUml extends MessageNotation {
         handlePredecessors(umlMessage, predecessors, hasPredecessors);
     }
 
-    private void printDebugInfo(String s, String fname, StringBuilder guard,
-            String paramExpr, StringBuilder varname, List<List> predecessors,
-            List<Integer> seqno, boolean parallell, boolean iterative) {
-        if (LOG.isLoggable(Level.FINE)) {
-            StringBuffer buf = new StringBuffer();
-            buf.append("ParseMessage: " + s + "\n");
-            buf.append("Message: ");
-            for (int i = 0; seqno != null && i + 1 < seqno.size(); i += 2) {
-                if (i > 0) {
-                    buf.append(", ");
-                }
-                buf.append(seqno.get(i) + " (" + seqno.get(i + 1) + ")");
-            }
-            buf.append("\n");
-            buf.append("predecessors: " + predecessors.size() + "\n");
-            for (int i = 0; i < predecessors.size(); i++) {
-                int j;
-                List v = predecessors.get(i);
-                buf.append("    Predecessor: ");
-                for (j = 0; v != null && j + 1 < v.size(); j += 2) {
-                    if (j > 0) {
-                        buf.append(", ");
-                    }
-                    buf.append(v.get(j) + " (" + v.get(j + 1) + ")");
-                }
-            }
-            buf.append("guard: " + guard + " it: " + iterative + " pl: "
-                    + parallell + "\n");
-            buf.append(varname + " := " + fname + " ( " + paramExpr + " )"
-                    + "\n");
-            LOG.log(Level.FINE, "{0}", buf);
-        }
-    }
+    
 
     /**
      * @param paramExpr

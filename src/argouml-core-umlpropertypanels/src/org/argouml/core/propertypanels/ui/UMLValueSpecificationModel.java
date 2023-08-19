@@ -16,8 +16,6 @@ package org.argouml.core.propertypanels.ui;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -39,8 +37,7 @@ import org.argouml.model.Model;
  class UMLValueSpecificationModel
 	implements PropertyChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLValueSpecificationModel.class.getName());
+    
 
     private Object target;
     private String propertyName;
@@ -82,7 +79,7 @@ import org.argouml.model.Model;
 	    Model.getPump().addModelEventListener(this, target,
 		    propertyName);
 	}
-        LOG.log(Level.FINE, ">>Start listening for UML changes...");
+        
     }
 
     protected void stopListeningForModelChanges() {
@@ -90,17 +87,17 @@ import org.argouml.model.Model;
 	    Model.getPump().removeModelEventListener(this, target,
 	                propertyName);
 	}
-        LOG.log(Level.FINE, ">>Stop listening for UML changes...");
+        
     }
 
     public void propertyChange(PropertyChangeEvent e) {
 	if (propertyName.equals(e.getPropertyName())) {
 	    if (rememberExpression != e.getNewValue()) {
 		fireStateChanged();
-                LOG.log(Level.FINE, ">>UML expression changed.");
+                
 	    } else {
 		/* This should not happen. */
-                LOG.log(Level.FINE, ">>Got an event for a modelchange that we inflicted ourselves...");
+                
 	    }
 	}
     }
@@ -207,7 +204,7 @@ import org.argouml.model.Model;
      */
     public void addChangeListener(ChangeListener l) {
         listenerList.add(ChangeListener.class, l);
-        LOG.log(Level.FINE, ">>Add listener");
+        
     }
 
     /**
@@ -218,7 +215,7 @@ import org.argouml.model.Model;
      */
     public void removeChangeListener(ChangeListener l) {
         listenerList.remove(ChangeListener.class, l);
-        LOG.log(Level.FINE, ">>Remove listener");
+        
     }
 
     /**
@@ -229,7 +226,7 @@ import org.argouml.model.Model;
      * @see EventListenerList
      */
     protected void fireStateChanged() {
-        LOG.log(Level.FINE, ">>Fire state changed to listeners.");
+        
         Object[] listeners = listenerList.getListenerList();
         for (int i = listeners.length - 2; i >= 0; i -=2 ) {
             if (listeners[i] == ChangeListener.class) {
