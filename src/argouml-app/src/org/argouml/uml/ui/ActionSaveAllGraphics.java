@@ -44,8 +44,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -82,8 +80,7 @@ import org.tigris.gef.util.Util;
 public class ActionSaveAllGraphics extends AbstractAction
     implements CommandLineInterface {
 
-    private static final Logger LOG =
-        Logger.getLogger(ActionSaveAllGraphics.class.getName());
+    
 
     private boolean overwrite;
 
@@ -174,10 +171,10 @@ public class ActionSaveAllGraphics extends AbstractAction
                 return result;
             }
             catch ( FileNotFoundException ignore ) {
-                LOG.log(Level.SEVERE, "got a FileNotFoundException", ignore);
+                
             }
             catch ( IOException ignore ) {
-                LOG.log(Level.SEVERE, "got an IOException", ignore);
+                
             }
         }
         return false;
@@ -283,7 +280,7 @@ public class ActionSaveAllGraphics extends AbstractAction
             }
         }
         catch ( MalformedURLException ex ) {
-            LOG.log(Level.SEVERE, "exception in opening JFileChooser", ex);
+            
         }
 
         if ( chooser == null ) {
@@ -312,7 +309,7 @@ public class ActionSaveAllGraphics extends AbstractAction
     public boolean doCommand(String argument) {
         File dir = new File(argument);
         if (!dir.exists() || !dir.isDirectory()) {
-            LOG.log(Level.SEVERE, "The argument must be a path to an existing directory.");
+            
             return false;
         }
         boolean result = true;

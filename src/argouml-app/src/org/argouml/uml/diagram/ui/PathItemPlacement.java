@@ -44,8 +44,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.tigris.gef.base.Globals;
 import org.tigris.gef.base.PathConv;
@@ -79,8 +77,7 @@ import org.tigris.gef.presentation.FigEdge;
  */
 public class PathItemPlacement extends PathConv {
 
-    private static final Logger LOG =
-        Logger.getLogger(PathItemPlacement.class.getName());
+    
 
     private boolean useCollisionCheck = true;
 
@@ -314,7 +311,7 @@ public class PathItemPlacement extends PathConv {
                 }
                 // If we timed out, give it one more try on the other side
                 if (false /* count >= limit */) {
-                    LOG.log(Level.FINE, "Retry limit exceeded.  Trying other side");
+                    
                     result.setLocation(anchor);
                     // TODO: This works for 90 degree angles, but is suboptimal
                     // for other angles. It should reflect the angle, rather
@@ -700,7 +697,7 @@ public class PathItemPlacement extends PathConv {
             return intersection(m, n);
         }
         // Should never get here.  If we do, return the inner point.
-        LOG.log(Level.WARNING, "Could not find rectangle intersection, using inner point.");
+        
         return pIn;
     }
 

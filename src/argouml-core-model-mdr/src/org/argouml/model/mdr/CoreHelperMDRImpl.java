@@ -49,8 +49,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jmi.reflect.InvalidObjectException;
 
@@ -166,11 +164,7 @@ import org.omg.uml.modelmanagement.UmlPackage;
  */
 class CoreHelperMDRImpl implements CoreHelper {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(CoreHelperMDRImpl.class.getName());
+    
 
     /**
      * The model implementation.
@@ -466,7 +460,7 @@ class CoreHelperMDRImpl implements CoreHelper {
 
         final boolean alreadyChecked = !dupCheck.add(ge);
         if (alreadyChecked) {
-            LOG.log(Level.WARNING, "Cyclic generalization found " + getFullName(ge));
+            
             return false;
         }
 
@@ -1777,11 +1771,11 @@ class CoreHelperMDRImpl implements CoreHelper {
 
     public Collection<Namespace> getAllPossibleNamespaces(Object modelElement,
             Object model) {
-        LOG.log(Level.FINE, "getAllPossibleNamespaces start");
+        
         ModelElement m = (ModelElement) modelElement;
         Collection<Namespace>  ret = new HashSet<Namespace> ();
         if (m == null) {
-            LOG.log(Level.FINE, "getAllPossibleNamespaces end");
+            
             return ret;
         }
 
@@ -1803,8 +1797,7 @@ class CoreHelperMDRImpl implements CoreHelper {
 
         // This is an expensive method that we should ensure is called
         // rarely. Hence info level to track easily.
-        LOG.log(Level.FINE,
-                "getAllPossibleNamespaces returns {0} items", ret.size() );
+        
         return ret;
     }
 
@@ -3023,7 +3016,7 @@ class CoreHelperMDRImpl implements CoreHelper {
         }
         /* See issue 6038 for the reason behind the next statements: */
         if (previousMult != null) {
-            LOG.log(Level.FINE, "Previous multiplicity of {0} will be deleted.", new Object[]{ handle, arg});
+            
             Model.getUmlFactory().delete(previousMult);
         }
     }
@@ -3528,9 +3521,9 @@ class CoreHelperMDRImpl implements CoreHelper {
                 .refAllOfClass()) {
             String name = ((javax.jmi.model.ModelElement) element).getName();
             if (names.add(name)) {
-                LOG.log(Level.FINE, " Class {0}", name);
+                
             } else {
-                LOG.log(Level.SEVERE, "Found duplicate class " + name + " in metamodel");
+                
             }
         }
         return names;
@@ -3543,9 +3536,9 @@ class CoreHelperMDRImpl implements CoreHelper {
                 .refAllOfClass()) {
             String name = ((javax.jmi.model.DataType) element).getName();
             if (names.add(name)) {
-                LOG.log(Level.FINE, " DataType {0}", name);
+                
             } else {
-                LOG.log(Level.SEVERE, "Found duplicate datatype " + name + " in metamodel");
+                
             }
         }
         // ScopeKind, VisibilityKind, PseudostateKind, etc
@@ -3554,10 +3547,9 @@ class CoreHelperMDRImpl implements CoreHelper {
                 .refAllOfClass()) {
             String name = ((javax.jmi.model.EnumerationType) element).getName();
             if (names.add(name)) {
-                LOG.log(Level.FINE, " EnumerationType {0}", name);
+                
             } else {
-                LOG.log(Level.SEVERE, "Found duplicate EnumerationType " + name
-                        + " in metamodel");
+                
             }
         }
 
@@ -3566,10 +3558,9 @@ class CoreHelperMDRImpl implements CoreHelper {
                 .refAllOfClass()) {
             String name = ((javax.jmi.model.PrimitiveType) element).getName();
             if (names.add(name)) {
-                LOG.log(Level.FINE, " PrimitiveType {0}", name);
+                
             } else {
-                LOG.log(Level.SEVERE, "Found duplicate primitive type " + name
-                        + " in metamodel");
+                
             }
         }
 

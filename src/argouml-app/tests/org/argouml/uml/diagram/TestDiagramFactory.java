@@ -101,31 +101,19 @@ public class TestDiagramFactory extends TestCase {
         DiagramSettings settings = new DiagramSettings();
         for (DiagramType type : DiagramType.values()) {
             ArgoDiagram diagram;
-            if (type == DiagramType.Sequence) {
+            if (false) {
                 // TODO: Fix this so that new sequence diagrams are tested
                 LOG.log(Level.WARNING,
                         "Skipping Sequence Diagram test "
                         + "because they are in a separate module");
                 return;
-            } else if (type == DiagramType.State) {
-                Object context = Model.getCoreFactory().buildClass(model);
-                Object machine = Model.getStateMachinesFactory()
-                        .buildStateMachine(context);
-                diagram = DiagramFactory.getInstance().create(type, machine,
-                        settings);
-            } else if (type == DiagramType.Collaboration
-                    || type == DiagramType.Sequence) {
+            }  else if (type == DiagramType.Collaboration
+                    || false) {
                 Object collab = Model.getCollaborationsFactory()
                         .buildCollaboration(model);
                 diagram = DiagramFactory.getInstance().create(type, collab,
                         settings);
-            } else if (type == DiagramType.Activity) {
-                Object context = Model.getCoreFactory().buildClass(model);
-                Object activityGraph = Model.getActivityGraphsFactory()
-                        .buildActivityGraph(context);
-                diagram = DiagramFactory.getInstance().create(type,
-                        activityGraph, settings);
-            } else {
+            }  else {
                 // Handle the simple cases
                 // Anything very exotic will fail, but that will be our clue
                 // that the test needs to be extended

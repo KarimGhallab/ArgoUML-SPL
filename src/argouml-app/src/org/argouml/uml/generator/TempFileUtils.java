@@ -45,16 +45,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Utility class with methods to manage files in the temporary directory.
  */
 public class TempFileUtils {
 
-    private static final Logger LOG =
-        Logger.getLogger(TempFileUtils.class.getName());
+    
 
     /**
      * Create a temporary directory.
@@ -71,7 +68,7 @@ public class TempFileUtils {
             }
             return tmpdir;
         } catch (IOException ioe) {
-            LOG.log(Level.SEVERE, "Error while creating a temporary directory", ioe);
+            
             return null;
         }
     }
@@ -148,7 +145,7 @@ public class TempFileUtils {
             });
             return ret;
         } catch (IOException ioe) {
-            LOG.log(Level.SEVERE, "Exception reading files", ioe);
+            
         }
         return null;
     }
@@ -165,7 +162,7 @@ public class TempFileUtils {
                 }
             });
         } catch (IOException ioe) {
-            LOG.log(Level.SEVERE, "Exception deleting directory", ioe);
+            
         }
     }
 
@@ -186,7 +183,7 @@ public class TempFileUtils {
                 }
             });
         } catch (IOException ioe) {
-            LOG.log(Level.SEVERE, "Exception reading file names", ioe);
+            
         }
         return ret;
     }

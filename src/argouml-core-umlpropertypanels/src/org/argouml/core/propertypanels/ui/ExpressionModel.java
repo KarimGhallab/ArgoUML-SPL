@@ -38,8 +38,6 @@
 
 package org.argouml.core.propertypanels.ui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -62,8 +60,7 @@ import org.argouml.model.Model;
  */
 class ExpressionModel {
 
-    private static final Logger LOG =
-        Logger.getLogger(ExpressionModel.class.getName());
+    
 
     /**
      * The target model element
@@ -97,7 +94,7 @@ class ExpressionModel {
             final Object umlElement,
             final GetterSetterManager getterSetterManager) {
         this.target = umlElement;
-        LOG.log(Level.INFO, "Creating ExpressionModel with target {0}", target);
+        
 
         this.propertyName = propertyName;
         this.getterSetterManager = getterSetterManager;
@@ -111,7 +108,7 @@ class ExpressionModel {
         Object expression = null;
         if (Model.getFacade().getUmlVersion().charAt(0) == '1') {
             expression = getterSetterManager.get(target, propertyName, type);
-            LOG.log(Level.INFO, "Got the expression {0}", expression);
+            
         } else {
             // in UML2, the target is already the "expression" (Opaque...)
             expression = target;
@@ -123,7 +120,7 @@ class ExpressionModel {
      * @param expr the expression
      */
     public void setExpression(Object expr) {
-        LOG.log(Level.INFO, "Setting the expression to {0}", expr);
+        
         getterSetterManager.set(target, expr, propertyName);
     }
 
@@ -219,9 +216,7 @@ class ExpressionModel {
             // be careful not to reuse them
             final Object currentExpression = getExpression();
             if (currentExpression != null) {
-                LOG.log(Level.INFO,
-                        "Deleting the current expression {0}",
-                        currentExpression);
+                
                 Model.getUmlFactory().delete(currentExpression);
             }
             final Object newExpression;
@@ -249,7 +244,7 @@ class ExpressionModel {
      */
     public void addChangeListener(ChangeListener l) {
         listenerList.add(ChangeListener.class, l);
-        LOG.log(Level.FINE, ">>Add listener");
+        
     }
 
     /**
@@ -260,7 +255,7 @@ class ExpressionModel {
      * @see EventListenerList
      */
     protected void fireStateChanged() {
-        LOG.log(Level.FINE, ">>Fire state changed to listeners.");
+        
         Object[] listeners = listenerList.getListenerList();
         for (int i = listeners.length - 2; i >= 0; i -=2 ) {
             if (listeners[i] == ChangeListener.class) {

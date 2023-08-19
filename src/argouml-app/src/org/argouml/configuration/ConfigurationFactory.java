@@ -39,7 +39,6 @@
 
 package org.argouml.configuration;
 
-import java.util.logging.Logger;
 
 /**
  * A factory object that provides configuration information.
@@ -72,10 +71,7 @@ public class ConfigurationFactory implements IConfigurationFactory {
                 newFactory =
                     (IConfigurationFactory) Class.forName(name).newInstance();
             } catch (Exception e) {
-                Logger.getLogger(ConfigurationFactory.class.getName()).
-                    warning("Can't create configuration factory "
-                            + name
-                            + ", using default factory");
+                
             }
         }
         if (newFactory == null) {

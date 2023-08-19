@@ -42,8 +42,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.AddAssociationEvent;
 import org.argouml.model.DeleteInstanceEvent;
@@ -63,8 +61,7 @@ import org.argouml.model.RemoveAssociationEvent;
  */
 public abstract class NotationProvider implements PropertyChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(NotationProvider.class.getName());
+    
     private NotationRenderer renderer;
 
     /**
@@ -159,8 +156,7 @@ public abstract class NotationProvider implements PropertyChangeListener {
         //     end if
         // end if
         if (Model.getUmlFactory().isRemoved(modelElement)) {
-            LOG.log(Level.WARNING, "Encountered deleted object during delete of "
-                    + modelElement);
+            
             return;
         }
         cleanListener();
@@ -176,8 +172,7 @@ public abstract class NotationProvider implements PropertyChangeListener {
             }
             if (owner != null) {
                 if (Model.getUmlFactory().isRemoved(owner)) {
-                    LOG.log(Level.WARNING, "Encountered deleted object during delete of "
-                            + owner);
+                    
                     return;
                 }
                 renderer.notationRenderingChanged(this,
@@ -200,7 +195,7 @@ public abstract class NotationProvider implements PropertyChangeListener {
     protected final void addElementListener(PropertyChangeListener listener,
             Object element) {
         if (Model.getUmlFactory().isRemoved(element)) {
-            LOG.log(Level.WARNING, "Encountered deleted object during delete of " + element);
+            
             return;
         }
         Object[] entry = new Object[] {element, null};
@@ -208,8 +203,7 @@ public abstract class NotationProvider implements PropertyChangeListener {
             listeners.add(entry);
             Model.getPump().addModelEventListener(listener, element);
         } else {
-            LOG.log(Level.WARNING, "Attempted duplicate registration of event listener"
-                    + " - Element: " + element + " Listener: " + listener);
+            
         }
     }
 
@@ -237,7 +231,7 @@ public abstract class NotationProvider implements PropertyChangeListener {
     protected final void addElementListener(PropertyChangeListener listener,
             Object element, String property) {
         if (Model.getUmlFactory().isRemoved(element)) {
-            LOG.log(Level.WARNING, "Encountered deleted object during delete of " + element);
+            
             return;
         }
         Object[] entry = new Object[] {element, property};
@@ -245,8 +239,7 @@ public abstract class NotationProvider implements PropertyChangeListener {
             listeners.add(entry);
             Model.getPump().addModelEventListener(listener, element, property);
         } else {
-            LOG.log(Level.FINE, "Attempted duplicate registration of event listener"
-                    + " - Element: {0} Listener: {1}", new Object[]{element, listener});
+            
         }
     }
 
@@ -275,7 +268,7 @@ public abstract class NotationProvider implements PropertyChangeListener {
     protected final void addElementListener(PropertyChangeListener listener,
             Object element, String[] property) {
         if (Model.getUmlFactory().isRemoved(element)) {
-            LOG.log(Level.WARNING, "Encountered deleted object during delete of " + element);
+            
             return;
         }
         Object[] entry = new Object[] {element, property};
@@ -283,9 +276,7 @@ public abstract class NotationProvider implements PropertyChangeListener {
             listeners.add(entry);
             Model.getPump().addModelEventListener(listener, element, property);
         } else {
-            LOG.log(Level.FINE,
-                    "Attempted duplicate registration of event listener"
-                    + " - Element: " + element + " Listener: " + listener);
+            
         }
     }
 

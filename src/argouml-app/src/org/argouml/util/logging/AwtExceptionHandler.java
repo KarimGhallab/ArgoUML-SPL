@@ -38,16 +38,13 @@
 
 package org.argouml.util.logging;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Last chance exception handler for AWT thread to make sure things get logged.
  */
 public class AwtExceptionHandler {
 
-    private static final Logger LOG =
-        Logger.getLogger(AwtExceptionHandler.class.getName());
+    
 
     /**
      * DO NOT CHANGE THIS METHOD SIGNATURE.
@@ -55,8 +52,7 @@ public class AwtExceptionHandler {
      */
     public void handle(Throwable t) {
         try {
-            LOG.log(Level.SEVERE,
-                    "Last chance error handler in AWT thread caught", t);
+            
         } catch (Throwable t2) {
             // Ignore any nested exceptions. We don't want infinite loop.
         }

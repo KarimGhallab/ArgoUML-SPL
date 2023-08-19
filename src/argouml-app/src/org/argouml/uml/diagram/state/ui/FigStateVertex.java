@@ -46,7 +46,6 @@ import java.util.List;
 
 import org.argouml.model.Model;
 import org.argouml.uml.diagram.DiagramSettings;
-import org.argouml.uml.diagram.activity.ui.SelectionActionState;
 import org.argouml.uml.diagram.ui.FigNodeModelElement;
 import org.tigris.gef.base.Editor;
 import org.tigris.gef.base.Globals;
@@ -156,7 +155,7 @@ public abstract class FigStateVertex extends FigNodeModelElement {
                     && Model.getFacade().isAActivityGraph(
                     Model.getFacade().getStateMachine(
                             Model.getFacade().getContainer(pstate)))) {
-                return new SelectionActionState(this);
+                
             }
             return new SelectionState(this);
         }

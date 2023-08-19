@@ -41,8 +41,6 @@ package org.argouml.uml.ui;
 import java.io.File;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -73,11 +71,7 @@ class SourcePathTableModel extends DefaultTableModel {
      */
     static final int SOURCE_PATH_COLUMN = 3;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(SourcePathTableModel.class.getName());
+    
 
     /**
      * Creates a new instance of SourcePathTableModel.
@@ -121,15 +115,13 @@ class SourcePathTableModel extends DefaultTableModel {
                 } else if (Model.getFacade().isAInterface(me)) {
                     type = strInterface;
                 } else {
-                    LOG.log(Level.WARNING,
-                            "Can't assign a type to this model element: "
-                            + me);
+                    
                 }
                 addRow(new Object[] {
                     me, name, type, path.toString(),
                 });
             } else {
-                LOG.log(Level.WARNING, "Unexpected: the source path for " + me + " is null!");
+                
             }
         }
     }

@@ -42,8 +42,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 
@@ -64,11 +62,7 @@ import org.argouml.application.events.ArgoNotationEvent;
 class NotationNameImpl
     implements NotationName {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(NotationNameImpl.class.getName());
+    
 
     private String name;
     private String version;
@@ -249,7 +243,7 @@ class NotationNameImpl
 		}
 	    } catch (Exception e) {
 	        // TODO: Document why we catch this.
-                LOG.log(Level.SEVERE, "Unexpected exception", e);
+                
 	    }
 	}
 	return null;

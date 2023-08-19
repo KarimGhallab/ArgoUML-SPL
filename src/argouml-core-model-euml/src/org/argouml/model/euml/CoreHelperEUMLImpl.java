@@ -24,8 +24,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.CoreHelper;
 import org.argouml.model.Model;
@@ -86,8 +84,7 @@ import org.eclipse.uml2.uml.VisibilityKind;
  */
 class CoreHelperEUMLImpl implements CoreHelper {
 
-    private static final Logger LOG =
-        Logger.getLogger(CoreHelperEUMLImpl.class.getName());
+    
 
     /**
      * The model implementation.
@@ -423,7 +420,7 @@ class CoreHelperEUMLImpl implements CoreHelper {
         }
         Element element = (Element) me;
         if (element.getOwner() != null) {
-            LOG.log(Level.INFO, "Setting ignore delete for {0}", element);
+            
 
             ModelEventPumpEUMLImpl pump =
                 (ModelEventPumpEUMLImpl) Model.getPump();
@@ -1785,9 +1782,7 @@ class CoreHelperEUMLImpl implements CoreHelper {
     public void setName(final Object handle, final String name) {
         if (!(handle instanceof NamedElement)) {
             if (handle instanceof Generalization) {
-                LOG.log(Level.WARNING, "Attempting to set the name of a generalization "
-                        + "which is no longer a NamedElement in UML 2" + name
-                        + handle.toString());
+                
                 return;
             }
             throw new IllegalArgumentException(

@@ -44,8 +44,6 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.Project;
 import org.argouml.model.Defaults;
@@ -79,8 +77,7 @@ import org.tigris.gef.presentation.FigRect;
  */
 public abstract class FigCompartment extends ArgoFigGroup {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigCompartment.class.getName());
+    
 
     private Fig bigPort;
 
@@ -153,7 +150,7 @@ public abstract class FigCompartment extends ArgoFigGroup {
         if (fig != getBigPort()
                 && !(fig instanceof CompartmentFigText)
                 && !(fig instanceof FigSeparator)) {
-            LOG.log(Level.SEVERE, "Illegal Fig added to a FigEditableCompartment");
+            
             throw new IllegalArgumentException(
                     "A FigEditableCompartment can only "
                     + "contain CompartmentFigTexts, "
@@ -351,8 +348,7 @@ public abstract class FigCompartment extends ArgoFigGroup {
             // TODO: It would be better here to continue the loop and try to
             // build the rest of the compartment. Hence try/catch should be
             // internal to the loop.
-            LOG.log(Level.FINE, "Attempted to populate a FigEditableCompartment"
-                    + " using a deleted model element - aborting", e);
+            
         }
 
         if (comp != null) {

@@ -44,8 +44,6 @@ import java.awt.Rectangle;
 import java.beans.PropertyVetoException;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -81,8 +79,7 @@ import org.tigris.gef.presentation.FigNode;
  */
 public class UMLUseCaseDiagram extends UMLDiagram implements UseCaseDiagram {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLUseCaseDiagram.class.getName());
+    
 
     // Actions specific to the use case diagram toolbar
 
@@ -215,8 +212,7 @@ public class UMLUseCaseDiagram extends UMLDiagram implements UseCaseDiagram {
     @Override
     public void setNamespace(Object handle) {
         if (!Model.getFacade().isANamespace(handle)) {
-            LOG.log(Level.SEVERE,
-                "Illegal argument. Object " + handle + " is not a namespace");
+            
             throw new IllegalArgumentException(
                 "Illegal argument. Object " + handle + " is not a namespace");
         }
@@ -534,11 +530,9 @@ public class UMLUseCaseDiagram extends UMLDiagram implements UseCaseDiagram {
             }
         }
         if (figNode != null) {
-            LOG.log(Level.FINE,
-                    "Model element {0} converted to {1}",
-                    new Object[]{modelElement, figNode});
+            
         } else {
-            LOG.log(Level.FINE, "Dropped object NOT added {0}", figNode);
+            
         }
         return figNode;
     }

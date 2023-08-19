@@ -45,8 +45,6 @@
 package org.argouml.ui;
 
 import java.awt.Font;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
@@ -76,10 +74,7 @@ import org.argouml.configuration.Configuration;
  * @author Jeremy Jones
  */
 public final class LookAndFeelMgr {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG = Logger.getLogger(LookAndFeelMgr.class.getName());
+    
 
     /**
      * The instance.
@@ -452,13 +447,13 @@ public final class LookAndFeelMgr {
                 UIManager.setLookAndFeel(lafClass);
             }
         } catch (UnsupportedLookAndFeelException e) {
-            LOG.log(Level.SEVERE, "", e);
+            
         } catch (ClassNotFoundException e) {
-            LOG.log(Level.SEVERE, "", e);
+            
         } catch (InstantiationException e) {
-            LOG.log(Level.SEVERE, "", e);
+            
         } catch (IllegalAccessException e) {
-            LOG.log(Level.SEVERE, "", e);
+            
         }
     }
 
@@ -480,13 +475,13 @@ public final class LookAndFeelMgr {
                 MetalLookAndFeel.setCurrentTheme(theme);
                 UIManager.setLookAndFeel(METAL_LAF_CLASS_NAME);
             } catch (UnsupportedLookAndFeelException e) {
-                LOG.log(Level.SEVERE, "", e);
+                
             } catch (ClassNotFoundException e) {
-                LOG.log(Level.SEVERE, "", e);
+                
             } catch (InstantiationException e) {
-                LOG.log(Level.SEVERE, "", e);
+                
             } catch (IllegalAccessException e) {
-                LOG.log(Level.SEVERE, "", e);
+                
             }
         }
     }

@@ -43,8 +43,6 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.beans.PropertyChangeEvent;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Facade;
 import org.argouml.model.Model;
@@ -65,8 +63,7 @@ import org.tigris.gef.presentation.FigText;
 
 public class FigStubState extends FigStateVertex {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigStubState.class.getName());
+    
 
     private static final int X = 0;
     private static final int Y = 0;
@@ -361,7 +358,7 @@ public class FigStubState extends FigStateVertex {
         try {
             text = facade.getReferenceState(getOwner());
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Exception caught and ignored!!", e);
+            
         }
         if (text != null) {
             referenceFig.setText((String) text);

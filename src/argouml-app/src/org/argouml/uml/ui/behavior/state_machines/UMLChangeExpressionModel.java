@@ -38,8 +38,6 @@
 
 package org.argouml.uml.ui.behavior.state_machines;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.ui.targetmanager.TargetManager;
@@ -53,8 +51,7 @@ import org.argouml.uml.ui.UMLUserInterfaceContainer;
  */
 class UMLChangeExpressionModel extends UMLExpressionModel2 {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLChangeExpressionModel.class.getName());
+    
 
     /**
      * The constructor.
@@ -92,7 +89,7 @@ class UMLChangeExpressionModel extends UMLExpressionModel2 {
      * @see org.argouml.uml.ui.UMLExpressionModel2#newExpression()
      */
     public Object newExpression() {
-        LOG.log(Level.FINE, "new boolean expression");
+        
         return Model.getDataTypesFactory().createBooleanExpression("", "");
     }
 

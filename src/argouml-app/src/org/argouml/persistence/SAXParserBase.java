@@ -43,8 +43,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -60,11 +58,7 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 
 abstract class SAXParserBase extends DefaultHandler {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(SAXParserBase.class.getName());
+    
 
     /**
      * The constructor.
@@ -168,7 +162,7 @@ abstract class SAXParserBase extends DefaultHandler {
             throw new SAXException(e);
         }
         if (stats) {
-            LOG.log(Level.INFO, "Elapsed time: {0} ms", (end - start));
+            
         }
     }
 
@@ -207,17 +201,7 @@ abstract class SAXParserBase extends DefaultHandler {
 
             XMLElement element = createXmlElement(name, atts);
 
-            if (LOG.isLoggable(Level.FINE)) {
-                StringBuffer buf = new StringBuffer();
-                buf.append("START: ").append(name).append(' ').append(element);
-                for (int i = 0; i < atts.getLength(); i++) {
-            	    buf.append("   ATT: ")
-                        .append(atts.getLocalName(i))
-                            .append(' ')
-                                .append(atts.getValue(i));
-                }
-                LOG.log(Level.FINE, "{0}", buf);
-            }
+            
 
             elements[nElements++] = element;
             handleStartElement(element);
@@ -250,16 +234,7 @@ abstract class SAXParserBase extends DefaultHandler {
         throws SAXException {
         if (isElementOfInterest(name)) {
             XMLElement e = elements[--nElements];
-            if (LOG.isLoggable(Level.FINE)) {
-                StringBuffer buf = new StringBuffer();
-                buf.append("END: " + e.getName() + " ["
-            	       + e.getText() + "] " + e + "\n");
-                for (int i = 0; i < e.getNumAttributes(); i++) {
-                    buf.append("   ATT: " + e.getAttributeName(i) + " "
-                    	   + e.getAttributeValue(i) + "\n");
-                }
-                LOG.log(Level.FINE, "{0}", buf);
-            }
+            
             handleEndElement(e);
         }
     }
@@ -313,9 +288,7 @@ abstract class SAXParserBase extends DefaultHandler {
             InputSource s = new InputSource(testIt.openStream());
             return s;
         } catch (Exception e) {
-            LOG.log(Level.INFO,
-                    "NOTE: Could not open DTD " + systemId
-                    + " due to exception");
+            
 
             String dtdName = systemId.substring(systemId.lastIndexOf('/') + 1);
             String dtdPath = "/org/argouml/persistence/" + dtdName;
@@ -361,13 +334,13 @@ abstract class SAXParserBase extends DefaultHandler {
      * @param e the element
      */
     public void ignoreElement(XMLElement e) {
-        LOG.log(Level.FINE, "NOTE: ignoring tag: {0}", e.getName());
+        
     }
 
     /**
      * @param e the element
      */
     public void notImplemented(XMLElement e) {
-        LOG.log(Level.FINE, "NOTE: element not implemented: {0}", e.getName());
+        
     }
 } /* end class SAXParserBase */

@@ -46,8 +46,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.api.Argo;
 import org.argouml.kernel.Project;
@@ -66,11 +64,7 @@ import org.xml.sax.InputSource;
  */
 class DiagramMemberFilePersister extends MemberFilePersister {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(DiagramMemberFilePersister.class.getName());
+    
 
     /**
      * The tee file for persistence.
@@ -107,7 +101,7 @@ class DiagramMemberFilePersister extends MemberFilePersister {
             // TODO: We need the project specific diagram settings here
             PGMLStackParser parser = new PGMLStackParser(project.getUUIDRefs(),
                     defaultSettings);
-            LOG.log(Level.INFO, "Adding translations registered by modules");
+            
             for (Map.Entry<String, String> translation
                     : CLASS_TRANSLATIONS.entrySet()) {
                 parser.addTranslation(

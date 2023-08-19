@@ -38,8 +38,6 @@
 
 package org.argouml.uml.diagram.static_structure.layout;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.tigris.gef.presentation.Fig;
 import org.tigris.gef.presentation.FigEdge;
@@ -49,8 +47,7 @@ import org.tigris.gef.presentation.FigEdge;
  * @author mkl
  */
 public abstract class ClassdiagramInheritanceEdge extends ClassdiagramEdge {
-    private static final Logger LOG =
-        Logger.getLogger(ClassdiagramInheritanceEdge.class.getName());
+    
 
     /**
      * The largest difference that we consider equivalent to zero
@@ -147,27 +144,16 @@ public abstract class ClassdiagramInheritanceEdge extends ClassdiagramEdge {
                     high.getLocation().y + high.getSize().height);
         } else {
             fig.addPoint(centerLow, (int) (low.getLocation().getY()));
-            LOG.log(Level.FINE,
-                    "Point: x: {0} y: {1}",
-                    new Object[]{ centerLow, low.getLocation().y});
+            
 
-            LOG.log(Level.FINE,
-                    "Point: x: {0} y: {1}",
-                    new Object[]{(centerHigh - difference), getDownGap()});
+            
             getUnderlyingFig().addPoint(centerHigh - difference, getDownGap());
 
-            LOG.log(Level.FINE,
-                    "Point: x: {0} y: {1}",
-                    new Object[]{centerHigh, getDownGap()});
+            
             getUnderlyingFig().addPoint(centerHigh, getDownGap());
             
 
-            LOG.log(Level.FINE,
-                    "Point x: {0} y: {1}",
-                    new Object[] {
-                        centerHigh,
-                        (high.getLocation().y + high.getSize().height)
-                    });
+            
             fig.addPoint(centerHigh, high.getLocation().y + high.getSize().height);            
         }
         fig.setFilled(false);

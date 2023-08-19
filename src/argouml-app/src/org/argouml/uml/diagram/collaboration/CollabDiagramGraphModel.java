@@ -46,8 +46,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.DeleteInstanceEvent;
 import org.argouml.model.Model;
@@ -67,11 +65,7 @@ public class CollabDiagramGraphModel extends UMLMutableGraphSupport
      */
     private Object interaction;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(CollabDiagramGraphModel.class.getName());
+    
 
     /**
      * @param collaboration the collaboration to be set for this diagram
@@ -88,7 +82,7 @@ public class CollabDiagramGraphModel extends UMLMutableGraphSupport
                     + collaboration.getClass().getName());
             }
         } catch (IllegalArgumentException e) {
-            LOG.log(Level.SEVERE, "Illegal Argument to setCollaboration", e);
+            
             throw e;
         }
         setHomeModel(collaboration);
@@ -103,7 +97,7 @@ public class CollabDiagramGraphModel extends UMLMutableGraphSupport
             interaction =
                 Model.getCollaborationsFactory().buildInteraction(
                     getHomeModel());
-            LOG.log(Level.FINE, "Interaction built.");
+            
             Model.getPump().addModelEventListener(this, interaction);
         }
         return interaction;
@@ -256,20 +250,18 @@ public class CollabDiagramGraphModel extends UMLMutableGraphSupport
 
         // Both ends must be defined and nodes that are on the graph already.
         if (end0 == null || end1 == null) {
-            LOG.log(Level.SEVERE, "Edge rejected. Its ends are not attached to anything");
+            
             return false;
         }
 
         if (!containsNode(end0)
                 && !containsEdge(end0)) {
-            LOG.log(Level.SEVERE, "Edge rejected. Its source end is attached to " + end0
-                    + " but this is not in the graph model");
+            
             return false;
         }
         if (!containsNode(end1)
                 && !containsEdge(end1)) {
-            LOG.log(Level.SEVERE, "Edge rejected. Its destination end is attached to "
-                    + end1 + " but this is not in the graph model");
+            
             return false;
         }
 
@@ -284,7 +276,7 @@ public class CollabDiagramGraphModel extends UMLMutableGraphSupport
      */
     @Override
     public void addNode(Object node) {
-  LOG.log(Level.FINE, "adding MClassifierRole node!!");
+  
 	if (!canAddNode(node)) {
             return;
         }
@@ -305,7 +297,7 @@ public class CollabDiagramGraphModel extends UMLMutableGraphSupport
      */
     @Override
     public void addEdge(Object edge) {
-        LOG.log(Level.FINE, "adding class edge!!!!!!");
+        
         if (!canAddEdge(edge)) {
             return;
         }
@@ -395,7 +387,7 @@ public class CollabDiagramGraphModel extends UMLMutableGraphSupport
 	    Object me = Model.getFacade().getModelElement(eo);
 	    if (oldOwned.contains(eo)) {
 
-    LOG.log(Level.FINE, "model removed {0}", me);
+    
 
 		if (Model.getFacade().isAClassifier(me)) {
                     removeNode(me);
@@ -407,7 +399,7 @@ public class CollabDiagramGraphModel extends UMLMutableGraphSupport
                     removeEdge(me);
                 }
 	    } else {
-    LOG.log(Level.FINE, "model added {0}", me);
+    
 	    }
 	}
     }
