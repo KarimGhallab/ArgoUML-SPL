@@ -61,8 +61,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -77,11 +75,6 @@ import org.argouml.application.events.ArgoEventTypes;
 import org.argouml.application.events.ArgoHelpEvent;
 import org.argouml.application.events.ArgoNotationEvent;
 import org.argouml.application.events.ArgoNotationEventListener;
-import org.argouml.cognitive.Designer;
-import org.argouml.cognitive.Highlightable;
-import org.argouml.cognitive.ToDoItem;
-import org.argouml.cognitive.ToDoList;
-import org.argouml.cognitive.ui.ActionGoToCritique;
 import org.argouml.i18n.Translator;
 import org.argouml.kernel.DelayedChangeNotify;
 import org.argouml.kernel.DelayedVChangeListener;
@@ -103,7 +96,6 @@ import org.argouml.notation.NotationRenderer;
 import org.argouml.notation.NotationSettings;
 import org.argouml.profile.FigNodeStrategy;
 import org.argouml.ui.ArgoJMenu;
-import org.argouml.ui.Clarifier;
 import org.argouml.ui.ContextActionFactoryManager;
 import org.argouml.ui.ProjectActions;
 import org.argouml.ui.UndoableAction;
@@ -155,17 +147,16 @@ public abstract class FigNodeModelElement
         ArgoDiagramAppearanceEventListener,
         ArgoNotationEventListener,
         NotationRenderer,
-        Highlightable,
+        
         IItemUID,
-        Clarifiable,
+        
         ArgoFig,
         StereotypeStyled,
         DiagramElement,
         Owned {
 
 
-    private static final Logger LOG =
-        Logger.getLogger(FigNodeModelElement.class.getName());
+    
 
     // TODO: There are lots and LOTS of magic numbers used in calculating
     // positions and sizes.  Any time you see Figs being placed at 10,10 use
@@ -649,34 +640,7 @@ public abstract class FigNodeModelElement
             popupAddOffset++;
         }
 
-        /* Check if multiple items are selected: */
-        if (TargetManager.getInstance().getTargets().size() == 1) {
-
-            // TODO: Having Critics actions here introduces an unnecessary
-            // dependency on the Critics subsystem.  Have it register its
-            // desired actions using an extension mechanism - tfm
-            ToDoList tdList = Designer.theDesigner().getToDoList();
-            List<ToDoItem> items = tdList.elementListForOffender(getOwner());
-            if (items != null && items.size() > 0) {
-                // TODO: This creates a dependency on the Critics subsystem.
-                // We need a generic way for modules (including our internal
-                // subsystems) to request addition of actions to the popup
-                // menu. - tfm 20080430
-                ArgoJMenu critiques = new ArgoJMenu("menu.popup.critiques");
-                ToDoItem itemUnderMouse = hitClarifier(me.getX(), me.getY());
-                if (itemUnderMouse != null) {
-                    critiques.add(new ActionGoToCritique(itemUnderMouse));
-                    critiques.addSeparator();
-                }
-                for (ToDoItem item : items) {
-                    if (item != itemUnderMouse) {
-                        critiques.add(new ActionGoToCritique(item));
-                    }
-                }
-                popUpActions.add(0, new JSeparator());
-                popUpActions.add(0, critiques);
-            }
-        }
+        
 
         // Add stereotypes submenu
         Collection<Object> elements = new ArrayList<Object>();
@@ -893,7 +857,7 @@ public abstract class FigNodeModelElement
                         owner, null, component,
                         null, null, namespace);
             } catch (IllegalModelElementConnectionException e) {
-                LOG.log(Level.SEVERE, "Exception", e);
+                
             }
         }
     }
@@ -933,123 +897,7 @@ public abstract class FigNodeModelElement
         return new SelectionDefaultClarifiers(this);
     }
 
-    /**
-     * Displays visual indications of pending ToDoItems.
-     * Please note that the list of advices (ToDoList) is not the same
-     * as the list of element known by the FigNode (_figs). Therefore,
-     * it is necessary to check if the graphic item exists before drawing
-     * on it. See ClAttributeCompartment for an example.
-     * @param g the graphics device
-     * @see org.argouml.uml.cognitive.critics.ClAttributeCompartment
-     */
-    public void paintClarifiers(Graphics g) {
-        // TODO: Generalize extension and remove critic specific stuff
-        int iconX = getX();
-        int iconY = getY() - 10;
-        ToDoList tdList = Designer.theDesigner().getToDoList();
-        List<ToDoItem> items = tdList.elementListForOffender(getOwner());
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-            }
-            if (icon != null) {
-                icon.paintIcon(null, g, iconX, iconY);
-                iconX += icon.getIconWidth();
-            }
-        }
-        items = tdList.elementListForOffender(this);
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-            }
-            if (icon != null) {
-                icon.paintIcon(null, g, iconX, iconY);
-                iconX += icon.getIconWidth();
-            }
-        }
-    }
-
-    /**
-     * @param x the x of the hit
-     * @param y the y of the hit
-     * @return the todo item of which the clarifier has been hit
-     */
-    protected ToDoItem hitClarifier(int x, int y) {
-        // TODO: ToDoItem stuff should be made an opaque extension
-        int iconX = getX();
-        ToDoList tdList = Designer.theDesigner().getToDoList();
-        List<ToDoItem> items = tdList.elementListForOffender(getOwner());
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            int width = icon.getIconWidth();
-            if (y >= getY() - 15
-                    && y <= getY() + 10
-                    && x >= iconX
-                    && x <= iconX + width) {
-                return item;
-            }
-            iconX += width;
-        }
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-                if (((Clarifier) icon).hit(x, y)) {
-                    return item;
-                }
-            }
-        }
-        items = tdList.elementListForOffender(this);
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            int width = icon.getIconWidth();
-            if (y >= getY() - 15
-                    && y <= getY() + 10
-                    && x >= iconX
-                    && x <= iconX + width) {
-                return item;
-            }
-            iconX += width;
-        }
-        for (ToDoItem item : items) {
-            Icon icon = item.getClarifier();
-            if (icon instanceof Clarifier) {
-                ((Clarifier) icon).setFig(this);
-                ((Clarifier) icon).setToDoItem(item);
-                if (((Clarifier) icon).hit(x, y)) {
-                    return item;
-                }
-            }
-        }
-        return null;
-    }
-
-    /*
-     * @see org.tigris.gef.presentation.Fig#getTipString(java.awt.event.MouseEvent)
-     */
-    @Override
-    public String getTipString(MouseEvent me) {
-        // TODO: Generalize extension and remove critic specific code
-        ToDoItem item = hitClarifier(me.getX(), me.getY());
-        String tip = "";
-        if (item != null
-            && Globals.curEditor().getSelectionManager().containsFig(this)) {
-            tip = item.getHeadline() + " ";
-        } else if (getOwner() != null) {
-            tip = Model.getFacade().getTipString(getOwner());
-        } else {
-            tip = toString();
-        }
-        if (tip != null && tip.length() > 0 && !tip.endsWith(" ")) {
-            tip += " ";
-        }
-        return tip;
-    }
+    
 
     ////////////////////////////////////////////////////////////////
     // event handlers
@@ -1058,7 +906,7 @@ public abstract class FigNodeModelElement
      * @see java.beans.VetoableChangeListener#vetoableChange(java.beans.PropertyChangeEvent)
      */
     public void vetoableChange(PropertyChangeEvent pce) {
-        LOG.log(Level.FINE, "in vetoableChange");
+        
 
         Object src = pce.getSource();
         if (src == getOwner()) {
@@ -1066,9 +914,7 @@ public abstract class FigNodeModelElement
                 new DelayedChangeNotify(this, pce);
             SwingUtilities.invokeLater(delayedNotify);
         } else {
-            LOG.log(Level.FINE,
-                    "FigNodeModelElement got vetoableChange from non-owner: {0}",
-                    src);
+            
         }
     }
 
@@ -1076,7 +922,7 @@ public abstract class FigNodeModelElement
      * @see org.argouml.kernel.DelayedVChangeListener#delayedVetoableChange(java.beans.PropertyChangeEvent)
      */
     public void delayedVetoableChange(PropertyChangeEvent pce) {
-        LOG.log(Level.FINE, "in delayedVetoableChange");
+        
         // update any text, colors, fonts, etc.
         renderingChanged();
         endTrans();
@@ -1145,9 +991,7 @@ public abstract class FigNodeModelElement
                 setBounds(bbox.x, bbox.y, bbox.width, bbox.height);
                 endTrans();
             } catch (PropertyVetoException ex) {
-                LOG.log(Level.SEVERE, "could not parse the text entered. "
-                        + "PropertyVetoException",
-                        ex);
+                
             }
         } else if (pName.equals("editing")
                 && Boolean.TRUE.equals(pve.getNewValue())) {
@@ -1173,11 +1017,7 @@ public abstract class FigNodeModelElement
             try {
                 modelChanged(event);
             } catch (InvalidElementException e) {
-                if (LOG.isLoggable(Level.FINE)) {
-                    LOG.log(Level.FINE, "modelChanged method accessed deleted element "
-                            + formatEvent(event),
-                            e);
-                }
+                
             }
 
             if (event.getSource() == owner
@@ -1190,10 +1030,7 @@ public abstract class FigNodeModelElement
                     try {
                         updateLayout(event);
                     } catch (InvalidElementException e) {
-                        if (LOG.isLoggable(Level.FINE)) {
-                            LOG.log(Level.FINE, "updateLayout method accessed deleted element "
-                                    + formatEvent(event), e);
-                        }
+                        
                     }
                 }
             };
@@ -1247,7 +1084,7 @@ public abstract class FigNodeModelElement
                 addElementListener(event.getNewValue(), "name");
             }
         } catch (InvalidElementException e) {
-            LOG.log(Level.FINE, "stereotypeChanged method accessed deleted element ", e);
+            
         }
     }
 
@@ -1346,7 +1183,7 @@ public abstract class FigNodeModelElement
                 Model.getCoreHelper().setName(getOwner(), "");
                 readyToEdit = true;
             } else {
-                LOG.log(Level.FINE, "not ready to edit name");
+                
                 return;
             }
         }
@@ -1407,7 +1244,7 @@ public abstract class FigNodeModelElement
                 Model.getCoreHelper().setName(getOwner(), "");
                 readyToEdit = true;
             } else {
-                LOG.log(Level.FINE, "not ready to edit name");
+                
                 return;
             }
         }
@@ -1607,8 +1444,7 @@ public abstract class FigNodeModelElement
      */
     protected void updateStereotypeText() {
         if (getOwner() == null) {
-            LOG.log(Level.WARNING, "Null owner for [" + this.toString() + "/"
-                    + this.getClass());
+            
             return;
         }
         if (getStereotypeFig() != null) {
@@ -1763,7 +1599,7 @@ public abstract class FigNodeModelElement
         try {
             renderingChanged();
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Exception", e);
+            
         }
     }
 
@@ -1822,9 +1658,7 @@ public abstract class FigNodeModelElement
 
     protected void updateStereotypeIcon() {
         if (getOwner() == null) {
-            LOG.log(Level.WARNING, "Owner of [" + this.toString() + "/" + this.getClass()
-                    + "] is null.");
-            LOG.log(Level.WARNING, "I return...");
+            
             return;
         }
 
@@ -2553,7 +2387,7 @@ public abstract class FigNodeModelElement
         // TODO: This is a temporary crutch to use until all Figs are updated
         // to use the constructor that accepts a DiagramSettings object
         if (settings == null) {
-            LOG.log(Level.FINE, "Falling back to project-wide settings");
+            
             Project p = getProject();
             if (p != null) {
                 return p.getProjectSettings().getDefaultDiagramSettings();

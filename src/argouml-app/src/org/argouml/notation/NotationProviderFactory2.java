@@ -42,8 +42,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *  The NotationProviderFactory2 is a singleton,
@@ -55,8 +53,7 @@ import java.util.logging.Logger;
  */
 public final class NotationProviderFactory2 {
 
-    private static final Logger LOG =
-        Logger.getLogger(NotationProviderFactory2.class.getName());
+    
 
     /**
      * TYPE_NAME the name of the modelelement, e.g. class, package, state
@@ -235,30 +232,30 @@ public final class NotationProviderFactory2 {
             } catch (SecurityException e) {
                 // TODO: Why aren't we throwing an exception here?
             	// Returning null results in NPE and no explanation why.
-                LOG.log(Level.SEVERE, "Exception caught", e);
+                
             } catch (NoSuchMethodException e) {
                 // TODO: Why aren't we throwing an exception here?
             	// Returning null results in NPE and no explanation why.
-                LOG.log(Level.SEVERE, "Exception caught", e);
+                
             } catch (IllegalArgumentException e) {
                 // TODO: Why aren't we throwing an exception here?
             	// Returning null results in NPE and no explanation why.
-                LOG.log(Level.SEVERE, "Exception caught", e);
+                
             } catch (InstantiationException e) {
                 // TODO: Why aren't we throwing an exception here?
             	// Returning null results in NPE and no explanation why.
-                LOG.log(Level.SEVERE, "Exception caught", e);
+                
             } catch (IllegalAccessException e) {
                 // TODO: Why aren't we throwing an exception here?
             	// Returning null results in NPE and no explanation why.
-                LOG.log(Level.SEVERE, "Exception caught", e);
+                
             } catch (InvocationTargetException e) {
                 // TODO: Why aren't we throwing an exception here?
             	// Returning null results in NPE and no explanation why.
-                LOG.log(Level.SEVERE, "Exception caught", e);
+                
             }
         }
-        LOG.log(Level.SEVERE, "No notation provider for " + name + " type " + type);
+        
         return null;
     }
 

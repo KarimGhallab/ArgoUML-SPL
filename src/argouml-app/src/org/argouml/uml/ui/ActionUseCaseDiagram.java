@@ -38,8 +38,6 @@
 
 package org.argouml.uml.ui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.diagram.ArgoDiagram;
@@ -51,8 +49,7 @@ import org.argouml.uml.diagram.DiagramSettings;
  */
 public class ActionUseCaseDiagram extends ActionAddDiagram {
 
-    private static final Logger LOG =
-        Logger.getLogger(ActionUseCaseDiagram.class.getName());
+    
 
     /**
      * Constructor.
@@ -70,7 +67,7 @@ public class ActionUseCaseDiagram extends ActionAddDiagram {
     @Override
     public ArgoDiagram createDiagram(Object namespace) {
         if (!Model.getFacade().isANamespace(namespace)) {
-            LOG.log(Level.SEVERE, "No namespace as argument {0}",namespace);
+            
             
             throw new IllegalArgumentException(
                 "The argument " + namespace + "is not a namespace.");
@@ -89,7 +86,7 @@ public class ActionUseCaseDiagram extends ActionAddDiagram {
     public ArgoDiagram createDiagram(Object namespace,
             DiagramSettings settings) {
         if (!Model.getFacade().isANamespace(namespace)) {
-            LOG.log(Level.SEVERE, "No namespace as argument {0}",namespace);
+            
             
             throw new IllegalArgumentException(
                 "The argument " + namespace + "is not a namespace.");

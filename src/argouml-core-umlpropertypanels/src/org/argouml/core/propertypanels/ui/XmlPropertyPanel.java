@@ -39,8 +39,6 @@
 package org.argouml.core.propertypanels.ui;
 
 import java.awt.Component;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -57,8 +55,7 @@ class XmlPropertyPanel extends JPanel implements ListSelectionListener {
     /**
      * Logger.
      */
-    private static final Logger LOG =
-        Logger.getLogger(XmlPropertyPanel.class.getName());
+    
 
     private JList selectedList;
 
@@ -115,7 +112,7 @@ class XmlPropertyPanel extends JPanel implements ListSelectionListener {
     }
 
     public void removeNotify() {
-        LOG.log(Level.INFO, "The XML panel is being removed");
+        
         removeAll();
     }
 }

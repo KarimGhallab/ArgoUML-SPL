@@ -40,8 +40,6 @@
 package org.argouml.model.mdr;
 
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.StateMachinesFactory;
 import org.omg.uml.behavioralelements.statemachines.CallEvent;
@@ -85,11 +83,7 @@ import org.omg.uml.foundation.datatypes.TimeExpression;
 class StateMachinesFactoryMDRImpl extends AbstractUmlModelFactoryMDR
         implements StateMachinesFactory {
 
-    /**
-     * Logger
-     */
-    private static final Logger LOG =
-        Logger.getLogger(StateMachinesFactoryMDRImpl.class.getName());
+    
 
     /**
      * The model implementation.
@@ -481,8 +475,7 @@ class StateMachinesFactoryMDRImpl extends AbstractUmlModelFactoryMDR
         if (transition instanceof Transition) {
             Transition t = (Transition) transition;
             if (t.getGuard() != null) {
-                LOG.log(Level.WARNING, "Replacing Guard " + t.getGuard().getName()
-                        + " on Transition " + t.getName());
+                
             }
             Guard guard = createGuard();
             guard.setTransition((Transition) transition);

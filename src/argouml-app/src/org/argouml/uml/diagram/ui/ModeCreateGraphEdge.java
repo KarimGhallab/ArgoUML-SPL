@@ -42,8 +42,6 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.diagram.static_structure.ui.FigEdgeNote;
@@ -62,8 +60,7 @@ import org.tigris.gef.presentation.FigPoly;
  */
 public abstract class ModeCreateGraphEdge extends ModeCreatePolyEdge {
 
-    private static final Logger LOG =
-        Logger.getLogger(ModeCreateGraphEdge.class.getName());
+    
 
     /**
      * The Fig from which drawing starts, either a FigNode or a FigEdge
@@ -154,7 +151,7 @@ public abstract class ModeCreateGraphEdge extends ModeCreatePolyEdge {
         if (!isConnectionValid(sourceFig, destFig)) {
             destFig = null;
         } else {
-            LOG.log(Level.INFO, "Connection valid");
+            
         }
 
         if (destFig instanceof FigEdgeModelElement
@@ -183,7 +180,7 @@ public abstract class ModeCreateGraphEdge extends ModeCreatePolyEdge {
                 editor.damageAll();
                 p.setComplete(true);
 
-                LOG.log(Level.INFO, "Connecting");
+                
                 FigEdge fe = buildConnection(
                         graphModel,
                         getMetaType(),

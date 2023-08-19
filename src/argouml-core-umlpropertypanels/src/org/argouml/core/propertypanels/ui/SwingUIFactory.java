@@ -8,7 +8,7 @@
  *
  * Contributors:
  *    Bob Tarling - Post GSOC improvements
- *    Christian López Espínola
+ *    Christian Lï¿½pez Espï¿½nola
  *    Thomas Neustupny
  *******************************************************************************
  *
@@ -40,8 +40,6 @@
 package org.argouml.core.propertypanels.ui;
 
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -71,8 +69,7 @@ import org.tigris.toolbar.ToolBarFactory;
  */
 class SwingUIFactory {
 
-    private static final Logger LOG =
-        Logger.getLogger(SwingUIFactory.class.getName());
+    
 
     public SwingUIFactory() {
     }
@@ -93,7 +90,7 @@ class SwingUIFactory {
         if (panelData == null) {
             panel.add(new JLabel(
         	    "There is no panel configured for " + target.getClass()));
-            LOG.log(Level.SEVERE, "No panel found for " + target.getClass());
+            
             return;
         }
 
@@ -107,7 +104,7 @@ class SwingUIFactory {
                     + prop.getControlType()
                     + " for property " + prop.getPropertyName()
                     + " on panel for " + target;
-                LOG.log(Level.SEVERE, message, e);
+                
                 try {
                     panel.add(new JLabel(message));
                 } catch (Exception ex) {

@@ -48,8 +48,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -72,9 +70,6 @@ import org.argouml.ui.UndoableAction;
 import org.argouml.ui.targetmanager.TargetManager;
 import org.argouml.uml.diagram.ArgoDiagram;
 import org.argouml.uml.diagram.DiagramUtils;
-import org.argouml.uml.diagram.SequenceDiagram;
-import org.argouml.uml.diagram.activity.ui.UMLActivityDiagram;
-import org.argouml.uml.diagram.state.ui.UMLStateDiagram;
 import org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram;
 import org.argouml.uml.diagram.ui.ActionAddAllClassesFromModel;
 import org.argouml.uml.diagram.ui.ActionAddExistingEdge;
@@ -82,14 +77,10 @@ import org.argouml.uml.diagram.ui.ActionAddExistingNode;
 import org.argouml.uml.diagram.ui.ActionAddExistingNodes;
 import org.argouml.uml.diagram.ui.ActionSaveDiagramToClipboard;
 import org.argouml.uml.diagram.ui.ModeAddToDiagram;
-import org.argouml.uml.ui.ActionActivityDiagram;
 import org.argouml.uml.ui.ActionClassDiagram;
 import org.argouml.uml.ui.ActionCollaborationDiagram;
 import org.argouml.uml.ui.ActionDeleteModelElements;
-import org.argouml.uml.ui.ActionDeploymentDiagram;
-import org.argouml.uml.ui.ActionSequenceDiagram;
 import org.argouml.uml.ui.ActionSetSourcePath;
-import org.argouml.uml.ui.ActionStateDiagram;
 import org.argouml.uml.ui.ActionUseCaseDiagram;
 import org.tigris.gef.base.Diagram;
 import org.tigris.gef.base.Editor;
@@ -108,8 +99,7 @@ public class ExplorerPopup extends JPopupMenu {
     private JMenu createDiagrams =
         new JMenu(menuLocalize("menu.popup.create-diagram"));
 
-    private static final Logger LOG =
-        Logger.getLogger(ExplorerPopup.class.getName());
+    
 
     /**
      * Creates a new instance of ExplorerPopup.
@@ -217,24 +207,15 @@ public class ExplorerPopup extends JPopupMenu {
                 Model.getFacade().isALink(selectedItem);
             final boolean transitionSelected =
                 Model.getFacade().isATransition(selectedItem);
-            final boolean activityDiagramActive =
-                activeDiagram instanceof UMLActivityDiagram;
-            final boolean sequenceDiagramActive =
-                activeDiagram instanceof SequenceDiagram;
-            final boolean stateDiagramActive =
-                activeDiagram instanceof UMLStateDiagram;
+            
+            
+            
             final Object selectedStateMachine =
                 (stateVertexSelected) ? Model
                     .getStateMachinesHelper().getStateMachine(selectedItem)
                     : null;
-            final Object diagramStateMachine =
-                (stateDiagramActive) ? ((UMLStateDiagram) activeDiagram)
-                    .getStateMachine()
-                    : null;
-            final Object diagramActivity =
-                (activityDiagramActive)
-                    ? ((UMLActivityDiagram) activeDiagram).getStateMachine()
-                    : null;
+            
+            
 
             Collection projectModels =
                 ProjectManager.getManager().getCurrentProject().getModels();
@@ -244,14 +225,11 @@ public class ExplorerPopup extends JPopupMenu {
                                 // TODO: Allow adding models to a diagram - issue 4172.
                                 && !projectModels.contains(selectedItem))
                         || (stateVertexSelected
-                                && activityDiagramActive
-                                && diagramActivity == selectedStateMachine)
-                        || (stateVertexSelected
-                                && stateDiagramActive
-                                && diagramStateMachine == selectedStateMachine)
+                                
+                                )
                         || (instanceSelected
                                 && !dataValueSelected
-                                && !sequenceDiagramActive)
+                                && false)
                         || nAryAssociationSelected || commentSelected) {
                     // TODO: Why can't we use ActionAddExistingNodes here? Bob.
                     Action action =
@@ -264,7 +242,7 @@ public class ExplorerPopup extends JPopupMenu {
                 if ((relationshipSelected
                         && !flowSelected
                         && !nAryAssociationSelected)
-                        || (linkSelected && !sequenceDiagramActive)
+                        || (linkSelected && false)
                         || transitionSelected) {
 
                     Action action =
@@ -359,15 +337,15 @@ public class ExplorerPopup extends JPopupMenu {
 
         createDiagrams.add(new ActionClassDiagram());
 
-        createDiagrams.add(new ActionSequenceDiagram());
+        
 
         createDiagrams.add(new ActionCollaborationDiagram());
 
-        createDiagrams.add(new ActionStateDiagram());
+        
 
-        createDiagrams.add(new ActionActivityDiagram());
+        
 
-        createDiagrams.add(new ActionDeploymentDiagram());
+        
     }
 
     /**
@@ -480,7 +458,7 @@ public class ExplorerPopup extends JPopupMenu {
         final List<Action> contextActions =
             ContextActionFactoryManager.getContextPopupActions();
         
-        LOG.log(Level.INFO, "{0}", contextActions);
+        
         
         if (contextActions instanceof ActionList) {
             recursiveAdd(this, (Action) contextActions);
@@ -776,7 +754,7 @@ public class ExplorerPopup extends JPopupMenu {
                             null);
                 }
             } catch (IllegalModelElementConnectionException e1) {
-                LOG.log(Level.SEVERE, "Exception", e1);
+                
             }
         }
     }
@@ -822,7 +800,7 @@ public class ExplorerPopup extends JPopupMenu {
                             null);
                 }
             } catch (IllegalModelElementConnectionException e1) {
-                LOG.log(Level.SEVERE, "Exception", e1);
+                
             }
         }
     }

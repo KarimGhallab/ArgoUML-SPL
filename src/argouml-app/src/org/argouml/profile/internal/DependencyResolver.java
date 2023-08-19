@@ -16,8 +16,6 @@ package org.argouml.profile.internal;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A dependency resolver for items of type T. It implements a state-full
@@ -28,8 +26,7 @@ import java.util.logging.Logger;
  */
 class DependencyResolver<T> {
 
-    private static final Logger LOG =
-        Logger.getLogger(DependencyResolver.class.getName());
+    
 
     private DependencyChecker<T> checker;
 
@@ -78,20 +75,13 @@ class DependencyResolver<T> {
         allUnresolvedItems.addAll(items);
         allUnresolvedItems.addAll(unresolvedItems);
         
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.log(Level.FINE,
-                    items2Msg("Attempt to resolve the following items:",
-                              allUnresolvedItems));
-        }
+        
         Collection<T> resolved = internalResolve(allUnresolvedItems);
         allUnresolvedItems.removeAll(resolved);
         unresolvedItems.clear();
         unresolvedItems.addAll(allUnresolvedItems);
         if (!unresolvedItems.isEmpty()) {
-            LOG.log(Level.WARNING,
-                    items2Msg("The following items were left unresolved after "
-                              + "attempt:\n",
-                              unresolvedItems));
+            
         }
     }
 

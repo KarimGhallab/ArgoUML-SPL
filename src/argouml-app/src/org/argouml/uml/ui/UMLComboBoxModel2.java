@@ -44,8 +44,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractListModel;
 import javax.swing.ComboBoxModel;
@@ -80,8 +78,7 @@ public abstract class UMLComboBoxModel2 extends AbstractListModel
         implements PropertyChangeListener,
         ComboBoxModel, TargetListener, PopupMenuListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLComboBoxModel2.class.getName());
+    
 
     /**
      * The string that represents a null or cleared choice.
@@ -179,8 +176,7 @@ public abstract class UMLComboBoxModel2 extends AbstractListModel
                     try {
                         modelChanged(event);
                     } catch (InvalidElementException e) {
-                        LOG.log(Level.FINE, "event = {0} ", event );
-                        LOG.log(Level.FINE, "updateLayout method accessed deleted element", e);
+                        
                     }
                 }
             };
@@ -419,12 +415,12 @@ public abstract class UMLComboBoxModel2 extends AbstractListModel
      */
     public void setTarget(Object theNewTarget) {
         if (theNewTarget != null && theNewTarget.equals(comboBoxTarget)) {
-            LOG.log(Level.FINE, "Ignoring duplicate setTarget request {0}", theNewTarget);
+            
             return;
         }
         modelValid = false;
 
-        LOG.log(Level.FINE, "setTarget target: {0}", theNewTarget);
+        
 
         theNewTarget = theNewTarget instanceof Fig
             ? ((Fig) theNewTarget).getOwner() : theNewTarget;
@@ -499,14 +495,9 @@ public abstract class UMLComboBoxModel2 extends AbstractListModel
         try {
             buildModelList();
 
-            if ( LOG.isLoggable( Level.FINE ) ) {
-              long endTime = System.currentTimeMillis();
-              LOG.log(Level.FINE, "buildModelList took " + (endTime - startTime)
-                      + " msec. for " + this.getClass().getName());
-            }
+            
         } catch (InvalidElementException e) {
-            LOG.log(Level.WARNING, "buildModelList attempted to operate on "
-                    + "deleted element");
+            
         }
     }
 
@@ -731,7 +722,7 @@ public abstract class UMLComboBoxModel2 extends AbstractListModel
      * @see TargetListener#targetAdded(TargetEvent)
      */
     public void targetAdded(TargetEvent e) {
-        LOG.log(Level.FINE, "targetAdded targetevent: {0}", e);
+        
         setTarget(e.getNewTarget());
     }
 
@@ -739,7 +730,7 @@ public abstract class UMLComboBoxModel2 extends AbstractListModel
      * @see TargetListener#targetRemoved(TargetEvent)
      */
     public void targetRemoved(TargetEvent e) {
-        LOG.log(Level.FINE, "targetRemoved targetevent: {0}", e);
+        
         Object currentTarget = comboBoxTarget;
         Object oldTarget =
 	    e.getOldTargets().length > 0
@@ -761,7 +752,7 @@ public abstract class UMLComboBoxModel2 extends AbstractListModel
      * @see TargetListener#targetSet(TargetEvent)
      */
     public void targetSet(TargetEvent e) {
-        LOG.log(Level.FINE, "targetSet targetevent : {0}", e);
+        
         setTarget(e.getNewTarget());
 
     }

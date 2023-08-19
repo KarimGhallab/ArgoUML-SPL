@@ -38,8 +38,6 @@
 
 package org.argouml.core.propertypanels.ui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 
@@ -50,8 +48,7 @@ import org.argouml.model.Model;
  */
 class UMLConditionExpressionModel extends UMLExpressionModel {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLConditionExpressionModel.class.getName());
+    
 
     /**
      * The constructor.
@@ -84,7 +81,7 @@ class UMLConditionExpressionModel extends UMLExpressionModel {
      * @see org.argouml.uml.ui.UMLExpressionModel2#newExpression()
      */
     public Object newExpression(String lang, String body) {
-        LOG.log(Level.FINE, "new boolean expression");
+        
         return Model.getDataTypesFactory().createBooleanExpression(lang, body);
     }
 }

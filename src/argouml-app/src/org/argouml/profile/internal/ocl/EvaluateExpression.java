@@ -44,8 +44,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.profile.internal.ocl.uml14.Bag;
 import org.argouml.profile.internal.ocl.uml14.HashBag;
@@ -106,11 +104,7 @@ import tudresden.ocl.parser.node.PExpressionListTail;
  */
 public class EvaluateExpression extends DepthFirstAdapter {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(EvaluateExpression.class.getName());
+    
 
     /**
      * The Variable Table
@@ -885,18 +879,14 @@ public class EvaluateExpression extends DepthFirstAdapter {
 
     /** Error Handling * */
     private void errorNotType(Object node, String type, Object dft) {
-        LOG.log(Level.SEVERE,
-                "OCL does not evaluate to a " + type + " expression!! Exp: "
-                + node + " Val: " + val);
+        
         val = dft;
         // TODO: We need a specific exception type here.
         throw new RuntimeException();
     }
 
     private void error(Object node) {
-        LOG.log(Level.SEVERE,
-                "Unknown error processing OCL exp!! Exp: " + node + " Val: "
-                + val);
+        
         val = null;
         // TODO: We need a specific exception type here.
         throw new RuntimeException();

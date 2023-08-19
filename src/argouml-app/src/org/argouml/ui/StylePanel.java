@@ -43,8 +43,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -69,11 +67,7 @@ public class StylePanel
     implements TabFigTarget,
                 ItemListener, DocumentListener, ListSelectionListener,
                 ActionListener {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(StylePanel.class.getName());
+    
 
     private Fig panelTarget;
 
@@ -157,7 +151,7 @@ public class StylePanel
      * @see javax.swing.event.DocumentListener#insertUpdate(javax.swing.event.DocumentEvent)
      */
     public void insertUpdate(DocumentEvent e) {
-        LOG.log(Level.FINE, "{0} insert", getClass().getName());
+        
     }
 
     /*

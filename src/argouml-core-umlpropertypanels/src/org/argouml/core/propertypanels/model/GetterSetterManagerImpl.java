@@ -24,8 +24,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
@@ -52,8 +50,7 @@ import org.argouml.util.ArgoFrame;
  */
 class GetterSetterManagerImpl extends GetterSetterManager {
 
-    private static final Logger LOG =
-        Logger.getLogger(GetterSetterManagerImpl.class.getName());
+    
 
     /**
      * The constructor
@@ -167,7 +164,7 @@ class GetterSetterManagerImpl extends GetterSetterManager {
         GetterSetter bgs = getterSetterByPropertyName.get(propertyName);
         if (bgs instanceof OptionGetterSetter) {
 
-            LOG.log(Level.FINE, "OptionGetterSetter found for {0} of {1}", new Object[]{propertyName, bgs});
+            
 
             final OptionGetterSetter ogs = (OptionGetterSetter) bgs;
             return ogs.getOptions(umlElement, types);
@@ -219,11 +216,11 @@ class GetterSetterManagerImpl extends GetterSetterManager {
 
     @Override
     public Command getAddCommand(String propertyName, Object umlElement) {
-        LOG.log(Level.INFO, "Finding getter/setter for {0}", propertyName);
+        
 
         GetterSetter bgs = getterSetterByPropertyName.get(propertyName);
         if (bgs instanceof Addable) {
-            LOG.log(Level.INFO, "Returning add command");
+            
             return ((Addable) bgs).getAddCommand(umlElement);
         }
         return null;
@@ -1333,7 +1330,7 @@ class GetterSetterManagerImpl extends GetterSetterManager {
     private class TemplateParameterGetterSetter extends ListGetterSetter {
 
         public Collection getOptions(Object modelElement, Collection<Class<?>> types) {
-            LOG.log(Level.FINE, "Getting template parameters for {0}", modelElement);
+            
 
             return Model.getFacade().getTemplateParameters(modelElement);
         }
@@ -1426,7 +1423,7 @@ class GetterSetterManagerImpl extends GetterSetterManager {
 
             @Override
             protected void doIt(Collection selected) {
-            	LOG.log(Level.INFO, "Setting {0} imported elements", selected.size());
+            	
 
                 Model.getModelManagementHelper().setImportedElements(getTarget(), selected);
             }
@@ -1974,7 +1971,7 @@ class GetterSetterManagerImpl extends GetterSetterManager {
 
         @Override
         public void set(Object modelElement, Object value) {
-            LOG.log(Level.INFO, "About to call setBody {0} / {1}", new Object[]{modelElement, value});
+            
             Model.getCoreHelper().setBody(modelElement, value);
         }
 
@@ -2154,7 +2151,7 @@ class GetterSetterManagerImpl extends GetterSetterManager {
                     } catch (ProfileException e) {
                         // TODO: We need to rethrow this as some other exception
                         // type but that is too much change for the moment.
-                        LOG.log(Level.SEVERE, "Exception", e);
+                        
                     }
                 }
                 return list;

@@ -48,8 +48,6 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -68,11 +66,7 @@ import org.tigris.gef.ocl.TemplateReader;
  * TODO: Review use of this against ZargoFilePersister - Bob
  */
 class OldZargoFilePersister extends ZargoFilePersister {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(OldZargoFilePersister.class.getName());
+    
 
     /**
      * This is the old version of the ArgoUML tee file which does not contain
@@ -178,8 +172,7 @@ class OldZargoFilePersister extends ZargoFilePersister {
                 ProjectMember projectMember = project.getMembers().get(i);
                 if (!(projectMember.getType().equalsIgnoreCase("xmi"))) {
                     
-                    LOG.log(Level.INFO,
-                            "Saving member: {0}", projectMember.getZipName());
+                    
 
                     String name = projectMember.getZipName();
                     String originalName = name;
@@ -201,9 +194,7 @@ class OldZargoFilePersister extends ZargoFilePersister {
                 ProjectMember projectMember = project.getMembers().get(i);
                 if (projectMember.getType().equalsIgnoreCase("xmi")) {
                     
-                    LOG.log(Level.INFO,
-                            "Saving member of type: {0}",
-                            projectMember.getType());
+                    
 
                     stream.putNextEntry(
                             new ZipEntry(projectMember.getZipName()));
@@ -232,7 +223,7 @@ class OldZargoFilePersister extends ZargoFilePersister {
             progressMgr.nextPhase();
 
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Exception occured during save attempt", e);
+            
             try {
                 writer.close();
             } catch (Exception ex) {
@@ -253,7 +244,7 @@ class OldZargoFilePersister extends ZargoFilePersister {
         try {
             writer.close();
         } catch (IOException ex) {
-            LOG.log(Level.SEVERE, "Failed to close save output writer", ex);
+            
         }
     }
 

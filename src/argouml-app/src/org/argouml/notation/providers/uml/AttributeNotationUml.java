@@ -42,8 +42,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.events.ArgoEventPump;
 import org.argouml.application.events.ArgoEventTypes;
@@ -67,11 +65,7 @@ import org.argouml.util.MyTokenizer;
  */
 public class AttributeNotationUml extends AttributeNotation {
 
-    /**
-     * The standard error etc. logger
-     */
-    private static final Logger LOG =
-        Logger.getLogger(AttributeNotationUml.class.getName());
+    
 
     /**
      * The constructor.
@@ -431,20 +425,7 @@ public class AttributeNotationUml extends AttributeNotation {
         //      throw pre;
         // }
 
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.log(Level.FINE, "ParseAttribute [name: " + name
-                    + " visibility: " + visibility
-                    + " type: " + type + " value: " + value
-                    + " stereo: " + stereotype
-                    + " mult: " + multiplicity);
-            if (properties != null) {
-                for (int i = 0; i + 1 < properties.size(); i += 2) {
-                    LOG.log(Level.FINE,
-                            "\tProperty [name: " + properties.get(i) + " = "
-                            + properties.get(i + 1) + "]");
-                }
-            }
-        }
+        
 
         dealWithDerived(attribute, derived);
         dealWithVisibility(attribute, visibility);

@@ -167,9 +167,7 @@ class UMLDiagramHomeModelComboBoxModel extends UMLComboBoxModel2 {
     @Override
     protected Object getSelectedModelElement() {
         Object t = getTarget();
-        if (t instanceof ArgoDiagram) {
-            return ((ArgoDiagram) t).getOwner();
-        }
+        
         return null;
     }
 

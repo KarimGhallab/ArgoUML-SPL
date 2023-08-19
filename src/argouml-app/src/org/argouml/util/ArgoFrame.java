@@ -39,8 +39,6 @@
 package org.argouml.util;
 
 import java.awt.Frame;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -58,8 +56,7 @@ import javax.swing.JOptionPane;
  */
 public class ArgoFrame {
 
-    private static final Logger LOG =
-        Logger.getLogger(ArgoFrame.class.getName());
+    
 
     private static Frame topFrame;
 
@@ -99,15 +96,14 @@ public class ArgoFrame {
                 for (int i = 0; i < frames.length; i++) {
                     if (frames[i] instanceof JFrame) {
                         if (topFrame != null) {
-                            LOG.log(Level.WARNING, "Found multiple JFrames");
+                            
                         } else {
                             setFrame(frames[i]);
                         }
                     }
                 }
                 if (topFrame == null) {
-                    LOG.log(Level.WARNING,
-                            "Failed to find JFrame - using rootFrame");
+                    
                     setFrame(JOptionPane.getRootFrame());
                 }
             }

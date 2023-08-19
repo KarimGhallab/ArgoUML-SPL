@@ -44,8 +44,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jmi.reflect.InvalidObjectException;
 
@@ -88,8 +86,7 @@ class CollaborationsHelperMDRImpl implements CollaborationsHelper {
      */
     private MDRModelImplementation modelImpl;
 
-    private static final Logger LOG =
-        Logger.getLogger(CollaborationsHelperMDRImpl.class.getName());
+    
 
     /**
      * Constructor.
@@ -382,7 +379,7 @@ class CollaborationsHelperMDRImpl implements CollaborationsHelper {
 
 
     public Collection<Feature> allAvailableFeatures(Object arole) {
-        LOG.log(Level.INFO, "allAvailableFeatures start");
+        
 
         if (arole instanceof ClassifierRole) {
             try {
@@ -397,7 +394,7 @@ class CollaborationsHelperMDRImpl implements CollaborationsHelper {
                 for (Classifier classifier : role.getBase()) {
                     returnList.addAll(classifier.getFeature());
                 }
-                LOG.log(Level.INFO, "allAvailableFeatures {0}", returnList.size());
+                
                 return returnList;
             } catch (InvalidObjectException e) {
                 throw new InvalidElementException(e);
@@ -409,7 +406,7 @@ class CollaborationsHelperMDRImpl implements CollaborationsHelper {
 
 
     public Collection allAvailableContents(Object arole) {
-        LOG.log(Level.INFO, "allAvailableContents start");
+        
         try {
             if (arole instanceof ClassifierRole) {
                 List returnList = new ArrayList();
@@ -423,7 +420,7 @@ class CollaborationsHelperMDRImpl implements CollaborationsHelper {
                 for (Classifier baseClassifier : role.getBase()) {
                     returnList.addAll(baseClassifier.getOwnedElement());
                 }
-                LOG.log(Level.INFO, "allAvailableFeatures {0}", returnList.size());
+                
                 return returnList;
             }
         } catch (InvalidObjectException e) {

@@ -39,8 +39,6 @@ package org.argouml.model.mdr;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.netbeans.lib.jmi.xmi.WriterBase;
 import org.netbeans.lib.jmi.xmi.XMIHeaderProvider;
@@ -52,8 +50,7 @@ import org.netbeans.lib.jmi.xmi.XMIHeaderProvider;
 class XmiHeaderProviderImpl implements XMIHeaderProvider {
 
     private static final String UML_VERSION = "1.4";
-    private static final Logger LOG =
-        Logger.getLogger(XmiHeaderProviderImpl.class.getName());
+    
 
     private String version;
 
@@ -87,7 +84,7 @@ class XmiHeaderProviderImpl implements XMIHeaderProvider {
         try {
             ps.write(header);
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "Exception while writing XMI header + ", e);
+            
         }
     }
 

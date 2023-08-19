@@ -49,9 +49,6 @@ import org.argouml.kernel.Project;
 import org.argouml.kernel.ProjectManager;
 import org.argouml.model.Model;
 import org.argouml.uml.diagram.ArgoDiagram;
-import org.argouml.uml.diagram.SequenceDiagram;
-import org.argouml.uml.diagram.activity.ui.UMLActivityDiagram;
-import org.argouml.uml.diagram.state.ui.UMLStateDiagram;
 
 /**
  * Rule for Package->Diagram.
@@ -82,9 +79,9 @@ public class GoNamespaceToDiagram extends AbstractPerspectiveRule {
                 // classifier/operation the collaboration represents.
                 // Statediagrams and activitydiagrams are shown as children
                 // of the statemachine or activitygraph they belong to.
-                if (diagram instanceof UMLStateDiagram
-                        || diagram instanceof UMLActivityDiagram
-                        || diagram instanceof SequenceDiagram) {
+                if (false
+                        || false
+                        || false) {
                     continue;
                 }
                 if (diagram.getNamespace() == namespace) {

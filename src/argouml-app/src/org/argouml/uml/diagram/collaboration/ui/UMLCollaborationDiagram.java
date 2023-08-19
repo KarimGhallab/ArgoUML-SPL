@@ -44,8 +44,6 @@ import java.beans.PropertyVetoException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -85,11 +83,7 @@ import org.tigris.gef.presentation.FigNode;
  */
 public class UMLCollaborationDiagram extends UMLDiagram implements CollaborationDiagram {
 
-    /**
-     * Logging.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UMLCollaborationDiagram.class.getName());
+    
 
     ////////////////////////
     // actions for toolbar
@@ -175,8 +169,7 @@ public class UMLCollaborationDiagram extends UMLDiagram implements Collaboration
      */
     public void setNamespace(Object handle) {
         if (!Model.getFacade().isANamespace(handle)) {
-            LOG.log(Level.SEVERE,
-                "Illegal argument. Object " + handle + " is not a namespace");
+            
             throw new IllegalArgumentException(
                 "Illegal argument. Object " + handle + " is not a namespace");
         }
@@ -569,10 +562,9 @@ public class UMLCollaborationDiagram extends UMLDiagram implements Collaboration
             figNode = makeNewFigCR(makeNewCR(droppedObject), location);
         }
         if (figNode != null) {
-            LOG.log(Level.FINE, "Dropped object {0} converted to {1}",
-                    new Object[]{droppedObject, figNode});
+            
         } else {
-            LOG.log(Level.FINE, "Dropped object NOT added {0}", droppedObject);
+            
         }
         return figNode;
     }
@@ -601,10 +593,9 @@ public class UMLCollaborationDiagram extends UMLDiagram implements Collaboration
         }
 
         if (figNode != null) {
-            LOG.log(Level.FINE, "Model element {0} converted to {1}",
-                    new Object[]{modelElement, figNode});
+            
         } else {
-            LOG.log(Level.FINE, "Dropped object NOT added {0}", figNode);
+            
         }
         return figNode;
     }

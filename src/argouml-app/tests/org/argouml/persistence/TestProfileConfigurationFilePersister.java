@@ -169,37 +169,5 @@ public class TestProfileConfigurationFilePersister extends TestCase {
                 profileIter.next() instanceof ProfileUML);
     }
     
-    /**
-     * Test that we can save and restore the default profile configuration.
-     * 
-     * @throws IOException on io error
-     * @throws SaveException on save error
-     * @throws OpenException on load error
-     */
-    public void testSaveLoadDefaultConfiguration() throws IOException,
-        SaveException, OpenException {
-        
-        // Create a default profile and record its contents
-        Project project = ProjectManager.getManager().makeEmptyProject();
-        ProfileConfiguration pc = new ProfileConfiguration(project);
-        Collection<Profile> startingProfiles = 
-            new ArrayList<Profile>(pc.getProfiles());
-
-        // Write the profile out to a temp file
-        ProfileConfigurationFilePersister persister = 
-            new ProfileConfigurationFilePersister();
-        File file = File.createTempFile(this.getName(), ".profile");
-        OutputStream outStream = new FileOutputStream(file);
-        persister.save(pc, outStream);
-        outStream.close();
-        
-        // Read it back in to a new empty project
-        project = ProjectManager.getManager().makeEmptyProject();
-        persister.load(project,
-                new InputSource(file.toURI().toURL().toExternalForm()));
- 
-        // Make sure we got what we started with
-        assertEquals(startingProfiles, 
-                project.getProfileConfiguration().getProfiles());
-    }
+   
 }

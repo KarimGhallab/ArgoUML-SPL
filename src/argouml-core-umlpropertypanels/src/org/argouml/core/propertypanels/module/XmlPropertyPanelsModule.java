@@ -38,8 +38,6 @@
 
 package org.argouml.core.propertypanels.module;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.core.propertypanels.ui.XMLPropPanelFactory;
 import org.argouml.moduleloader.ModuleInterface;
@@ -56,8 +54,7 @@ public class XmlPropertyPanelsModule implements ModuleInterface {
     /**
      * The logger.
      */
-    private static final Logger LOG =
-        Logger.getLogger(XmlPropertyPanelsModule.class.getName());
+    
 
     public boolean enable() {
         try {
@@ -65,7 +62,7 @@ public class XmlPropertyPanelsModule implements ModuleInterface {
             PropPanelFactoryManager.addPropPanelFactory(elementFactory);
             return true;
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Exception caught", e);
+            
             return false;
         }
     }
@@ -77,7 +74,7 @@ public class XmlPropertyPanelsModule implements ModuleInterface {
             PropPanelFactoryManager.removePropPanelFactory(elementFactory);
             return true;
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Exception caught", e);
+            
             return false;
         }
     }

@@ -20,7 +20,6 @@ import java.nio.file.Files;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.argouml.kernel.TestProject;
 
 /**
  * Create a project from testmodels.

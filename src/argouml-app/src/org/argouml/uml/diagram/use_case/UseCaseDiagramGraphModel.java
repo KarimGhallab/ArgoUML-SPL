@@ -45,8 +45,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.uml.CommentEdge;
@@ -62,11 +60,7 @@ import org.argouml.uml.diagram.UMLMutableGraphSupport;
 public class UseCaseDiagramGraphModel
         extends UMLMutableGraphSupport
         implements VetoableChangeListener {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UseCaseDiagramGraphModel.class.getName());
+    
 
     ///////////////////////////////////////////////////////////////////////////
     //
@@ -285,25 +279,18 @@ public class UseCaseDiagramGraphModel
 
         // Both ends must be defined and nodes that are on the graph already.
         if (sourceModelElement == null || destModelElement == null) {
-            LOG.log(Level.SEVERE,
-                    "Edge rejected. Its ends are not attached to anything");
+            
             return false;
         }
 
         if (!containsNode(sourceModelElement)
                 && !containsEdge(sourceModelElement)) {
-            LOG.log(Level.SEVERE,
-                    "Edge rejected. Its source end is attached to "
-                    + sourceModelElement
-                    + " but this is not in the graph model");
+            
             return false;
         }
         if (!containsNode(destModelElement)
                 && !containsEdge(destModelElement)) {
-            LOG.log(Level.SEVERE,
-                    "Edge rejected. Its destination end is attached to "
-                    + destModelElement
-                    + " but this is not in the graph model");
+            
             return false;
         }
 
@@ -331,7 +318,7 @@ public class UseCaseDiagramGraphModel
     @Override
     public void addNode(Object node) {
 
-        LOG.log(Level.FINE, "adding usecase node");
+        
 
         // Give up if we are already on the graph. This is a bit inconistent
         // with canAddNode above.
@@ -381,12 +368,10 @@ public class UseCaseDiagramGraphModel
                     "The source and dest port should be provided on an edge");
         }
 
-        LOG.log(Level.INFO,
-                "Adding an edge of type to use case diagram. {0}",
-                edge.getClass().getName());
+        
 
         if (!canAddEdge(edge)) {
-            LOG.log(Level.INFO, "Attempt to add edge rejected");
+            
             return;
         }
 
@@ -548,7 +533,7 @@ public class UseCaseDiagramGraphModel
 
             if (oldOwned.contains(eo)) {
 
-                LOG.log(Level.FINE, "model removed {0}", me);
+                
 
                 // Remove a node
 
@@ -566,7 +551,7 @@ public class UseCaseDiagramGraphModel
                 }
             } else {
                 // Something was added - nothing for us to worry about
-                LOG.log(Level.FINE, "model added {0}", me);
+                
             }
         }
     }

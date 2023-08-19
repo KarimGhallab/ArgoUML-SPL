@@ -39,16 +39,13 @@
 package org.argouml.persistence;
 
 import java.util.Hashtable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Jim Holy
  */
 
 abstract class XMLTokenTableBase {
-    private static final Logger LOG =
-        Logger.getLogger(XMLTokenTableBase.class.getName());
+    
 
     ////////////////////////////////////////////////////////////////
     // instance variables
@@ -85,7 +82,7 @@ abstract class XMLTokenTableBase {
 	if (push) {
 	    openTags[++numOpen] = s;
 	} else if (s.equals(openTags[numOpen])) {
-            LOG.log(Level.FINE, "matched: {0}", s);
+            
 	    return openTokens[numOpen--];
 	}
 	Integer i = (Integer) tokens.get(s);
@@ -118,14 +115,13 @@ abstract class XMLTokenTableBase {
         boolean error = false;
 	if (dbg) {
 	    if (tokens.contains(i) || tokens.containsKey(s)) {
-                LOG.log(Level.SEVERE,
-                        "ERROR: token table already contains " + s);
+                
 		error = true;
 	    }
 	}
 	tokens.put(s, i);
 	if (dbg && !error) {
-            LOG.log(Level.FINE, "NOTE: added {0} to token table", s);
+            
         }
     }
 

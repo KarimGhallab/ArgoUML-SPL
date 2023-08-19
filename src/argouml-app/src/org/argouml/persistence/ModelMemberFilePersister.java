@@ -48,8 +48,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.api.Argo;
 import org.argouml.application.helpers.ApplicationVersion;
@@ -75,8 +73,7 @@ import org.xml.sax.InputSource;
 class ModelMemberFilePersister extends MemberFilePersister
     implements XmiExtensionParser {
 
-    private static final Logger LOG =
-        Logger.getLogger(ModelMemberFilePersister.class.getName());
+    
 
     private Object curModel;
     private HashMap<String, Object> uUIDRefs;
@@ -130,7 +127,7 @@ class ModelMemberFilePersister extends MemberFilePersister
             readModels(source);
             mmodel = getCurModel();
         } catch (OpenException e) {
-            LOG.log(Level.SEVERE, "UmlException caught", e);
+            
             throw e;
         }
         // This should probably be inside xmiReader.parse
@@ -187,7 +184,7 @@ class ModelMemberFilePersister extends MemberFilePersister
     }
 
     public void parse(String label, String xmiExtensionString) {
-        LOG.log(Level.INFO, "Parsing an extension for {0}", label);
+        
     }
 
 
@@ -221,9 +218,7 @@ class ModelMemberFilePersister extends MemberFilePersister
      */
     public synchronized void readModels(URL url,
             XmiExtensionParser xmiExtensionParser) throws OpenException {
-        LOG.log(Level.INFO,
-                "=======================================\n"
-                +"== READING MODEL {0}", url);
+        
 
         try {
             // TODO: What progressMgr is to be used here? Where does
@@ -282,18 +277,12 @@ class ModelMemberFilePersister extends MemberFilePersister
                 while (elements.hasNext()) {
                     current = elements.next();
                     if (facade.isAModel(current)) {
-                        if (LOG.isLoggable(Level.INFO)) {
-                            LOG.log(Level.INFO,
-                                    "Loaded model {0}",
-                                    facade.getName(current));
-                        }
+                        
                         if (curModel == null) {
                             curModel = current;
                         }
                     } else if (facade.isAProfile(current)) {
-                        LOG.log(Level.INFO,
-                                "Loaded profile '" + facade.getName(current)
-                                + "'");
+                        
                         if (curModel == null) {
                             curModel = current;
                         }
@@ -310,7 +299,7 @@ class ModelMemberFilePersister extends MemberFilePersister
             // to handle differently?  Don't think so.  - tfm
             throw new XmiFormatException(ex);
         }
-        LOG.log(Level.INFO, "=======================================");
+        
     }
 
     /**
@@ -369,32 +358,12 @@ class ModelMemberFilePersister extends MemberFilePersister
 
             ArgoDiagram diagram = null;
             if (facade.isAActivityGraph(statemachine)) {
-                if (LOG.isLoggable(Level.INFO)) {
-                    LOG.log(Level.INFO,
-                            "Creating activity diagram for {0}<<{1}>>",
-                            new Object[] {
-                                facade.getUMLClassName(statemachine),
-                                facade.getName(statemachine)
-                            });
-                }
-                diagram = diagramFactory.createDiagram(
-                        DiagramType.Activity,
-                	namespace,
-                	statemachine);
+                
+                
             } else {
-                if (LOG.isLoggable(Level.INFO)) {
-                    LOG.log(Level.INFO,
-                            "Creating activity diagram for {0}<<{1}>>",
-                            new Object[] {
-                                facade.getUMLClassName(statemachine),
-                                facade.getName(statemachine)
-                            });
-                }
+                
 
-                diagram = diagramFactory.createDiagram(
-                        DiagramType.State,
-                	namespace,
-                	statemachine);
+                
             }
             if (diagram != null) {
                 project.addMember(diagram);
