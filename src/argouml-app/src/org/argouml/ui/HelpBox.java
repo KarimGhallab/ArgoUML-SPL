@@ -44,8 +44,6 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -62,8 +60,7 @@ import org.argouml.cognitive.Translator;
  */
 public class HelpBox extends JFrame implements HyperlinkListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(HelpBox.class.getName());
+    
 
     /**
      * A tabbed pane to display several pages simultaneously.
@@ -118,17 +115,17 @@ public class HelpBox extends JFrame implements HyperlinkListener {
             try {
                 paneURL = new URL( pages[i][1]);
             } catch ( MalformedURLException e) {
-                LOG.log(Level.WARNING, pages[i][0] + " URL malformed: " + pages[i][1]);
+                
             }
 
             if ( paneURL != null) {
                 try {
                     panes[i].setPage( paneURL);
                 } catch ( IOException e) {
-                    LOG.log(Level.WARNING, "Attempted to read a bad URL: " + paneURL);
+                    
                 }
             } else {
-                LOG.log(Level.WARNING, "Couldn't find " + pages[i][0]);
+                
             }
 
             // Put the current pane in a scroll pane.
@@ -149,7 +146,7 @@ public class HelpBox extends JFrame implements HyperlinkListener {
             try {
                 pane.setPage(event.getURL());
             } catch (IOException ioe) {
-                LOG.log(Level.WARNING, "Could not fetch requested URL");
+                
             }
 	}
     }

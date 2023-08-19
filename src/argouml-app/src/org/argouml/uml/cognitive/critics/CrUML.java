@@ -38,8 +38,6 @@
 
 package org.argouml.uml.cognitive.critics;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.Critic;
 import org.argouml.cognitive.Designer;
@@ -63,11 +61,7 @@ import org.tigris.gef.ocl.ExpansionException;
  * @author jrobbins
  */
 public class CrUML extends Critic {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(CrUML.class.getName());
+    
 
    /**
     * By default looks for the localized strings at the <code>critics</code>
@@ -241,7 +235,7 @@ public class CrUML extends Critic {
 		    CriticOclEvaluator.getInstance().evalToString(off1, expr);
             } catch (ExpansionException e) {
                 // Really ought to have a CriticException to throw here.
-                LOG.log(Level.SEVERE, "Failed to evaluate critic expression", e);
+                
             }
             if (expr.endsWith("") && evalStr.equals("")) {
                 evalStr = Translator.localize("misc.name.anon");

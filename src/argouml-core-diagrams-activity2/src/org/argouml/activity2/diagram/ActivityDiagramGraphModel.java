@@ -17,17 +17,12 @@ package org.argouml.activity2.diagram;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.argouml.uml.diagram.UMLMutableGraphSupport;
 
 class ActivityDiagramGraphModel extends UMLMutableGraphSupport {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ActivityDiagramGraphModel.class.getName());
+    
 
     ActivityDiagramGraphModel() {
         super();

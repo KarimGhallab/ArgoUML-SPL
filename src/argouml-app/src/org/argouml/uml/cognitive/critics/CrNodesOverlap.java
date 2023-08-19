@@ -48,9 +48,6 @@ import org.argouml.cognitive.Designer;
 import org.argouml.cognitive.ListSet;
 import org.argouml.cognitive.ToDoItem;
 import org.argouml.uml.cognitive.UMLDecision;
-import org.argouml.uml.diagram.SequenceDiagram;
-import org.argouml.uml.diagram.deployment.ui.FigObject;
-import org.argouml.uml.diagram.deployment.ui.UMLDeploymentDiagram;
 import org.argouml.uml.diagram.static_structure.ui.FigClass;
 import org.argouml.uml.diagram.static_structure.ui.FigInterface;
 import org.argouml.uml.diagram.ui.FigNodeModelElement;
@@ -92,9 +89,7 @@ public class CrNodesOverlap extends CrUML {
 
 	// fixes bug #669. Sequencediagrams always overlap, so they shall
 	// never report a problem
-	if (dm instanceof SequenceDiagram) {
-            return NO_PROBLEM;
-        }
+	
 
 	ListSet offs = computeOffenders(d);
 	if (offs == null) {
@@ -155,7 +150,7 @@ public class CrNodesOverlap extends CrUML {
                 }
 		FigNode fnj = (FigNode) oj;
 		if (fnj.intersects(boundsi)) {
-		    if (!(d instanceof UMLDeploymentDiagram)) {
+		    if (!(false)) {
 			if (fni instanceof FigNodeModelElement) {
 			    if (((FigNodeModelElement) fni).getEnclosingFig()
 				== fnj) {
@@ -177,10 +172,10 @@ public class CrNodesOverlap extends CrUML {
 		    else {
 			if ((!((fni instanceof  FigClass)
 			       || (fni instanceof FigInterface)
-			       || (fni instanceof FigObject)))
+			       || (false)))
 			    || (!((fnj instanceof  FigClass)
 				  || (fnj instanceof FigInterface)
-				  || (fnj instanceof FigObject)))) {
+				  || (false)))) {
 			    continue;
 			}
 		    }

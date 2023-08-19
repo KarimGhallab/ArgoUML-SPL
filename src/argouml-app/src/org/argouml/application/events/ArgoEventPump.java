@@ -40,8 +40,6 @@ package org.argouml.application.events;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -56,11 +54,7 @@ import org.argouml.application.api.ArgoEventListener;
  * be managed on a per-project or per-diagram basis.
  */
 public final class ArgoEventPump {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ArgoEventPump.class.getName());
+    
 
     /**
      * <code>listeners</code> contains the list of register listeners.
@@ -220,7 +214,7 @@ public final class ArgoEventPump {
             break;
 
 	default :
-            LOG.log(Level.SEVERE, "Invalid event:" + event.getEventType());
+            
 	    break;
         }
     }
@@ -255,7 +249,7 @@ public final class ArgoEventPump {
             listener.diagramFontChanged(event);
             break;
         default :
-            LOG.log(Level.SEVERE, "Invalid event:" + event.getEventType());
+            
             break;
         }
     }
@@ -279,7 +273,7 @@ public final class ArgoEventPump {
             break;
 
         default :
-            LOG.log(Level.SEVERE, "Invalid event:" + event.getEventType());
+            
             break;
         }
     }
@@ -316,7 +310,7 @@ public final class ArgoEventPump {
             break;
 
         default :
-            LOG.log(Level.SEVERE, "Invalid event:" + event.getEventType());
+            
             break;
         }
     }
@@ -340,7 +334,7 @@ public final class ArgoEventPump {
             break;
 
         default:
-            LOG.log(Level.SEVERE, "Invalid event:" + event.getEventType());
+            
             break;
         }
     }
@@ -368,7 +362,7 @@ public final class ArgoEventPump {
             break;
 
         default:
-            LOG.log(Level.SEVERE, "Invalid event:" + event.getEventType());
+            
             break;
         }
     }

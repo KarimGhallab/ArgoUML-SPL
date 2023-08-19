@@ -40,8 +40,6 @@ package org.argouml.uml.cognitive.critics;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -54,11 +52,7 @@ import org.argouml.model.Model;
  * of an association.
  */
 public class WizNavigable extends UMLWizard {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(WizNavigable.class.getName());
+    
 
     private String instructions =
         Translator.localize("critics.WizNavigable-ins");
@@ -130,7 +124,7 @@ public class WizNavigable extends UMLWizard {
      * @see org.argouml.cognitive.ui.Wizard#doAction(int)
      */
     public void doAction(int oldStep) {
-        LOG.log(Level.FINE, "doAction {0}", oldStep);
+        
 
 	switch (oldStep) {
 	case 1:
@@ -152,7 +146,7 @@ public class WizNavigable extends UMLWizard {
 		Model.getCoreHelper().setNavigable(ae1,
 		        choice == 1 || choice == 2);
 	    } catch (Exception pve) {
-                LOG.log(Level.SEVERE, "could not set navigablity", pve);
+                
 	    }
 	}
     }

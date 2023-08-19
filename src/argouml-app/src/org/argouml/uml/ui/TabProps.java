@@ -41,8 +41,6 @@ package org.argouml.uml.ui;
 import java.awt.BorderLayout;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 import javax.swing.event.EventListenerList;
@@ -79,11 +77,7 @@ public class TabProps
     extends AbstractArgoJPanel
     implements TabModelTarget {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(TabProps.class.getName());
+    
 
     private JPanel blankPanel = new JPanel();
     private Hashtable<Class, JPanel> panels =
@@ -187,8 +181,7 @@ public class TabProps
     @Deprecated
     public void setTarget(Object target) {
         // targets ought to be UML objects or diagrams
-        LOG.log(Level.INFO, "setTarget: there are {0} targets",
-                TargetManager.getInstance().getTargets().size());
+        
 
         target = (target instanceof Fig) ? ((Fig) target).getOwner() : target;
         if (!(target == null || Model.getFacade().isAUMLElement(target)
@@ -258,12 +251,11 @@ public class TabProps
 
         JPanel panel = createPropPanel(trgt);
         if (panel != null) {
-            LOG.log(Level.FINE,
-                    "Factory created {0} for {1}", new Object[]{panel.getClass().getName(), trgt.getClass().getName()});
+            
             panels.put(trgt.getClass(), panel);
             return panel;
         }
-        LOG.log(Level.SEVERE, "Failed to create a prop panel for: {0}", trgt);
+        
         return null;
     }
 

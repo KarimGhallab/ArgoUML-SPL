@@ -46,8 +46,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.Critic;
 import org.argouml.cognitive.ToDoItem;
@@ -103,8 +101,7 @@ import org.argouml.uml.cognitive.critics.CrOppEndVsAttr;
  */
 public class ProfileUML extends Profile {
 
-    private static final Logger LOG =
-        Logger.getLogger(ProfileUML.class.getName());
+    
 
     private static final String PROFILE_UML14_FILE = "default-uml14.xmi";
     private static final String PROFILE_UML22_FILE = "default-uml22.xmi";
@@ -150,7 +147,7 @@ public class ProfileUML extends Profile {
                 try {
                     model = profileModelLoader.loadModel(profileReference);
                 } catch (ProfileException e) {
-                    LOG.log(Level.SEVERE, "Error loading UML profile", e);
+                    
                 }
             } else {
                 // We have our own UML2 profile, but it is not used. Instead,

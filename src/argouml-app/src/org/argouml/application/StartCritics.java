@@ -38,8 +38,6 @@
 
 package org.argouml.application;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.api.Argo;
 import org.argouml.application.helpers.ResourceLoaderWrapper;
@@ -57,11 +55,7 @@ import org.argouml.uml.cognitive.critics.InitCognitiveCritics;
  * StartCritics is a thread which helps to start the critiquing thread.
  */
 public class StartCritics implements Runnable {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(StartCritics.class.getName());
+    
 
     /*
      * @see java.lang.Runnable#run()
@@ -81,7 +75,7 @@ public class StartCritics implements Runnable {
         for (Object model : p.getUserDefinedModelList()) {
             Model.getPump().addModelEventListener(dsgr, model);
         }
-        LOG.log(Level.INFO, "spawned critiquing thread");
+        
         dsgr.getDecisionModel().startConsidering(UMLDecision.CLASS_SELECTION);
         dsgr.getDecisionModel().startConsidering(UMLDecision.BEHAVIOR);
         dsgr.getDecisionModel().startConsidering(UMLDecision.NAMING);

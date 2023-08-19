@@ -40,8 +40,6 @@ package org.argouml.uml.cognitive.critics;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -56,11 +54,7 @@ import org.argouml.model.Model;
  * @author jrobbins
  */
 public class WizManyNames extends UMLWizard {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(WizManyNames.class.getName());
+    
 
     /**
      * The text that describes what to be done.
@@ -127,7 +121,7 @@ public class WizManyNames extends UMLWizard {
      * @see org.argouml.cognitive.ui.Wizard#doAction(int)
      */
     public void doAction(int oldStep) {
-        LOG.log(Level.FINE, "doAction {0}", oldStep);
+        
 
         switch (oldStep) {
         case 1:
@@ -142,7 +136,7 @@ public class WizManyNames extends UMLWizard {
                     Model.getCoreHelper().setName(me, newNames.get(i));
                 }
             } catch (Exception pve) {
-                LOG.log(Level.SEVERE, "could not set name", pve);
+                
             }
             break;
 

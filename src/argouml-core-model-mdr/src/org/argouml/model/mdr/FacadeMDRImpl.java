@@ -48,8 +48,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jmi.model.MofClass;
 import javax.jmi.model.Reference;
@@ -202,11 +200,7 @@ import org.omg.uml.modelmanagement.UmlPackage;
  */
 class FacadeMDRImpl implements Facade {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(FacadeMDRImpl.class.getName());
+    
 
     private MDRModelImplementation modelImpl;
 
@@ -2208,7 +2202,7 @@ class FacadeMDRImpl implements Facade {
                 }
             }
         } else {
-            LOG.log(Level.WARNING, "No default extent in getRootElements");
+            
         }
         return elements;
     }
@@ -4218,9 +4212,7 @@ class FacadeMDRImpl implements Facade {
                 }
                 // TODO: Implement support for multiple TaggedValues
                 if (values.size() + refValues.size() > 1) {
-                    LOG.log(Level.WARNING,
-                            "Don't know how to manage multiple values "
-                            + "for a TaggedValue, returning first value");
+                    
                 }
 
                 // TODO: More is required here to support referenceValues
@@ -4237,9 +4229,7 @@ class FacadeMDRImpl implements Facade {
                     return ((EnumerationLiteral) value).getName();
                 } else {
                     // TODO: Implement support for types other than String
-                    LOG.log(Level.WARNING,
-                            "Can't handled TaggedValue.dataValues which "
-                            + " aren't Strings.  Converting to String");
+                    
                     return value.toString();
                 }
             }

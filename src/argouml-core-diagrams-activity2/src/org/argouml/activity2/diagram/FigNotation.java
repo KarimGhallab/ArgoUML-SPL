@@ -15,7 +15,6 @@ package org.argouml.activity2.diagram;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.util.logging.Logger;
 
 import org.argouml.notation2.NotatedItem;
 import org.argouml.notation2.NotationLanguage;
@@ -31,8 +30,7 @@ import org.tigris.gef.presentation.FigText;
  */
 class FigNotation extends FigText implements NotatedItem, DiagramElement {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigNotation.class.getName());
+    
 
     private final NotationType notationType;
 

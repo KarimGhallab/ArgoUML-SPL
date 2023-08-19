@@ -40,8 +40,6 @@ package org.argouml.uml.cognitive.critics;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.Critic;
 import org.argouml.cognitive.Designer;
@@ -56,8 +54,7 @@ import org.argouml.uml.cognitive.UMLToDoItem;
  * @author jrobbins@ics.uci.edu
  */
 public class CrCircularComposition extends CrUML {
-    private static final Logger LOG =
-        Logger.getLogger(CrCircularComposition.class.getName());
+    
 
     /**
      * The constructor.
@@ -132,13 +129,7 @@ public class CrCircularComposition extends CrUML {
 	ListSet newOffs = computeOffenders(dm);
 	boolean res = offs.equals(newOffs);
 
-        LOG.log(Level.FINE,
-                "offs={0} newOffs={1} res = {2}",
-                new Object[] {
-                    offs,
-                    newOffs,
-                    res
-                });
+        
 	return res;
     }
 

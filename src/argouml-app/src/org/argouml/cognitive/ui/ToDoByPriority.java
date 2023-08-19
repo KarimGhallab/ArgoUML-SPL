@@ -39,8 +39,6 @@
 package org.argouml.cognitive.ui;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.Designer;
 import org.argouml.cognitive.ToDoItem;
@@ -53,8 +51,7 @@ import org.argouml.cognitive.ToDoListListener;
  */
 public class ToDoByPriority extends ToDoPerspective
     implements ToDoListListener {
-    private static final Logger LOG =
-        Logger.getLogger(ToDoByPriority.class.getName());
+    
 
     /**
      * The constructor.
@@ -72,7 +69,7 @@ public class ToDoByPriority extends ToDoPerspective
      * @see org.argouml.cognitive.ToDoListListener#toDoItemsChanged(org.argouml.cognitive.ToDoListEvent)
      */
     public void toDoItemsChanged(ToDoListEvent tde) {
-        LOG.log(Level.FINE, "toDoItemChanged");
+        
         List<ToDoItem> items = tde.getToDoItemList();
 	Object[] path = new Object[2];
 	path[0] = Designer.theDesigner().getToDoList();
@@ -112,7 +109,7 @@ public class ToDoByPriority extends ToDoPerspective
      * @see org.argouml.cognitive.ToDoListListener#toDoItemsAdded(org.argouml.cognitive.ToDoListEvent)
      */
     public void toDoItemsAdded(ToDoListEvent tde) {
-        LOG.log(Level.FINE, "toDoItemAdded");
+        
 	List<ToDoItem> items = tde.getToDoItemList();
 	Object[] path = new Object[2];
 	path[0] = Designer.theDesigner().getToDoList();
@@ -152,7 +149,7 @@ public class ToDoByPriority extends ToDoPerspective
      * @see org.argouml.cognitive.ToDoListListener#toDoItemsRemoved(org.argouml.cognitive.ToDoListEvent)
      */
     public void toDoItemsRemoved(ToDoListEvent tde) {
-        LOG.log(Level.FINE, "toDoItemRemoved");
+        
         List<ToDoItem> items = tde.getToDoItemList();
 	Object[] path = new Object[2];
 	path[0] = Designer.theDesigner().getToDoList();
@@ -171,7 +168,7 @@ public class ToDoByPriority extends ToDoPerspective
 	    if (!anyInPri) {
                 continue;
             }
-            LOG.log(Level.FINE, "toDoItemRemoved updating PriorityNode");
+            
 	    path[1] = pn;
 	    //fireTreeNodesChanged(this, path, childIndices, children);
 	    fireTreeStructureChanged(path);

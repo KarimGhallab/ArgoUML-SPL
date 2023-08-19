@@ -59,8 +59,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -155,8 +153,7 @@ public abstract class FigEdgeModelElement
         DiagramElement,
         Owned {
 
-    private static final Logger LOG =
-        Logger.getLogger(FigEdgeModelElement.class.getName());
+    
 
     private DiElement diElement = null;
 
@@ -318,7 +315,7 @@ public abstract class FigEdgeModelElement
             } catch (InvalidElementException e) {
                 // We moused over an object just as it was deleted
                 // transient condition - doesn't require I18N
-                LOG.log(Level.WARNING, "A deleted element still exists on the diagram");
+                
                 return Translator.localize("misc.name.deleted");
             }
         } else {
@@ -635,8 +632,7 @@ public abstract class FigEdgeModelElement
                     try {
                         removeFromDiagram();
                     } catch (InvalidElementException e) {
-                        LOG.log(Level.SEVERE, "updateLayout method accessed "
-                                    + "deleted element", e);
+                        
                     }
                 }
             };
@@ -646,7 +642,7 @@ public abstract class FigEdgeModelElement
         // We handle and consume editing events
         if (pName.equals("editing")
                 && Boolean.FALSE.equals(pve.getNewValue())) {
-            LOG.log(Level.FINE, "finished editing");
+            
             // parse the text that was edited
             textEdited((FigText) src);
             calcBounds();
@@ -673,7 +669,7 @@ public abstract class FigEdgeModelElement
                     try {
                         updateLayout(event);
                     } catch (InvalidElementException e) {
-                        LOG.log(Level.FINE, "updateLayout method accessed deleted element ", e);
+                        
                     }
                 }
             };
@@ -1235,11 +1231,11 @@ public abstract class FigEdgeModelElement
     protected boolean determineFigNodes() {
         Object owner = getOwner();
         if (owner == null) {
-            LOG.log(Level.SEVERE, "The FigEdge has no owner");
+            
             return false;
         }
         if (getLayer() == null) {
-            LOG.log(Level.SEVERE, "The FigEdge has no layer");
+            
             return false;
         }
 
@@ -1644,7 +1640,7 @@ public abstract class FigEdgeModelElement
         // TODO: This is a temporary crutch to use until all Figs are updated
         // to use the constructor that accepts a DiagramSettings object
         if (settings == null) {
-            LOG.log(Level.FINE, "Falling back to project-wide settings");
+            
             Project p = getProject();
             if (p != null) {
                 return p.getProjectSettings().getDefaultDiagramSettings();

@@ -42,8 +42,6 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.ButtonModel;
@@ -111,8 +109,7 @@ public abstract class UMLDiagram
     extends ArgoDiagramImpl
     implements Relocatable {
 
-    private static final Logger LOG =
-        Logger.getLogger(UMLDiagram.class.getName());
+    
 
     /**
      * Tool to add a comment node.
@@ -213,7 +210,7 @@ public abstract class UMLDiagram
         try {
             setName(name);
         } catch (PropertyVetoException pve) {
-            LOG.log(Level.SEVERE, "Name not allowed in construction of diagram");
+            
         }
     }
 

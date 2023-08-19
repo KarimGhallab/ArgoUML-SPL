@@ -41,19 +41,13 @@ package org.argouml.uml.reveng;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Keeps an instance of each ImportInterface implementation module registered.
  * ImporterManager is a singleton.
  */
 public final class ImporterManager {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ImporterManager.class.getName());
+    
 
     /**
      * The instance.
@@ -87,7 +81,7 @@ public final class ImporterManager {
         importers.add(importer);
 //        ArgoEventPump.fireEvent(
 //                new ArgoImporterEvent(ArgoEventTypes.IMPORTER_ADDED, gen));
-        LOG.log(Level.FINE, "Added importer {0}", importer );
+        
     }
 
     /**
@@ -105,7 +99,7 @@ public final class ImporterManager {
 //                    new ArgoImporterEvent(
 //                            ArgoEventTypes.IMPORTER_REMOVED, old));
 //        }
-        LOG.log(Level.FINE, "Removed importer {0}", importer );
+        
         return status;
     }
 

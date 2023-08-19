@@ -45,8 +45,6 @@ import java.util.Dictionary;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.kernel.Project;
 import org.argouml.model.DiDiagram;
@@ -70,11 +68,7 @@ import org.tigris.gef.graph.MutableGraphSupport;
  */
 public abstract class UMLMutableGraphSupport extends MutableGraphSupport {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UMLMutableGraphSupport.class.getName());
+    
 
     private DiDiagram diDiagram;
 
@@ -268,20 +262,12 @@ public abstract class UMLMutableGraphSupport extends MutableGraphSupport {
                 model);
 
         if (connection == null) {
-            if (LOG.isLoggable(Level.FINE)) {
-                LOG.log(Level.FINE, "Cannot make a " + edgeType
-                        + " between a " + fromPort.getClass().getName()
-                        + " and a " + toPort.getClass().getName());
-            }
+            
             return null;
         }
 
         addEdge(connection);
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.log(Level.FINE, "Connection type" + edgeType
-                      + " made between a " + fromPort.getClass().getName()
-                      + " and a " + toPort.getClass().getName());
-        }
+        
         return connection;
     }
 
@@ -342,8 +328,7 @@ public abstract class UMLMutableGraphSupport extends MutableGraphSupport {
 
         // Don't know what to do otherwise
 
-        LOG.log(Level.SEVERE,this.getClass().toString() + ": getSourcePort("
-                + edge.toString() + ") - can't handle");
+        
 
         return null;
     }
@@ -374,8 +359,7 @@ public abstract class UMLMutableGraphSupport extends MutableGraphSupport {
 
         // Don't know what to do otherwise
 
-        LOG.log(Level.SEVERE,this.getClass().toString() + ": getDestPort("
-                + edge.toString() + ") - can't handle");
+        
 
         return null;
     }
@@ -477,9 +461,7 @@ public abstract class UMLMutableGraphSupport extends MutableGraphSupport {
                             toStyle,
                             unidirectional,
                             namespace);
-                LOG.log(Level.INFO,
-                        "Created " + connection + " between "
-        	        + fromElement + " and " + toElement);
+                
 
             } catch (UmlException ex) {
                 // fail silently as we expect users to accidentally drop
@@ -490,7 +472,7 @@ public abstract class UMLMutableGraphSupport extends MutableGraphSupport {
         	// TODO: IllegalArgumentException should not be used for
         	// events we expect to happen. We need a different way of
         	// catching well-formedness rules.
-                LOG.log(Level.WARNING, "IllegalArgumentException caught", iae);
+                
             }
         }
         return connection;

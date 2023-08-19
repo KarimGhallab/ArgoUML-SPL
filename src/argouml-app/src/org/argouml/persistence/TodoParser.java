@@ -41,8 +41,6 @@ package org.argouml.persistence;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.Designer;
 import org.argouml.cognitive.ListSet;
@@ -60,11 +58,7 @@ import org.xml.sax.SAXException;
  * @author	Michael Stockman
  */
 class TodoParser extends SAXParserBase {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(TodoParser.class.getName());
+    
 
     private TodoTokenTable tokens = new TodoTokenTable();
 
@@ -115,7 +109,7 @@ class TodoParser extends SAXParserBase {
      */
     public synchronized void readTodoList(
             InputSource inputSource) throws SAXException {
-        LOG.log(Level.INFO, "Reading ToDo list");
+        
         parse(inputSource);
     }
 
@@ -129,9 +123,7 @@ class TodoParser extends SAXParserBase {
     public synchronized void readTodoList(
             Reader is) throws SAXException {
 
-        LOG.log(Level.INFO,
-                "=======================================\n"
-                + "== READING TO DO LIST");
+        
         parse(is);
     }
 
@@ -176,11 +168,11 @@ class TodoParser extends SAXParserBase {
 		break;
 
 	    default:
-                LOG.log(Level.WARNING, "WARNING: unknown tag:" + e.getName());
+                
 		break;
 	    }
 	} catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Exception in startelement", ex);
+            
 	}
     }
 
@@ -234,8 +226,7 @@ class TodoParser extends SAXParserBase {
         	break;
 
             default:
-                LOG.log(Level.WARNING,
-                        "WARNING: unknown end tag:" + e.getName());
+                
         	break;
             }
         } catch (Exception ex) {

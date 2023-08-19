@@ -45,8 +45,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -76,11 +74,7 @@ class XmlInputStream extends BufferedInputStream {
     private int instanceCount;
     //private EventListenerList listenerList = new EventListenerList();
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(XmlInputStream.class.getName());
+    
 
     /**
      * Construct a new XmlInputStream.
@@ -303,8 +297,7 @@ class XmlInputStream extends BufferedInputStream {
                         ch = (char) realRead();
                     }
                     endTagName = "/" + tagName;
-                    LOG.log(Level.INFO, "Start tag = {0}", tagName);
-                    LOG.log(Level.INFO, "End tag = {0}", endTagName);
+                    
                 }
                 reset();
                 return;

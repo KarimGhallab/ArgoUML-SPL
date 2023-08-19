@@ -43,8 +43,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.api.Argo;
 import org.argouml.configuration.Configuration;
@@ -56,13 +54,9 @@ import org.argouml.ui.explorer.rules.GoClassToAssociatedClass;
 import org.argouml.ui.explorer.rules.GoClassToNavigableClass;
 import org.argouml.ui.explorer.rules.GoClassToSummary;
 import org.argouml.ui.explorer.rules.GoClassifierToBehavioralFeature;
-import org.argouml.ui.explorer.rules.GoClassifierToCollaboration;
 import org.argouml.ui.explorer.rules.GoClassifierToInstance;
-import org.argouml.ui.explorer.rules.GoClassifierToSequenceDiagram;
 import org.argouml.ui.explorer.rules.GoClassifierToStateMachine;
 import org.argouml.ui.explorer.rules.GoClassifierToStructuralFeature;
-import org.argouml.ui.explorer.rules.GoCollaborationToDiagram;
-import org.argouml.ui.explorer.rules.GoCollaborationToInteraction;
 import org.argouml.ui.explorer.rules.GoComponentToResidentModelElement;
 import org.argouml.ui.explorer.rules.GoCompositeStateToSubvertex;
 import org.argouml.ui.explorer.rules.GoCriticsToCritic;
@@ -81,7 +75,6 @@ import org.argouml.ui.explorer.rules.GoModelElementToContainedLostElements;
 import org.argouml.ui.explorer.rules.GoModelElementToContents;
 import org.argouml.ui.explorer.rules.GoModelElementToTemplateParameter;
 import org.argouml.ui.explorer.rules.GoModelToBaseElements;
-import org.argouml.ui.explorer.rules.GoModelToCollaboration;
 import org.argouml.ui.explorer.rules.GoModelToDiagrams;
 import org.argouml.ui.explorer.rules.GoModelToElements;
 import org.argouml.ui.explorer.rules.GoModelToNode;
@@ -89,15 +82,11 @@ import org.argouml.ui.explorer.rules.GoNamespaceToClassifierAndPackage;
 import org.argouml.ui.explorer.rules.GoNamespaceToDiagram;
 import org.argouml.ui.explorer.rules.GoNamespaceToOwnedElements;
 import org.argouml.ui.explorer.rules.GoNodeToResidentComponent;
-import org.argouml.ui.explorer.rules.GoOperationToCollaboration;
-import org.argouml.ui.explorer.rules.GoOperationToCollaborationDiagram;
-import org.argouml.ui.explorer.rules.GoOperationToSequenceDiagram;
 import org.argouml.ui.explorer.rules.GoPackageToClass;
 import org.argouml.ui.explorer.rules.GoPackageToElementImport;
 import org.argouml.ui.explorer.rules.GoProfileConfigurationToProfile;
 import org.argouml.ui.explorer.rules.GoProfileToCritics;
 import org.argouml.ui.explorer.rules.GoProfileToModel;
-import org.argouml.ui.explorer.rules.GoProjectToCollaboration;
 import org.argouml.ui.explorer.rules.GoProjectToDiagram;
 import org.argouml.ui.explorer.rules.GoProjectToModel;
 import org.argouml.ui.explorer.rules.GoProjectToProfileConfiguration;
@@ -128,7 +117,6 @@ import org.argouml.ui.explorer.rules.GoTransitionToGuard;
 import org.argouml.ui.explorer.rules.GoTransitionToSource;
 import org.argouml.ui.explorer.rules.GoTransitionToTarget;
 import org.argouml.ui.explorer.rules.GoTransitiontoEffect;
-import org.argouml.ui.explorer.rules.GoUseCaseToExtensionPoint;
 import org.argouml.ui.explorer.rules.PerspectiveRule;
 
 /**
@@ -142,11 +130,7 @@ import org.argouml.ui.explorer.rules.PerspectiveRule;
  * @since 0.15.2
  */
 public final class PerspectiveManager {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(PerspectiveManager.class.getName());
+    
 
     private static PerspectiveManager instance;
 
@@ -290,26 +274,11 @@ public final class PerspectiveManager {
 
                             userDefinedPerspective.addRule(rule);
                         } catch (ClassNotFoundException e) {
-                            LOG.log(Level.SEVERE,
-                                    "could not create rule " + ruleName
-                                    + " you can try to "
-                                    + "refresh the perspectives to the "
-                                    + "default settings.",
-                                    e);
+                            
                         } catch (InstantiationException e) {
-                            LOG.log(Level.SEVERE,
-                                    "could not create rule " + ruleName
-                                    + " you can try to "
-                                    + "refresh the perspectives to the "
-                                    + "default settings.",
-                                    e);
+                            
                         } catch (IllegalAccessException e) {
-                            LOG.log(Level.SEVERE,
-                                    "could not create rule " + ruleName
-                                    + " you can try to "
-                                    + "refresh the perspectives to the "
-                                    + "default settings.",
-                                    e);
+                            
                         }
                     }
                 } else {
@@ -378,22 +347,22 @@ public final class PerspectiveManager {
         packagePerspective.addRule(new GoNamespaceToOwnedElements());
         packagePerspective.addRule(new GoPackageToElementImport());
         packagePerspective.addRule(new GoNamespaceToDiagram());
-        packagePerspective.addRule(new GoUseCaseToExtensionPoint());
+        
         packagePerspective.addRule(new GoClassifierToStructuralFeature());
         packagePerspective.addRule(new GoClassifierToBehavioralFeature());
         packagePerspective.addRule(new GoEnumerationToLiterals());
-        packagePerspective.addRule(new GoCollaborationToInteraction());
+        
         packagePerspective.addRule(new GoInteractionToMessages());
         packagePerspective.addRule(new GoMessageToAction());
         packagePerspective.addRule(new GoSignalToReception());
         packagePerspective.addRule(new GoLinkToStimuli());
         packagePerspective.addRule(new GoStimulusToAction());
-        packagePerspective.addRule(new GoClassifierToCollaboration());
+        
         // TODO: We need a factory pattern for GoXXX classes that can determine if they are required
-        packagePerspective.addRule(new GoOperationToCollaboration());
-        packagePerspective.addRule(new GoOperationToSequenceDiagram());
+        
+        
         packagePerspective.addRule(new GoModelElementToComment());
-        packagePerspective.addRule(new GoCollaborationToDiagram());
+        
         packagePerspective.addRule(new GoModelElementToTemplateParameter());
 
         /*
@@ -411,7 +380,7 @@ public final class PerspectiveManager {
         packagePerspective.addRule(new GoStateToDoActivity());
         packagePerspective.addRule(new GoStateToEntry());
         packagePerspective.addRule(new GoStateToExit());
-        packagePerspective.addRule(new GoClassifierToSequenceDiagram());
+        
         packagePerspective.addRule(new GoClassifierToInstance());
         packagePerspective.addRule(new GoStateToIncomingTrans());
         packagePerspective.addRule(new GoStateToOutgoingTrans());
@@ -432,7 +401,7 @@ public final class PerspectiveManager {
         diagramPerspective.addRule(new GoModelToDiagrams());
         diagramPerspective.addRule(new GoDiagramToNode());
         diagramPerspective.addRule(new GoDiagramToEdge());
-        diagramPerspective.addRule(new GoUseCaseToExtensionPoint());
+        
         diagramPerspective.addRule(new GoClassifierToStructuralFeature());
         diagramPerspective.addRule(new GoClassifierToBehavioralFeature());
 
@@ -540,14 +509,13 @@ public final class PerspectiveManager {
             new GoBehavioralFeatureToStateDiagram(),
             new GoBehavioralFeatureToStateMachine(),
             new GoClassifierToBehavioralFeature(),
-            new GoClassifierToCollaboration(),
+            
             new GoClassifierToInstance(),
-            new GoClassifierToSequenceDiagram(),
+            
             new GoClassifierToStateMachine(),
             new GoClassifierToStructuralFeature(),
             new GoClassToAssociatedClass(), new GoClassToNavigableClass(),
-            new GoClassToSummary(), new GoCollaborationToDiagram(),
-            new GoCollaborationToInteraction(),
+            new GoClassToSummary(), 
             new GoComponentToResidentModelElement(),
             new GoDiagramToEdge(),
             new GoDiagramToNode(), new GoElementToMachine(),
@@ -560,17 +528,16 @@ public final class PerspectiveManager {
             new GoModelElementToContents(),
             new GoModelElementToContainedDiagrams(),
             new GoModelElementToContainedLostElements(),
-            new GoModelToBaseElements(), new GoModelToCollaboration(),
+            new GoModelToBaseElements(), 
             new GoModelToDiagrams(), new GoModelToElements(),
             new GoModelToNode(), new GoNamespaceToClassifierAndPackage(),
             new GoNamespaceToDiagram(), new GoNamespaceToOwnedElements(),
             new GoNodeToResidentComponent(),
-            new GoOperationToCollaboration(),
-            new GoOperationToCollaborationDiagram(),
-            new GoOperationToSequenceDiagram(),
+            
+            
             new GoPackageToClass(),
             new GoPackageToElementImport(),
-            new GoProjectToCollaboration(), new GoProjectToDiagram(),
+             new GoProjectToDiagram(),
             new GoProjectToModel(), new GoProjectToStateMachine(),
             new GoProjectToProfileConfiguration(),
             new GoProfileConfigurationToProfile(),
@@ -592,7 +559,7 @@ public final class PerspectiveManager {
             new GoSummaryToOutgoingDependency(),
             new GoTransitionToSource(), new GoTransitionToTarget(),
             new GoTransitiontoEffect(), new GoTransitionToGuard(),
-            new GoUseCaseToExtensionPoint(),
+            
             new GoSubmachineStateToStateMachine(),
             new GoStateToInternalTrans()
         };

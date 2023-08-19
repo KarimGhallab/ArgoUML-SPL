@@ -40,8 +40,6 @@ package org.argouml.cognitive.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.ToDoItem;
 import org.argouml.ui.TreeModelComposite;
@@ -53,11 +51,7 @@ import org.argouml.ui.TreeModelComposite;
  */
 public abstract class ToDoPerspective extends TreeModelComposite {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ToDoPerspective.class.getName());
+    
 
     ////////////////////////////////////////////////////////////////
     // instance variables
@@ -165,7 +159,7 @@ public abstract class ToDoPerspective extends TreeModelComposite {
         if (node == null) {
 	    return;
 	}
-        LOG.log(Level.FINE, "addFlatChildren");
+        
         // hack for to do items only, should check isLeaf(node), but that
         // includes empty folders. Really I need alwaysLeaf(node).
         if ((node instanceof ToDoItem) && !flatChildren.contains(node)) {

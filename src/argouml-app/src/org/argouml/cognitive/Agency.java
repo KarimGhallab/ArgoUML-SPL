@@ -46,8 +46,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Agency manages Critics.  Since classes are not really first class
@@ -77,10 +75,7 @@ import java.util.logging.Logger;
  * @author Jason Robbins
  */
 public class Agency extends Observable { //implements java.io.Serialization
-    /**
-     * Logger.
-     */
-    private static final Logger LOG = Logger.getLogger(Agency.class.getName());
+    
 
 
     /**
@@ -182,7 +177,7 @@ public class Agency extends Observable { //implements java.io.Serialization
         try {
             dmClass = Class.forName(dmClassName);
         } catch (java.lang.ClassNotFoundException e) {
-            LOG.log(Level.SEVERE, "Error loading dm " + dmClassName, e);
+            
             return;
         }
         Critic cr = singletonCritics.get(crClassName);
@@ -191,19 +186,16 @@ public class Agency extends Observable { //implements java.io.Serialization
             try {
                 crClass = Class.forName(crClassName);
             } catch (java.lang.ClassNotFoundException e) {
-                LOG.log(Level.SEVERE,
-                        "Error loading cr " + crClassName, e);
+                
                 return;
             }
             try {
                 cr = (Critic) crClass.newInstance();
             } catch (java.lang.IllegalAccessException e) {
-                LOG.log(Level.SEVERE,
-                        "Error instancating cr " + crClassName, e);
+                
                 return;
             } catch (java.lang.InstantiationException e) {
-                LOG.log(Level.SEVERE,
-                        "Error instancating cr " + crClassName, e);
+                
                 return;
             }
             singletonCritics.put(crClassName, cr);
@@ -231,7 +223,7 @@ public class Agency extends Observable { //implements java.io.Serialization
         if (!theCritics.contains(cr)) {
             theCritics.add(cr);
             notifyStaticObservers(cr);
-            LOG.log(Level.FINE, "Registered: {0}", theCritics );
+            
             cachedCritics.remove(clazz);
             addCritic(cr);
         }
@@ -358,10 +350,7 @@ public class Agency extends Observable { //implements java.io.Serialization
                 try {
                     c.critique(dm, d);
                 } catch (Exception ex) {
-                    LOG.log(Level.SEVERE,
-                            "Disabling critique due to exception\n"
-                            + c + "\n" + dm,
-                            ex);
+                    
                     c.setEnabled(false);
                 }
             }

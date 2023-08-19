@@ -40,8 +40,6 @@ package org.argouml.uml.diagram.ui;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 
@@ -76,8 +74,7 @@ import org.tigris.gef.presentation.Handle;
  */
 public abstract class SelectionNodeClarifiers2 extends SelectionButtons {
 
-    private static final Logger LOG =
-        Logger.getLogger(SelectionNodeClarifiers2.class.getName());
+    
 
     /** Base index of array */
     protected static final int BASE = 10;
@@ -305,7 +302,7 @@ public abstract class SelectionNodeClarifiers2 extends SelectionButtons {
             bx = cx;
             break;
         default:
-            LOG.log(Level.WARNING, "invalid handle number");
+            
             break;
         }
 

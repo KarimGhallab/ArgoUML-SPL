@@ -41,8 +41,6 @@ package org.argouml.uml.cognitive.critics;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.cognitive.Designer;
 import org.argouml.cognitive.ListSet;
@@ -57,11 +55,7 @@ import org.argouml.uml.cognitive.UMLToDoItem;
  * @author jrobbins
  */
 public class CrMultipleInitialStates extends CrUML {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(CrMultipleInitialStates.class.getName());
+    
 
     /**
      * The constructor.
@@ -92,7 +86,7 @@ public class CrMultipleInitialStates extends CrUML {
         // container state / composite state
         Object cs = Model.getFacade().getContainer(dm);
         if (cs == null) {
-            LOG.log(Level.FINE, "null parent state");
+            
             return NO_PROBLEM;
         }
 
@@ -131,7 +125,7 @@ public class CrMultipleInitialStates extends CrUML {
         ListSet offs = new ListSet(ps);
         Object cs = Model.getFacade().getContainer(ps);
         if (cs == null) {
-            LOG.log(Level.FINE, "null parent in still valid");
+            
             return offs;
 	}
 

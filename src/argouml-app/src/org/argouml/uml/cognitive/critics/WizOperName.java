@@ -42,8 +42,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -79,11 +77,7 @@ import org.argouml.model.Model;
  * </pre>
  */
 public class WizOperName extends WizMEName {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(WizOperName.class.getName());
+    
 
     private boolean possibleConstructor;
 
@@ -271,7 +265,7 @@ public class WizOperName extends WizMEName {
                     ProjectManager.getManager().updateRoots();
                     addedCreateStereotype = true;
                 } catch (Exception pve) {
-                    LOG.log(Level.SEVERE, "could not set stereotype", pve);
+                    
                 }
                 return;
 

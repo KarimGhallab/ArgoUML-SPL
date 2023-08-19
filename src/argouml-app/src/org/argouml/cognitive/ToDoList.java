@@ -47,8 +47,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Observable;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
 
@@ -84,11 +82,7 @@ import org.argouml.model.InvalidElementException;
  * @author Jason Robbins
  */
 public class ToDoList extends Observable implements Runnable {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ToDoList.class.getName());
+    
 
     /**
      * Number of seconds thread should sleep between passes
@@ -188,7 +182,7 @@ public class ToDoList extends Observable implements Runnable {
                     try {
                         pausedMutex.wait();
                     } catch (InterruptedException ignore) {
-                        LOG.log(Level.SEVERE, "InterruptedException!!!", ignore);
+                        
                     }
                 }
             }
@@ -198,7 +192,7 @@ public class ToDoList extends Observable implements Runnable {
             try {
                 Thread.sleep(SLEEP_SECONDS * 1000);
             } catch (InterruptedException ignore) {
-                LOG.log(Level.SEVERE, "InterruptedException!!!", ignore);
+                
             }
         }
     }
@@ -242,7 +236,7 @@ public class ToDoList extends Observable implements Runnable {
                             "Exception raised in ToDo list cleaning");
                     buf.append("\n");
                     buf.append(item.toString());
-                    LOG.log(Level.SEVERE,buf.toString(), ex);
+                    
                 }
                 if (!valid) {
                     numNotValid++;
@@ -461,7 +455,7 @@ public class ToDoList extends Observable implements Runnable {
                 // cat.debug("Checking for inhibitors " + rc);
                 while (elems.hasNext()) {
                     if (elems.next().equals(rc)) {
-                        LOG.log(Level.FINE, "ToDoItem not added because it was resolved");
+                        
                         return;
                     }
                 }
@@ -585,7 +579,7 @@ public class ToDoList extends Observable implements Runnable {
      * Remove all todo items.
      */
     public void removeAllElements() {
-        LOG.log(Level.FINE, "removing all todo items");
+        
         List<ToDoItem> oldItems = new ArrayList<ToDoItem>(items);
         items.clear();
         itemSet.clear();

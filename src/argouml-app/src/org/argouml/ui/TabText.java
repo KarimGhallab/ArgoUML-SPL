@@ -41,8 +41,6 @@ package org.argouml.ui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -75,10 +73,7 @@ public class TabText
      */
     private JToolBar toolbar;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG = Logger.getLogger(TabText.class.getName());
+    
 
     /**
      * Create a text tab without a toolbar.
@@ -202,7 +197,7 @@ public class TabText
         if (s == null) {
             s = "(null)";
         }
-        LOG.log(Level.FINE, "parsing text: {0}", s);
+        
     }
 
     /*

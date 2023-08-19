@@ -39,8 +39,6 @@
 package org.argouml.uml.ui;
 
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.application.helpers.ResourceLoaderWrapper;
 import org.argouml.i18n.Translator;
@@ -52,11 +50,7 @@ import org.argouml.ui.ProjectBrowser;
  * @stereotype singleton
  */
 public class ActionSaveProjectAs extends ActionSaveProject {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ActionSaveProjectAs.class.getName());
+    
 
     /**
      * The constructor.
@@ -73,7 +67,7 @@ public class ActionSaveProjectAs extends ActionSaveProject {
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
     public void actionPerformed(ActionEvent e) {
-        LOG.log(Level.INFO, "Performing saveas action");
+        
         ProjectBrowser.getInstance().trySave(false, true);
     }
 

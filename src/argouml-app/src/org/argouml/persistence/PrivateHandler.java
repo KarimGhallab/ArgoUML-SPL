@@ -39,8 +39,6 @@
 package org.argouml.persistence;
 
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.uml.diagram.ui.PathItemPlacement;
 import org.argouml.util.IItemUID;
@@ -68,11 +66,7 @@ class PrivateHandler
 
     private Container container;
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(PrivateHandler.class.getName());
+    
 
     /**
      * The constructor.
@@ -226,18 +220,13 @@ class PrivateHandler
                     // If the PathItemPlacement was unknown, leave the
                     // diagram with the default settings.
                     else {
-                        LOG.log(Level.WARNING,
-                                "PGML stored pathitem class name does "
-                                + "not match the class name on the "
-                                + "diagram. Label position will revert "
-                                + "to defaults.");
+                        
                     }
                 }
             }
             // If any of the values are null, ignore the element.
             else {
-                LOG.log(Level.WARNING, "Could not find all attributes for <"
-                        + qname + "> tag, ignoring.");
+                
                 //System.out.println("Error - one of these is null:"
                 //        + "classname=" + classname
                 //        + " figclassname=" + figclassname
@@ -273,9 +262,7 @@ class PrivateHandler
                 }
             }
         }
-        LOG.log(Level.WARNING,
-                "Could not load path item for fig '" + figclassname
-                + "', using default placement.");
+        
         return null;
     }
 
@@ -292,10 +279,7 @@ class PrivateHandler
             NameVal nval = splitNameVal(str);
 
             if (nval != null) {
-                if (LOG.isLoggable(Level.FINE)) {
-                    LOG.log(Level.FINE, "Private Element: \"" + nval.getName()
-                              + "\" \"" + nval.getValue() + "\"");
-                }
+                
                 if ("ItemUID".equals(nval.getName())
                     && nval.getValue().length() > 0) {
                     return new ItemUID(nval.getValue());

@@ -45,8 +45,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This class provides a user configuration based upon
@@ -55,11 +53,7 @@ import java.util.logging.Logger;
  * @author Thierry Lach
  */
 class ConfigurationProperties extends ConfigurationHandler {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(ConfigurationProperties.class.getName());
+    
 
     /**
      * The location of Argo's default properties resource.
@@ -87,12 +81,10 @@ class ConfigurationProperties extends ConfigurationHandler {
         Properties defaults = new Properties();
         try {
             defaults.load(getClass().getResourceAsStream(propertyLocation));
-            LOG.log(Level.FINE,
-                    "Configuration loaded from {0}", propertyLocation);
+            
         } catch (Exception ioe) {
             // TODO:  What should we do here?
-            LOG.log(Level.WARNING,
-                    "Configuration not loaded from " + propertyLocation, ioe);
+            
         }
         propertyBundle = new Properties(defaults);
     }
@@ -137,13 +129,13 @@ class ConfigurationProperties extends ConfigurationHandler {
             fos.close();
             return true;
         } catch (final FileNotFoundException e) {
-            LOG.log(Level.SEVERE, "File not found while copying", e);
+            
             return false;
         } catch (final IOException e) {
-            LOG.log(Level.SEVERE, "IO error copying file", e);
+            
             return false;
         } catch (final SecurityException e) {
-            LOG.log(Level.SEVERE, "You are not allowed to copy these files", e);
+            
             return false;
         }
     }
@@ -197,22 +189,15 @@ class ConfigurationProperties extends ConfigurationHandler {
                     // do the actual load
                     final boolean result = copyFile(oldFile, file);
                     if (result) {
-                        LOG.log(Level.INFO,
-                                "Configuration copied from {0} to {1}",
-                                new Object[]{oldFile, file});
+                        
                     } else {
-                        LOG.log(Level.SEVERE,
-                                "Error copying old configuration to new, "
-                                + "see previous log messages");
+                        
                     }
                 } else {
                     try {
                         file.createNewFile();
                     } catch (IOException e) {
-                        LOG.log(Level.SEVERE,
-                                "Could not create the properties file at: "
-                                + file.getAbsolutePath(),
-                                e);
+                        
                     }
                 }
             }
@@ -220,21 +205,17 @@ class ConfigurationProperties extends ConfigurationHandler {
             if (file.exists() && file.isFile() && file.canRead()) {
                 try {
                     propertyBundle.load(new FileInputStream(file));
-                    LOG.log(Level.INFO, "Configuration loaded from {0}", file);
+                    
                     return true;
                 } catch (final IOException e) {
                     if (canComplain) {
-                        LOG.log(Level.WARNING,
-                                "Unable to load configuration {0}", file);
+                        
                     }
                     canComplain = false;
                 }
             }
         } catch (final SecurityException e) {
-            LOG.log(Level.SEVERE,
-                    "A security exception occurred trying to load"
-                    + " the configuration, check your security settings",
-                    e);
+            
         }
         return false;
     }
@@ -250,12 +231,11 @@ class ConfigurationProperties extends ConfigurationHandler {
         try {
             propertyBundle.store(new FileOutputStream(file),
                     "ArgoUML properties");
-            LOG.log(Level.INFO, "Configuration saved to {0}", file);
+            
             return true;
         } catch (Exception e) {
             if (canComplain) {
-                LOG.log(Level.WARNING,
-                        "Unable to save configuration {0}", file);
+                
             }
             canComplain = false;
         }
@@ -273,11 +253,11 @@ class ConfigurationProperties extends ConfigurationHandler {
     public boolean loadURL(URL url) {
         try {
             propertyBundle.load(url.openStream());
-            LOG.log(Level.INFO, "Configuration loaded from {0}", url);
+            
             return true;
         } catch (Exception e) {
             if (canComplain) {
-                LOG.log(Level.WARNING, "Unable to load configuration {0}", url);
+                
             }
             canComplain = false;
             return false;
@@ -321,7 +301,7 @@ class ConfigurationProperties extends ConfigurationHandler {
      * @param value the value to set the key to.
      */
     public void setValue(String key, String value) {
-        LOG.log(Level.FINE, "key {0} set to {1}", new Object[]{key, value});
+        
         propertyBundle.setProperty(key, value);
     }
 

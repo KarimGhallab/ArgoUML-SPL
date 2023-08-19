@@ -47,7 +47,6 @@ import java.util.List;
 import org.argouml.model.Model;
 import org.argouml.uml.diagram.DiagramSettings;
 import org.argouml.uml.diagram.activity.ui.SelectionActionState;
-import org.argouml.uml.diagram.use_case.ui.FigUseCase.FigMyCircle;
 import org.tigris.gef.base.Globals;
 import org.tigris.gef.base.Selection;
 import org.tigris.gef.presentation.Fig;
@@ -125,8 +124,7 @@ public class FigFinalState extends FigStateVertex {
     
     @Override
     protected Fig createBigPortFig() {
-        return new FigMyCircle(X0, Y0, DIA, DIA, 
-                LINE_COLOR, FILL_COLOR);
+        return null;
     }
 
     @Override

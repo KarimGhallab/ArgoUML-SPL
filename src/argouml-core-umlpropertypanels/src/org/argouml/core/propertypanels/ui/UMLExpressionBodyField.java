@@ -37,7 +37,6 @@
 // UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 package org.argouml.core.propertypanels.ui;
-import java.util.logging.Logger;
 
 import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
@@ -53,11 +52,7 @@ import org.argouml.ui.LookAndFeelMgr;
 class UMLExpressionBodyField extends JTextArea
     implements DocumentListener {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(UMLExpressionBodyField.class.getName());
+    
 
     private UMLExpressionModel model;
     private boolean notifyModel;

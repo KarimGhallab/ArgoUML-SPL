@@ -47,8 +47,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.DefaultListModel;
@@ -95,8 +93,7 @@ class RowSelector extends UmlControl
     /**
      * The logger.
      */
-    private static final Logger LOG =
-        Logger.getLogger(RowSelector.class.getName());
+    
 
     /**
      * class uid
@@ -244,12 +241,7 @@ class RowSelector extends UmlControl
             metaTypes.add(metaType);
         }
 
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.log(Level.FINE, "Creating list for {0}", target);
-            LOG.log(Level.FINE, "model = {0}", model.getClass().getName());
-            LOG.log(Level.FINE, "metatype = {0}", metaType);
-            LOG.log(Level.FINE, "target = {0}", target);
-        }
+        
 
         add((JComponent) scroll);
 
@@ -643,7 +635,7 @@ class RowSelector extends UmlControl
         if (e.getIndex0() == e.getIndex1()
                 && getModel().getElementAt(e.getIndex0())
                 == movedModelElement.getElement()) {
-            LOG.log(Level.INFO, "Setting attribute to selected");
+            
             final Object element = movedModelElement.getElement();
             movedModelElement.setElement(null);
             getList().setSelectedValue(element, true);
@@ -916,7 +908,7 @@ class RowSelector extends UmlControl
         }
 
         public void setElement(Object element) {
-            LOG.log(Level.INFO, "Setting moved model element to {0}", element);
+            
             this.element = element;
         }
     }
@@ -957,9 +949,7 @@ class RowSelector extends UmlControl
                     simpleListModel.getRemoveCommand(objectToRemove);
                 command.execute();
             } else {
-                LOG.log(Level.WARNING,
-                        "No selected object was found in the list control - "
-                        + "we shouldn't be able to get here");
+                
             }
         }
     }
