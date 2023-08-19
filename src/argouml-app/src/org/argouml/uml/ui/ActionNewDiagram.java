@@ -40,8 +40,6 @@
 package org.argouml.uml.ui;
 
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 
@@ -67,8 +65,7 @@ import org.argouml.uml.diagram.DiagramSettings;
  */
 public abstract class ActionNewDiagram extends UndoableAction {
 
-    private static final Logger LOG =
-        Logger.getLogger(ActionNewDiagram.class.getName());
+    
 
     /**
      * The constructor.
@@ -113,7 +110,7 @@ public abstract class ActionNewDiagram extends UndoableAction {
                     diagram.getNamespace());
             TargetManager.getInstance().setTarget(diagram);
         } else {
-            LOG.log(Level.SEVERE, "No valid namespace found");
+            
             throw new IllegalStateException("No valid namespace found");
         }
     }

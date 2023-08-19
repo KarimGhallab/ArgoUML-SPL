@@ -45,7 +45,6 @@ import javax.swing.Icon;
 import org.argouml.application.helpers.ResourceLoaderWrapper;
 import org.argouml.model.Model;
 import org.argouml.uml.StereotypeUtility;
-import org.argouml.uml.diagram.deployment.DeploymentDiagramGraphModel;
 import org.argouml.uml.diagram.ui.SelectionNodeClarifiers2;
 import org.tigris.gef.base.Globals;
 import org.tigris.gef.graph.MutableGraphModel;
@@ -141,11 +140,7 @@ public class SelectionStereotype extends SelectionNodeClarifiers2 {
 
     @Override
     protected Icon[] getIcons() {
-        // In the DeploymentDiagram there are no Generalizations
-        if (Globals.curEditor().getGraphModel() 
-                instanceof DeploymentDiagramGraphModel) {
-            return null;
-        }
+        
         if (Model.getModelManagementHelper().isReadOnly(
                 getContent().getOwner())) {
             return new Icon[] {null, inheritIcon, null, null, null };

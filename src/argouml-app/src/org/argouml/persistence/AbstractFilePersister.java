@@ -46,8 +46,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
 import javax.swing.filechooser.FileFilter;
@@ -59,7 +57,6 @@ import org.argouml.kernel.ProjectMember;
 import org.argouml.taskmgmt.ProgressEvent;
 import org.argouml.taskmgmt.ProgressListener;
 import org.argouml.uml.ProjectMemberModel;
-import org.argouml.uml.cognitive.ProjectMemberTodoList;
 import org.argouml.uml.diagram.ProjectMemberDiagram;
 import org.argouml.util.ThreadUtils;
 
@@ -71,8 +68,7 @@ import org.argouml.util.ThreadUtils;
 public abstract class AbstractFilePersister extends FileFilter
         implements ProjectFilePersister {
 
-    private static final Logger LOG =
-        Logger.getLogger(AbstractFilePersister.class.getName());
+    
 
     /**
      * Map of persisters by target class.
@@ -93,8 +89,7 @@ public abstract class AbstractFilePersister extends FileFilter
                 DiagramMemberFilePersister.class);
         registerPersister(ProfileConfiguration.class, "profile",
                 ProfileConfigurationFilePersister.class);
-        registerPersister(ProjectMemberTodoList.class, "todo",
-                TodoListMemberFilePersister.class);
+        
         registerPersister(ProjectMemberModel.class, "xmi",
                 ModelMemberFilePersister.class);
     }
@@ -431,10 +426,10 @@ public abstract class AbstractFilePersister extends FileFilter
         try {
             return clazz.newInstance();
         } catch (InstantiationException e) {
-            LOG.log(Level.SEVERE, "Exception instantiating file persister " + clazz, e);
+            
             return null;
         } catch (IllegalAccessException e) {
-            LOG.log(Level.SEVERE, "Exception instantiating file persister " + clazz, e);
+            
             return null;
         }
     }

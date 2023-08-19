@@ -40,8 +40,6 @@ package org.argouml.language.ui;
 
 import java.awt.Dimension;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
 
@@ -60,9 +58,7 @@ public class LanguageComboBox
     extends JComboBox
     implements ArgoGeneratorEventListener {
 
-    /** logger */
-    private static final Logger LOG =
-        Logger.getLogger(LanguageComboBox.class.getName());
+    
 
     /**
      * The constructor.
@@ -99,7 +95,7 @@ public class LanguageComboBox
                 Language ll = (Language) iterator.next();
                 addItem(ll);
             } catch (Exception e) {
-                LOG.log(Level.SEVERE, "Unexpected exception", e);
+                
             }
         }
         setVisible(true);

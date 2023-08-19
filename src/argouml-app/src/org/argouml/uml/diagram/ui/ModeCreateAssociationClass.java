@@ -39,8 +39,6 @@
 package org.argouml.uml.diagram.ui;
 
 import java.awt.Rectangle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Model;
 import org.argouml.ui.ProjectBrowser;
@@ -64,8 +62,7 @@ public class ModeCreateAssociationClass extends ModeCreateAssociation {
 
     private static final long serialVersionUID = -8656139458297932182L;
 
-    private static final Logger LOG =
-        Logger.getLogger(ModeCreateAssociationClass.class.getName());
+    
 
     private static final int DISTANCE = 80;
 
@@ -130,7 +127,7 @@ public class ModeCreateAssociationClass extends ModeCreateAssociation {
         DiagramSettings settings = ((ArgoDiagram) ((LayerPerspective) lay)
                 .getDiagram()).getDiagramSettings();
 
-        LOG.log(Level.INFO, "Creating Class box for association class");
+        
         
         FigClassAssociationClass figNode =
             new FigClassAssociationClass(thisFig.getOwner(),

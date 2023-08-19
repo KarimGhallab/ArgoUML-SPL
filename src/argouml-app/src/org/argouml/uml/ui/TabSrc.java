@@ -43,8 +43,6 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
 
@@ -69,7 +67,7 @@ public class TabSrc
 
     private static final long serialVersionUID = -4958164807996827484L;
 
-    private static final Logger LOG = Logger.getLogger(TabSrc.class.getName());
+    
 
     private Language langName = null;
     private String fileName = null;
@@ -117,10 +115,7 @@ public class TabSrc
      * Populate files[] and cbFiles, using the specified element.
      */
     private void generateSource(Object elem) {
-      if ( LOG.isLoggable( Level.FINE ) ) {
-          LOG.log(Level.FINE, "TabSrc.genText(): getting src for {0}",
-                  Model.getFacade().getName(elem));
-      }
+      
 	Collection code =
 	    GeneratorHelper.generate(langName, elem, false);
 	cbFiles.removeAllItems();
@@ -151,10 +146,7 @@ public class TabSrc
 
     @Override
     protected void parseText(String s) {
-        if ( LOG.isLoggable(Level.FINE) ) {
-            LOG.log(Level.FINE, "TabSrc setting src for {0}",
-                    Model.getFacade().getName(getTarget()));
-        }
+        
         Object modelObject = getTarget();
         if (getTarget() instanceof FigNode) {
             modelObject = ((FigNode) getTarget()).getOwner();

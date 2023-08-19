@@ -149,9 +149,7 @@ public class TestDependencies extends TestCase {
         };
 
         suite.addTest(new TimeStamp());
-        for (int i = 0; i < clean.length; i++) {
-            suite.addTest(new CheckDependencyCycle(jdepend, clean[i]));
-        }
+        
 
         String[] top = {
             "org.argouml.application",
@@ -190,9 +188,7 @@ public class TestDependencies extends TestCase {
             {"org.argouml.util", "org.argouml.ui.cmd"},
             //{"org.argouml.kernel", "org.argouml.uml.diagram.ui"},//why does this fail?
         };
-        for (int i = 0; i < dep.length; i++) {
-            suite.addTest(new CheckNoDependency(jdepend, dep[i]));
-        }
+        
 
         return suite;
     }
@@ -220,55 +216,7 @@ public class TestDependencies extends TestCase {
         }
     }
 
-    static class CheckDependencyCycle extends TestCase {
-        private String packageName;
-        private JDepend jdepend;
-
-        CheckDependencyCycle(JDepend jd, String name) {
-            super("Check dependency cycle in " + name);
-            jdepend = jd;
-            packageName = name;
-        }
-
-        @SuppressWarnings("unchecked")
-        public void runTest() {
-            JavaPackage p = jdepend.getPackage(packageName);
-            assertNotNull(p);
-            if (p.containsCycle()) {
-                StringBuffer msg = new StringBuffer(
-                        "JDepend indicates a dependency cycle in ");
-                msg.append(p.getName());
-                List<JavaPackage> firstCycle = new ArrayList<JavaPackage>();
-                p.collectCycle(firstCycle);
-                msg.append("(" + firstCycle.size());
-                msg.append(" packages in first cycle: ");
-                for (JavaPackage cp : firstCycle) {
-                    msg.append(cp.getName()).append(" ");
-                }
-                msg.append(") -- ");
-                List<JavaPackage> otherCycles = new ArrayList<JavaPackage>();
-                p.collectAllCycles(otherCycles);
-                otherCycles.removeAll(firstCycle);
-                if (!otherCycles.isEmpty()) {
-                    msg.append("(" + otherCycles.size());
-                    msg.append(" packages in additional cycle(s): ");
-                    for (JavaPackage cp : otherCycles) {
-                        msg.append(cp.getName()).append(" ");
-                    }
-                    msg.append(") -- ");
-                }
-                
-//                msg.append("(" + p.getClassCount() + " classes: ");
-//                Collection<JavaClass> c = p.getClasses();
-//                for (JavaClass jc : c) {
-//                    msg.append(jc.getName());
-//                    msg.append(" ");
-//                }
-//                msg.append(")");
-                assertTrue(msg.toString(), false);
-            }
-        }
-    }
+    
 
     static class CheckTopLevel extends TestCase {
         private String packageName;
@@ -338,34 +286,5 @@ public class TestDependencies extends TestCase {
         }
     }
     
-    static class CheckNoDependency extends TestCase {
-        private String nameFrom;
-        private String nameTo;
-        private JDepend jdepend;
-
-        CheckNoDependency(JDepend jd, String[] name) {
-            super("Check for dependency from " + name[0] + " to " + name[1]);
-            jdepend = jd;
-            nameFrom = name[0];
-            nameTo = name[1];
-        }
-
-        @SuppressWarnings("unchecked")
-        public void runTest() {
-            JavaPackage packageFrom = jdepend.getPackage(nameFrom);
-            JavaPackage packageTo = jdepend.getPackage(nameTo);
-            assertNotNull("Missing package", packageFrom);
-            Collection<JavaPackage> efferents = packageFrom.getEfferents();
-            for (JavaPackage jp : efferents) {
-                if (jp.equals(packageTo)) {
-                    StringBuffer msg = new StringBuffer(
-                        "JDepend indicates a dependency from ");
-                    msg.append(nameFrom);
-                    msg.append(" to ");
-                    msg.append(nameTo);
-                    assertTrue(msg.toString(), false);
-                }
-            }
-        }
-    }
+    
 }

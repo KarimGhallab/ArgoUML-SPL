@@ -46,7 +46,6 @@ import java.util.Collection;
 import org.argouml.model.Model;
 import org.argouml.notation.NotationProviderFactory2;
 import org.argouml.uml.diagram.DiagramSettings;
-import org.argouml.uml.diagram.use_case.ui.FigExtensionPoint;
 
 /**
  * The compartment that contains extension points.
@@ -71,7 +70,7 @@ public class FigExtensionPointsCompartment extends FigCompartment {
     @Override
     FigSingleLineTextWithNotation createFigText(Object owner, Rectangle bounds,
             DiagramSettings settings) {
-        return new FigExtensionPoint(owner, bounds, settings);
+        return null;
     }
 
     @Override

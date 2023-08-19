@@ -45,8 +45,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.Action;
 import javax.swing.DefaultCellEditor;
@@ -83,8 +81,7 @@ import org.tigris.toolbar.ToolBar;
 public class TabTaggedValues extends AbstractArgoJPanel
     implements TabModelTarget, ListSelectionListener, ComponentListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(TabTaggedValues.class.getName());
+    
 
     /**
      * Serial version generated for rev 1.58
@@ -213,8 +210,7 @@ public class TabTaggedValues extends AbstractArgoJPanel
                 // target with the event pump turned off so we didn't
                 // get notification.  Nothing we can do about it now and
                 // we are changing targets anyway, so just log it.
-                LOG.log(Level.WARNING, "failed to cancel editing - "
-                        + "model element deleted while edit in progress");
+                
             }
         }
     }

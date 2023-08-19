@@ -24,8 +24,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.argouml.model.Facade;
 import org.argouml.model.NotImplementedException;
@@ -53,8 +51,7 @@ import org.eclipse.uml2.uml.resource.UMLResource;
  */
 class FacadeEUMLImpl implements Facade {
 
-    private static final Logger LOG =
-        Logger.getLogger(FacadeEUMLImpl.class.getName());
+    
 
     /**
      * The model implementation.
@@ -240,7 +237,7 @@ class FacadeEUMLImpl implements Facade {
 
     public Collection getAssociationRoles(Object handle) {
         // TODO: How do we get the Connectors of an Association?
-        LOG.log(Level.WARNING, "Not yet implemented - returning empty");
+        
         return Collections.emptySet();
     }
 

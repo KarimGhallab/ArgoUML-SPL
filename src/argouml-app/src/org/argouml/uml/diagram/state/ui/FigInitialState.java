@@ -47,7 +47,6 @@ import java.util.List;
 
 import org.argouml.model.Model;
 import org.argouml.uml.diagram.DiagramSettings;
-import org.argouml.uml.diagram.activity.ui.SelectionActionState;
 import org.tigris.gef.base.Selection;
 import org.tigris.gef.presentation.Fig;
 import org.tigris.gef.presentation.FigCircle;
@@ -120,11 +119,7 @@ public class FigInitialState extends FigStateVertex {
                     && Model.getFacade().isAActivityGraph(
                             Model.getFacade().getStateMachine(
                                     Model.getFacade().getContainer(pstate)))) {
-                sel = new SelectionActionState(this);
-                ((SelectionActionState) sel).setIncomingButtonEnabled(false);
-                Collection outs = Model.getFacade().getOutgoings(getOwner());
-                ((SelectionActionState) sel)
-                        .setOutgoingButtonEnabled(outs.isEmpty());
+                
             } else {
                 sel = new SelectionState(this);
                 ((SelectionState) sel).setIncomingButtonEnabled(false);

@@ -44,8 +44,6 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -55,15 +53,13 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
 import org.argouml.application.helpers.ApplicationVersion;
-import org.argouml.cognitive.Translator;
 
 /**
  * This is what you see after you activate the "Help->Help" menu-item.
  */
 public class HelpBox extends JFrame implements HyperlinkListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(HelpBox.class.getName());
+    
 
     /**
      * A tabbed pane to display several pages simultaneously.
@@ -80,16 +76,14 @@ public class HelpBox extends JFrame implements HyperlinkListener {
      */
     private String pages[][] = {
         {
-            Translator.localize("tab.help.manual"),
-            (Translator.localize("tab.help.path.manual")
-                + "manual-" + ApplicationVersion.getStableVersion()
-                + "/"),
-             Translator.localize("tab.help.tip.manual")
+            "Help Manual",
+            "Path Manual",
+             "Tip Manual"
         },
         {
-            Translator.localize("tab.help.support"),
-            Translator.localize("tab.help.path.support"),
-            Translator.localize("tab.help.tip.support")
+            "Support",
+            "Path Support",
+            "Tip Support"
         }
     };
 
@@ -118,17 +112,17 @@ public class HelpBox extends JFrame implements HyperlinkListener {
             try {
                 paneURL = new URL( pages[i][1]);
             } catch ( MalformedURLException e) {
-                LOG.log(Level.WARNING, pages[i][0] + " URL malformed: " + pages[i][1]);
+                
             }
 
             if ( paneURL != null) {
                 try {
                     panes[i].setPage( paneURL);
                 } catch ( IOException e) {
-                    LOG.log(Level.WARNING, "Attempted to read a bad URL: " + paneURL);
+                    
                 }
             } else {
-                LOG.log(Level.WARNING, "Couldn't find " + pages[i][0]);
+                
             }
 
             // Put the current pane in a scroll pane.
@@ -149,7 +143,7 @@ public class HelpBox extends JFrame implements HyperlinkListener {
             try {
                 pane.setPage(event.getURL());
             } catch (IOException ioe) {
-                LOG.log(Level.WARNING, "Could not fetch requested URL");
+                
             }
 	}
     }

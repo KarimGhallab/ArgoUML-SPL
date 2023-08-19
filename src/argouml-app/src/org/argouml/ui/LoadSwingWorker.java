@@ -39,8 +39,6 @@
 package org.argouml.ui;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.UIManager;
 
@@ -57,8 +55,7 @@ import org.argouml.util.ArgoFrame;
 @Deprecated
 class LoadSwingWorker extends SwingWorker {
 
-    private static final Logger LOG =
-        Logger.getLogger(LoadSwingWorker.class.getName());
+    
 
     private boolean showUi;
     private File file;
@@ -114,8 +111,7 @@ class LoadSwingWorker extends SwingWorker {
     	try {
     	    ProjectBrowser.getInstance().addFileSaved(file);
     	} catch (IOException exc) {
-            LOG.log(Level.SEVERE, "Failed to save file: " + file
-                    + " in most recently used list");
+            
     	}
     }
 }

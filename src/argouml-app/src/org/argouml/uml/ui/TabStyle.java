@@ -43,8 +43,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Collection;
 import java.util.Hashtable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -116,8 +114,7 @@ import org.tigris.gef.presentation.FigEdge;
 public class TabStyle extends AbstractArgoJPanel implements TabFigTarget,
         PropertyChangeListener, DelayedVChangeListener {
 
-    private static final Logger LOG =
-        Logger.getLogger(TabStyle.class.getName());
+    
 
     private Fig target;
 
@@ -317,16 +314,15 @@ public class TabStyle extends AbstractArgoJPanel implements TabFigTarget,
             try {
                 p = (TabFigTarget) panelClass.newInstance();
             } catch (IllegalAccessException ignore) {
-                LOG.log(Level.SEVERE, "", ignore);
+                
                 return null;
             } catch (InstantiationException ignore) {
-                LOG.log(Level.SEVERE, "", ignore);
+                
                 return null;
             }
             panels.put(targetClass, p);
         }
-        LOG.log(Level.FINE, "found style for {0}({1})",
-                new Object[]{targetClass.getName(), p.getClass()});
+        
         return (StylePanel) p;
 
     }
@@ -352,7 +348,7 @@ public class TabStyle extends AbstractArgoJPanel implements TabFigTarget,
         StringNamespaceElement targetClassElement =
         	(StringNamespaceElement) classNs.peekNamespaceElement();
 
-        LOG.log(Level.FINE, "Attempt to find style panel for: {0}", classNs);
+        
 
         classNs.popNamespaceElement();
 
@@ -377,7 +373,7 @@ public class TabStyle extends AbstractArgoJPanel implements TabFigTarget,
             Class cls = Class.forName(name);
             return cls;
         } catch (ClassNotFoundException ignore) {
-            LOG.log(Level.FINE, "ClassNotFoundException. Could not find class: {0}", name);
+            
         }
         return null;
     }

@@ -47,8 +47,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Reading and writing preserved sections from the code.
@@ -56,11 +54,7 @@ import java.util.logging.Logger;
  * @author Marian Heddesheimer
  */
 public abstract class AbstractSection {
-    /**
-     * Logger.
-     */
-    private static final Logger LOG =
-        Logger.getLogger(AbstractSection.class.getName());
+    
 
     /**
      * System newline separator.
@@ -126,9 +120,7 @@ public abstract class AbstractSection {
                             endSectionId = getSectId(line);
                         } while (endSectionId == null);
                         if (!endSectionId.equals(sectionId)) {
-                            LOG.log(Level.SEVERE, "Mismatch between sectionId (\""
-                                    + sectionId + "\") and endSectionId (\""
-                                    + endSectionId + "\")!");
+                            
                         }
                     }
                     mAry.remove(sectionId);
@@ -156,7 +148,7 @@ public abstract class AbstractSection {
             fr.close();
             fw.close();
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "Error: " + e.toString());
+            
         }
     }
 
@@ -195,7 +187,7 @@ public abstract class AbstractSection {
             }
             fr.close();
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "Error: " + e.toString());
+            
         }
     }
 
