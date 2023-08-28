@@ -6,7 +6,10 @@ SPL migration of the [ArgoUML]([https://](https://github.com/argouml-tigris-org/
 ## Start the Application and the Variants
 
 ### Prerequisites
-ArgoUML is a Java application, so you need to have the Java JDK installed on your environment. Furthermore, you must have JDK 8 to be able to fully run the application and its unit tests (available [here](https://www.oracle.com/fr/java/technologies/javase/javase8-archive-downloads.html)).
+The creation of the SPL has been achieved through the usage of [Mobioos Forge](https://documentation.mobioos.ai/). Consequently, to gain a comprehensive view of the FM and the SPL's maps, it is imperative to install Mobioos Forge within your [VScode](https://code.visualstudio.com/) editor. The extension will also allow you to generate new variants. You can acquire the extension through VScode's built-in extension
+explorer or by accessing it [here](https://marketplace.visualstudio.com/items?itemName=Mobioos.mobioos-forge).
+
+Regarding ArgoUML, since it is a Java-based application, you need to have the Java JDK installed on your environment. Furthermore, you must have JDK 8 to be able to fully run the application and its unit tests (available [here](https://www.oracle.com/fr/java/technologies/javase/javase8-archive-downloads.html)).
 You will also need to have [Maven](https://maven.apache.org/download.cgi) installed to easily build and run the application.
 
 ### Build and Launch The App
