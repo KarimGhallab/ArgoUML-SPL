@@ -68,3 +68,52 @@ The source code for each of the variants is available on branches of this repo:
 - Class, State, Activity, Cognitive: https://github.com/KarimGhallab/ArgoUML-SPL/tree/variants/class-state-activity-cognitive
 - Class, State, Deployment, Sequence, Logging: https://github.com/KarimGhallab/ArgoUML-SPL/tree/variants/class-state-deployment-sequence-logging
 - All diagrams features: https://github.com/KarimGhallab/ArgoUML-SPL/tree/variants/all-diagrams-enabled
+
+
+### Variant Only *Class* enabled
+The first variant introduced here is a variant where the only enabled feature is the mandatory one (*Class*).
+The two next Figures show, the configuration used to generate the variant and its execution.
+
+![Configuration of the variant Only Class enabled](./images/only-class/configuration.png)
+
+![Execution of the variant Only Class enabled](./images/only-class/execution.png)
+
+In this variant, the user can only create class diagrams. No insights are provided by the *Cognitive Support* feature and no logs are emitted during the execution.
+
+### Variant *Class*, *State*, *Activity* and *Cognitive* enabled
+This second variant has the features *Class*, *State*, *Activity* and *Cognitive* enabled. The two Figures below show, the configuration used to generate the variant and its execution.
+
+![Configuration of the variant Class, State, Activity and Cognitive enabled](./images/class-state-activity-cognitive/configuration.png)
+
+![Execution of the variant Class, State, Activity and Cognitive enabled](./images/class-state-activity-cognitive/execution.png)
+
+Compared to the previous variant, this one includes activity and state diagrams in addition to the class diagram. Additionally, the "ToDo item" panel related to the *Cognitive Support* feature appears at the bottom of the UI. And just like in the previous variant, no logs are generated during the execution.
+
+### Variant *Class*, *State*, *Deployment*, *Sequence* and *Logging* enabled
+This third variant encompasses the features *Class*, *State*, *Deployment*, *Sequence* and *Logging*.
+The two next Figures show, the configuration used to generate the variant and its execution.
+
+![Configuration of the variant Class, State, Deployment, Sequence and Logging enabled](./images/class-state-deployment-sequence-logging/configuration.png)
+
+![Execution of the variant Class, State, Deployment, Sequence and Logging enabled](./images/class-state-deployment-sequence-logging/execution.png)
+
+This variant allows for the design of *Class*, *State*, *Deployment* and *Sequence* diagrams. Unlike the two previous variants, logs are generated during the execution.
+
+### Variant *Class*, *Use Case* and *Collaboration* enabled
+This fourth variant contains only the features *Class*, *Use Case* and *Collaboration*.
+The two next Figures show, the configuration used to generate the variant and its execution.
+
+![Configuration of the variant Class, Use Case and Collaboration enabled](./images/class-use-case-collaboration/configuration.png)
+
+![Execution of the variant Class, Use Case and Collaboration enabled](./images/class-use-case-collaboration/execution.png)
+
+This variant allows for the design of *Class*, *Use Case* and *Collaboration* diagrams. Both the     insights and the logs are disabled.
+
+### Variant All diagrams enabled enabled
+This last variant presented here encompasses all diagram types provided by ArgoUML. However, other non-diagram features are disabled. The two next Figures show, the configuration used to generate the variant and its execution.
+
+![Configuration of the variant all diagrams enabled](./images/all-diagrams-enabled/configuration.png)
+
+![Execution of the variant all diagrams enabled](./images/all-diagrams-enabled/execution.png)
+
+This variant allows the user to design all the type of diagrams provided by ArgoUML. regarding the cognitive insights and the logs, both are disabled and do not appear while executing the variant.
