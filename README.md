@@ -38,11 +38,11 @@ This cross-tree constraint was recommended to us by Mobioos Forge, which detecte
 The Table below shows data about the feature-mapping of the application.
 | **Feature**           | **Mapping\-Time** | **Lines Of Codes \(LOCs\)** | **Impacted Files** | **Markers** | **Manually\-Validated Maps** | **Automatically\-Validated Maps** |
 |-----------------------|-------------------|-----------------------------|--------------------|-------------|------------------------------|-----------------------------------|
-| **Class**             | 00h 57m           | 6671                        | 68                 | 28          | 99                           | 91                                |
+| **Class**             | 00h 56m           | 6671                        | 68                 | 28          | 99                           | 91                                |
 | **State**             | 00h 35m           | 5228                        | 64                 | 22          | 90                           | 107                               |
 | **Activity**          | 00h 41m           | 7757                        | 96                 | 23          | 65                           | 161                               |
 | **Use Case**          | 00h 31m           | 9297                        | 81                 | 35          | 53                           | 108                               |
-| **Collaboration**     | 00h 54m           | 4475                        | 51                 | 22          | 56                           | 59                                |
+| **Collaboration**     | 00h 58m           | 4475                        | 51                 | 22          | 56                           | 59                                |
 | **Sequence**          | 00h 34m           | 6779                        | 113                | 21          | 34                           | 143                               |
 | **Deployment**        | 00h 41m           | 7842                        | 93                 | 18          | 78                           | 267                               |
 | **Cognitive Support** | 01h 37m           | 46126                       | 335                | 29          | 201                          | 2101                              |
@@ -56,11 +56,11 @@ Several variants have been generated using MF's embedded variant derivation proc
 | **Variant (enabled features)**                                         | **Lines Of Codes \(LOCs\)** | **Deleted Lines** | **Tests** |
 |-----------------------------------------------------|-----------------------------|-------------------|-----------|
 | **All features \(original application\)**          | 459391                      | 0                 | 1225      |
-| **Only Class**                                     | 381693                      | 77698             | 937       |
-| **Class, Use Case, Collaboration**                 | 390183                      | 69208             | 953       |
-| **Class, State, Activity and Cognitive**           | 431903                      | 27488             | 1046      |
-| **Class, State, Deployment, Sequence and Logging** | 397681                      | 61710             | 952       |
-| **All diagrams features**                          | 411146                      | 48245             | 970       |
+| **Only Class**                                     | 395265                      | 64126             | 937       |
+| **Class, Use Case, Collaboration**                 | 403757                      | 55634             | 953       |
+| **Class, State, Activity and Cognitive**           | 440360                      | 19031             | 1046      |
+| **Class, State, Deployment, Sequence and Logging** | 400684                      | 58707             | 952       |
+| **All diagrams features**                          | 411191                      | 48200             | 970       |
 
 The source code for each of the variants is available on branches of this repo:
 - Only Class: https://github.com/KarimGhallab/ArgoUML-SPL/tree/variants/only-class
